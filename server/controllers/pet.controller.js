@@ -1,9 +1,13 @@
-const { mongoose } = require("mongoose")
-const { Pet } = require("../models/pet.model")
+const { Pet } = require("../models/pet.model");
 
-module.exports.getAllPets = async (req, res) => {
-    let pets = await Pet.find({})
-    return res.send(pets)
+module.exports.getAllPets = async (req, res,next) => {
+
+    try {
+        let pets = await Pet.find({})
+        return res.send(pets)
+    } catch (next) {
+        
+    }
 }
 
 
@@ -14,7 +18,7 @@ module.exports.createPet = async ( req, res , next ) => {
             image : req.body.image,
             gender : req.body.gender,
             age : req.body.age,
-            type : req.body.type
+            type : req.body.type,
         })
         await pet.save()
         res.status(201).json(pet)
@@ -35,10 +39,7 @@ module.exports.updatePet = async ( req, res ,next) => {
         .catch(err => {
             return res.status(400).send(err)
         })
-    } catch (error) {
-        // console.log(error, "INI ERRORRRRRRRRRRRRRR");
-        next(error)
-    }
+    } catch (next) {  }
 }
 
 module.exports.deletePet = async ( req, res ) => {
