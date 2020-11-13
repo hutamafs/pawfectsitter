@@ -28,6 +28,10 @@ const petSchema = new mongoose.Schema({
     type : {
         type : String,
         required : true
+    },
+    user_id:{
+        type:String,
+        required:true
     }
 
 })

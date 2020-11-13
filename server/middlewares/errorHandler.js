@@ -1,7 +1,6 @@
 function errorHandler(err,req,res,next) {
     let errors = [];
     let code = 500;
-    
     switch(err._message) {
         case 'User validation failed':
 
