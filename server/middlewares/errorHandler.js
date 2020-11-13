@@ -4,7 +4,11 @@ function errorHandler(err,req,res,next) {
     
     switch(err._message) {
         case 'User validation failed':
+
+        case 'Pet validation failed':
+
         case 'Keeper validation failed':
+
             for (key in err.errors) {
                 errors.push(err.errors[key].properties.message);
             }
