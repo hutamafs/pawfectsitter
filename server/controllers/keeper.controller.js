@@ -4,7 +4,7 @@ class KeeperController {
 
     static async getAllKeepers(req,res,next) {
         try {
-            let keepers = await Keeper.find({});
+            let keepers = await Keeper.find({}).sort({rating:-1});
             res.status(200).json(keepers);
         } catch (next) {
             
