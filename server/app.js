@@ -1,9 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const createError = require("http-errors");
 const bodyParser= require('body-parser');
 const config = require('./config');
 const env = process.env.NODE_ENV || 'development';
+require('dotenv').config();
 
 const routes = require('./routes');
 const errorHandler = require('./middlewares/errorHandler')
@@ -25,7 +25,6 @@ mongoose.connection.on("connected", () => {
 mongoose.connection.on("disconnected", () => {
   console.log("mongoose is disconnected...")
 });
-
 
 app.use("/", routes);
 app.use(errorHandler);
