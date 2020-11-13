@@ -3,37 +3,29 @@ const mongoose = require('mongoose')
 const keeperSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true,
-        minlength: 3,
-        maxlength: 50
+        required: [true,'keeper name is required'],
     },
     email: {
         type: String,
-        required: true,
-        minlength: 5,
-        maxlength: 255,
-        unique: true
+        required: [true,'keeper email is required'],
+        unique:true 
     },
     image: {
         type: String,
-        required: true
+        required: [true,'keeper image is required']
     },
     rating: {
-        type: Number,
-        min: 0,
-        max: 5,
-        required: true
+        type:Number,
+        required: [true,'keeper rating is required']
     },
     skills: [String],
     status: {
         type: Boolean,
-        required: true
+        required: [true,'keeper status is required']
     },
     address: {
         type: String,
-        required: true,
-        minlength: 5,
-        maxlength: 255,
+        required: [true,'keeper address is required']
     }
 });
 
