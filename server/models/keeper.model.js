@@ -4,15 +4,10 @@ const keeperSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        minlength: 3,
-        maxlength: 50
     },
     email: {
         type: String,
-        required: true,
-        minlength: 5,
-        maxlength: 255,
-        unique: true
+        required: true,   
     },
     image: {
         type: String,
@@ -20,8 +15,6 @@ const keeperSchema = new mongoose.Schema({
     },
     rating: {
         type: Number,
-        min: 0,
-        max: 5,
         required: true
     },
     skills: [String],
@@ -32,8 +25,6 @@ const keeperSchema = new mongoose.Schema({
     address: {
         type: String,
         required: true,
-        minlength: 5,
-        maxlength: 255,
     }
 });
 
