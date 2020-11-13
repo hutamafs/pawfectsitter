@@ -11,7 +11,7 @@ let userId = '';
 describe("api/users", () => {
     before(async () => {
       // before each test delete all users table data
-      await User.deleteMany({});
+      await User.deleteMany({})
     });
   
     after(async () => {
