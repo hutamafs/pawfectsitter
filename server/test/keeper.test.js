@@ -27,8 +27,27 @@ describe("/keepers", () => {
       await Keeper.insertMany(keepers);
     //   console.log(keepers);
       const res = await request(app).get("/keepers");
+      console.log(res.status, 'SATATSUSUSUS')
       expect(res.status).to.equal(200);
       expect(res.body.length).to.equal(2);
     });
   });
+
+  describe("POST /", () => {
+    it("should return status 201", async () => {
+      const res = await request(app)
+        .post("/keepers")
+        .send({
+          name: "george", 
+          email: "geo@gmail.com", 
+          image: "https://images-na.ssl-images-amazon.com/images/I/41dJs71v-aL._AC_.jpg", 
+          rating: 5.0, 
+          skills: ["Dog"], 
+          status: true, 
+          address: "Kebon Jeruk, Jakarta barat"
+        });
+        console.log(res.status, 'status di post')
+      expect(res.status).to.equal(201);
+    })
+  })
 })
