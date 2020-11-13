@@ -1,9 +1,15 @@
-const User = require('../config/mongoose');
+const User = require('../config/UserSchema');
 const assert = require('assert');
 
 describe("create user",()=>{
     it('should create new user',(done)=>{
-        const singleUser = new User({name : "Joe"});
+        const singleUser = new User({
+            name : "Tama",
+            email : "tama@mail.com",
+            password : "ama",
+            address: "Kelapa Gading"
+
+        });
         singleUser.save()
             .then(()=>{
                 assert(!singleUser.isNew);
