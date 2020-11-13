@@ -1,6 +1,6 @@
 const User = require('../models/UserModel');
 const {hashPass, vefPass} = require('../helpers/bcrypt.js');
-const {genToken} = require('../helpers/jwt')
+const jwt = require('jsonwebtoken');
 
 class UserController {
 
@@ -35,7 +35,8 @@ class UserController {
                 id:user._id,
                 email:user.email
             }
-            let access_token = await genToken(payload);
+            //let access_token = await genToken(payload);
+            let access_token = await jwt.sign(payload,process.env.SECRET);
             res.status(200).json({access_token});
 
         } catch (error) {

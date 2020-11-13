@@ -18,9 +18,23 @@ const keeperSchema = new mongoose.Schema({
         type:Number,
         required: [true,'keeper rating is required']
     },
-    skills: [String],
+    price:{
+        hourly:{
+            type:Number,
+            required: [true,'keeper price hourly is required']
+        },
+        daily:{
+            type:Number,
+            required: [true,'keeper price daily is required']
+        },
+        weekly:{
+            type:Number,
+            required: [true,'keeper price weekly is required']
+        },
+    },
+    skills: [[String]],
     status: {
-        type: Boolean,
+        type: String,
         required: [true,'keeper status is required']
     },
     address: {
