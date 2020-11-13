@@ -15,6 +15,7 @@ function errorHandler(err,req,res,next) {
             code = err.code || 500;
             break;
     }
+    
     res.status(code).json({errors})
 }
 

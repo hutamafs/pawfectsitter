@@ -41,7 +41,7 @@ describe("api/users", () => {
   
         await mongoose.connect(config.db[env], config.dbParams);
     });
-
+    
     describe("successfully register new user", () => {
       it("should return user when the all request body is valid", async () => {
         const res = await request(app)
@@ -124,4 +124,36 @@ describe("api/users", () => {
         expect(data).to.have.property("access_token");
       });
     });
+    
+
+    describe("failed login user", () => {
+      it("should return user errors email is invalid", async () => {
+        const res = await request(app)
+          .post("/users/login")
+          .send({
+            email: 'tam@mail.com',
+            password: userData.password
+          });
+        const data = res.body;
+        expect(res.status).to.equal(400);
+        expect(data).to.have.property("errors");
+        expect(data.errors).to.be.an('array').that.includes('invalid email or password')
+      });
+
+      it("should return user errors password is invalid", async () => {
+        const res = await request(app)
+          .post("/users/login")
+          .send({
+            email: userData.email,
+            password: 'a'
+          });
+        const data = res.body;
+        expect(res.status).to.equal(400);
+        expect(data).to.have.property("errors");
+        expect(data.errors).to.be.an('array').that.includes('invalid email or password')
+      });
+    });
+
+    
   });
+
