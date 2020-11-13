@@ -4,6 +4,7 @@ function errorHandler(err,req,res,next) {
     
     switch(err._message) {
         case 'User validation failed':
+        case 'Pet validation failed':
             for (key in err.errors) {
                 //console.log(err.errors[key].properties,'dapet key');
                 errors.push(err.errors[key].properties.message);
