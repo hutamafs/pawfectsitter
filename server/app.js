@@ -4,7 +4,9 @@ const createError = require("http-errors");
 const bodyParser= require('body-parser');
 const config = require('./config');
 const env = process.env.NODE_ENV || 'development';
-const routes = require('./routes')
+
+const routes = require('./routes');
+const errorHandler = require('./middlewares/errorHandler')
 
 const app = express();
 app.use(bodyParser.json());
@@ -24,16 +26,9 @@ mongoose.connection.on("disconnected", () => {
   console.log("mongoose is disconnected...")
 });
 
-app.use(routes);
 
-app.use((req, res, next) => {
-  next(createError(404));
-});
+app.use("/", routes);
+app.use(errorHandler);
 
-app.use((err, req, res, next) => {
-  res.locals.message = err.message;
-  res.status(err.status || 500);
-  res.send(err);
-});
 
 module.exports = app;
