@@ -1,5 +1,6 @@
 const expect = require('chai').expect;
 const request = require('supertest');
+
 const User = require('../models/UserModel');
 const app = require('../app');
 const mongoose = require('mongoose');
@@ -14,7 +15,6 @@ let userData = {
   password:'hutama',
   address:'kelapa gading',
 };
-
 
 describe("api/users", () => {
     before(async () => {
@@ -124,5 +124,4 @@ describe("api/users", () => {
         expect(data).to.have.property("access_token");
       });
     });
-
   });
