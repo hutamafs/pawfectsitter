@@ -34,11 +34,11 @@ export default function App() {
               headerShown: false
             }}
           >
-            <Stack.Screen name="PetList" component={PetList} 
-            options={{title: 'PetList'}}
-            />
             <Stack.Screen name="Landing" component={Landing} 
             options={{title: 'Landing'}}
+            />
+            <Stack.Screen name="PetList" component={PetList} 
+            options={{title: 'PetList'}}
             />
           <Stack.Screen name="Home" component={Home} 
           options={{title: 'Home'}}
