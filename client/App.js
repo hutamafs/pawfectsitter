@@ -18,10 +18,6 @@ const getFont = () => Font.loadAsync({
 })
 
 
-
-
-
-
 export default function App() {
   const Stack = createStackNavigator();
   const [fontsLoaded , setFontsLoaded ] = useState(false)
@@ -36,7 +32,6 @@ export default function App() {
               headerShown: false
             }}
           >
-        <Stack.Navigator>
           <Stack.Screen name="AddPet" component={AddPet} 
           options={{title: 'AddPet'}}
           />

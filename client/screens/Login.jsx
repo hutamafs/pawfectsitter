@@ -1,14 +1,11 @@
 import React, {useState, useEffect} from 'react';
 
-import { Image, StyleSheet, Text, View } from 'react-native';
-import { TextInput } from 'react-native-gesture-handler';
-import { Button, StyleSheet, Text, View , TextInput } from 'react-native';
+import { Image, StyleSheet, Text, View , Button , TextInput} from 'react-native';
 
 import axios from 'axios'
 import {setToken} from '../store/actions'
 import {useDispatch} from 'react-redux'
 import logo from '../assets/logoDog.png'
-import Button from 'apsl-react-native-button'
 
 
 export default function Login({navigation}) {

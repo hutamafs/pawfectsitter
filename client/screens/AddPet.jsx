@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Button, StyleSheet, Text, View , TextInput, TouchableWithoutFeedback , Keyboard , Image , TouchableOpacity} from 'react-native';
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 import axios from 'axios';
-import DocumentPicker from 'react-native-document-picker';
+import ImagePicker from 'react-native-image-picker';
 import { addPet } from '../store/actions/index';
 import { useDispatch , useSelector } from 'react-redux';
+import { RNS3 } from 'react-native-aws3';
 
 const AddPet = () => {
     const dispatch = useDispatch();
@@ -14,7 +15,7 @@ const AddPet = () => {
     const[image,setImage] = useState('');
     const[age,setAge] = useState(0);
 
-    const {access_token} = useSelector(state => state)
+    //const {access_token} = useSelector(state => state)
 
     const gender_props = [
         {label: 'Male', value: 'male',textStyle:{marginRight:20} },
@@ -28,6 +29,7 @@ const AddPet = () => {
     ];
 
     const handleSubmit = () => {
+        console.log(image,'ini image')
     axios({
         url: 'http://192.168.1.3:3000/pets',
         method: 'POST',
@@ -44,9 +46,34 @@ const AddPet = () => {
         })
     }
 
+    const takePic = () => {
+        ImagePicker.showImagePicker( {} , (response) => {
+            const file={
+                uri:response.uri,
+                name:response.fileName,
+                type:'image/png',
+            }
+            const config = {
+                keyPrefix: `s3/`,
+                bucket:'photos',
+                region:'ap-southeast-1',
+                access_key:'AKIAI3HZB6Q3UPG2LTMA',
+                secretKey:'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',
+                successActionStatus:201,
+            }
+            RNS3.put(file,config)
+            .then(response => 
+                setImage(response.body.postResponse.location)    
+            )
+            .catch(err => {
+                console.log(err);
+            })
+        })
+    }
+
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-             <View>
+             <View style={{display:'flex',justifyContent:'center',alignContent:'center',paddingTop:100}}>
                 <TextInput
                 placeholder="Enter your Pet Name"
                 value={name}
@@ -84,6 +111,18 @@ const AddPet = () => {
                     onPress={(value) => setType(value)}
                     labelStyle={{paddingLeft:5,marginRight:15}}                        
                 />
+                <Button
+                onPress={takePic}
+                title="choose photo"
+                />
+                {
+                    image && (
+                        <Image
+                        source={{uri:image}}
+                        style={{width:300,height:300}}
+                        />
+                    )
+                }
             <Button
             title="submit"           
             onPress={handleSubmit}
