@@ -18,10 +18,10 @@ const getFont = () => Font.loadAsync({
 
 
 
-const Stack = createStackNavigator();
 
 
 export default function App() {
+
   const [fontsLoaded , setFontsLoaded ] = useState(false)
 
   if (fontsLoaded){
