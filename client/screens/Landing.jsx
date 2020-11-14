@@ -4,6 +4,7 @@ import { Image, StyleSheet, Text, View } from 'react-native';
 import Button from 'apsl-react-native-button'
 import logo from '../assets/logoDog.png'
 
+
 export default function Landing({navigation}) {
   return (
     <View style={styles.container}>

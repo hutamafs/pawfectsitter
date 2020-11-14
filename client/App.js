@@ -8,6 +8,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Landing from './screens/Landing'
 import Login from './screens/Login'
 import Register from './screens/Register'
+import KeepersPage from './screens/KeepersPage'
 import Home from './screens/Home';
 import AddPet from './screens/AddPet'
 import * as Font from 'expo-font'
@@ -18,6 +19,7 @@ const getFont = () => Font.loadAsync({
 })
 
 
+
 export default function App() {
   const Stack = createStackNavigator();
   const [fontsLoaded , setFontsLoaded ] = useState(false)
@@ -26,7 +28,9 @@ export default function App() {
     return (
       <Provider store={store}>
       <NavigationContainer>
-
+        <Stack.Screen name="KeepersPage" component={KeepersPage}
+          options={{title: 'Keepers'}}
+          />
         <Stack.Navigator
             screenOptions={{
               headerShown: false
