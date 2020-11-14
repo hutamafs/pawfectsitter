@@ -12,7 +12,7 @@ import KeepersPage from './screens/KeepersPage'
 import Home from './screens/Home';
 import AddPet from './screens/AddPet'
 import * as Font from 'expo-font'
-import { AppLoading } from 'expo'
+//import { AppLoading } from 'expo'
 
 const getFont = () => Font.loadAsync({
     'nunito' : require('./assets/fonts/Nunito.ttf')
@@ -28,14 +28,14 @@ export default function App() {
     return (
       <Provider store={store}>
       <NavigationContainer>
-        <Stack.Screen name="KeepersPage" component={KeepersPage}
-          options={{title: 'Keepers'}}
-          />
         <Stack.Navigator
             screenOptions={{
               headerShown: false
             }}
           >
+          <Stack.Screen name="KeepersPage" component={KeepersPage}
+          options={{title: 'Keepers'}}
+          />
           <Stack.Screen name="AddPet" component={AddPet} 
           options={{title: 'AddPet'}}
           />
@@ -57,12 +57,12 @@ export default function App() {
 
     )
   }else {
-    return(
-      <AppLoading 
-      startAsync={getFont}
-      onFinish={() => setFontsLoaded(true)}
-      />
-    )
+    return null
+      // <AppLoading 
+      // startAsync={getFont}
+      // onFinish={() => setFontsLoaded(true)}
+      // />
+    
   }
 }
 

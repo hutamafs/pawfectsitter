@@ -1,4 +1,4 @@
-export const fetchKeepers = () => {
+export function fetchKeepers ()  {
     return(dispatch) => {
         // console.log('masuk pak ekoooo')
         fetch(`http://192.168.100.6:3000/keepers`)
@@ -13,6 +13,8 @@ export const fetchKeepers = () => {
             console.log(err)
             console.warn
         })
+    }
+}
 export function setToken(payload) {
     return {
         type: 'SET_TOKEN',

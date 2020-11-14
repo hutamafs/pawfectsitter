@@ -1,5 +1,5 @@
 const initialState = {
-    keepers: []
+    keepers: [],
     access_token: '',
     pets:[]
 }
