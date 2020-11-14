@@ -69,7 +69,6 @@ describe("/keepers", () => {
           address: "Kebon Jeruk, Jakarta barat"
         });
       const data = res.body;
-      //const errors = ['name is required'];
       expect(res.status).to.equal(400);
       expect(data).to.have.property("errors");
       expect(data.errors).to.be.an('array').that.includes('keeper name is required');
