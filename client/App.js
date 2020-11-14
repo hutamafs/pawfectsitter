@@ -9,6 +9,7 @@ import Landing from './screens/Landing'
 import Login from './screens/Login'
 import Register from './screens/Register'
 import Home from './screens/Home'
+import PetList from './screens/PetList'
 import * as Font from 'expo-font'
 import { AppLoading } from 'expo'
 
@@ -30,6 +31,9 @@ export default function App() {
       <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator>
+        <Stack.Screen name="PetList" component={PetList} 
+          options={{title: 'PetList'}}
+          />
           <Stack.Screen name="Landing" component={Landing} 
           options={{title: 'Landing'}}
           />
