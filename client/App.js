@@ -8,27 +8,30 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Landing from './screens/Landing'
 import Login from './screens/Login'
 import Register from './screens/Register'
-
-
-
+import KeepersPage from './screens/KeepersPage'
 
 
 export default function App() {
   const Stack = createStackNavigator();
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Login" component={Login} 
-        options={{title: 'Login'}}
-        />
-        <Stack.Screen name="Landing" component={Landing} 
-        options={{title: 'Landing'}}
-        />
-        <Stack.Screen name="Register" component={Register} 
-        options={{title: 'Register'}}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="KeepersPage" component={KeepersPage}
+          options={{title: 'Keepers'}}
+          />
+          <Stack.Screen name="Login" component={Login} 
+          options={{title: 'Login'}}
+          />
+          <Stack.Screen name="Landing" component={Landing} 
+          options={{title: 'Landing'}}
+          />
+          <Stack.Screen name="Register" component={Register} 
+          options={{title: 'Register'}}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
 
