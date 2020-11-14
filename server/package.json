@@ -28,7 +28,8 @@
     "nyc": "^15.1.0",
     "socket.io": "^3.0.1",
     "supertest": "^6.0.1",
-    "unggah": "^2.1.0"
+    "unggah": "^2.1.0",
+    "vue-socket.io": "^3.0.10"
   },
   "devDependencies": {
     "dotenv": "^8.2.0",

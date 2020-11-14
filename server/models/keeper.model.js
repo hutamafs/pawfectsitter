@@ -32,7 +32,7 @@ const keeperSchema = new mongoose.Schema({
             required: [true,'keeper price weekly is required']
         },
     },
-    skills: [[String]],
+    skills: [String],
     status: {
         type: String,
         required: [true,'keeper status is required']

@@ -13,7 +13,7 @@ export default function Register({navigation}) {
 
   const handleRegister = () => {
     axios({
-      url: 'http://192.168.1.5:3000/users/register',
+      url: 'http://192.168.100.6:3000/users/register',
       method: 'POST',
       data: {
         name,email,password,address
@@ -87,7 +87,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   formInput: {
-    width: 100,
-    borderWidth: 2
+    width: 200,
+    borderWidth: 2,
+    margin: 5
   }
 });

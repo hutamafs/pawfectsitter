@@ -10,7 +10,7 @@ export default function Login({navigation}) {
 
   const handleLogin = () => {
     axios({
-      url: 'http://192.168.1.5:3000/users/login',
+      url: 'http://192.168.100.6:3000/users/login',
       method: 'POST',
       data: {
         email,password
@@ -74,7 +74,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   formInput: {
-    width: 100,
-    borderWidth: 2
+    width: 200,
+    borderWidth: 2,
+    margin: 5
   }
 });
