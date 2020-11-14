@@ -2,9 +2,11 @@ import React, {useState, useEffect} from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import axios from 'axios'
-import { color } from 'react-native-reanimated';
+import {setToken} from '../store/actions'
+import {useDispatch} from 'react-redux'
 
 export default function Login({navigation}) {
+  const dispatch = useDispatch()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -18,6 +20,8 @@ export default function Login({navigation}) {
     })
     .then((res) => {
       console.log(res, '<<<<<<<RESPONYA');
+      dispatch(setToken(res.data.access_token))
+      navigation.replace('Home')
     })
     .catch((err) => {
       console.log(err, '<<<<<<<<<ERRRRRROOORRRRRR');

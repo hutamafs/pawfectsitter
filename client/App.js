@@ -8,6 +8,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Landing from './screens/Landing'
 import Login from './screens/Login'
 import Register from './screens/Register'
+import Home from './screens/Home'
 import * as Font from 'expo-font'
 import { AppLoading } from 'expo'
 
@@ -21,11 +22,12 @@ const getFont = () => Font.loadAsync({
 
 
 export default function App() {
-
+  const Stack = createStackNavigator();
   const [fontsLoaded , setFontsLoaded ] = useState(false)
 
   if (fontsLoaded){
     return (
+      <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen name="Landing" component={Landing} 
@@ -37,8 +39,13 @@ export default function App() {
           <Stack.Screen name="Register" component={Register} 
           options={{title: 'Register'}}
           />
+          <Stack.Screen name="Home" component={Home} 
+          options={{title: 'Home'}}
+          />
         </Stack.Navigator>
       </NavigationContainer>
+     </Provider>
+
     )
   }else {
     return(
@@ -48,7 +55,6 @@ export default function App() {
       />
     )
   }
-
 }
 
 const styles = StyleSheet.create({

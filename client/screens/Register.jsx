@@ -21,9 +21,12 @@ export default function Register({navigation}) {
     })
     .then((res) => {
       console.log(res, '<<<<<<<RESPONYA');
+      console.log(res);
+      navigation.replace('Login')
     })
     .catch((err) => {
       console.log(err, '<<<<<<<<<ERRRRRROOORRRRRR');
+      alert('Please make sure the input fields are not empty')
     })
   }
   return (
