@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Button, StyleSheet, Text, View , TextInput, TouchableWithoutFeedback , Keyboard , Image , TouchableOpacity} from 'react-native';
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 import axios from 'axios';
-import ImagePicker from 'react-native-image-picker';
+//import ImagePicker from 'react-native-image-picker';
 import { addPet } from '../store/actions/index';
 import { useDispatch , useSelector } from 'react-redux';
 import { RNS3 } from 'react-native-aws3';
+import ImagePicker from 'react-native-image-picker';
 
 const AddPet = () => {
     const dispatch = useDispatch();

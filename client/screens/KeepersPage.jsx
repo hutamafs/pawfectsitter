@@ -15,7 +15,6 @@ export default function KeepersPage({route, navigation}) {
   return (
     <View style={styles.container}>
       <View style={styles.top}>
-        <Text>Keepers</Text>
       </View>
       <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
         {
