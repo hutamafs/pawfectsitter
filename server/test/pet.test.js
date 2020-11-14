@@ -22,6 +22,7 @@ describe("beginning before all",() => {
     user_id = user._id;
     token = await jwt.sign({ user_id,email:user.email },process.env.SECRET);
   })
+  
 
   describe("POST /", () => {
     before(async () => {
@@ -66,7 +67,7 @@ describe("beginning before all",() => {
       await Pet.deleteMany({});
     });
     
-    describe.only("GET /", () => {
+    describe("GET /", () => {
       it("should return all pets", async () => {
         const pets = [
           { name : "Test1" , image : "Test1" , gender : "Test1" , age : 1 , type : "Test1",user_id}
