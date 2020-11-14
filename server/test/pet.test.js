@@ -20,35 +20,25 @@ describe("beginning before all",() => {
     });
     await user.save();
     user_id = user._id;
-    token = await jwt.sign({ user_id,email:user.email },process.env.SECRET);
+    token = await jwt.sign({ id:user_id,email:user.email },process.env.SECRET);
   })
   
 
   describe("POST /", () => {
     before(async () => {
         await Pet.deleteMany({});
-        // let user = new User({
-        //   name:'abc',
-        //   email:'abc@mail.com',
-        //   password:'abcde',
-        //   address:'gading'
-        // });
-        // await user.save();
-        // user_id = user._id;
-        // token = await jwt.sign({ user_id,email:user.email },process.env.SECRET);
     });
     it("should return pet when the all request body is valid",  async() => {
       const res = await  request(app)
           .post('/pets')
-          .set('access_token',token)
           .send({
             name : "Test6",
             image : "Test6",
             gender : "Test6",
             age : 6,
             type : "Test6",
-            user_id
-            })
+          })
+          .set('access_token',token)
       expect(res.status).to.equal(201);
       
       const data = res.body
@@ -94,7 +84,7 @@ describe("beginning before all",() => {
               gender : "Test6",
               age : 6,
               type : "Test6",
-              user_id
+              id:user_id
               })
         expect(res.status).to.equal(400);
       });

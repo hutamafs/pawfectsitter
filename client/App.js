@@ -8,7 +8,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Landing from './screens/Landing'
 import Login from './screens/Login'
 import Register from './screens/Register'
-import Home from './screens/Home'
+import Home from './screens/Home';
+import AddPet from './screens/AddPet'
 import * as Font from 'expo-font'
 import { AppLoading } from 'expo'
 
@@ -29,11 +30,16 @@ export default function App() {
     return (
       <Provider store={store}>
       <NavigationContainer>
+
         <Stack.Navigator
             screenOptions={{
               headerShown: false
             }}
           >
+        <Stack.Navigator>
+          <Stack.Screen name="AddPet" component={AddPet} 
+          options={{title: 'AddPet'}}
+          />
           <Stack.Screen name="Landing" component={Landing} 
           options={{title: 'Landing'}}
           />
