@@ -1,30 +1,31 @@
 import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View, Image} from 'react-native';
 import axios from 'axios'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setPet } from '../store/actions'
 import logo from '../assets/logoDog.png'
 import { ScrollView } from 'react-native-gesture-handler';
-import TabBar from './components/TabBottomNavbar'
 
 
 export default function PetList() {
+    const dispatch = useDispatch()
     const {access_token, pets} = useSelector(state => state)
     useEffect(() => {
         axios({
             url: 'http://192.168.1.5:3000/pets',
             method: 'GET',
-            headers: access_token
+            headers: {access_token}
           })
           .then((res) => {
             console.log(res, '<<<<<<<RESPONYA');
-            dispatch(setPet(res.data.access_token))
+            dispatch(setPet(res.data))
           })
           .catch((err) => {
             console.log(err, '<<<<<<<<<ERRRRRROOORRRRRR');
           })
     },[])
   return (
+      <>
     <View style={styles.container}>
       <Text style={{textAlign: 'center'}}>Pet</Text>
       {/* <Text>{JSON.stringify(pets)}</Text> */}
@@ -57,20 +58,20 @@ export default function PetList() {
         <Text>Type</Text>
       </View>
     </ScrollView>
-    <TabBar/>
     </View>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    display: "flex",
     backgroundColor: '#fff',
-    justifyContent: 'start',
-    margin: 10
+    justifyContent: 'flex-start',
+    margin: 30,
   },
   cardContainer: {
-    flex: 1,
+    display: "flex",
     backgroundColor: 'gray',
     alignItems: 'center',
     justifyContent: 'center',

@@ -5,9 +5,8 @@ import Home from '../Home'
 import Order from '../Order'
 import Chat from '../Chat'
 import History from '../History'
-
-const Tab = createBottomTabNavigator();
-
+import PetList from '../PetList'
+const Tab = createBottomTabNavigator()
 
 export default function TabBar() {
   return (
@@ -16,6 +15,7 @@ export default function TabBar() {
     <Tab.Screen name="Order" component={Order} />
     <Tab.Screen name="Chat" component={Chat} />
     <Tab.Screen name="History" component={History} />
+    <Tab.Screen name="PetList" component={PetList} />
   </Tab.Navigator>
   );
 }

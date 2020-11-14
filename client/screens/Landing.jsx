@@ -4,6 +4,7 @@ import { Image, StyleSheet, Text, View } from 'react-native';
 import Button from 'apsl-react-native-button'
 import logo from '../assets/logoDog.png'
 
+
 export default function Landing({navigation}) {
   return (
     <View style={styles.container}>
@@ -15,14 +16,14 @@ export default function Landing({navigation}) {
       <Button
           style={styles.buttonStyle6} textStyle={styles.textStyle}
           onPress={() => navigation.navigate('Login')}
+          title="Log in"
           >
-          Log in
         </Button>
         <Button
           style={styles.buttonStyle7} textStyle={styles.textStyle}
           onPress={() => navigation.navigate('Register')}
+          title="Register"
           >
-          Register
         </Button>
     </View>
   );
@@ -64,6 +65,5 @@ const styles = StyleSheet.create({
     fontWeight: '900',
     fontSize : 30,
     fontFamily : 'nunito'
-
   }
 });

@@ -3,7 +3,7 @@ const { Pet } = require("../models/pet.model");
 module.exports.getAllPets = async (req, res,next) => {
 
     try {
-        let pets = await Pet.find().where('this.user_id == req.userData.user_id');
+        let pets = await Pet.find({user_id: req.userData.user_id})
         res.status(200).json(pets)
     } catch (next) {
         
@@ -19,7 +19,7 @@ module.exports.createPet = async ( req, res , next ) => {
             gender : req.body.gender,
             age : req.body.age,
             type : req.body.type,
-            user_id : req.userData.user_id
+            user_id : req.userData.id
         })
         await pet.save()
         res.status(201).json(pet)

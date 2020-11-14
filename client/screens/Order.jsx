@@ -11,7 +11,7 @@ export default function Order() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    display: "flex",
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
