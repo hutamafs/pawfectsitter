@@ -11,10 +11,10 @@ import Register from './screens/Register'
 
 
 
-const Stack = createStackNavigator();
 
 
 export default function App() {
+  const Stack = createStackNavigator();
   return (
     <NavigationContainer>
       <Stack.Navigator>

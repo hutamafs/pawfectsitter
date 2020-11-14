@@ -1,21 +1,67 @@
-import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import { Button, StyleSheet, Text, View } from 'react-native';
+import { TextInput } from 'react-native-gesture-handler';
+import axios from 'axios'
+import { color } from 'react-native-reanimated';
 
 export default function Login({navigation}) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+  const handleLogin = () => {
+    axios({
+      url: 'http://192.168.1.5:3000/users/login',
+      method: 'POST',
+      data: {
+        email,password
+      }
+    })
+    .then((res) => {
+      console.log(res, '<<<<<<<RESPONYA');
+    })
+    .catch((err) => {
+      console.log(err, '<<<<<<<<<ERRRRRROOORRRRRR');
+    })
+  }
+
   return (
     <View style={styles.container}>
-      <StatusBar style="auto" />
-      <Text>Email:</Text>
-      <TextInput onChangeText={text => setEmail(text)} value={email} style={styles.textInput}/>
-      <Text>Password:</Text>
-      <TextInput onChangeText={text => setPassword(text)} value={password} style={styles.textInput}/>
-      <View style={styles.buttonStyle}>
-        <Button Button title='Login' onPress={() => navigation.navigate('Landing', {email})}></Button>
-      </View>
+      <Text>Login Page</Text>
+
+      <Text>email: {email}</Text>
+      <Text>password: {password}</Text>
+
+  
+      <TextInput
+      style={styles.formInput}
+      autoCompleteType="off"
+      keyboardType="email-address"
+      onChangeText={(text) => setEmail(text)}
+      />
+      <TextInput
+      style={styles.formInput}
+      autoCompleteType="off"
+      onChangeText={(text) => setPassword(text)}
+      secureTextEntry={true}
+      />
+
+      <Button
+      title="Login"
+      onPress={handleLogin}
+      />
+     <Text>Don't have an account yet? 
+       <Text 
+       style={{color:'blue', textDecorationLine: 'underline'}}
+       accessibilityRole='button'
+       onPress={(e) => {
+        e.preventDefault()
+        navigation.replace('Register')
+         }
+       }
+       > Register</Text>
+
+     </Text>
+
     </View>
   );
 }
@@ -27,12 +73,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  textInput: {
-    borderWidth: 1,
-    width: 200,
-    marginBottom: 10
-  },
-  buttonStyle: {
-    margin: 10,
+  formInput: {
+    width: 100,
+    borderWidth: 2
   }
 });
