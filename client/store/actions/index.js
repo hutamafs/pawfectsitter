@@ -1,7 +1,7 @@
 export function fetchKeepers ()  {
     return(dispatch) => {
         // console.log('masuk pak ekoooo')
-        fetch(`http://192.168.100.6:3000/keepers`)
+        fetch(`http://192.168.1.3:3000/keepers`)
         .then(resp => resp.json())
         .then(resp => {
             // console.log(resp, 'resp dari fetch')
@@ -29,3 +29,6 @@ export function addPet(payload) {
 
     }
 }
+
+// fetch hutama : http://192.168.1.3:3000
+// fetch nasrul : http://192.168.100.6:3000
