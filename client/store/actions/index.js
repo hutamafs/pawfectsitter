@@ -13,6 +13,9 @@ export const fetchKeepers = () => {
             console.log(err)
             console.warn
         })
+    }
+}
+
 export function setToken(payload) {
     return {
         type: 'SET_TOKEN',
