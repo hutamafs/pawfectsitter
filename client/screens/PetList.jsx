@@ -28,7 +28,23 @@ export default function PetList() {
       <>
     <View style={styles.container}>
       <Text style={{textAlign: 'center'}}>Pet</Text>
-      {/* <Text>{JSON.stringify(pets)}</Text> */}
+      {/* <ScrollView>
+      {pets &&
+        pets.map(pet => {
+            return (
+                <View style={styles.cardContainer}>
+                  <Image
+                  source={pet.image}
+                  />
+                  <Text>Name: {pet.name}</Text>
+                  <Text>Gender: {pet.gender}</Text>
+                  <Text>Age: {pet.age}</Text>
+                 <Text>Type: {pet.type}</Text>
+                </View>
+            )
+        })
+      }
+      </ScrollView> */}
       <ScrollView>
       <View style={styles.cardContainer}>
         <Image
