@@ -64,6 +64,5 @@ const styles = StyleSheet.create({
     fontWeight: '900',
     fontSize : 30,
     fontFamily : 'nunito'
-
   }
 });
