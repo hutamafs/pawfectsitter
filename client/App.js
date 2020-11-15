@@ -37,6 +37,7 @@ export default function App() {
               headerShown: false
             }}
           >
+
             <Stack.Screen name="KeepersPage" component={KeepersPage}
               options={{ title: 'Keepers' }}
             />
