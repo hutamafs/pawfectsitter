@@ -38,9 +38,9 @@ export default function App() {
             }}
           >
 
-            <Stack.Screen name="KeepersPage" component={KeepersPage}
+            {/* <Stack.Screen name="KeepersPage" component={KeepersPage}
               options={{ title: 'Keepers' }}
-            />
+            /> */}
             <Stack.Screen name="AddPet" component={AddPet}
               options={{ title: 'AddPet' }}
             />
