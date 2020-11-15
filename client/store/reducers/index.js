@@ -1,7 +1,8 @@
 const initialState = {
     keepers: [],
     access_token: '',
-    pets:[]
+    pets:[],
+    loading: true
 }
 
 export default function reducer (state = initialState, action) {
@@ -12,6 +13,8 @@ export default function reducer (state = initialState, action) {
             return {...state, access_token: action.payload};
         case 'ADD_PET':
             return {...state, pets:state.pets.concat(action.payload)};
+        case 'FETCH_PETS':
+            return {...state, pets: action.payload, loading: false}
         default:
             return state
     }
