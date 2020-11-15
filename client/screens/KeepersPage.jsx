@@ -17,26 +17,29 @@ export default function KeepersPage({ route, navigation }) {
   const [quantity, setQuantity] = useState(0);
   const [harga, setHarga] = useState(0);
   const dispatch = useDispatch();
-  let duration_props = null;
   const [price, setPrice] = useState('')
   
   useEffect(() => {
     dispatch(fetchKeepers())
     dispatch(fetchPets())
   }, [])
+  
+  // console.log(price, 'ini priceeeeee')
+  let duration_props = [
+    { label: 'hourly', value: `${price.hourly}` },
+    { label: 'daily', value: `${price.daily}` },
+    { label: 'weekly', value: `${price.weekly}` }
+  ];
 
   const handlePress = (el) => {
     setName(el.name);
     setPrice(el.price)
-    duration_props = [
-      { label: 'hourly', value: `${el.price.hourly}`, textStyle: { marginRight: 20 } },
-      { label: 'daily', value: `${el.price.daily}`, style: { marginLeft: 20 } },
-      { label: 'weekly', value: `${el.price.weekly}`, style: { marginLeft: 20 } }
-    ];
-    console.log(el, 'ini element yg dibawa')
+    
+    // console.log(el, 'ini element yg dibawa')
     console.log(el.name, 'element name isinya')
-    console.log(el.price, 'element price isinya')
-    // console.log(duration_props, 'ini duration_props')
+    // console.log(el.price, 'element price isinya')
+    // console.log(el.price.hourly, 'element hourly')
+    console.log(duration_props, 'ini duration_props')
     setModalVisible(!isModalVisible);
   }
 
@@ -118,12 +121,11 @@ export default function KeepersPage({ route, navigation }) {
                         </Picker> */}
                       </View>
 
-                      <View style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: 200, marginTop: 50, marginLeft: 10 }}>
+                      <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', width: 200, marginTop: 50, marginLeft: 10 }}>
                         <Text style={{ marginTop: 15, fontSize: 15 }}> Which Package ? </Text>
                         {
                           duration_props &&
                           <RadioForm
-                            value={price}
                             radio_props={duration_props}
                             initial={0}
                             formHorizontal={true}
@@ -131,7 +133,6 @@ export default function KeepersPage({ route, navigation }) {
                             buttonColor={'#2196f3'}
                             borderWidth={2}
                             buttonSize={15}
-                            style={{ backgroundColor: 'black' }}
                             buttonWrapStyle={{ marginLeft: 10 }}
                             onPress={(value) => setHarga(value)}
                             labelStyle={{ paddingLeft: 5, marginRight: 15 }}
