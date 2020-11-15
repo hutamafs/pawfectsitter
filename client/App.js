@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { StyleSheet, Text, View , Keyboard,TouchableWithoutFeedback } from 'react-native';
 import { Provider } from 'react-redux'
@@ -15,34 +16,44 @@ import Order from './screens/Order'
 import Chat from './screens/Chat'
 import History from './screens/History'
 
+
 import * as Font from 'expo-font'
 import { AppLoading } from 'expo'
 
 
 const getFont = () => Font.loadAsync({
-  'nunito': require('./assets/fonts/Nunito.ttf')
+    'nunito' : require('./assets/fonts/Nunito.ttf')
 })
+
+
 
 export default function App() {
   const Stack = createStackNavigator();
-  const [fontsLoaded, setFontsLoaded] = useState(false)
+  const [fontsLoaded , setFontsLoaded ] = useState(false)
 
-  if (fontsLoaded) {
+  if (fontsLoaded){
     return (
+
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <Provider store={store}>
         <NavigationContainer>
           <Stack.Navigator
+
             screenOptions={{
               headerShown: false
             }}
           >
 
+
             <Stack.Screen name="KeepersPage" component={KeepersPage}
               options={{ title: 'Keepers' }}
             />
             {/* <Stack.Screen name="AddPet" component={AddPet}
+
               options={{ title: 'AddPet' }}
+            />
+            <Stack.Screen name="KeepersPage" component={KeepersPage}
+              options={{ title: 'Keepers' }}
             />
             <Stack.Screen name="PetList" component={PetList}
               options={{ title: 'PetList' }}
@@ -56,9 +67,20 @@ export default function App() {
             />
             <Stack.Screen name="Login" component={Login}
               options={{ title: 'Login' }}
+
             />
-            <Stack.Screen name="Register" component={Register}
-              options={{ title: 'Register' }}
+          
+          <Stack.Screen name="Home" component={Home} 
+          options={{title: 'Home'}}
+          />
+          <Stack.Screen name="Login" component={Login} 
+          options={{title: 'Login'}}
+          />
+          <Stack.Screen name="Register" component={Register} 
+          options={{title: 'Register'}}
+          />
+          <Stack.Screen name="Order" component={Order} 
+            options={{title: 'Order'}}
             />
             <Stack.Screen name="Order" component={Order}
               options={{ title: 'Order' }}
@@ -75,14 +97,15 @@ export default function App() {
       </Provider>
       </TouchableWithoutFeedback>    
 
+
     )
-  } else {
+  }else {
     return (
-      <AppLoading
-        startAsync={getFont}
-        onFinish={() => setFontsLoaded(true)}
+      <AppLoading 
+      startAsync={getFont}
+      onFinish={() => setFontsLoaded(true)}
       />
-    )
+    )    
   }
 }
 
