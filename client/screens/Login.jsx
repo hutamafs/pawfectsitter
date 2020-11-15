@@ -53,16 +53,15 @@ export default function Login({navigation}) {
         secureTextEntry={true}
         />
         </View>
-        <Button
+        <Button title={"Log In"}
           style={styles.buttonStyle7} textStyle={styles.textStyle}
           onPress={handleLogin}
           >
-          Log in
         </Button>
       </View>
       
       <View style={styles.bottom}>
-        <Text style={[styles.textbottom, { letterSpacing : 1 }]}>Don't have an account yet ? 
+        <Text style={[styles.textbottom, { letterSpacing : 1 }]}>Don't have an account yet ?
           <Text 
           style={{color:'blue', textDecorationLine: 'none'}}
           accessibilityRole='button'

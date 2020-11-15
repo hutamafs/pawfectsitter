@@ -16,13 +16,13 @@ export default function Landing({navigation}) {
       <Button
           style={styles.buttonStyle6} textStyle={styles.textStyle}
           onPress={() => navigation.navigate('Login')}
-          title="Log in"
+          title={"Log in"}
           >
         </Button>
         <Button
           style={styles.buttonStyle7} textStyle={styles.textStyle}
           onPress={() => navigation.navigate('Register')}
-          title="Register"
+          title={"Register"}
           >
         </Button>
     </View>
