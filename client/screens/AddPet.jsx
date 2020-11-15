@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Button, StyleSheet, Text, View , TextInput, TouchableWithoutFeedback , Keyboard , Image , TouchableOpacity} from 'react-native';
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 import axios from 'axios';
-//import ImagePicker from 'react-native-image-picker';
 import { addPet } from '../store/actions/index';
 import { useDispatch , useSelector } from 'react-redux';
 import { RNS3 } from 'react-native-aws3';
@@ -32,7 +31,7 @@ const AddPet = () => {
     const handleSubmit = () => {
         console.log(image,'ini image')
     axios({
-        url: 'http://192.168.1.3:3000/pets',
+        url: 'http://192.168.100.6:3000/pets',
         method: 'POST',
         headers:{access_token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYWZkNThhOWQ5NjAyNDQ4OGI3OGJkNyIsImVtYWlsIjoidGFtYUBnbWFpbC5jb20iLCJpYXQiOjE2MDUzNTg5ODh9.1fDc7yYmvXXrLwKiLecnJjhnffnTlRFuBMNRtNDzYUI'},
         data: { name,gender,type,age,image },
@@ -114,18 +113,18 @@ const AddPet = () => {
                 />
                 <Button
                 onPress={takePic}
-                title="choose photo"
+                title={"choose photo"}
                 />
-                {
+                {/* {
                     image && (
                         <Image
                         source={{uri:image}}
                         style={{width:300,height:300}}
                         />
                     )
-                }
+                } */}
             <Button
-            title="submit"           
+            title={"submit"}           
             onPress={handleSubmit}
             />
             </View>

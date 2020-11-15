@@ -12,32 +12,30 @@ import KeepersPage from './screens/KeepersPage'
 import Home from './screens/Home';
 import AddPet from './screens/AddPet'
 import * as Font from 'expo-font'
-//import { AppLoading } from 'expo'
+import { AppLoading } from 'expo'
 
 const getFont = () => Font.loadAsync({
     'nunito' : require('./assets/fonts/Nunito.ttf')
 })
 
-
-
 export default function App() {
   const Stack = createStackNavigator();
   const [fontsLoaded , setFontsLoaded ] = useState(false)
 
-  if (fontsLoaded){
+  // if (fontsLoaded){
     return (
-      <Provider store={store}>
+     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator
-            screenOptions={{
-              headerShown: false
-            }}
-          >
-          <Stack.Screen name="KeepersPage" component={KeepersPage}
-            options={{title: 'Keepers'}}
-          />
+          screenOptions={{
+            headerShown: false
+          }}
+        >
           <Stack.Screen name="AddPet" component={AddPet} 
-          options={{title: 'AddPet'}}
+            options={{title: 'AddPet'}}
+          />
+          {/* <Stack.Screen name="KeepersPage" component={KeepersPage}
+            options={{title: 'Keepers'}}
           />
           <Stack.Screen name="Landing" component={Landing} 
           options={{title: 'Landing'}}
@@ -50,20 +48,21 @@ export default function App() {
           />
           <Stack.Screen name="Home" component={Home} 
           options={{title: 'Home'}}
-          />
+          /> */}
         </Stack.Navigator>
       </NavigationContainer>
      </Provider>
 
     )
-  }else {
-    return null
-      // <AppLoading 
-      // startAsync={getFont}
-      // onFinish={() => setFontsLoaded(true)}
-      // />
+  // }else {
+  //   return(
+  //     <AppLoading 
+  //     startAsync={getFont}
+  //     onFinish={() => setFontsLoaded(true)}
+  //     />
+  //   )
     
-  }
+  // }
 }
 
 const styles = StyleSheet.create({
