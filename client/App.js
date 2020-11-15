@@ -15,9 +15,9 @@ import Order from './screens/Order'
 import Chat from './screens/Chat'
 import History from './screens/History'
 
-
 import * as Font from 'expo-font'
 import { AppLoading } from 'expo'
+import createPet from './screens/createPet';
 
 
 const getFont = () => Font.loadAsync({
@@ -37,17 +37,14 @@ export default function App() {
               headerShown: false
             }}
           >
-<<<<<<< HEAD
-=======
-          {/* <Stack.Screen name="PetList" component={PetList} 
-            options={{title: 'PetList'}}
-            /> */}
->>>>>>> development
-            <Stack.Screen name="KeepersPage" component={KeepersPage}
-              options={{ title: 'Keepers' }}
-            />
             <Stack.Screen name="AddPet" component={AddPet}
               options={{ title: 'AddPet' }}
+            />
+            <Stack.Screen name="createPet" component={createPet}
+              options={{ title: 'CreatePet' }}
+            />
+            <Stack.Screen name="KeepersPage" component={KeepersPage}
+              options={{ title: 'Keepers' }}
             />
             <Stack.Screen name="PetList" component={PetList}
               options={{ title: 'PetList' }}
@@ -65,19 +62,11 @@ export default function App() {
             <Stack.Screen name="Register" component={Register}
               options={{ title: 'Register' }}
             />
-<<<<<<< HEAD
             <Stack.Screen name="Order" component={Order}
               options={{ title: 'Order' }}
             />
             <Stack.Screen name="History" component={History}
               options={{ title: 'History' }}
-=======
-            {/* <Stack.Screen name="History" component={History} 
-            options={{title: 'History'}}
-            /> */}
-            <Stack.Screen name="Chat" component={Chat} 
-            options={{title: 'Chat'}}
->>>>>>> development
             />
             <Stack.Screen name="Chat" component={Chat}
               options={{ title: 'Chat' }}
