@@ -2,44 +2,51 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, Button } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchKeepers, fetchPets } from '../store/actions';
+import { fetchKeepers, fetchPets, setOrders } from '../store/actions';
 import TabBar from './components/TabBottomNavbar';
 import Modal from 'react-native-modal';
 import { Picker } from '@react-native-picker/picker';
 import { TextInput } from 'react-native-paper';
 import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
+import axios from 'axios';
 
 export default function KeepersPage({ route, navigation }) {
   const { keepers, pets } = useSelector(state => state);
-  const { petId, setPetId } = useState('');
+  const [ petId, setPetId ] = useState('');
   const [name, setName] = useState('');
   const [isModalVisible, setModalVisible] = useState(false);
-  const [quantity, setQuantity] = useState(0);
-  const [harga, setHarga] = useState(0);
+  const [quantity, setQuantity] = useState('');
+  const [harga, setHarga] = useState('');
   const dispatch = useDispatch();
   const [price, setPrice] = useState('')
+  const [keeperId, setKeeperId] = useState('')
   
   useEffect(() => {
     dispatch(fetchKeepers())
     dispatch(fetchPets())
   }, [])
-  
+
   // console.log(price, 'ini priceeeeee')
   let duration_props = [
     { label: 'hourly', value: `${price.hourly}` },
     { label: 'daily', value: `${price.daily}` },
     { label: 'weekly', value: `${price.weekly}` }
   ];
+  // console.log(duration_props, 'ini duration_props')
 
+  // console.log(pets, 'ini pet nya')
+  let pet_props = []
+  pets.map(el => pet_props.push({ label: `${el.name}`, value: `${el._id}` }))
+  // console.log(pet_props, 'petproopes nih')
   const handlePress = (el) => {
     setName(el.name);
     setPrice(el.price)
-    
+    setKeeperId(el._id)
     // console.log(el, 'ini element yg dibawa')
-    console.log(el.name, 'element name isinya')
+    // console.log(el.name, 'element name isinya')
     // console.log(el.price, 'element price isinya')
     // console.log(el.price.hourly, 'element hourly')
-    console.log(duration_props, 'ini duration_props')
+    console.log(keeperId, 'ini keepers ID nyaaaa')
     setModalVisible(!isModalVisible);
   }
 
@@ -48,14 +55,46 @@ export default function KeepersPage({ route, navigation }) {
   }
 
   const handleSubmit = () => {
+    console.log(petId, 'petid niiiih')
+    console.log(harga, 'harganyaaaa')
     let payload = {
       pet_id: petId,
       harga: (Number(quantity) * Number(harga)),
       quantity: Number(quantity)
     }
-    setModalVisible(!isModalVisible);
-    setQuantity(0)
+    
     console.log(payload, 'ini payload')
+    axios({
+      url: 'http://192.168.100.6/orders/' + keeperId,
+      method: 'post',
+      headers: {
+        access_token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYjEwYmUzNWU4ODkxMTU3YzMwYTFjMCIsImVtYWlsIjoic3VzYW5AbWFpbC5jb20iLCJpYXQiOjE2MDU0Mzg1NTl9.XC6fVC7Oo8BEN7o1f4t04T31SaLEVL8xhhxlYarjkgo'
+      },
+      data: {
+        quantity: payload.quantity,
+        price: payload.harga,
+        pet_id: payload.pet_id
+      }
+    })
+    .then(result => {
+      console.log(result, 'result orderrererreers')
+      dispatch(setOrders(result))
+    })
+    .catch(err => console.log(err))
+
+    setModalVisible(!isModalVisible);
+    setQuantity('')
+  }
+
+  const handlePetRadio = (e) => {
+    // setPetId(e.target[radio_props].value)
+    setPetId(e)
+    console.log(petId, 'petid di radio nih')
+  }
+
+  const setRadioHarga = (value) => {
+    setHarga(value)
+    console.log(harga, 'harga di radio nih')
   }
 
   const handleValuePid = (v) => {
@@ -119,6 +158,21 @@ export default function KeepersPage({ route, navigation }) {
                           })
                         }
                         </Picker> */}
+                        {
+                          pet_props &&
+                          <RadioForm
+                            radio_props={pet_props}
+                            initial={0}
+                            formHorizontal={true}
+                            labelHorizontal={true}
+                            buttonColor={'#2196f3'}
+                            borderWidth={2}
+                            buttonSize={15}
+                            buttonWrapStyle={{ marginLeft: 10 }}
+                            onPress={(value) => handlePetRadio(value)}
+                            labelStyle={{ paddingLeft: 5, marginRight: 15 }}
+                          />
+                        }
                       </View>
 
                       <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', width: 200, marginTop: 50, marginLeft: 10 }}>
@@ -134,13 +188,13 @@ export default function KeepersPage({ route, navigation }) {
                             borderWidth={2}
                             buttonSize={15}
                             buttonWrapStyle={{ marginLeft: 10 }}
-                            onPress={(value) => setHarga(value)}
+                            onPress={(value) => setRadioHarga(value)}
                             labelStyle={{ paddingLeft: 5, marginRight: 15 }}
                           />
                         }
                       </View>
 
-                      {/* <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', width: 200, marginTop: 100 }}>
+                      <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', width: 200, marginTop: 100 }}>
                         <TextInput
                           placeholder="For How long?"
                           style={{ backgroundColor: 'white', width: 300, height: 50, borderWidth: 0.5, marginLeft: 10 }}
@@ -148,7 +202,7 @@ export default function KeepersPage({ route, navigation }) {
                           keyboardType="numeric"
                           onChangeText={(text) => setQuantity(text)}
                         />
-                      </View> */}
+                      </View>
 
                       <View style={{ display: 'flex', justifyContent: 'space-between' }}>
                         <Button title={"Hire"} onPress={() => handleSubmit()} />

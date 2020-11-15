@@ -7,6 +7,8 @@ import { useDispatch , useSelector } from 'react-redux';
 import { RNS3 } from 'react-native-aws3';
 import DocumentPicker from 'react-native-document-picker';
 import * as ImagePicker from 'expo-image-picker';
+import logo from '../assets/logoDog.png'
+
 
 const AddPet = () => {
     const dispatch = useDispatch();
@@ -19,14 +21,14 @@ const AddPet = () => {
     //const {access_token} = useSelector(state => state)
 
     const gender_props = [
-        {label: 'Male', value: 'male',textStyle:{marginRight:20} },
-        {label: 'Female', value: 'female',style:{marginLeft:20} },
+        {label: '♂️', value: 'male',textStyle:{marginRight:20} },
+        {label: '♀️', value: 'female',style:{marginLeft:20} },
     ];
 
     const type_props = [
-        {label: 'Dog', value: 'dog',textStyle:{marginRight:20} },
-        {label: 'Bird', value: 'bird',style:{marginLeft:20} },
-        {label: 'Cat', value: 'cat',style:{marginLeft:20} }
+        {label: '🐶', value: 'dog',textStyle:{marginRight:20} },
+        {label: '🦅', value: 'bird',style:{marginLeft:20} },
+        {label: '🐱', value: 'cat',style:{marginLeft:20} }
     ];
 
     // const handleSubmit = () => {
@@ -177,12 +179,18 @@ const AddPet = () => {
       };
 
     return (
+        <>
+        <View style={{display: 'flex', flexDirection: 'row', marginTop: 25}}>
+        <Image
+        source={logo}
+        style={{ width: 80, height: 80}}
+        />
+        <Text style={{fontSize: 20, marginTop: 25}}>Add Pet</Text>
+        </View>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
              <View style={styles.container}>
                  <View style={{backgroundColor: '#F9F8F6', borderRadius: 100, marginBottom: 30}}>
-            <TouchableOpacity style={{borderWidth: 0.1, margin: 10, borderRadius: 100, padding: 30, backgroundColor: 'white',
-
-            }}>
+            <TouchableOpacity style={{borderWidth: 0.1, margin: 10, borderRadius: 100, padding: 30, backgroundColor: 'white'}}>
              <Image
                 source={{uri: 'https://lh3.googleusercontent.com/proxy/W_fq5wVspFA3goJG22FNuX2nx204B0kalDUZqTmMBP4QznwrD0gHhcMbhe9WlC6OxzVmyZy-hm4pqT4YrCLUWgE2'}}
                 style={{ width: 80, height: 80}}
@@ -254,7 +262,8 @@ const AddPet = () => {
                     <Text style={{ fontSize: 20, color: '#fff', textAlign: 'center', margin: 5 }}>Submit</Text>
                 </TouchableOpacity>
             </View>
-        </TouchableWithoutFeedback>       
+        </TouchableWithoutFeedback>      
+        </> 
     )
 }
 
