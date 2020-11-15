@@ -34,9 +34,9 @@ export function addPet(payload) {
 
 export function fetchPets(access_token) {
     return(dispatch) => {
-        // console.log('masuk fetch pets')
+        console.log('masuk fetch pets')
         axios({
-            url: 'http://192.168.1.5:3000/pets',
+            url: 'http://192.168.1.4:3000/pets',
             method: 'GET',
             headers: {access_token}
           })
