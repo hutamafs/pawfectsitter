@@ -13,6 +13,7 @@ class OrderController {
     }
 
     static async createOrder(req,res,next) {
+        console.log('<<<<WOY')
         try {
             let keeper = await Keeper.findById(req.params.id);
             let pet = await Pet.findById(req.body.pet_id);
