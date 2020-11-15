@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 export function fetchKeepers ()  {
     return(dispatch) => {
         // console.log('masuk pak ekoooo')
@@ -27,6 +29,27 @@ export function addPet(payload) {
         type: 'ADD_PET',
         payload
 
+    }
+}
+
+export function fetchPets(access_token) {
+    return(dispatch) => {
+        // console.log('masuk fetch pets')
+        axios({
+            url: 'http://192.168.1.5:3000/pets',
+            method: 'GET',
+            headers: {access_token}
+          })
+          .then((res) => {
+            console.log(res, '<<<<<<<RESPONYA');
+            dispatch({
+                type: 'FETCH_PETS',
+                payload: res.data
+            })
+          })
+          .catch((err) => {
+            console.log(err, '<<<<<<<<<ERRRRRROOORRRRRR');
+          })
     }
 }
 

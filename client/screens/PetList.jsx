@@ -1,36 +1,28 @@
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, Text, View, Image} from 'react-native';
-import axios from 'axios'
+import { StyleSheet, Text, View, Image, ActivityIndicator} from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPet } from '../store/actions'
 import logo from '../assets/logoDog.png'
 import { ScrollView } from 'react-native-gesture-handler';
 import TabBar from './components/TabBottomNavbar'
+import {fetchPets} from '../store/actions'
 
 
 export default function PetList({navigation}) {
     const dispatch = useDispatch()
-    const {access_token, pets} = useSelector(state => state)
+    const {access_token, pets, loading} = useSelector(state => state)
     useEffect(() => {
-        axios({
-            url: 'http://192.168.1.5:3000/pets',
-            method: 'GET',
-            headers: {access_token}
-          })
-          .then((res) => {
-            console.log(res, '<<<<<<<RESPONYA');
-            dispatch(setPet(res.data))
-          })
-          .catch((err) => {
-            console.log(err, '<<<<<<<<<ERRRRRROOORRRRRR');
-          })
+        dispatch(fetchPets(access_token))
     },[])
   return (
       <>
     <View style={styles.container}>
       <Text style={{textAlign: 'center'}}>Pet</Text>
+      {/* {loading && 
+            <ActivityIndicator size="large" color="#0000ff" />
+      } */}
       {/* <ScrollView>
-      {pets &&
+      {pets.length == 0 ? <Text>No Pet</Text> :
         pets.map(pet => {
             return (
                 <View style={styles.cardContainer}>
