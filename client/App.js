@@ -39,9 +39,6 @@ export default function App() {
               headerShown: false
             }}
           >
-            <Stack.Screen name="History" component={History} 
-            options={{title: 'History'}}
-            />
           {/* <Stack.Screen name="PetList" component={PetList} 
             options={{title: 'PetList'}}
             /> */}
