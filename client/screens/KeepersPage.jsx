@@ -18,6 +18,8 @@ export default function KeepersPage({ route, navigation }) {
   const [harga, setHarga] = useState(0);
   const dispatch = useDispatch();
   let duration_props = null;
+  const [price, setPrice] = useState('')
+  
   useEffect(() => {
     dispatch(fetchKeepers())
     dispatch(fetchPets())
@@ -25,13 +27,16 @@ export default function KeepersPage({ route, navigation }) {
 
   const handlePress = (el) => {
     setName(el.name);
+    setPrice(el.price)
     duration_props = [
       { label: 'hourly', value: `${el.price.hourly}`, textStyle: { marginRight: 20 } },
       { label: 'daily', value: `${el.price.daily}`, style: { marginLeft: 20 } },
       { label: 'weekly', value: `${el.price.weekly}`, style: { marginLeft: 20 } }
     ];
-    console.log(el.price.hourly, 'ini el')
-    console.log(duration_props, 'ini duration_props')
+    console.log(el, 'ini element yg dibawa')
+    console.log(el.name, 'element name isinya')
+    console.log(el.price, 'element price isinya')
+    // console.log(duration_props, 'ini duration_props')
     setModalVisible(!isModalVisible);
   }
 
@@ -71,16 +76,12 @@ export default function KeepersPage({ route, navigation }) {
                     <Image source={{ uri: el.image }} style={{ width: 120, height: 120, borderColor: 'white' }} />
 
                   </View>
-                  <View style={{ display: 'flex', flexDirection: 'column', marginTop: 10 }}>
+                  <View style={{ display: 'flex', flexDirection: 'column' }}>
                     <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                       <Text style={{ color: 'black', fontSize: 25 }}> {el.name} </Text>
                       <Text style={{ color: 'blue', fontSize: 15, marginRight: 30 }}> {el.rating}</Text>
                     </View>
                     <View style={{ display: 'flex', flexDirection: 'column', marginTop: 10 }}>
-                      <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <Text style={{ color: 'black', fontSize: 25 }}> {el.name} </Text>
-                        <Text style={{ color: 'blue', fontSize: 15, marginRight: 30 }}> {el.rating}</Text>
-                      </View>
                       <Text style={{ color: 'red', fontSize: 15 }}> Specialized in: {el.skills.map(element => { return (`${element}, `) })} </Text>
                       <View style={{ flex: 0.3, display: 'flex', flexDirection: 'column' }}>
                         <Text style={{ color: 'black', fontSize: 15 }}> {el.address}</Text>
@@ -90,8 +91,8 @@ export default function KeepersPage({ route, navigation }) {
                       </View>
                     </View>
                     <TouchableOpacity
-                      style={{ backgroundColor: 'white', width: 75, height: 20, position: 'absolute', right: 15, bottom: 15 }}
-                      onPress={handlePress}
+                      style={{ backgroundColor: 'white', width: 75, height: 20, position: 'absolute', right: 15, bottom: 5 }}
+                      onPress={() => handlePress(el)}
                     >
                       <Text style={{ color: 'red', textAlign: 'center' }}>Hire Me! </Text>
                     </TouchableOpacity>
@@ -102,26 +103,27 @@ export default function KeepersPage({ route, navigation }) {
                       <View style={{ alignItems: 'flex-start', marginLeft: 10 }}>
                         <Text style={{ marginTop: 15, fontSize: 15 }}> {`Which pet would you like to entrust to ${name}?`} </Text>
                         {/* <Picker
-                    selectedValue={petId}
-                    style={{height: 50, width: 200,justifyContent:'center',paddingLeft:10,marginVertical:10}}
-                    onValueChange={(value) =>
-                      handleValuePid(value)
-                    }>                      
-                    {
-                      pets && pets.map(el => {
-                        return (
-                          <Picker.Item key={el._id} label={el.name} value={el._id} />
-                        )
-                      })
-                    }
-                    </Picker> */}
+                        selectedValue={petId}
+                        style={{height: 50, width: 200,justifyContent:'center',paddingLeft:10,marginVertical:10}}
+                        onValueChange={(value) =>
+                          handleValuePid(value)
+                        }>                      
+                        {
+                          pets && pets.map(el => {
+                            return (
+                              <Picker.Item key={el._id} label={el.name} value={el._id} />
+                            )
+                          })
+                        }
+                        </Picker> */}
                       </View>
 
-                      <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', width: 200, marginTop: 50, marginLeft: 10 }}>
+                      <View style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: 200, marginTop: 50, marginLeft: 10 }}>
                         <Text style={{ marginTop: 15, fontSize: 15 }}> Which Package ? </Text>
                         {
                           duration_props &&
                           <RadioForm
+                            value={price}
                             radio_props={duration_props}
                             initial={0}
                             formHorizontal={true}
@@ -137,7 +139,7 @@ export default function KeepersPage({ route, navigation }) {
                         }
                       </View>
 
-                      <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', width: 200, marginTop: 100 }}>
+                      {/* <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', width: 200, marginTop: 100 }}>
                         <TextInput
                           placeholder="For How long?"
                           style={{ backgroundColor: 'white', width: 300, height: 50, borderWidth: 0.5, marginLeft: 10 }}
@@ -145,21 +147,21 @@ export default function KeepersPage({ route, navigation }) {
                           keyboardType="numeric"
                           onChangeText={(text) => setQuantity(text)}
                         />
-                      </View>
+                      </View> */}
 
                       <View style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <Button title="Hire" onPress={() => handleSubmit()} />
-                        <Button title="Cancel" onPress={() => handleCancel()} />
+                        <Button title={"Hire"} onPress={() => handleSubmit()} />
+                        <Button title={"Cancel"} onPress={() => handleCancel()} />
                       </View>
                     </View>
+                    {/* <TouchableOpacity
+                      style={{ backgroundColor: 'white', width: 75, height: 20, position: 'absolute', right: 15, bottom: 15 }}
+                      onPress={() => handleSubmit(el)}
+                    >
+                      <Text style={{ color: 'red', textAlign: 'center' }}>Hire Me! </Text>
+                    </TouchableOpacity> */}
                   </Modal>
 
-                  <TouchableOpacity
-                    style={{ backgroundColor: 'white', width: 75, height: 20, position: 'absolute', right: 15, bottom: 15 }}
-                    onPress={() => handlePress(el)}
-                  >
-                    <Text style={{ color: 'red', textAlign: 'center' }}>Hire Me! </Text>
-                  </TouchableOpacity>
                 </View>
 
                 /*

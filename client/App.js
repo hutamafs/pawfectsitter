@@ -37,14 +37,14 @@ export default function App() {
               headerShown: false
             }}
           >
+            <Stack.Screen name="KeepersPage" component={KeepersPage}
+              options={{ title: 'Keepers' }}
+            />
             <Stack.Screen name="AddPet" component={AddPet}
               options={{ title: 'AddPet' }}
             />
             <Stack.Screen name="createPet" component={createPet}
               options={{ title: 'CreatePet' }}
-            />
-            <Stack.Screen name="KeepersPage" component={KeepersPage}
-              options={{ title: 'Keepers' }}
             />
             <Stack.Screen name="PetList" component={PetList}
               options={{ title: 'PetList' }}
