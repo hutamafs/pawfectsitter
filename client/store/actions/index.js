@@ -1,3 +1,4 @@
+import axios from 'axios';
 export function fetchKeepers ()  {
     return(dispatch) => {
         // console.log('masuk pak ekoooo')
@@ -28,6 +29,30 @@ export function addPet(payload) {
         payload
 
     }
+}
+
+export function setOrders(payload) {
+    return {
+        type:'SET_ORDERS',
+        payload
+    }
+}
+
+export function fetchOrders() {
+    return (dispatch) => {
+        axios({
+            url: 'http://192.168.1.3:3000/orders/',
+            method: 'GET',
+            headers:{access_token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYjA5NGNkMjU5ZTlkMDE5MDlkYmIwNiIsImVtYWlsIjoidGFtYUBnbWFpbC5jb20iLCJpYXQiOjE2MDU0MDc5NTF9.sEH3tA-RFJt21XnkDVOFDVRJuQK77uOHL9i3Usnt7t4'}
+          })
+          .then(({data}) => {
+            //console.log(data, '<<<<<<<RESPONYA');
+            dispatch(setOrders(data))
+          })
+          .catch((err) => {
+            console.log(err, '<<<<<<<<<ERRRRRROOORRRRRR');
+          })
+    }    
 }
 
 // fetch hutama : http://192.168.1.3:3000

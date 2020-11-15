@@ -39,9 +39,12 @@ export default function App() {
               headerShown: false
             }}
           >
-          <Stack.Screen name="PetList" component={PetList} 
-            options={{title: 'PetList'}}
+            <Stack.Screen name="History" component={History} 
+            options={{title: 'History'}}
             />
+          {/* <Stack.Screen name="PetList" component={PetList} 
+            options={{title: 'PetList'}}
+            /> */}
             <Stack.Screen name="KeepersPage" component={KeepersPage}
            options={{title: 'Keepers'}}
            />
@@ -64,9 +67,9 @@ export default function App() {
           <Stack.Screen name="Order" component={Order} 
             options={{title: 'Order'}}
             />
-            <Stack.Screen name="History" component={History} 
+            {/* <Stack.Screen name="History" component={History} 
             options={{title: 'History'}}
-            />
+            /> */}
             <Stack.Screen name="Chat" component={Chat} 
             options={{title: 'Chat'}}
             />
