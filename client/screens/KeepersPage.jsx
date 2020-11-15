@@ -65,7 +65,7 @@ export default function KeepersPage({ route, navigation }) {
     
     console.log(payload, 'ini payload')
     axios({
-      url: 'http://192.168.100.6/orders/' + keeperId,
+      url: 'http://192.168.100.6:3000/orders/' + keeperId,
       method: 'post',
       headers: {
         access_token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYjEwYmUzNWU4ODkxMTU3YzMwYTFjMCIsImVtYWlsIjoic3VzYW5AbWFpbC5jb20iLCJpYXQiOjE2MDU0Mzg1NTl9.XC6fVC7Oo8BEN7o1f4t04T31SaLEVL8xhhxlYarjkgo'
@@ -144,20 +144,6 @@ export default function KeepersPage({ route, navigation }) {
                     <View style={{ flex: 0.7, display: 'flex', backgroundColor: 'white' }}>
                       <View style={{ alignItems: 'flex-start', marginLeft: 10 }}>
                         <Text style={{ marginTop: 15, fontSize: 15 }}> {`Which pet would you like to entrust to ${name}?`} </Text>
-                        {/* <Picker
-                        selectedValue={petId}
-                        style={{height: 50, width: 200,justifyContent:'center',paddingLeft:10,marginVertical:10}}
-                        onValueChange={(value) =>
-                          handleValuePid(value)
-                        }>                      
-                        {
-                          pets && pets.map(el => {
-                            return (
-                              <Picker.Item key={el._id} label={el.name} value={el._id} />
-                            )
-                          })
-                        }
-                        </Picker> */}
                         {
                           pet_props &&
                           <RadioForm
@@ -209,12 +195,6 @@ export default function KeepersPage({ route, navigation }) {
                         <Button title={"Cancel"} onPress={() => handleCancel()} />
                       </View>
                     </View>
-                    {/* <TouchableOpacity
-                      style={{ backgroundColor: 'white', width: 75, height: 20, position: 'absolute', right: 15, bottom: 15 }}
-                      onPress={() => handleSubmit(el)}
-                    >
-                      <Text style={{ color: 'red', textAlign: 'center' }}>Hire Me! </Text>
-                    </TouchableOpacity> */}
                   </Modal>
 
                 </View>
