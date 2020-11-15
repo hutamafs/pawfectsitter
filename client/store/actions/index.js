@@ -44,7 +44,7 @@ export function fetchOrders() {
         axios({
             url: 'http://192.168.100.6:3000/orders',
             method: 'GET',
-            headers:{access_token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYjA5NGNkMjU5ZTlkMDE5MDlkYmIwNiIsImVtYWlsIjoidGFtYUBnbWFpbC5jb20iLCJpYXQiOjE2MDU0MDc5NTF9.sEH3tA-RFJt21XnkDVOFDVRJuQK77uOHL9i3Usnt7t4'}
+            headers:{access_token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYjEwYmUzNWU4ODkxMTU3YzMwYTFjMCIsImVtYWlsIjoic3VzYW5AbWFpbC5jb20iLCJpYXQiOjE2MDU0NjE4OTR9.xslH4N2F3MQfNp3-7d0G8iWcjZ4TtyH5OsgGSlYfJlg'}
           })
           .then(({data}) => {
             //console.log(data, '<<<<<<<RESPONYA');
@@ -57,9 +57,9 @@ export function fetchOrders() {
 export function fetchPets() {
     return(dispatch) => {
         axios({
-            url: 'http://192.168.1.3:3000/pets',
+            url: 'http://192.168.100.6:3000/pets',
             method: 'GET',
-            headers: {access_token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYjBhNzM2NzBkM2U0M2RmODE1ZDZhZCIsImVtYWlsIjoidGFtYUBnbWFpbC5jb20iLCJpYXQiOjE2MDU0MzAyMjV9.SicZdMhqgEQsWUbbKpg8YjMonqjZyV9m2hqWsCrb9wY'}
+            headers: {access_token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYjEwYmUzNWU4ODkxMTU3YzMwYTFjMCIsImVtYWlsIjoic3VzYW5AbWFpbC5jb20iLCJpYXQiOjE2MDU0NjE4OTR9.xslH4N2F3MQfNp3-7d0G8iWcjZ4TtyH5OsgGSlYfJlg'}
           })
           .then((res) => {
             //console.log(res.data, '<<<<<<<RESPONYA');
