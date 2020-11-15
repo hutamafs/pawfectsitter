@@ -8,7 +8,7 @@ import TabBar from './components/TabBottomNavbar'
 export default function KeepersPage({route, navigation}) {
   const {keepers} = useSelector(state => state)
   const dispatch = useDispatch()
-   console.log(keepers, 'keepers neeeeh')
+   //console.log(keepers, 'keepers neeeeh')
   useEffect(() => {
     dispatch(fetchKeepers())
   }, [])

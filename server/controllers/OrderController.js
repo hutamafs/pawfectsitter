@@ -6,8 +6,7 @@ class OrderController {
 
     static async getAllOrders(req,res,next) {
         try {
-            let orders = await Order.find({user_id: req.userData.user_id,status:true })
-            console.log(orders,'ini orders')
+            let orders = await Order.find({user_id: req.userData.id})
             res.status(200).json(orders);
         } catch (next) {
         }
@@ -18,11 +17,13 @@ class OrderController {
             let keeper = await Keeper.findById(req.params.id);
             let pet = await Pet.findById(req.body.pet_id);
             let order = new Order({
-                user_id:req.userData.user_id,
+                user_id:req.userData.id,
                 quantity:req.body.quantity,
                 price:req.body.price,
                 keeperName : keeper.name,
                 petName : pet.name,
+                petImage : pet.image,
+                keeperImage:keeper.image,
                 status:true
             })
             await order.save();
