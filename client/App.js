@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View , Keyboard,TouchableWithoutFeedback } from 'react-native';
 import { Provider } from 'react-redux'
 import store from './store'
 import { NavigationContainer, useLinkProps } from '@react-navigation/native';
@@ -17,7 +17,6 @@ import History from './screens/History'
 
 import * as Font from 'expo-font'
 import { AppLoading } from 'expo'
-import createPet from './screens/createPet';
 
 
 const getFont = () => Font.loadAsync({
@@ -30,7 +29,8 @@ export default function App() {
 
   if (fontsLoaded) {
     return (
-      <Provider store={store}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+        <Provider store={store}>
         <NavigationContainer>
           <Stack.Navigator
             screenOptions={{
@@ -41,13 +41,13 @@ export default function App() {
             <Stack.Screen name="KeepersPage" component={KeepersPage}
               options={{ title: 'Keepers' }}
             />
-            <Stack.Screen name="AddPet" component={AddPet}
+            {/* <Stack.Screen name="AddPet" component={AddPet}
               options={{ title: 'AddPet' }}
             />
             <Stack.Screen name="PetList" component={PetList}
               options={{ title: 'PetList' }}
-            />
-            <Stack.Screen name="Landing" component={Landing}
+            /> */}
+            {/* <Stack.Screen name="Landing" component={Landing}
               options={{ title: 'Landing' }}
             />
 
@@ -68,11 +68,12 @@ export default function App() {
             />
             <Stack.Screen name="Chat" component={Chat}
               options={{ title: 'Chat' }}
-            />
+            /> */}
 
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>
+      </TouchableWithoutFeedback>    
 
     )
   } else {
