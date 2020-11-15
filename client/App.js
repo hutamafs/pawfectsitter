@@ -7,9 +7,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Landing from './screens/Landing'
 import Login from './screens/Login'
 import Register from './screens/Register'
-import Home from './screens/Home'
 import PetList from './screens/PetList'
 import KeepersPage from './screens/KeepersPage'
+import Home from './screens/Home';
 import AddPet from './screens/AddPet'
 import Order from './screens/Order'
 import Chat from './screens/Chat'
