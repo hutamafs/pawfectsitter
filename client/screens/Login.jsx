@@ -1,10 +1,9 @@
 import React, {useState, useEffect} from 'react';
-
-import { Image, StyleSheet, Text, View , Button , TextInput} from 'react-native';
-
+import { Image, StyleSheet, Text, View, TextInput} from 'react-native';
 import axios from 'axios'
 import {setToken} from '../store/actions'
 import {useDispatch} from 'react-redux'
+import Button from 'apsl-react-native-button'
 import logo from '../assets/logoDog.png'
 
 
@@ -54,10 +53,12 @@ export default function Login({navigation}) {
         />
         </View>
         <Button
-          style={styles.buttonStyle7} textStyle={styles.textStyle}
+          style={styles.buttonStyle7} 
+          textStyle={styles.textStyle}
           onPress={handleLogin}
+          // title="Login"
           >
-          Log in
+            Login
         </Button>
       </View>
       

@@ -56,7 +56,7 @@ describe("beginning before all",() => {
     kid = keeper._id;
     kName = keeper.name;
     kPrice = keeper.price.hourly
-    token = await jwt.sign({ user_id,email:user.email },process.env.SECRET);
+    token = await jwt.sign({ id:user_id,email:user.email },process.env.SECRET);
   })
   
 

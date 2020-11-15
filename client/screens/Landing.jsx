@@ -14,17 +14,26 @@ export default function Landing({navigation}) {
 
       <StatusBar style="auto" />
       <Button
-          style={styles.buttonStyle6} textStyle={styles.textStyle}
+          style={styles.buttonStyle6} 
+          textStyle={styles.textStyle}
           onPress={() => navigation.navigate('Login')}
-          title="Log in"
           >
+          Login
         </Button>
         <Button
-          style={styles.buttonStyle7} textStyle={styles.textStyle}
+          style={styles.buttonStyle7} 
+          textStyle={styles.textStyle}
           onPress={() => navigation.navigate('Register')}
-          title="Register"
           >
+            Register
         </Button>
+        <Button
+          style={{
+            height: 25,
+            width: 65,
+          }}
+          onPress={() => navigation.navigate('Home')}
+        >Home</Button>
     </View>
   );
 }

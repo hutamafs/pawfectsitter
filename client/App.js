@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
 import React , { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import {Provider} from 'react-redux'
@@ -8,9 +7,15 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Landing from './screens/Landing'
 import Login from './screens/Login'
 import Register from './screens/Register'
+import PetList from './screens/PetList'
 import KeepersPage from './screens/KeepersPage'
 import Home from './screens/Home';
 import AddPet from './screens/AddPet'
+import Order from './screens/Order'
+import Chat from './screens/Chat'
+import History from './screens/History'
+
+
 import * as Font from 'expo-font'
 import { AppLoading } from 'expo'
 
@@ -27,30 +32,41 @@ export default function App() {
   if (fontsLoaded){
     return (
       <Provider store={store}>
-      <NavigationContainer>
-        <Stack.Navigator
-            screenOptions={{
-              headerShown: false
-            }}
-          >
-          {/* <Stack.Screen name="KeepersPage" component={KeepersPage}
-          options={{title: 'Keepers'}}
-          />
-          <Stack.Screen name="AddPet" component={AddPet} 
-          options={{title: 'AddPet'}} */}
-          {/* /> */}
-          {/* <Stack.Screen name="Landing" component={Landing} 
-          options={{title: 'Landing'}}
-          />  */}
-          {/* <Stack.Screen name="Login" component={Login} 
-          options={{title: 'Login'}}
-          />
-          <Stack.Screen name="Register" component={Register} 
-          options={{title: 'Register'}}
-          /> */} 
-          <Stack.Screen name="Home" component={Home} 
-          options={{title: 'Home'}}
-          />
+        <NavigationContainer>
+          <Stack.Navigator screenOptions={{headerShown: false}}>
+
+            <Stack.Screen name="Home" component={Home} 
+                options={{title: 'Home'}}
+            />
+            <Stack.Screen name="KeepersPage" component={KeepersPage}
+              options={{title: 'Keepers'}}
+            />
+            <Stack.Screen name="History" component={History} 
+              options={{title: 'History'}}
+            />
+            {/* <Stack.Screen name="Landing" component={Landing} 
+              options={{title: 'Landing'}}
+            />
+            
+            <Stack.Screen name="AddPet" component={AddPet} 
+              options={{title: 'AddPet'}}
+            />
+            <Stack.Screen name="Login" component={Login} 
+              options={{title: 'Login'}}
+            />  
+            <Stack.Screen name="Register" component={Register} 
+              options={{title: 'Register'}}
+              />   
+            <Stack.Screen name="PetList" component={PetList} 
+                options={{title: 'PetList'}}
+              /> */}
+            {/* <Stack.Screen name="Order" component={Order} 
+              options={{title: 'Order'}}
+            /> */}
+            {/* <Stack.Screen name="Chat" component={Chat} 
+            options={{title: 'Chat'}}
+             /> */}
+         
         </Stack.Navigator>
       </NavigationContainer>
      </Provider>
@@ -62,7 +78,7 @@ export default function App() {
       startAsync={getFont}
       onFinish={() => setFontsLoaded(true)}
       />
-    )
+    )    
   }
 }
 
@@ -74,3 +90,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+
+//error di history => keluar sendiri
+// error di login => text string
+// error di addPet => text string
