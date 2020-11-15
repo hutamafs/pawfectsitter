@@ -179,13 +179,17 @@ const AddPet = () => {
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
              <View style={styles.container}>
-            <View style={{borderWidth: 0.1, marginBottom: 50, borderRadius: 100, padding: 30, 
-            shadowColor: 'black', shadowOpacity: 100
+                 <View style={{backgroundColor: '#F9F8F6', borderRadius: 100, marginBottom: 30}}>
+            <TouchableOpacity style={{borderWidth: 0.1, margin: 10, borderRadius: 100, padding: 30, backgroundColor: 'white',
+
             }}>
              <Image
                 source={{uri: 'https://lh3.googleusercontent.com/proxy/W_fq5wVspFA3goJG22FNuX2nx204B0kalDUZqTmMBP4QznwrD0gHhcMbhe9WlC6OxzVmyZy-hm4pqT4YrCLUWgE2'}}
                 style={{ width: 80, height: 80}}
+                accessibilityRole="button"
+                onPress={() => pickImage()}
             />
+            </TouchableOpacity>
             </View>
                 <TextInput
                 style={styles.textInputStyle}
@@ -268,9 +272,7 @@ const styles = StyleSheet.create({
         width: 300,
         borderRadius: 20,
         paddingLeft: 20,
-        margin: 5,
-        shadowColor:'black',
-        shadowOpacity:2000000
+        margin: 5
     },
     btnStyle: {
         backgroundColor: 'orange',
