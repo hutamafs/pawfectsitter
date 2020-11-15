@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, Button } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, Button , TouchableWithoutFeedback , Keyboard } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchKeepers, fetchPets, setOrders } from '../store/actions';
 import TabBar from './components/TabBottomNavbar';
@@ -9,6 +9,9 @@ import { Picker } from '@react-native-picker/picker';
 import { TextInput } from 'react-native-paper';
 import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
 import axios from 'axios';
+import logo from '../assets/logoDog.png';
+import { ScrollView } from 'react-native-gesture-handler';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function KeepersPage({ route, navigation }) {
   const { keepers, pets } = useSelector(state => state);
@@ -25,6 +28,9 @@ export default function KeepersPage({ route, navigation }) {
     dispatch(fetchKeepers())
     dispatch(fetchPets())
   }, [])
+
+  console.log(keepers,'ini keepers')
+  console.log(pets,'ini pets')
 
   // console.log(price, 'ini priceeeeee')
   let duration_props = [
@@ -55,20 +61,17 @@ export default function KeepersPage({ route, navigation }) {
   }
 
   const handleSubmit = () => {
-    console.log(petId, 'petid niiiih')
-    console.log(harga, 'harganyaaaa')
     let payload = {
       pet_id: petId,
       harga: (Number(quantity) * Number(harga)),
       quantity: Number(quantity)
     }
     
-    console.log(payload, 'ini payload')
     axios({
-      url: 'http://192.168.100.6/orders/' + keeperId,
+      url: 'http://192.168.1.3:3000/orders/' + keeperId,
       method: 'post',
       headers: {
-        access_token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYjEwYmUzNWU4ODkxMTU3YzMwYTFjMCIsImVtYWlsIjoic3VzYW5AbWFpbC5jb20iLCJpYXQiOjE2MDU0Mzg1NTl9.XC6fVC7Oo8BEN7o1f4t04T31SaLEVL8xhhxlYarjkgo'
+        access_token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYjBhNzM2NzBkM2U0M2RmODE1ZDZhZCIsImVtYWlsIjoidGFtYUBnbWFpbC5jb20iLCJpYXQiOjE2MDU0MzAyMjV9.SicZdMhqgEQsWUbbKpg8YjMonqjZyV9m2hqWsCrb9wY'
       },
       data: {
         quantity: payload.quantity,
@@ -89,56 +92,71 @@ export default function KeepersPage({ route, navigation }) {
   const handlePetRadio = (e) => {
     // setPetId(e.target[radio_props].value)
     setPetId(e)
-    console.log(petId, 'petid di radio nih')
   }
 
   const setRadioHarga = (value) => {
     setHarga(value)
-    console.log(harga, 'harga di radio nih')
-  }
-
-  const handleValuePid = (v) => {
-    console.log(v, 'ini v nya');
-    setPetId(v);
-  }
-  const coba = () => {
-    console.log('tes')
   }
 
   return (
     <>
       <View style={styles.container}>
-
-        <View style={{ display: 'flex', flexDirection: 'column', flex: 0.8 }}>
+        <View style={{display:'flex',flexDirection:'row',height:80,marginTop:15,borderBottomColor:'black',borderBottomWidth:1}}>
+          <Image
+            source={logo} 
+            style={{ width: 80, height: 80,marginLeft:3 }}
+          />
+        <Text style={{fontSize:30,marginTop:20}}>Keepers</Text>
+      </View>
+      <ScrollView showsVerticalScrollIndicator={false}>
+      <View style={{ display: 'flex', flexDirection: 'column', flex: 0.8 , alignItems:'center' }}>
           {keepers &&
             keepers.map(el => {
               return (
-                <View key={el._id} style={{ display: 'flex', flexDirection: 'row', flex: 0.3, borderRadius: 10, borderBottomColor: 'black', width: 350, height: 125, marginVertical: 10, borderBottomWidth: 0.5 }}>
+                <View key={el._id} style={{ display: 'flex', flexDirection: 'row', flex: 0.3, borderRadius: 10, borderBottomColor: 'black', width: 350, height: 150, marginVertical: 10, borderWidth: 0.6,backgroundColor:'lightblue' }}>
                   <View style={{ paddingHorizontal: 10, display: 'flex', justifyContent: 'center' }}>
-                    <Image source={{ uri: el.image }} style={{ width: 120, height: 120, borderColor: 'white' }} />
+                    <Image source={{ uri: el.image }} style={{ flex:1,width: 100, height: 125, borderColor: 'white',resizeMode:'contain' }} />
 
                   </View>
-                  <View style={{ display: 'flex', flexDirection: 'column' }}>
+                  <View style={{ display: 'flex', flexDirection: 'column',marginTop:15 }}>
                     <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                      <Text style={{ color: 'black', fontSize: 25 }}> {el.name} </Text>
-                      <Text style={{ color: 'blue', fontSize: 15, marginRight: 30 }}> {el.rating}</Text>
+                      <Text style={{ color: 'black', fontSize: 25 }}> {el.name} </Text>                      
                     </View>
-                    <View style={{ display: 'flex', flexDirection: 'column', marginTop: 10 }}>
-                      <Text style={{ color: 'red', fontSize: 15 }}> Specialized in: {el.skills.map(element => { return (`${element}, `) })} </Text>
-                      <View style={{ flex: 0.3, display: 'flex', flexDirection: 'column' }}>
-                        <Text style={{ color: 'black', fontSize: 15 }}> {el.address}</Text>
-                        <Text style={{ color: 'black', fontSize: 12.5 }}> {el.price.daily}</Text>
-                        <Text style={{ color: 'black', fontSize: 12.5 }}> {el.price.hourly}</Text>
-                        <Text style={{ color: 'black', fontSize: 12.5 }}> {el.price.weekly}</Text>
+                    <View style={{display:'flex',flexDirection:'column',marginTop:3}}>
+                      <View style={{ display: 'flex', flexDirection: 'row',paddingLeft:3}}>
+                      <Icon  name="star" color="yellow" size={15} style={{marginTop:3}} />              
+                      <Text style={{ color: 'blue', fontSize: 15,alignSelf:'center'}}> {el.rating}</Text>
+                      <Icon  name="compass" color="green" size={20} style={{marginTop:2,marginLeft:20}} />
+                      <Text style={{ color: 'blue', fontSize: 12,alignSelf:'center'}}> {el.address}</Text>              
+                        {/* <Text style={{ color: 'red', fontSize: 15 }}> Specialized in: {el.skills.map(element => { return (`${element}, `) })} </Text> */}
+                        {/* <View style={{ flex: 0.3, display: 'flex', flexDirection: 'column' }}>
+                          <Text style={{ color: 'black', fontSize: 15 }}> {el.address}</Text>
+                          <Text style={{ color: 'black', fontSize: 12.5 }}> {el.price.daily}</Text>
+                          <Text style={{ color: 'black', fontSize: 12.5 }}> {el.price.hourly}</Text>
+                          <Text style={{ color: 'black', fontSize: 12.5 }}> {el.price.weekly}</Text>
+                        </View> */}
+                      </View>
+                      <View style={{display:'flex',flexDirection:'row',paddingLeft:3}}>
+                        <Icon name="stopwatch" color="grey" size={17.5} style={{marginTop:3}} />
+                        <Text style={{ color: 'black', fontSize: 12.5,alignSelf:'center'}}> Rp {el.price.hourly.toLocaleString('en-us').replace(',','.')}</Text>
+                      </View>
+                      <View style={{display:'flex',flexDirection:'row',paddingLeft:3}}>
+                        <Icon name="stopwatch" color="grey" size={17.5} style={{marginTop:3}} />
+                        <Text style={{ color: 'black', fontSize: 12.5,alignSelf:'center'}}> Rp {el.price.daily.toLocaleString('en-us').replace(',','.')}</Text>
+                      </View>
+                      <View style={{display:'flex',flexDirection:'row',paddingLeft:3}}>
+                        <Icon name="stopwatch" color="grey" size={17.5} style={{marginTop:3}} />
+                        <Text style={{ color: 'black', fontSize: 12.5,alignSelf:'center'}}> Rp {el.price.weekly.toLocaleString('en-us').replace(',','.')}</Text>
                       </View>
                     </View>
+
+                  </View>
                     <TouchableOpacity
-                      style={{ backgroundColor: 'white', width: 75, height: 20, position: 'absolute', right: 15, bottom: 5 }}
+                      style={{ width: 75, height: 20 ,position:'absolute',right:10,bottom:10 }}
                       onPress={() => handlePress(el)}
                     >
                       <Text style={{ color: 'red', textAlign: 'center' }}>Hire Me! </Text>
                     </TouchableOpacity>
-                  </View>
 
                   <Modal isVisible={isModalVisible}>
                     <View style={{ flex: 0.7, display: 'flex', backgroundColor: 'white' }}>
@@ -234,11 +252,14 @@ export default function KeepersPage({ route, navigation }) {
           }
 
         </View>
+      </ScrollView>
+        
         <TabBar
           navigation={navigation}
         />
       </View>
     </>
+      
   );
 }
 
@@ -246,9 +267,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    maxHeight: '80%'
   },
   top: {
     flex: 0.2,

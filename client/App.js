@@ -1,6 +1,7 @@
-import React , { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import {Provider} from 'react-redux'
+
+import React, { useState } from 'react';
+import { StyleSheet, Text, View , Keyboard,TouchableWithoutFeedback } from 'react-native';
+import { Provider } from 'react-redux'
 import store from './store'
 import { NavigationContainer, useLinkProps } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -32,14 +33,23 @@ export default function App() {
 
   if (fontsLoaded){
     return (
-      <Provider store={store}>
-      <NavigationContainer>
-        <Stack.Navigator
+
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+        <Provider store={store}>
+        <NavigationContainer>
+          <Stack.Navigator
+
             screenOptions={{
               headerShown: false
             }}
           >
-            <Stack.Screen name="AddPet" component={AddPet}
+
+
+            <Stack.Screen name="KeepersPage" component={KeepersPage}
+              options={{ title: 'Keepers' }}
+            />
+            {/* <Stack.Screen name="AddPet" component={AddPet}
+
               options={{ title: 'AddPet' }}
             />
             <Stack.Screen name="KeepersPage" component={KeepersPage}
@@ -47,9 +57,17 @@ export default function App() {
             />
             <Stack.Screen name="PetList" component={PetList}
               options={{ title: 'PetList' }}
+            /> */}
+            {/* <Stack.Screen name="Landing" component={Landing}
+              options={{ title: 'Landing' }}
             />
-            <Stack.Screen name="Landing" component={Landing} 
-            options={{title: 'Landing'}}
+
+            <Stack.Screen name="Home" component={Home}
+              options={{ title: 'Home' }}
+            />
+            <Stack.Screen name="Login" component={Login}
+              options={{ title: 'Login' }}
+
             />
           
           <Stack.Screen name="Home" component={Home} 
@@ -64,16 +82,21 @@ export default function App() {
           <Stack.Screen name="Order" component={Order} 
             options={{title: 'Order'}}
             />
-            {/* <Stack.Screen name="History" component={History} 
-            options={{title: 'History'}}
-            /> */}
-            <Stack.Screen name="Chat" component={Chat} 
-            options={{title: 'Chat'}}
+            <Stack.Screen name="Order" component={Order}
+              options={{ title: 'Order' }}
             />
-         
-        </Stack.Navigator>
-      </NavigationContainer>
-     </Provider>
+            <Stack.Screen name="History" component={History}
+              options={{ title: 'History' }}
+            />
+            <Stack.Screen name="Chat" component={Chat}
+              options={{ title: 'Chat' }}
+            /> */}
+
+          </Stack.Navigator>
+        </NavigationContainer>
+      </Provider>
+      </TouchableWithoutFeedback>    
+
 
     )
   }else {
