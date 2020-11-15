@@ -4,11 +4,10 @@ import { TextInput } from 'react-native-gesture-handler';
 import { useDispatch, useSelector } from 'react-redux';
 import {io} from "socket.io-client";
 import {setSocket} from '../store/actions'
+// http://192.168.1.4:3000
 
 
-const socket = io
-console.log(socket('http://192.168.1.4:3000'));
-
+// const socket = io('http://192.168.1.4:3000')
 export default function Chat() {
     const {socket} = useSelector(state => state)
     const dispatch = useDispatch()
