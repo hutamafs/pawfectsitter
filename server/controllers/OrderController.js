@@ -23,6 +23,7 @@ class OrderController {
                 keeperName : keeper.name,
                 petName : pet.name,
                 petImage : pet.image,
+                keeperImage:keeper.image,
                 status:true
             })
             await order.save();

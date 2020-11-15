@@ -20,6 +20,9 @@ const orderSchema = new mongoose.Schema({
     petImage:{
         type:String
     },
+    keeperImage:{
+        type:String
+    },
     status:{
         type:Boolean
     }
