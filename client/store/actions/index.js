@@ -54,16 +54,19 @@ export function fetchOrders() {
     }
 }
 
-export function fetchPets(access_token) {
+export function fetchPets() {
     return(dispatch) => {
-        console.log('masuk fetch pets')
         axios({
+<<<<<<< HEAD
             url: 'http://192.168.100.6:3000/pets',
+=======
+            url: 'http://192.168.1.3:3000/pets',
+>>>>>>> development
             method: 'GET',
-            headers: {access_token}
+            headers: {access_token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYjBhNzM2NzBkM2U0M2RmODE1ZDZhZCIsImVtYWlsIjoidGFtYUBnbWFpbC5jb20iLCJpYXQiOjE2MDU0MzAyMjV9.SicZdMhqgEQsWUbbKpg8YjMonqjZyV9m2hqWsCrb9wY'}
           })
           .then((res) => {
-            console.log(res, '<<<<<<<RESPONYA');
+            //console.log(res.data, '<<<<<<<RESPONYA');
             dispatch({
                 type: 'FETCH_PETS',
                 payload: res.data
