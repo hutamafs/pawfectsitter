@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import { useDispatch, useSelector } from 'react-redux';
-import io from "socket.io-client";
+import {io} from "socket.io-client";
 import {setSocket} from '../store/actions'
 
 
-
+const socket = io
+console.log(socket('http://192.168.1.4:3000'));
 
 export default function Chat() {
     const {socket} = useSelector(state => state)
@@ -15,18 +16,17 @@ export default function Chat() {
     const [chat, setChat] = useState([])
 
     const submitMessage = () => {
-        socket.emit('chat message', message);
+        // socket.emit('chat message', message);
         setMessage('');
     }
     useEffect(() => {
-        const socket = io("http://192.168.1.4:3000")
-        dispatch(setSocket(socket))
-        console.log(socket);
-        if(socket) {
-            socket.on('chat message', msg => {
-                console.log(msg, '<<<<<, dari server');
-            })
-        }
+        // dispatch(setSocket(socket))
+        // console.log(socket);
+        // if(socket) {
+        //     socket.on('chat message', msg => {
+        //         console.log(msg, '<<<<<, dari server');
+        //     })
+        // }
     }, [])
   return (
     <View style={styles.container}>
