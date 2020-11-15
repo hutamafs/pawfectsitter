@@ -1,21 +1,60 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Home from '../Home'
-import Order from '../Order'
-import Chat from '../Chat'
-import History from '../History'
-import PetList from '../PetList'
-const Tab = createBottomTabNavigator()
 
-export default function TabBar() {
+
+export default function TabBar({navigation}) {
   return (
-  <Tab.Navigator>
-    <Tab.Screen name="Home" component={Home} />
-    <Tab.Screen name="Order" component={Order} />
-    <Tab.Screen name="Chat" component={Chat} />
-    <Tab.Screen name="History" component={History} />
-    <Tab.Screen name="PetList" component={PetList} />
-  </Tab.Navigator>
-  );
+    <View style={styles.tabBottom}>
+    <Text 
+          style={{color:'blue', textDecorationLine: 'none', margin: 15}}
+          accessibilityRole='button'
+          onPress={(e) => {
+            e.preventDefault()
+            navigation.navigate('Home')
+            }
+          }
+        > Home
+    </Text>
+    <Text 
+          style={{color:'blue', textDecorationLine: 'none', margin: 15}}
+          accessibilityRole='button'
+          onPress={(e) => {
+            e.preventDefault()
+            navigation.navigate('Order')
+            }
+          }
+        > Order
+    </Text>
+    <Text 
+          style={{color:'blue', textDecorationLine: 'none', margin: 15}}
+          accessibilityRole='button'
+          onPress={(e) => {
+            e.preventDefault()
+            navigation.navigate('Chat')
+            }
+          }
+        > Chat
+    </Text>
+    <Text 
+          style={{color:'blue', textDecorationLine: 'none', margin: 15}}
+          accessibilityRole='button'
+          onPress={(e) => {
+            e.preventDefault()
+            navigation.navigate('History')
+            }
+          }
+        > History
+    </Text>
+    </View>
+  )
 }
+
+const styles = StyleSheet.create({
+  tabBottom: {
+    display: "flex",
+    backgroundColor: 'gray',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+  }
+});

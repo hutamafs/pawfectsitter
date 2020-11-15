@@ -11,6 +11,11 @@ import Home from './screens/Home'
 import PetList from './screens/PetList'
 import KeepersPage from './screens/KeepersPage'
 import AddPet from './screens/AddPet'
+import Order from './screens/Order'
+import Chat from './screens/Chat'
+import History from './screens/History'
+
+
 import * as Font from 'expo-font'
 import { AppLoading } from 'expo'
 
@@ -34,20 +39,21 @@ export default function App() {
               headerShown: false
             }}
           >
+          <Stack.Screen name="PetList" component={PetList} 
+            options={{title: 'PetList'}}
+            />
+            <Stack.Screen name="KeepersPage" component={KeepersPage}
+           options={{title: 'Keepers'}}
+           />
             <Stack.Screen name="Landing" component={Landing} 
             options={{title: 'Landing'}}
             />
-            <Stack.Screen name="PetList" component={PetList} 
-            options={{title: 'PetList'}}
-            />
+            
+                <Stack.Screen name="AddPet" component={AddPet} 
+          options={{title: 'AddPet'}}
+          />
           <Stack.Screen name="Home" component={Home} 
           options={{title: 'Home'}}
-          />
-          <Stack.Screen name="KeepersPage" component={KeepersPage}
-          options={{title: 'Keepers'}}
-          />
-          <Stack.Screen name="AddPet" component={AddPet} 
-          options={{title: 'AddPet'}}
           />
           <Stack.Screen name="Login" component={Login} 
           options={{title: 'Login'}}
@@ -55,6 +61,15 @@ export default function App() {
           <Stack.Screen name="Register" component={Register} 
           options={{title: 'Register'}}
           />
+          <Stack.Screen name="Order" component={Order} 
+            options={{title: 'Order'}}
+            />
+            <Stack.Screen name="History" component={History} 
+            options={{title: 'History'}}
+            />
+            <Stack.Screen name="Chat" component={Chat} 
+            options={{title: 'Chat'}}
+            />
          
         </Stack.Navigator>
       </NavigationContainer>

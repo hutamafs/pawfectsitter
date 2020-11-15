@@ -5,9 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setPet } from '../store/actions'
 import logo from '../assets/logoDog.png'
 import { ScrollView } from 'react-native-gesture-handler';
+import TabBar from './components/TabBottomNavbar'
 
 
-export default function PetList() {
+export default function PetList({navigation}) {
     const dispatch = useDispatch()
     const {access_token, pets} = useSelector(state => state)
     useEffect(() => {
@@ -75,6 +76,9 @@ export default function PetList() {
       </View>
     </ScrollView>
     </View>
+    <TabBar
+        navigation={navigation}
+    />
     </>
   );
 }
@@ -84,7 +88,8 @@ const styles = StyleSheet.create({
     display: "flex",
     backgroundColor: '#fff',
     justifyContent: 'flex-start',
-    margin: 30,
+    margin: 50,
+    maxHeight: '80%'
   },
   cardContainer: {
     display: "flex",
