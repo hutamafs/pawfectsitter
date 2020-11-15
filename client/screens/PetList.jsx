@@ -18,7 +18,7 @@ export default function PetList({navigation}) {
       <>
     <View style={styles.container}>
       <Text style={{textAlign: 'center'}}>Pet</Text>
-      {loading && 
+      {/* {loading && 
             <ActivityIndicator size="large" color="#0000ff" />
       }
       <ScrollView>
@@ -37,8 +37,8 @@ export default function PetList({navigation}) {
             )
         })
       }
-      </ScrollView>
-      {/* <ScrollView>
+      </ScrollView> */}
+      <ScrollView>
       <View style={styles.cardContainer}>
         <Image
         source={logo}
@@ -66,7 +66,7 @@ export default function PetList({navigation}) {
         <Text>Age</Text>
         <Text>Type</Text>
       </View>
-    </ScrollView> */}
+    </ScrollView>
     </View>
     <TabBar
         navigation={navigation}

@@ -39,19 +39,22 @@ export default function App() {
               headerShown: false
             }}
           >
-          {/* <Stack.Screen name="PetList" component={PetList} 
-            options={{title: 'PetList'}}
-            /> */}
-            <Stack.Screen name="KeepersPage" component={KeepersPage}
-           options={{title: 'Keepers'}}
-           />
+            <Stack.Screen name="Chat" component={Chat} 
+            options={{title: 'Chat'}}
+            />
+            <Stack.Screen name="PetList" component={PetList} 
+              options={{title: 'PetList'}}
+            />
             <Stack.Screen name="Landing" component={Landing} 
             options={{title: 'Landing'}}
             />
+          <Stack.Screen name="AddPet" component={AddPet} 
+    options={{title: 'AddPet'}}
+    />
+            <Stack.Screen name="KeepersPage" component={KeepersPage}
+           options={{title: 'Keepers'}}
+           />
             
-                <Stack.Screen name="AddPet" component={AddPet} 
-          options={{title: 'AddPet'}}
-          />
           <Stack.Screen name="Home" component={Home} 
           options={{title: 'Home'}}
           />
@@ -67,9 +70,6 @@ export default function App() {
             {/* <Stack.Screen name="History" component={History} 
             options={{title: 'History'}}
             /> */}
-            <Stack.Screen name="Chat" component={Chat} 
-            options={{title: 'Chat'}}
-            />
          
         </Stack.Navigator>
       </NavigationContainer>

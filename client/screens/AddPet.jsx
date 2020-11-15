@@ -33,9 +33,9 @@ const AddPet = () => {
     const handleSubmit = () => {
         console.log(image,'ini image')
     axios({
-        url: 'http://192.168.1.3:3000/pets',
+        url: 'http://192.168.1.4:3000/pets',
         method: 'POST',
-        headers:{access_token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYWZkNThhOWQ5NjAyNDQ4OGI3OGJkNyIsImVtYWlsIjoidGFtYUBnbWFpbC5jb20iLCJpYXQiOjE2MDUzNTg5ODh9.1fDc7yYmvXXrLwKiLecnJjhnffnTlRFuBMNRtNDzYUI'},
+        headers:{access_token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYWZkMDc1Zjc5MmZjMmJmZjgyNGJmYiIsImVtYWlsIjoiaEBtYWlsLmNvbSIsImlhdCI6MTYwNTM4ODgwOX0.54h9zQqXhvFXOW-ZS2Gmj84bKwilvj-3VqDNQOfC8pM'},
         data: { name,gender,type,age,image },
         })
         .then(({data}) => {

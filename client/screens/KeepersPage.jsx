@@ -8,7 +8,7 @@ import TabBar from './components/TabBottomNavbar'
 export default function KeepersPage({route, navigation}) {
   const {keepers} = useSelector(state => state)
   const dispatch = useDispatch()
-   //console.log(keepers, 'keepers neeeeh')
+   console.log(keepers, 'keepers neeeeh')
   useEffect(() => {
     dispatch(fetchKeepers())
   }, [])
@@ -21,7 +21,7 @@ export default function KeepersPage({route, navigation}) {
     <>
     <View style={styles.container}>
       
-      <View style={{display:'flex',flexDirection: 'col', flex:0.8}}>
+      <View style={{display:'flex',flexDirection: 'column', flex:0.8}}>
         {keepers &&
           keepers.map(el => {
             return(              
@@ -30,13 +30,13 @@ export default function KeepersPage({route, navigation}) {
                   <Image source={{uri:el.image}} style={{ width: 120, height: 120, borderColor: 'white' }}  />
 
                 </View>
-                <View style={{display:'flex',flexDirection:'col',marginTop:10}}>
+                <View style={{display:'flex',flexDirection:'column',marginTop:10}}>
                   <View style={{display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
                     <Text style={{color:'black',fontSize:25}}> {el.name} </Text>
                     <Text style={{color: 'blue',fontSize:15,marginRight:30}}> {el.rating}</Text>
                   </View>
                   <Text style={{color:'red',fontSize:15}}> Specialized in: {el.skills.map(element => {return(`${element}, `)})} </Text>
-                  <View style={{flex:0.3,display:'flex',flexDirection:'col'}}> 
+                  <View style={{flex:0.3,display:'flex',flexDirection:'column'}}> 
                     <Text style={{color: 'black',fontSize:15}}> {el.address}</Text>
                     <Text style={{color: 'black',fontSize:12.5}}> {el.price.daily}</Text>
                     <Text style={{color: 'black',fontSize:12.5}}> {el.price.hourly}</Text>
