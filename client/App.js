@@ -43,9 +43,6 @@ export default function App() {
             <Stack.Screen name="AddPet" component={AddPet}
               options={{ title: 'AddPet' }}
             />
-            <Stack.Screen name="createPet" component={createPet}
-              options={{ title: 'CreatePet' }}
-            />
             <Stack.Screen name="PetList" component={PetList}
               options={{ title: 'PetList' }}
             />
