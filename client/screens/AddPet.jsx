@@ -5,8 +5,8 @@ import axios from 'axios';
 import { addPet } from '../store/actions/index';
 import { useDispatch , useSelector } from 'react-redux';
 import { RNS3 } from 'react-native-aws3';
-import ImagePicker from 'react-native-image-picker';
-
+import DocumentPicker from 'react-native-document-picker';
+import * as ImagePicker from 'expo-image-picker';
 
 const AddPet = () => {
     const dispatch = useDispatch();
@@ -29,48 +29,152 @@ const AddPet = () => {
         {label: 'Cat', value: 'cat',style:{marginLeft:20} }
     ];
 
-    const handleSubmit = () => {
-        console.log(image,'ini image')
-    axios({
-        url: 'http://192.168.100.6:3000/pets',
-        method: 'POST',
-        headers:{access_token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYWZkNThhOWQ5NjAyNDQ4OGI3OGJkNyIsImVtYWlsIjoidGFtYUBnbWFpbC5jb20iLCJpYXQiOjE2MDUzNTg5ODh9.1fDc7yYmvXXrLwKiLecnJjhnffnTlRFuBMNRtNDzYUI'},
-        data: { name,gender,type,age,image },
-        })
-        .then(({data}) => {
-        console.log(data, '<<<<<<<RESPONYA');
-        //dispatch(setToken(res.data.access_token))
-        navigation.replace('Home')
-        })
-        .catch((err) => {
-        console.log(err, '<<<<<<<<<ERRRRRROOORRRRRR');
-        })
-    }
+    // const handleSubmit = () => {
+    //     console.log(image,'ini image')
+    // axios({
+    //     url: 'http://192.168.1.3:3000/pets',
+    //     method: 'POST',
+    //     headers:{access_token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYWZkNThhOWQ5NjAyNDQ4OGI3OGJkNyIsImVtYWlsIjoidGFtYUBnbWFpbC5jb20iLCJpYXQiOjE2MDUzNTg5ODh9.1fDc7yYmvXXrLwKiLecnJjhnffnTlRFuBMNRtNDzYUI'},
+    //     data: { name,gender,type,age,image },
+    //     })
+    //     .then(({data}) => {
+    //     console.log(data, '<<<<<<<RESPONYA');
+    //     //dispatch(setToken(res.data.access_token))
+    //     navigation.replace('Home')
+    //     })
+    //     .catch((err) => {
+    //     console.log(err, '<<<<<<<<<ERRRRRROOORRRRRR');
+    //     })
+    // }
 
-    const takePic = () => {
-        ImagePicker.showImagePicker({}, (response) => {
-            const file={
-                uri:response.uri,
-                name:response.fileName,
-                type:'image/png',
+    // const takePic = () => {
+    //     ImagePicker.showImagePicker( {} , (response) => {
+    //         const file={
+    //             uri:response.uri,
+    //             name:response.fileName,
+    //             type:'image/png',
+    //         }
+    //         const config = {
+    //             keyPrefix: `s3/`,
+    //             bucket:'photos',
+    //             region:'ap-southeast-1',
+    //             access_key:'AKIAI3HZB6Q3UPG2LTMA',
+    //             secretKey:'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',
+    //             successActionStatus:201,
+    //         }
+    //         RNS3.put(file,config)
+    //         .then(response => 
+    //             setImage(response.body.postResponse.location)    
+    //         )
+    //         .catch(err => {
+    //             console.log(err);
+    //         })
+    //     })
+    // }
+
+    const handleSubmit = async () => {
+        if (image != null) {
+          // If file selected then create FormData
+          //const fileToUpload = image;
+          const data = new FormData();
+          data.append('name', name);
+          data.append('gender', gender);
+          data.append('type', type);
+          data.append('age', age);
+          data.append('image', image);
+          console.log(data,'ini data')
+          // Please change file upload URL
+          let res = await fetch(
+            'http://192.168.1.3:3000/pets',
+            {
+              method: 'post',
+              body: data,
+              headers: {
+                'Content-Type': 'multipart/form-data; ',
+                access_token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYjBhNzM2NzBkM2U0M2RmODE1ZDZhZCIsImVtYWlsIjoidGFtYUBnbWFpbC5jb20iLCJpYXQiOjE2MDU0MzAyMjV9.SicZdMhqgEQsWUbbKpg8YjMonqjZyV9m2hqWsCrb9wY'
+              },
             }
-            const config = {
-                keyPrefix: `s3/`,
-                bucket:'photos',
-                region:'ap-southeast-1',
-                access_key:'AKIAI3HZB6Q3UPG2LTMA',
-                secretKey:'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',
-                successActionStatus:201,
-            }
-            RNS3.put(file,config)
-            .then(response => 
-                setImage(response.body.postResponse.location)    
-            )
-            .catch(err => {
-                console.log(err);
-            })
-        })
-    }
+          )
+          let responseJson = await res.json();
+          console.log(responseJson,'ini response json')
+        //   if (responseJson.status == 1) {
+        //     alert('Upload Successful');
+        //   }
+        // } else {
+        //   alert('Please Select File first');
+        // }
+        }
+      };
+      /*
+      const selectFile = async () => {
+        try {
+          const res = await DocumentPicker.pick({
+            type: [DocumentPicker.types.allFiles],
+          });
+          console.log(res,'ini res')
+          // Printing the log realted to the file
+          console.log('res : ' + JSON.stringify(res));
+        //   setImage(res);
+        } catch (err) {
+        //   setImage(null);
+          // Handling any exception (If any)
+          if (DocumentPicker.isCancel(err)) {
+            alert('Canceled');
+          } else {
+            alert('Unknown Error: ' + JSON.stringify(err));
+            throw err;
+          }
+        }
+      };
+      */
+
+     function blobCreationFromURL(inputURI) { 
+  
+        let binaryVal; 
+  
+        // mime extension extraction 
+        let inputMIME = inputURI.split(',')[0].split(':')[1].split(';')[0]; 
+  
+        // Extract remaining part of URL and convert it to binary value 
+        if (inputURI.split(',')[0].indexOf('base64') >= 0) 
+            binaryVal = atob(inputURI.split(',')[1]); 
+  
+        // Decoding of base64 encoded string 
+        else
+            binaryVal = unescape(inputURI.split(',')[1]); 
+  
+        // Computation of new string in which hexadecimal 
+        // escape sequences are replaced by the character  
+        // it represents 
+  
+        // Store the bytes of the string to a typed array 
+        let blobArray = []; 
+        for (let index = 0; index < binaryVal.length; index++) { 
+            blobArray.push(binaryVal.charCodeAt(index)); 
+        } 
+        console.log(blobArray,'ini blobarray')
+        return new Blob([blobArray], { 
+            type: inputMIME 
+        }); 
+    } 
+
+     const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.All,
+          allowsEditing: true,
+          aspect: [4, 3],
+          quality: 1,
+        });
+    
+        //console.log(result);
+    
+        if (!result.cancelled) {
+            let hasil = await blobCreationFromURL(result.uri)
+            console.log(hasil,'ini hasilnya')
+            //console.log(result.uri)
+          //setImage(result.uri);
+        }
+      };
 
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -119,7 +223,7 @@ const AddPet = () => {
                     />
                 </View>
                 <TouchableOpacity
-                    onPress={() => {takePic}}
+                    onPress={pickImage}
                     style={styles.btnStyle}>
                     <Text style={{ fontSize: 20, color: '#fff', textAlign: 'center', margin: 5 }}>Choose Photo</Text>
                 </TouchableOpacity>
