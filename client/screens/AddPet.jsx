@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Button, StyleSheet, Text, View , TextInput, TouchableWithoutFeedback , Keyboard , Image , TouchableOpacity} from 'react-native';
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 import axios from 'axios';
-//import ImagePicker from 'react-native-image-picker';
 import { addPet } from '../store/actions/index';
 import { useDispatch , useSelector } from 'react-redux';
 import { RNS3 } from 'react-native-aws3';
@@ -33,7 +32,7 @@ const AddPet = () => {
     const handleSubmit = () => {
         console.log(image,'ini image')
     axios({
-        url: 'http://192.168.1.3:3000/pets',
+        url: 'http://192.168.100.6:3000/pets',
         method: 'POST',
         headers:{access_token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYWZkNThhOWQ5NjAyNDQ4OGI3OGJkNyIsImVtYWlsIjoidGFtYUBnbWFpbC5jb20iLCJpYXQiOjE2MDUzNTg5ODh9.1fDc7yYmvXXrLwKiLecnJjhnffnTlRFuBMNRtNDzYUI'},
         data: { name,gender,type,age,image },
@@ -49,7 +48,7 @@ const AddPet = () => {
     }
 
     const takePic = () => {
-        ImagePicker.showImagePicker( {} , (response) => {
+        ImagePicker.showImagePicker({}, (response) => {
             const file={
                 uri:response.uri,
                 name:response.fileName,
@@ -75,63 +74,96 @@ const AddPet = () => {
 
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-             <View style={{display:'flex',justifyContent:'center',alignContent:'center',paddingTop:100}}>
+             <View style={styles.container}>
                 <TextInput
+                style={styles.textInputStyle}
                 placeholder="Enter your Pet Name"
                 value={name}
                 onChangeText={ (text) => setName(text)}
                 required
                 />
                 <TextInput
+                style={styles.textInputStyle}
                 placeholder="Enter your Pet Age"
                 value={age}
                 keyboardType="numeric"
                 onChangeText={ (text) => setAge(text)}
                 required
                 />
-                <RadioForm
-                    radio_props={gender_props}
-                    initial={0}
-                    formHorizontal={true}
-                    labelHorizontal={true}
-                    buttonColor={'#2196f3'}
-                    borderWidth={1}
-                    buttonSize={15}
-                    buttonWrapStyle={{marginLeft: 10}}
-                    onPress={(value) => setGender(value)}
-                    labelStyle={{paddingLeft:5,marginRight:15}}                        
-                />
-                <RadioForm
-                    radio_props={type_props}
-                    initial={0}
-                    formHorizontal={true}
-                    labelHorizontal={true}
-                    buttonColor={'#2196f3'}
-                    borderWidth={1}
-                    buttonSize={15}
-                    buttonWrapStyle={{marginLeft: 10}}
-                    onPress={(value) => setType(value)}
-                    labelStyle={{paddingLeft:5,marginRight:15}}                        
-                />
-                <Button
-                onPress={takePic}
-                title="choose photo"
-                />
-                {
+                <View style={{flexDirection: "row", margin: 5}}>
+                    <RadioForm
+                        radio_props={gender_props}
+                        initial={0}
+                        formHorizontal={true}
+                        labelHorizontal={true}
+                        buttonColor={'#2196f3'}
+                        borderWidth={1}
+                        buttonSize={15}
+                        buttonWrapStyle={{marginLeft: 10}}
+                        onPress={(value) => setGender(value)}
+                        labelStyle={{paddingLeft:5,marginRight:15}}                        
+                    />
+                </View>
+                <View style={{flexDirection: "row", margin: 5}}>
+                    <RadioForm
+                        radio_props={type_props}
+                        initial={0}
+                        formHorizontal={true}
+                        labelHorizontal={true}
+                        buttonColor={'#2196f3'}
+                        borderWidth={1}
+                        buttonSize={15}
+                        buttonWrapStyle={{marginLeft: 10}}
+                        onPress={(value) => setType(value)}
+                        labelStyle={{paddingLeft:5,marginRight:15}}                        
+                    />
+                </View>
+                <TouchableOpacity
+                    onPress={() => {takePic}}
+                    style={styles.btnStyle}>
+                    <Text style={{ fontSize: 20, color: '#fff', textAlign: 'center', margin: 5 }}>Choose Photo</Text>
+                </TouchableOpacity>
+                {/* {
                     image && (
                         <Image
                         source={{uri:image}}
                         style={{width:300,height:300}}
                         />
                     )
-                }
-            <Button
-            title="submit"           
-            onPress={handleSubmit}
-            />
+                } */}
+
+                <TouchableOpacity
+                    onPress={() => {handleSubmit}}
+                    style={styles.btnStyle}>
+                    <Text style={{ fontSize: 20, color: '#fff', textAlign: 'center', margin: 5 }}>Submit</Text>
+                </TouchableOpacity>
             </View>
         </TouchableWithoutFeedback>       
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    textInputStyle: {
+        borderColor: 'gray',
+        borderWidth: 1,
+        height: 50,
+        width: 350,
+        borderRadius: 20,
+        paddingLeft: 20,
+        margin: 5
+    },
+    btnStyle: {
+        backgroundColor: 'orange',
+        width: 350,
+        borderRadius: 20,
+        margin: 5
+    }
+})
 
 export default AddPet;
