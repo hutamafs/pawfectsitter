@@ -85,7 +85,7 @@ const AddPet = () => {
                 placeholder="Enter your Pet Age"
                 value={age}
                 keyboardType="numeric"
-                onChangeText={ (text) => setAge(text)}
+                onChangeText={ (number) => setAge(number)}
                 required
                 />
                 <RadioForm
