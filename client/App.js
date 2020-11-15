@@ -17,7 +17,6 @@ import History from './screens/History'
 
 import * as Font from 'expo-font'
 import { AppLoading } from 'expo'
-import createPet from './screens/createPet';
 
 
 const getFont = () => Font.loadAsync({
@@ -41,9 +40,9 @@ export default function App() {
             <Stack.Screen name="KeepersPage" component={KeepersPage}
               options={{ title: 'Keepers' }}
             />
-            <Stack.Screen name="AddPet" component={AddPet}
+            {/* <Stack.Screen name="AddPet" component={AddPet}
               options={{ title: 'AddPet' }}
-            />
+            /> */}
             <Stack.Screen name="PetList" component={PetList}
               options={{ title: 'PetList' }}
             />
