@@ -3,7 +3,7 @@ const { Pet } = require("../models/pet.model");
 module.exports.getAllPets = async (req, res,next) => {
 
     try {
-        let pets = await Pet.find({user_id: req.userData.user_id})
+        let pets = await Pet.find({user_id: req.userData.id})
         res.status(200).json(pets)
     } catch (next) {
         
