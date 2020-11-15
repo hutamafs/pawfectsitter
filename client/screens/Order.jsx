@@ -1,21 +1,17 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import TabBar from './components/TabBottomNavbar'
 
-
-export default function Home() {
+export default function Order() {
   return (
-    <>
     <View style={styles.container}>
+      <Text>Order</Text>
     </View>
-    {/* <TabBar/> */}
-    </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    display: "flex",
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',

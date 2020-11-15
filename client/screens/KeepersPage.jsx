@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity ,Button} from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import {fetchKeepers} from '../store/actions'
+import TabBar from './components/TabBottomNavbar'
 
 export default function KeepersPage({route, navigation}) {
   const {keepers} = useSelector(state => state)
@@ -17,6 +18,7 @@ export default function KeepersPage({route, navigation}) {
   }
 
   return (
+    <>
     <View style={styles.container}>
       
       <View style={{display:'flex',flexDirection: 'col', flex:0.8}}>
@@ -65,6 +67,10 @@ export default function KeepersPage({route, navigation}) {
         
       </View>
     </View>
+    <TabBar
+        navigation={navigation}
+    />
+    </>
   );
 }
 
@@ -74,6 +80,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    maxHeight: '80%'
   },
   top: {
     flex: 0.2,
