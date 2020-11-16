@@ -52,7 +52,7 @@ export default class GoogleMap extends React.Component {
 
     async getDirections(startLoc,endLoc) {
         try {
-            const resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${startLoc}&destination=${endLoc}&key=AIzaSyDqBEgeW_csCSB0LUCScbk7oNL7ZOOqDRw`)
+            const resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${startLoc}&destination=${endLoc}&key=AIzaSyCSp7OYU9C6KtIsU_v_gB3C08-jBRTb6dE`)
             const respJson = await resp.json();
             console.log(respJson,'ini response json')
             const points = Polyline.decode(respJson.routes[0].overview_polyline.points);
