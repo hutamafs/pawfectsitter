@@ -16,7 +16,7 @@ export default function Register({navigation}) {
 
   const handleRegister = () => {
     axios({
-      url: 'http://192.168.100.6:3000/users/register',
+      url: 'http://192.168.8.100:3000/users/register',
       method: 'POST',
       data: {
         name,email,password,address
@@ -107,12 +107,12 @@ const styles = StyleSheet.create({
     color : 'black',
     textTransform : 'capitalize',
     fontWeight : '800',
-    borderColor: '#EED811',
+    borderColor: '#0A1D2A',
 
   },
   buttonStyle7 : {
-    borderColor: '#EED811',
-    backgroundColor: '#EED811',
+    borderColor: '#6661DB',
+    backgroundColor: '#6661DB',
     marginTop : 5,
     borderRadius: 20,
   },

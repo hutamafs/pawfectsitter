@@ -42,7 +42,7 @@ export function setOrders(payload) {
 export function fetchOrders() {
     return (dispatch) => {
         axios({
-            url: 'http://192.168.100.6:3000/orders',
+            url: 'http://192.168.8.100:3000/orders',
             method: 'GET',
             headers:{access_token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYjEwYmUzNWU4ODkxMTU3YzMwYTFjMCIsImVtYWlsIjoic3VzYW5AbWFpbC5jb20iLCJpYXQiOjE2MDU0NjE4OTR9.xslH4N2F3MQfNp3-7d0G8iWcjZ4TtyH5OsgGSlYfJlg'}
           })
@@ -57,7 +57,7 @@ export function fetchOrders() {
 export function fetchPets() {
     return(dispatch) => {
         axios({
-            url: 'http://192.168.100.6:3000/pets',
+            url: 'http://192.168.8.100:3000/pets',
             method: 'GET',
             headers: {access_token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYjEwYmUzNWU4ODkxMTU3YzMwYTFjMCIsImVtYWlsIjoic3VzYW5AbWFpbC5jb20iLCJpYXQiOjE2MDU0NjE4OTR9.xslH4N2F3MQfNp3-7d0G8iWcjZ4TtyH5OsgGSlYfJlg'}
           })
