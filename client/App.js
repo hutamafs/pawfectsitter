@@ -46,10 +46,8 @@ export default function App() {
               {/* <Stack.Screen name="gMap" component={GMap}
                 options={{ title: 'gMap' }}
               /> */}
-              <Stack.Screen name="KeepersPage" component={KeepersPage}
-                options={{ title: 'Keepers' }}
 
-            <Stack.Screen name="Landing" component={Landing}
+            {/* <Stack.Screen name="Landing" component={Landing}
               options={{ title: 'Landing' }}
             />
             <Stack.Screen name="Register" component={Register} 
@@ -71,7 +69,7 @@ export default function App() {
             />
             <Stack.Screen name="History" component={History} 
               options={{title: 'History'}}
-            />
+            /> */}
             {/* <Stack.Screen name="Landing" component={Landing} 
               options={{title: 'Landing'}}
             /> */}
@@ -91,43 +89,6 @@ export default function App() {
             <Stack.Screen name="Chat" component={Chat} 
             options={{title: 'Chat'}}
              />
-
-            {/* <Stack.Screen name="AddPet" component={AddPet}
-              options={{ title: 'AddPet' }}
-            /> */}
-            {/* <Stack.Screen name="Landing" component={Landing}
-              options={{ title: 'Landing' }}
-            />
-
-            <Stack.Screen name="Home" component={Home}
-              options={{ title: 'Home' }}
-            />
-            <Stack.Screen name="Login" component={Login}
-              options={{ title: 'Login' }}
-
-            />
-          
-          <Stack.Screen name="Home" component={Home} 
-          options={{title: 'Home'}}
-          />
-          <Stack.Screen name="Login" component={Login} 
-          options={{title: 'Login'}}
-          />
-          <Stack.Screen name="Register" component={Register} 
-          options={{title: 'Register'}}
-          />
-          <Stack.Screen name="Order" component={Order} 
-            options={{title: 'Order'}}
-            />
-            <Stack.Screen name="Order" component={Order}
-              options={{ title: 'Order' }}
-            />
-            <Stack.Screen name="History" component={History}
-              options={{ title: 'History' }}
-            />
-            <Stack.Screen name="Chat" component={Chat}
-              options={{ title: 'Chat' }}
-            /> */}
 
           </Stack.Navigator>
         </NavigationContainer>
