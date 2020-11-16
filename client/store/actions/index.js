@@ -39,12 +39,12 @@ export function setOrders(payload) {
     }
 }
 
-export function fetchOrders() {
+export function fetchOrders(token) {
     return (dispatch) => {
         axios({
             url: 'http://192.168.100.6:3000/orders',
             method: 'GET',
-            headers:{access_token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYjEwYmUzNWU4ODkxMTU3YzMwYTFjMCIsImVtYWlsIjoic3VzYW5AbWFpbC5jb20iLCJpYXQiOjE2MDU0NjE4OTR9.xslH4N2F3MQfNp3-7d0G8iWcjZ4TtyH5OsgGSlYfJlg'}
+            headers:{access_token: token}
           })
           .then(({data}) => {
             //console.log(data, '<<<<<<<RESPONYA');
@@ -54,12 +54,12 @@ export function fetchOrders() {
     }
 }
 
-export function fetchPets() {
+export function fetchPets(token) {
     return(dispatch) => {
         axios({
             url: 'http://192.168.1.3:3000/pets',
             method: 'GET',
-            headers: {access_token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYjBhNzM2NzBkM2U0M2RmODE1ZDZhZCIsImVtYWlsIjoidGFtYUBnbWFpbC5jb20iLCJpYXQiOjE2MDU1MDM1NzR9.MqXo3XTpsCcbe-dpxQ1utlrb8-SijbvzAUJdG4TU0B8'}
+            headers: {access_token: token}
           })
           .then((res) => {
             //console.log(res.data, '<<<<<<<RESPONYA');

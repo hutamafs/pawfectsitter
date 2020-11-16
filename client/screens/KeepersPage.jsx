@@ -14,7 +14,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function KeepersPage({ route, navigation }) {
-  const { keepers, pets } = useSelector(state => state);
+  const { keepers, pets,  access_token} = useSelector(state => state);
   const [ petId, setPetId ] = useState('');
   const [name, setName] = useState('');
   const [isModalVisible, setModalVisible] = useState(false);
@@ -33,9 +33,7 @@ export default function KeepersPage({ route, navigation }) {
   
   useEffect(() => {
     dispatch(fetchKeepers())
-    dispatch(fetchPets());
-  }, [])
-
+    dispatch(fetchPets(access_token))
 
 
   // console.log(price, 'ini priceeeeee')
@@ -72,12 +70,11 @@ export default function KeepersPage({ route, navigation }) {
       quantity: Number(quantity)
     }
     
-    // console.log(payload, 'ini payload')
     axios({
       url: 'http://192.168.100.6:3000/orders/' + keeperId,
       method: 'post',
       headers: {
-        access_token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYjEwYmUzNWU4ODkxMTU3YzMwYTFjMCIsImVtYWlsIjoic3VzYW5AbWFpbC5jb20iLCJpYXQiOjE2MDU0NjE4OTR9.xslH4N2F3MQfNp3-7d0G8iWcjZ4TtyH5OsgGSlYfJlg'
+        access_token: access_token
       },
       data: {
         quantity: payload.quantity,
