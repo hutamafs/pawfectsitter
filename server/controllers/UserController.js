@@ -9,7 +9,11 @@ class UserController {
         try {
             const {name,email,password,address} = req.body;
             const newObj = {name,email,password: await hashPass(password),address};
+<<<<<<< HEAD
+            // console.log(req.body);
+=======
             
+>>>>>>> development
             let user = new User(newObj);
             await user.save();
             res.status(201).json({
@@ -27,19 +31,19 @@ class UserController {
         try {
             const {email,password} = req.body;
             let user = await User.findOne({email});
-
+            // console.log(req.body);
             if(!user) throw ({msg: 'invalid email or password',code:400});
             let comparison = vefPass(password,user.password);
             if(!comparison) throw ({msg: 'invalid email or password',code:400});
-
+            // console.log(comparison);
             let payload = {
                 id:user._id,
                 email:user.email
             }
             //let access_token = await genToken(payload);
             let access_token = await jwt.sign(payload,process.env.SECRET);
+            // console.log(access_token);
             res.status(200).json({access_token});
-
         } catch (error) {
             next(error);
         }
