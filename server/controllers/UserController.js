@@ -5,10 +5,15 @@ const jwt = require('jsonwebtoken');
 class UserController {
 
     static async register(req,res,next) {
+        console.log(req.body)
         try {
             const {name,email,password,address} = req.body;
             const newObj = {name,email,password: await hashPass(password),address};
+<<<<<<< HEAD
             // console.log(req.body);
+=======
+            
+>>>>>>> development
             let user = new User(newObj);
             await user.save();
             res.status(201).json({

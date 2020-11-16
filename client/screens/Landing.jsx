@@ -17,6 +17,7 @@ export default function Landing({navigation}) {
           style={styles.buttonStyle6} 
           textStyle={styles.textStyle}
           onPress={() => navigation.navigate('Login')}
+          title={"Log in"}
           >
           Login
         </Button>
@@ -24,6 +25,7 @@ export default function Landing({navigation}) {
           style={styles.buttonStyle7} 
           textStyle={styles.textStyle}
           onPress={() => navigation.navigate('Register')}
+          title={"Register"}
           >
             Register
         </Button>
