@@ -1,12 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { GiftedChat } from 'react-native-gifted-chat';
 
 export default function Chat() {
   return (
-    <View style={styles.container}>
-      <Text>Chat</Text>
-    </View>
-  );
+    <GiftedChat/>
+  )
 }
 
 const styles = StyleSheet.create({
