@@ -14,9 +14,9 @@ export default function Chat({navigation, route}) {
   
 
   const {userData} = route.params
-  useEffect(async () => {
+  useEffect(() => {
     firebaseSDK.on(message => {
-      await setMessages(messages.concat(message))
+      setMessages(messages.concat(message))
     })
     console.log(messages);
     firebaseSDK.off()
@@ -55,10 +55,7 @@ export default function Chat({navigation, route}) {
       messages={messages}
       onSend={messages => onSend(messages)}
       user={{
-        name: userData.name,
-        email: userData.email,
-        avatar: 'https://placeimg.com/140/140/any',
-        _id: firebaseSDK.uid
+        userData
       }}
     />
     <TabBar
