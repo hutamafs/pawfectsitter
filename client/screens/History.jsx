@@ -12,10 +12,11 @@ import {TextInput,ScrollView,TouchableOpacity} from 'react-native-gesture-handle
 
 export default function History({navigation}) {
   const dispatch = useDispatch();
-  const {orders} = useSelector(state => state);
+  const {orders, access_token} = useSelector(state => state);
+  console.log(access_token, 'ini access token di history')
 
   useEffect(() => {
-    dispatch(fetchOrders())
+    dispatch(fetchOrders(access_token))
   },[])
 
   return (

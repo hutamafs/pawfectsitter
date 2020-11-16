@@ -9,11 +9,7 @@ class UserController {
         try {
             const {name,email,password,address} = req.body;
             const newObj = {name,email,password: await hashPass(password),address};
-<<<<<<< HEAD
-            // console.log(req.body);
-=======
             
->>>>>>> development
             let user = new User(newObj);
             await user.save();
             res.status(201).json({

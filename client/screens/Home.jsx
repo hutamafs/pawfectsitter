@@ -6,9 +6,18 @@ import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import  TabBar  from './components/TabBottomNavbar'
 import KeepList from './components/KeepList'
 import Button from 'apsl-react-native-button'
+import { setToken } from '../store/actions';
+import { useDispatch } from 'react-redux';
 
 
 const Home = ({navigation}) => {
+    const dispatch = useDispatch()
+
+    const handleLogout = () => {
+        dispatch(setToken(''))
+        navigation.replace('Landing')
+    }
+
     return(
         <View style={{
             backgroundColor:"#FFF",
@@ -49,6 +58,7 @@ const Home = ({navigation}) => {
                             fontSize : 3,
                             padding : 5
                           }}
+                          onPress={handleLogout}
                        >Log out</Button>
                    </View>
               </View>

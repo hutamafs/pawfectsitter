@@ -3,7 +3,7 @@ import axios from 'axios'
 export function fetchKeepers ()  {
     return(dispatch) => {
         // console.log('masuk pak ekoooo')
-        fetch(`http://192.168.8.100:3000/keepers`)
+        fetch(`http://192.168.100.6:3000/keepers`)
         .then(resp => resp.json())
         .then(resp => 
             dispatch({
@@ -39,12 +39,12 @@ export function setOrders(payload) {
     }
 }
 
-export function fetchOrders() {
+export function fetchOrders(token) {
     return (dispatch) => {
         axios({
             url: 'http://192.168.100.6:3000/orders',
             method: 'GET',
-            headers:{access_token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYjEwYmUzNWU4ODkxMTU3YzMwYTFjMCIsImVtYWlsIjoic3VzYW5AbWFpbC5jb20iLCJpYXQiOjE2MDU0NjE4OTR9.xslH4N2F3MQfNp3-7d0G8iWcjZ4TtyH5OsgGSlYfJlg'}
+            headers:{access_token: token}
           })
           .then(({data}) => {
             //console.log(data, '<<<<<<<RESPONYA');
@@ -54,12 +54,12 @@ export function fetchOrders() {
     }
 }
 
-export function fetchPets() {
+export function fetchPets(token) {
     return(dispatch) => {
         axios({
             url: 'http://192.168.100.6:3000/pets',
             method: 'GET',
-            headers: {access_token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYjEwYmUzNWU4ODkxMTU3YzMwYTFjMCIsImVtYWlsIjoic3VzYW5AbWFpbC5jb20iLCJpYXQiOjE2MDU0NjE4OTR9.xslH4N2F3MQfNp3-7d0G8iWcjZ4TtyH5OsgGSlYfJlg'}
+            headers: {access_token: token}
           })
           .then((res) => {
             //console.log(res.data, '<<<<<<<RESPONYA');
