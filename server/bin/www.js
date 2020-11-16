@@ -9,7 +9,16 @@ let port = config.port;
 app.set("port", port);
 
 let server = http.createServer(app);
-const io = require("socket.io")(server);
+
+const io = require("socket.io")(server)
+
+io.on("connection", socket => {
+  console.log("udah konek nih ^^ <<<<<<<SOCKET");
+  socket.on("chat message", msg => {
+    console.log(msg);
+    io.emit("chat message", msg);
+  });
+});
 
 server.listen(port);
 
@@ -17,13 +26,7 @@ server.on("error", (err) => {
   console.error(err);
 });
 
-io.on("connection", socket => {
-  console.log("udah konek nih ^^ <<<<<<<SOCKET");
-  // socket.on("chat message", msg => {
-  //   console.log(msg);
-  //   io.emit("chat message", msg);
-  // });
-});
+
 
 
 

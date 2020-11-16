@@ -18,23 +18,27 @@ export default function PetList({navigation}) {
     console.log(pets,'ini pets')
   return (
       <>
-    <View style={{display:'flex',flexDirection:'row',height:90,marginTop:15,borderBottomColor:'black',borderBottomWidth:1}}>
+    <View style={{display:'flex',flexDirection:'row',height:90,borderBottomWidth:1, backgroundColor: '#F7E7D3', borderColor: '#BA826A' }}>
         <Image
           source={logo} 
-          style={{ width: 90, height: 90,marginLeft:3 }}
+          style={{ width: 90, height: 90,marginLeft:3, marginTop: 10 }}
         />
-      <Text style={{fontSize:30,marginTop:20}}>My Pets</Text>
+      <Text style={{fontSize:30,marginTop:30, color: '#BA826A'}}>My Pets</Text>
     </View>
     <View style={styles.container}>
+      {/* {loading && 
+            <ActivityIndicator size="large" color="#0000ff" />
+=======
       {loading && 
         <ActivityIndicator size="large" color="#0000ff" />
+>>>>>>> development
       }
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{marginTop:100}}>
         {pets.length == 0 ? <Text style={{textAlign: 'center'}}>No Pet</Text> :
         pets.map(pet => {
             return (
-                <View key={pet._id} style={{display:'flex',flexDirection:'column',flex:0.4,width:200,height:250,marginVertical:10,justifyContent:'center',alignContent:'center',borderWidth:0,borderRadius:5,shadowOpacity: 0.37,
+                <View key={pet._id} style={{display:'flex',flexDirection:'column',flex:0.4,width:200,height:250,marginVertical:10,justifyContent:'center',alignContent:'center',borderWidth:0,borderRadius:5, backgroundColor: '#F7E7D3',shadowOpacity: 0.37,
                 shadowRadius: 7.49,shadowColor: "#000",
                 shadowOffset: {
                   width: 0,
@@ -47,7 +51,7 @@ export default function PetList({navigation}) {
                     />
                  </View>
                  <View style={{display:'flex',flexDirection:'row',marginTop:10,justifyContent:'center'}}>
-                  <Text style={{fontSize:25,fontWeight:'bold',marginHorizontal:6}} >{pet.name}</Text>
+                  <Text style={{fontSize:25,fontWeight:'bold',marginHorizontal:6, color: '#BA826A'}} >{pet.name}</Text>
                   <Icon 
                   name={
                     (pet.gender == 'male') ?
@@ -69,13 +73,12 @@ export default function PetList({navigation}) {
                   {/* <Text>Gender: {pet.gender}</Text>
                   <Text>Age: {pet.age}</Text>
                  <Text>Type: {pet.type}</Text> */}
-                </View>
+                {/* </View>
             )
         })
-      }
-        </View>
+      } */}
       
-      </ScrollView>
+      {/* </ScrollView> */}
     </View>
     <TabBar
         navigation={navigation}
@@ -101,6 +104,7 @@ const styles = StyleSheet.create({
 });
 
       {/* <ScrollView>
+>>>>>>> development
       <View style={styles.cardContainer}>
         <Image
         source={logo}
@@ -128,4 +132,31 @@ const styles = StyleSheet.create({
         <Text>Age</Text>
         <Text>Type</Text>
       </View>
+<<<<<<< HEAD
+    </ScrollView>
+    </View>
+    <TabBar
+        navigation={navigation}
+    />
+    </>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    display: "flex",
+    backgroundColor: '#fff',
+    justifyContent: 'flex-start',
+    margin: 50,
+    maxHeight: '80%'
+  },
+  cardContainer: {
+    display: "flex",
+    backgroundColor: 'gray',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 5
+  }
+});
+=======
     </ScrollView> */}

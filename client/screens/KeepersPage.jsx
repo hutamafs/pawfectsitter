@@ -13,6 +13,7 @@ import logo from '../assets/logoDog.png';
 import { ScrollView } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+
 export default function KeepersPage({ route, navigation }) {
   const { keepers, pets,  access_token} = useSelector(state => state);
   const [ petId, setPetId ] = useState('');
@@ -35,6 +36,7 @@ export default function KeepersPage({ route, navigation }) {
     dispatch(fetchKeepers())
     dispatch(fetchPets(access_token))
   },[localKeepers,categoryNow,animalNow])
+
   let duration_props = [
     { label: 'hourly', value: `${price.hourly}` },
     { label: 'daily', value: `${price.daily}` },
@@ -188,12 +190,12 @@ export default function KeepersPage({ route, navigation }) {
 
   return (
       <View style={styles.container}>
-        <View style={{display:'flex',flexDirection:'row',height:80,marginTop:15,borderBottomColor:'black',borderBottomWidth:1}}>
+        <View style={{display:'flex',flexDirection:'row',height:80,marginTop:15, borderBottomWidth:1, backgroundColor: '#F7E7D3'}}>
           <Image
             source={logo} 
             style={{ width: 80, height: 80,marginLeft:3 }}
           />
-        <Text style={{fontSize:30,marginTop:20}}>Keepers</Text>
+        <Text style={{fontSize:30,marginTop:20, color: '#BA826A'}}>Keepers</Text>
         </View>
         <View style={{display:'flex',flexDirection:'row',height:30,marginTop:10,marginBottom:2}}>
         <Text style={{display:'flex',alignSelf:'center',marginLeft:5,marginRight:10}}>Filter by Animal</Text> 
@@ -210,10 +212,12 @@ export default function KeepersPage({ route, navigation }) {
             localKeepers        
             .map(el => {
               return (
+
                 <View key={el._id} style={{ display: 'flex', flexDirection: 'row', flex: 0.3, borderRadius: 10, borderBottomColor: 'black', width: 350, height: 150, marginVertical: 10, borderWidth: 0.6,borderColor:'red' }}>
+
                    <Text style={{position:'absolute',top:20,right:10,fontWeight:'bold'}}> Rp {el.price.hourly.toLocaleString().replace(',','.')} </Text>
                   <View style={{ paddingHorizontal: 10, display: 'flex', justifyContent: 'center' }}>
-                    <Image source={{ uri: el.image }} style={{ flex:1,width: 100, height: 125, borderColor: 'white',resizeMode:'contain' }} />
+                    <Image source={{ uri: el.image }} style={{ flex:1,width: 100, height: 125, borderColor: 'white',resizeMode:'contain', margin: 5 }} />
 
                   </View>
                   <View style={{ display: 'flex', flexDirection: 'column',marginTop:15 }}>
@@ -244,13 +248,12 @@ export default function KeepersPage({ route, navigation }) {
                       <View style={{display:'flex',flexDirection:'row',paddingLeft:3}}>
                       </View>
                     </View>
-
                   </View>
                     <TouchableOpacity
-                      style={{ width: 75, height: 20 ,position:'absolute',right:10,bottom:10 }}
+                      style={{ width: 85, height: 30 ,position:'absolute',right:10,bottom:10, backgroundColor: '#BA826A', borderRadius: 10 }}
                       onPress={() => handlePress(el)}
                     >
-                      <Text style={{ color: 'red', textAlign: 'center' }}>Hire Me! </Text>
+                      <Text style={{ color: 'white', textAlign: 'center' }}>Hire Me! </Text>
                     </TouchableOpacity>
 
                   <Modal isVisible={isModalVisible}>
