@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {View, Text, Image, ImageBackground} from 'react-native'
 import {TextInput,ScrollView,TouchableOpacity} from 'react-native-gesture-handler'
 import { LinearGradient } from 'expo-linear-gradient'
@@ -6,9 +6,19 @@ import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import  TabBar  from './components/TabBottomNavbar'
 import KeepList from './components/KeepList'
 import Button from 'apsl-react-native-button'
+import { setToken } from '../store/actions';
+import { useDispatch } from 'react-redux';
 
 
-const Home = ({navigation}) => {
+const Home = ({navigation, route}) => {
+  const {userData} = route.params
+    const dispatch = useDispatch()
+
+    const handleLogout = () => {
+        dispatch(setToken(''))
+        navigation.replace('Landing')
+    }
+
     return(
         <View style={{
             backgroundColor:"#FFF",
@@ -49,6 +59,7 @@ const Home = ({navigation}) => {
                             fontSize : 3,
                             padding : 5
                           }}
+                          onPress={handleLogout}
                        >Log out</Button>
                    </View>
               </View>
@@ -278,7 +289,10 @@ const Home = ({navigation}) => {
                         bg="#EED811"
                     />
                 </ScrollView>    
-            <TabBar navigation={navigation} />               
+            <TabBar 
+            navigation={navigation} 
+            userData={userData}
+            />               
         </View>
     )
 }

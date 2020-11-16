@@ -12,10 +12,10 @@ import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 export default function Order({navigation}) {
 
   const dispatch = useDispatch();
-  const {orders} = useSelector(state => state);
+  const {orders, access_token} = useSelector(state => state);
 
   useEffect(() => {
-    dispatch(fetchOrders())
+    dispatch(fetchOrders(access_token))
   },[])
 
   const handlePress = () => {

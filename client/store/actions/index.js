@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { ActionSheetIOS } from 'react-native'
 
 export function fetchKeepers ()  {
     return(dispatch) => {
@@ -39,12 +40,12 @@ export function setOrders(payload) {
     }
 }
 
-export function fetchOrders() {
+export function fetchOrders(token) {
     return (dispatch) => {
         axios({
             url: 'http://192.168.1.4:3000/orders',
             method: 'GET',
-            headers:{access_token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYjEwYmUzNWU4ODkxMTU3YzMwYTFjMCIsImVtYWlsIjoic3VzYW5AbWFpbC5jb20iLCJpYXQiOjE2MDU0NjE4OTR9.xslH4N2F3MQfNp3-7d0G8iWcjZ4TtyH5OsgGSlYfJlg'}
+            headers:{access_token: token}
           })
           .then(({data}) => {
             //console.log(data, '<<<<<<<RESPONYA');
@@ -54,12 +55,12 @@ export function fetchOrders() {
     }
 }
 
-export function fetchPets() {
+export function fetchPets(token) {
     return(dispatch) => {
         axios({
-            url: 'http://192.168.1.4:3000/pets',
+            url: 'http://192.168.1.3:3000/pets',
             method: 'GET',
-            headers: {access_token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYjEwYmUzNWU4ODkxMTU3YzMwYTFjMCIsImVtYWlsIjoic3VzYW5AbWFpbC5jb20iLCJpYXQiOjE2MDU0NjE4OTR9.xslH4N2F3MQfNp3-7d0G8iWcjZ4TtyH5OsgGSlYfJlg'}
+            headers: {access_token: token}
           })
           .then((res) => {
             //console.log(res.data, '<<<<<<<RESPONYA');
@@ -72,6 +73,22 @@ export function fetchPets() {
             console.log(err, '<<<<<<<<<ERRRRRROOORRRRRR');
           })
     }    
+}
+
+export function setSocket(payload) {
+    console.log('MASUUKKKK SOCKETTTTT');
+    return {
+        type: SET_SOCKET,
+        payload: payload
+    }
+}
+
+export function setMessages(payload) {
+    console.log('MASUK UBAH MESSAGE REDUX');
+    return {
+        type: 'SET_MESSAGES',
+        payload: payload
+    }
 }
 
 

@@ -5,6 +5,8 @@ import {setToken} from '../store/actions'
 import {useDispatch} from 'react-redux'
 import Button from 'apsl-react-native-button'
 import logo from '../assets/logoDog.png'
+import firebaseSDK from './config/firebaseSDK';
+
 
 
 export default function Login({navigation}) {
@@ -12,7 +14,24 @@ export default function Login({navigation}) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const handleLogin = () => {
+  // firebase
+  const loginSuccess = () => {
+    console.log('login successful, can move to chat.');
+    let obj = {
+			name: 'Customer',
+			email: email,
+			avatar: ''
+		}
+		navigation.replace('Home', {
+      userData: obj
+    });
+	};
+
+	const loginFailed = () => {
+		alert('Login failure. Please tried again.');
+	};
+
+  const handleLogin = async () => {
     axios({
       url: 'http://192.168.1.4:3000/users/login',
       method: 'POST',
@@ -21,12 +40,24 @@ export default function Login({navigation}) {
       }
     })
     .then((res) => {
-      console.log(res, '<<<<<<<RESPONYA');
+      // console.log(res, '<<<<<<<RESPONYA');
       dispatch(setToken(res.data.access_token))
-      navigation.replace('Home')
+
+      // firebase
+      const user = {
+        email: email,
+        password: password,
+        avatar: ''
+      };
+  
+      const response = firebaseSDK.login(
+        user,
+        loginSuccess(),
+      );
     })
     .catch((err) => {
       console.log(err, '<<<<<<<<<ERRRRRROOORRRRRR');
+      loginFailed()
     })
   }
 

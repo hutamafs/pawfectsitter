@@ -5,7 +5,7 @@ import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { useNavigation } from '@react-navigation/native'
 
 
-export default function TabBar({navigation}) {
+export default function TabBar({navigation, userData}) {
   return (
     <View style={styles.tabBottom}>
     <Button 
@@ -51,7 +51,9 @@ export default function TabBar({navigation}) {
             marginLeft : 60,
           }}
           accessibilityRole='button'
-          onPress={() => navigation.navigate('Chat')}
+          onPress={() => navigation.navigate('Chat', {
+            userData: userData
+          })}
         > 
         <Icon name="chat-processing" color="white" size={35} />
     </Button>
