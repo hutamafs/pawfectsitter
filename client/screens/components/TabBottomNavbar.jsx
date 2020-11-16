@@ -5,7 +5,7 @@ import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { useNavigation } from '@react-navigation/native'
 
 
-export default function TabBar() {
+export default function TabBar({navigation}) {
   return (
     <View style={styles.tabBottom}>
     <Button 
@@ -16,13 +16,10 @@ export default function TabBar() {
             width: 50,
             borderRadius: 20,
             marginTop : 10,
-            borderColor : '#ED9104',
+            borderColor : '#6131C1',
           }}
           accessibilityRole='button'
-          onPress={() => 
-            navigation.navigate('Home')
-            
-          }
+          onPress={() => navigation.navigate('Home')}
         >
         <Icon name="home" color="white" size={35} />
     </Button>
@@ -34,14 +31,11 @@ export default function TabBar() {
             width: 50,
             borderRadius: 20,
             marginTop : 10,
-            borderColor : '#ED9104',
+            borderColor : '#6131C1',
             marginLeft : 60,
           }}
           accessibilityRole='button'
-          onPress={() => 
-            navigation.navigate('Order')
-            
-          }
+          onPress={() => navigation.navigate('Order')}
         > 
         <Icon name="book-outline" color="white" size={35}  />
     </Button>
@@ -53,7 +47,7 @@ export default function TabBar() {
             width: 50,
             borderRadius: 20,
             marginTop : 10,
-            borderColor : '#ED9104',
+            borderColor : '#6131C1',
             marginLeft : 60,
           }}
           accessibilityRole='button'
@@ -69,7 +63,7 @@ export default function TabBar() {
             width: 50,
             borderRadius: 20,
             marginTop : 10,
-            borderColor : '#ED9104',
+            borderColor : '#6131C1',
             marginLeft : 60,
           }}
           accessibilityRole='button'
@@ -84,7 +78,7 @@ export default function TabBar() {
 const styles = StyleSheet.create({
   tabBottom: {
     display: "flex",
-    backgroundColor: '#ED9104',
+    backgroundColor: '#6131C1',
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',

@@ -282,7 +282,7 @@ const Home = ({navigation}) => {
                         bg="#EED811"
                     />
                 </ScrollView>    
-            <TabBar />               
+            <TabBar navigation={navigation} />               
         </View>
     )
 }

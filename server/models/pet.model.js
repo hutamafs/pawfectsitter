@@ -1,12 +1,5 @@
 const mongoose = require('mongoose')
 
-// schema pets
-// name : String
-// image : String
-// gender : String
-// age : Integer 
-// type : String (dog)
-// user_id: ID
 
 const petSchema = new mongoose.Schema({
     name : {

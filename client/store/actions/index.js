@@ -3,7 +3,7 @@ import axios from 'axios'
 export function fetchKeepers ()  {
     return(dispatch) => {
         // console.log('masuk pak ekoooo')
-        fetch(`http://192.168.1.3:3000/keepers`)
+        fetch(`http://192.168.8.100:3000/keepers`)
         .then(resp => resp.json())
         .then(resp => {
             // console.log(resp, 'resp dari fetch')
@@ -44,7 +44,7 @@ export function fetchOrders() {
         axios({
             url: 'http://192.168.8.100:3000/orders/',
             method: 'GET',
-            headers:{access_token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYjA5NGNkMjU5ZTlkMDE5MDlkYmIwNiIsImVtYWlsIjoidGFtYUBnbWFpbC5jb20iLCJpYXQiOjE2MDU0MDc5NTF9.sEH3tA-RFJt21XnkDVOFDVRJuQK77uOHL9i3Usnt7t4'}
+            headers:{access_token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYjEwOTc1NGE4MjQ0MDQ1NGNhNmM2MSIsImVtYWlsIjoiYWJjZEBtYWlsLmNvbSIsImlhdCI6MTYwNTQzNzg2OH0.CHnIsDmwmKkEg7ESV_VAL6bUM0m5SDUKY14X8ibMJKo'}
           })
           .then(({data}) => {
             //console.log(data, '<<<<<<<RESPONYA');
@@ -54,16 +54,15 @@ export function fetchOrders() {
     }
 }
 
-export function fetchPets(access_token) {
+export function fetchPets() {
     return(dispatch) => {
-        console.log('masuk fetch pets')
         axios({
-            url: 'http://192.168.1.4:3000/pets',
+            url: 'http://192.168.1.3:3000/pets',
             method: 'GET',
-            headers: {access_token}
+            headers: {access_token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYjEwOTc1NGE4MjQ0MDQ1NGNhNmM2MSIsImVtYWlsIjoiYWJjZEBtYWlsLmNvbSIsImlhdCI6MTYwNTQzNzg2OH0.CHnIsDmwmKkEg7ESV_VAL6bUM0m5SDUKY14X8ibMJKo'}
           })
           .then((res) => {
-            console.log(res, '<<<<<<<RESPONYA');
+            //console.log(res.data, '<<<<<<<RESPONYA');
             dispatch({
                 type: 'FETCH_PETS',
                 payload: res.data
@@ -78,3 +77,6 @@ export function fetchPets(access_token) {
 
 // fetch hutama : http://192.168.1.3:3000
 // fetch nasrul : http://192.168.100.6:3000
+//fetch aji : http://192.168.8.100
+
+//access_aji : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYjEwOTc1NGE4MjQ0MDQ1NGNhNmM2MSIsImVtYWlsIjoiYWJjZEBtYWlsLmNvbSIsImlhdCI6MTYwNTQzNzg2OH0.CHnIsDmwmKkEg7ESV_VAL6bUM0m5SDUKY14X8ibMJKo

@@ -32,11 +32,19 @@ export default function App() {
   if (fontsLoaded){
     return (
       <Provider store={store}>
-        <NavigationContainer>
-          <Stack.Navigator screenOptions={{headerShown: false}}>
 
+      <NavigationContainer>
+        <Stack.Navigator
+            screenOptions={{
+              headerShown: false
+            }}
+          >
             <Stack.Screen name="Home" component={Home} 
-                options={{title: 'Home'}}
+            options={{title: 'Home'}}
+            />
+            
+          <Stack.Screen name="PetList" component={PetList} 
+            options={{title: 'PetList'}}
             />
             <Stack.Screen name="KeepersPage" component={KeepersPage}
               options={{title: 'Keepers'}}
@@ -46,26 +54,23 @@ export default function App() {
             />
             {/* <Stack.Screen name="Landing" component={Landing} 
               options={{title: 'Landing'}}
-            />
+            /> */}
             
             <Stack.Screen name="AddPet" component={AddPet} 
               options={{title: 'AddPet'}}
             />
-            <Stack.Screen name="Login" component={Login} 
+            {/* <Stack.Screen name="Login" component={Login} 
               options={{title: 'Login'}}
             />  
             <Stack.Screen name="Register" component={Register} 
               options={{title: 'Register'}}
-              />   
-            <Stack.Screen name="PetList" component={PetList} 
-                options={{title: 'PetList'}}
-              /> */}
-            {/* <Stack.Screen name="Order" component={Order} 
+              />    */}
+            <Stack.Screen name="Order" component={Order} 
               options={{title: 'Order'}}
-            /> */}
-            {/* <Stack.Screen name="Chat" component={Chat} 
+            />
+            <Stack.Screen name="Chat" component={Chat} 
             options={{title: 'Chat'}}
-             /> */}
+             />
          
         </Stack.Navigator>
       </NavigationContainer>
