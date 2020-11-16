@@ -101,26 +101,26 @@ export default function KeepersPage({ route, navigation }) {
   return (
     <>
       <View style={styles.container}>
-        <View style={{display:'flex',flexDirection:'row',height:80,marginTop:15,borderBottomColor:'black',borderBottomWidth:1}}>
+        <View style={{display:'flex',flexDirection:'row',height:80,marginTop:15, borderBottomWidth:1, backgroundColor: '#F7E7D3'}}>
           <Image
             source={logo} 
             style={{ width: 80, height: 80,marginLeft:3 }}
           />
-        <Text style={{fontSize:30,marginTop:20}}>Keepers</Text>
+        <Text style={{fontSize:30,marginTop:20, color: '#BA826A'}}>Keepers</Text>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
       <View style={{ display: 'flex', flexDirection: 'column', flex: 0.8 , alignItems:'center' }}>
           {keepers &&
             keepers.map(el => {
               return (
-                <View key={el._id} style={{ display: 'flex', flexDirection: 'row', flex: 0.3, borderRadius: 10, borderBottomColor: 'black', width: 350, height: 150, marginVertical: 10, borderWidth: 0.6,backgroundColor:'lightblue' }}>
+                <View key={el._id} style={{ display: 'flex', flexDirection: 'row', flex: 0.3, borderRadius: 10, borderBottomColor: 'black', width: 350, height: 150, marginVertical: 10, borderWidth: 0.6, backgroundColor:'#F7E7D3' }}>
                   <View style={{ paddingHorizontal: 10, display: 'flex', justifyContent: 'center' }}>
-                    <Image source={{ uri: el.image }} style={{ flex:1,width: 100, height: 125, borderColor: 'white',resizeMode:'contain' }} />
+                    <Image source={{ uri: el.image }} style={{ flex:1,width: 100, height: 125, borderColor: 'white',resizeMode:'contain', margin: 5 }} />
 
                   </View>
                   <View style={{ display: 'flex', flexDirection: 'column',marginTop:15 }}>
                     <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                      <Text style={{ color: 'black', fontSize: 25 }}> {el.name} </Text>                      
+                      <Text style={{ color: 'black', fontSize: 25, color: '#BA826A' }}> {el.name} </Text>                      
                     </View>
                     <View style={{display:'flex',flexDirection:'column',marginTop:3}}>
                       <View style={{ display: 'flex', flexDirection: 'row',paddingLeft:3}}>
@@ -152,10 +152,10 @@ export default function KeepersPage({ route, navigation }) {
 
                   </View>
                     <TouchableOpacity
-                      style={{ width: 75, height: 20 ,position:'absolute',right:10,bottom:10 }}
+                      style={{ width: 85, height: 30 ,position:'absolute',right:10,bottom:10, backgroundColor: '#BA826A', borderRadius: 10 }}
                       onPress={() => handlePress(el)}
                     >
-                      <Text style={{ color: 'red', textAlign: 'center' }}>Hire Me! </Text>
+                      <Text style={{ color: 'white', textAlign: 'center' }}>Hire Me! </Text>
                     </TouchableOpacity>
 
                   <Modal isVisible={isModalVisible}>

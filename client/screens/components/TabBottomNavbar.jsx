@@ -16,12 +16,12 @@ export default function TabBar({navigation}) {
             width: 50,
             borderRadius: 20,
             marginTop : 10,
-            borderColor : '#6131C1',
+            borderColor : '#BA826A',
           }}
           accessibilityRole='button'
           onPress={() => navigation.navigate('Home')}
         >
-        <Icon name="home" color="white" size={35} />
+        <Icon name="home" color="#BA826A" size={35} />
     </Button>
     <Button 
           style={{
@@ -31,13 +31,13 @@ export default function TabBar({navigation}) {
             width: 50,
             borderRadius: 20,
             marginTop : 10,
-            borderColor : '#6131C1',
+            borderColor : '#BA826A',
             marginLeft : 60,
           }}
           accessibilityRole='button'
           onPress={() => navigation.navigate('Order')}
         > 
-        <Icon name="book-outline" color="white" size={35}  />
+        <Icon name="book-outline" color="#BA826A" size={35}  />
     </Button>
     <Button 
           style={{
@@ -47,13 +47,13 @@ export default function TabBar({navigation}) {
             width: 50,
             borderRadius: 20,
             marginTop : 10,
-            borderColor : '#6131C1',
+            borderColor : '#BA826A',
             marginLeft : 60,
           }}
           accessibilityRole='button'
           onPress={() => navigation.navigate('Chat')}
         > 
-        <Icon name="chat-processing" color="white" size={35} />
+        <Icon name="chat-processing" color="#BA826A" size={35} />
     </Button>
     <Button 
           style={{
@@ -63,13 +63,13 @@ export default function TabBar({navigation}) {
             width: 50,
             borderRadius: 20,
             marginTop : 10,
-            borderColor : '#6131C1',
+            borderColor : '#BA826A',
             marginLeft : 60,
           }}
           accessibilityRole='button'
           onPress={() => navigation.navigate('History')}
         > 
-        <Icon name="history" color="white" size={35} />
+        <Icon name="history" color="#BA826A" size={35} />
     </Button>
     </View>
   )
@@ -78,7 +78,7 @@ export default function TabBar({navigation}) {
 const styles = StyleSheet.create({
   tabBottom: {
     display: "flex",
-    backgroundColor: '#6131C1',
+    backgroundColor: '#F7E7D3',
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
