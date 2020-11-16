@@ -7,6 +7,7 @@ import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 
 
 export default function Landing({navigation}) {
+  
   return (
     <View style={styles.container}>
       <View>

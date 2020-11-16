@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { StyleSheet, Text, View , Keyboard,TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, Text, View, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { Provider } from 'react-redux'
 import store from './store'
 import { NavigationContainer, useLinkProps } from '@react-navigation/native';
@@ -21,16 +21,16 @@ import * as Font from 'expo-font'
 import { AppLoading } from 'expo'
 
 const getFont = () => Font.loadAsync({
-    'nunito' : require('./assets/fonts/Nunito.ttf')
+  'nunito': require('./assets/fonts/Nunito.ttf')
 })
 
 
 
 export default function App() {
   const Stack = createStackNavigator();
-  const [fontsLoaded , setFontsLoaded ] = useState(false)
+  const [fontsLoaded, setFontsLoaded] = useState(false)
 
-  if (fontsLoaded){
+  if (fontsLoaded) {
     return (
 
 
@@ -98,13 +98,13 @@ export default function App() {
 
 
     )
-  }else {
+  } else {
     return (
-      <AppLoading 
-      startAsync={getFont}
-      onFinish={() => setFontsLoaded(true)}
+      <AppLoading
+        startAsync={getFont}
+        onFinish={() => setFontsLoaded(true)}
       />
-    )    
+    )
   }
 }
 

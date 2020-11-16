@@ -7,9 +7,18 @@ import  TabBar  from './components/TabBottomNavbar'
 import KeepList from './components/KeepList'
 import Button from 'apsl-react-native-button'
 import logo from '../assets/logoDog.png'
+import { setToken } from '../store/actions';
+import { useDispatch } from 'react-redux';
 
 
 const Home = ({navigation}) => {
+    const dispatch = useDispatch()
+
+    const handleLogout = () => {
+        dispatch(setToken(''))
+        navigation.replace('Landing')
+    }
+
     return(
         <View style={{
             backgroundColor:"#C8D1DA",
