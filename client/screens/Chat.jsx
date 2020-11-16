@@ -1,34 +1,63 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
 import { useSelector, useDispatch } from 'react-redux';
 import TabBar from './components/TabBottomNavbar'
 import firebaseSDK from './config/firebaseSDK';
 import {setMessages} from '../store/actions'
-import { ScrollView } from 'react-native-gesture-handler';
 
 
 export default function Chat({navigation, route}) {
-  const dispatch = useDispatch()
-  const {messages} = useSelector(state => state)
+  // const dispatch = useDispatch()
+  // const {messages} = useSelector(state => state)
+  const [messages, setMessages] = useState([]);
+  
+
   const {userData} = route.params
-  useEffect(() => {
-    console.log(userData, '<<<<<<<< ini dioper dari home');
-    firebaseSDK.refOn(message => {
-      dispatch(setMessages(message))
-      GiftedChat.append(messages)
+  useEffect(async () => {
+    firebaseSDK.on(message => {
+      await setMessages(messages.concat(message))
     })
+    console.log(messages);
+    firebaseSDK.off()
+  },[])
+  //   setMessages([
+  //     {
+  //       _id: 1,
+  //       text: 'Hello developer',
+  //       createdAt: new Date(),
+  //       user: {
+  //         _id: 2,
+  //         name: 'React Native',
+  //         avatar: 'https://placeimg.com/140/140/any',
+  //       },
+  //     },
+  //   ])
+  // }, [])
+  const onSend = useCallback((messages = []) => {
+    firebaseSDK.send(messages)
+    setMessages(previousMessages => GiftedChat.append(previousMessages, messages))
   }, [])
   return (
     <>
     {/* <ScrollView>
     <Text>{JSON.stringify(messages)}</Text>
     </ScrollView> */}
-    <GiftedChat
+    {/* <GiftedChat
       messages={messages}
       onSend={firebaseSDK.send}
       user={{
         ...userData,
+        _id: firebaseSDK.uid,
+      }}
+    /> */}
+     <GiftedChat
+      messages={messages}
+      onSend={messages => onSend(messages)}
+      user={{
+        name: userData.name,
+        email: userData.email,
+        avatar: 'https://placeimg.com/140/140/any',
         _id: firebaseSDK.uid
       }}
     />
