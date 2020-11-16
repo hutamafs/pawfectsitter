@@ -15,6 +15,8 @@ class OrderController {
     static async createOrder(req,res,next) {
         try {
             let keeper = await Keeper.findById(req.params.id);
+            await keeper.update({status:'unavailable'})
+            await keeper.save();
             let pet = await Pet.findById(req.body.pet_id);
             let order = new Order({
                 user_id:req.userData.id,
@@ -26,7 +28,6 @@ class OrderController {
                 keeperImage:keeper.image,
                 status:true
             })
-            console.log('masuk');
             await order.save();
             res.status(201).json(order)
         } catch (next) {

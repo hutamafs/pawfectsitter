@@ -32,61 +32,16 @@ export default function App() {
 
   if (fontsLoaded){
     return (
-<<<<<<< HEAD
-      <Provider store={store}>
-
-      <NavigationContainer>
-        <Stack.Navigator
-=======
 
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <Provider store={store}>
         <NavigationContainer>
           <Stack.Navigator
 
->>>>>>> development
             screenOptions={{
               headerShown: false
             }}
           >
-<<<<<<< HEAD
-            <Stack.Screen name="Home" component={Home} 
-            options={{title: 'Home'}}
-            />
-            
-          <Stack.Screen name="PetList" component={PetList} 
-            options={{title: 'PetList'}}
-            />
-            <Stack.Screen name="KeepersPage" component={KeepersPage}
-              options={{title: 'Keepers'}}
-            />
-            <Stack.Screen name="History" component={History} 
-              options={{title: 'History'}}
-            />
-            {/* <Stack.Screen name="Landing" component={Landing} 
-              options={{title: 'Landing'}}
-            /> */}
-            
-            <Stack.Screen name="AddPet" component={AddPet} 
-              options={{title: 'AddPet'}}
-            />
-            {/* <Stack.Screen name="Login" component={Login} 
-              options={{title: 'Login'}}
-            />  
-            <Stack.Screen name="Register" component={Register} 
-              options={{title: 'Register'}}
-              />    */}
-            <Stack.Screen name="Order" component={Order} 
-              options={{title: 'Order'}}
-            />
-            <Stack.Screen name="Chat" component={Chat} 
-            options={{title: 'Chat'}}
-             />
-         
-        </Stack.Navigator>
-      </NavigationContainer>
-     </Provider>
-=======
 
 
             <Stack.Screen name="KeepersPage" component={KeepersPage}
@@ -137,7 +92,6 @@ export default function App() {
       </Provider>
       </TouchableWithoutFeedback>    
 
->>>>>>> development
 
     )
   }else {
