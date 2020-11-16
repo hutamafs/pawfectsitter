@@ -45,7 +45,11 @@
     "react-redux": "^7.2.2",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+<<<<<<< HEAD
     "uuid": "^8.3.1"
+=======
+    "expo-linear-gradient": "~8.3.0"
+>>>>>>> 34edc3a3afcb57817ce066d6bc67cb754232ba44
   },
   "devDependencies": {
     "@babel/core": "~7.9.0"

@@ -1,50 +1,76 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import Button from 'apsl-react-native-button'
+import Icon from "@expo/vector-icons/MaterialCommunityIcons";
+import { useNavigation } from '@react-navigation/native'
 
 
 export default function TabBar({navigation}) {
   return (
     <View style={styles.tabBottom}>
-    <Text 
-          style={{color:'blue', textDecorationLine: 'none', margin: 15}}
+    <Button 
+          style={{
+            alignItems: "center",
+            justifyContent: "center",
+            height: 50,
+            width: 50,
+            borderRadius: 20,
+            marginTop : 10,
+            borderColor : '#6131C1',
+          }}
           accessibilityRole='button'
-          onPress={(e) => {
-            e.preventDefault()
-            navigation.navigate('Home')
-            }
-          }
-        > Home
-    </Text>
-    <Text 
-          style={{color:'blue', textDecorationLine: 'none', margin: 15}}
+          onPress={() => navigation.navigate('Home')}
+        >
+        <Icon name="home" color="white" size={35} />
+    </Button>
+    <Button 
+          style={{
+            alignItems: "center",
+            justifyContent: "center",
+            height: 50,
+            width: 50,
+            borderRadius: 20,
+            marginTop : 10,
+            borderColor : '#6131C1',
+            marginLeft : 60,
+          }}
           accessibilityRole='button'
-          onPress={(e) => {
-            e.preventDefault()
-            navigation.navigate('Order')
-            }
-          }
-        > Order
-    </Text>
-    <Text 
-          style={{color:'blue', textDecorationLine: 'none', margin: 15}}
+          onPress={() => navigation.navigate('Order')}
+        > 
+        <Icon name="book-outline" color="white" size={35}  />
+    </Button>
+    <Button 
+          style={{
+            alignItems: "center",
+            justifyContent: "center",
+            height: 50,
+            width: 50,
+            borderRadius: 20,
+            marginTop : 10,
+            borderColor : '#6131C1',
+            marginLeft : 60,
+          }}
           accessibilityRole='button'
-          onPress={(e) => {
-            e.preventDefault()
-            navigation.navigate('Chat')
-            }
-          }
-        > Chat
-    </Text>
-    <Text 
-          style={{color:'blue', textDecorationLine: 'none', margin: 15}}
+          onPress={() => navigation.navigate('Chat')}
+        > 
+        <Icon name="chat-processing" color="white" size={35} />
+    </Button>
+    <Button 
+          style={{
+            alignItems: "center",
+            justifyContent: "center",
+            height: 50,
+            width: 50,
+            borderRadius: 20,
+            marginTop : 10,
+            borderColor : '#6131C1',
+            marginLeft : 60,
+          }}
           accessibilityRole='button'
-          onPress={(e) => {
-            e.preventDefault()
-            navigation.navigate('History')
-            }
-          }
-        > History
-    </Text>
+          onPress={() => navigation.navigate('History')}
+        > 
+        <Icon name="history" color="white" size={35} />
+    </Button>
     </View>
   )
 }
@@ -52,9 +78,17 @@ export default function TabBar({navigation}) {
 const styles = StyleSheet.create({
   tabBottom: {
     display: "flex",
-    backgroundColor: 'gray',
+    backgroundColor: '#6131C1',
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
+    borderTopLeftRadius : 20,
+    borderBottomLeftRadius : 20,
+    borderTopRightRadius : 20,
+    borderBottomRightRadius : 20,
+    height : "9%" ,
+    marginBottom : 10,
+    marginLeft : 20,
+    marginRight : 20,
   }
 });

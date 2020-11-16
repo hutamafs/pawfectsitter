@@ -26,6 +26,7 @@ class OrderController {
                 keeperImage:keeper.image,
                 status:true
             })
+            console.log('masuk');
             await order.save();
             res.status(201).json(order)
         } catch (next) {

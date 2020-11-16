@@ -20,7 +20,6 @@ import History from './screens/History'
 import * as Font from 'expo-font'
 import { AppLoading } from 'expo'
 
-
 const getFont = () => Font.loadAsync({
     'nunito' : require('./assets/fonts/Nunito.ttf')
 })
@@ -33,12 +32,10 @@ export default function App() {
 
   if (fontsLoaded){
     return (
-
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <Provider store={store}>
         <NavigationContainer>
           <Stack.Navigator
-
             screenOptions={{
               headerShown: false
             }}
@@ -54,8 +51,37 @@ export default function App() {
             />
             <Stack.Screen name="Login" component={Login}
               options={{ title: 'Login' }}
-
+              />
+            
+          <Stack.Screen name="PetList" component={PetList} 
+            options={{title: 'PetList'}}
             />
+            <Stack.Screen name="KeepersPage" component={KeepersPage}
+              options={{title: 'Keepers'}}
+            />
+            <Stack.Screen name="History" component={History} 
+              options={{title: 'History'}}
+            />
+            {/* <Stack.Screen name="Landing" component={Landing} 
+              options={{title: 'Landing'}}
+            /> */}
+            
+            <Stack.Screen name="AddPet" component={AddPet} 
+              options={{title: 'AddPet'}}
+            />
+            {/* <Stack.Screen name="Login" component={Login} 
+              options={{title: 'Login'}}
+            />  
+            <Stack.Screen name="Register" component={Register} 
+              options={{title: 'Register'}}
+              />    */}
+            <Stack.Screen name="Order" component={Order} 
+              options={{title: 'Order'}}
+            />
+            <Stack.Screen name="Chat" component={Chat} 
+            options={{title: 'Chat'}}
+             />
+
             <Stack.Screen name="KeepersPage" component={KeepersPage}
               options={{ title: 'Keepers' }}
             />
@@ -104,7 +130,6 @@ export default function App() {
       </Provider>
       </TouchableWithoutFeedback>    
 
-
     )
   }else {
     return (
@@ -124,3 +149,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+
+//error di history => keluar sendiri
+// error di login => text string
+// error di addPet => text string

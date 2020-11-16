@@ -78,3 +78,5 @@ export function fetchPets() {
 // fetch hutama : http://192.168.1.3:3000
 // fetch nasrul : http://192.168.100.6:3000
 // fetch angga: http://192.168.1.4:3000
+//fetch aji : http://192.168.8.100
+//access_aji : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYjEwOTc1NGE4MjQ0MDQ1NGNhNmM2MSIsImVtYWlsIjoiYWJjZEBtYWlsLmNvbSIsImlhdCI6MTYwNTQzNzg2OH0.CHnIsDmwmKkEg7ESV_VAL6bUM0m5SDUKY14X8ibMJKo

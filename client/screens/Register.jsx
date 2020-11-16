@@ -58,7 +58,7 @@ export default function Register({navigation}) {
       />
       <TextInput
       style={[styles.formInput , { letterSpacing : 3 }]}
-      placeholder="adress" 
+      placeholder="address" 
       autoCompleteType="off"
       onChangeText={(text) => setAddress(text)}
       />
