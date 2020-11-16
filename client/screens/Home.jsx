@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {View, Text, Image, ImageBackground} from 'react-native'
 import {TextInput,ScrollView,TouchableOpacity} from 'react-native-gesture-handler'
 import { LinearGradient } from 'expo-linear-gradient'
@@ -8,7 +8,9 @@ import KeepList from './components/KeepList'
 import Button from 'apsl-react-native-button'
 
 
-const Home = ({navigation}) => {
+const Home = ({navigation, route}) => {
+  const {userData} = route.params
+
     return(
         <View style={{
             backgroundColor:"#FFF",
@@ -278,7 +280,10 @@ const Home = ({navigation}) => {
                         bg="#EED811"
                     />
                 </ScrollView>    
-            <TabBar navigation={navigation} />               
+            <TabBar 
+            navigation={navigation} 
+            userData={userData}
+            />               
         </View>
     )
 }

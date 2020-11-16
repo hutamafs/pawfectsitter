@@ -82,15 +82,9 @@ export default function App() {
             options={{title: 'Chat'}}
              />
 
-            <Stack.Screen name="KeepersPage" component={KeepersPage}
-              options={{ title: 'Keepers' }}
-            />
             {/* <Stack.Screen name="AddPet" component={AddPet}
               options={{ title: 'AddPet' }}
             /> */}
-            <Stack.Screen name="PetList" component={PetList}
-              options={{ title: 'PetList' }}
-            />
             {/* <Stack.Screen name="Landing" component={Landing}
               options={{ title: 'Landing' }}
             />

@@ -85,6 +85,14 @@ export function setSocket(payload) {
     }
 }
 
+export function setMessages(payload) {
+    console.log('MASUK UBAH MESSAGE REDUX');
+    return {
+        type: 'SET_MESSAGES',
+        payload: payload
+    }
+}
+
 
 // fetch hutama : http://192.168.1.3:3000
 // fetch nasrul : http://192.168.100.6:3000
