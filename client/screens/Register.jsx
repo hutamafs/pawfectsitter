@@ -16,7 +16,7 @@ export default function Register({navigation}) {
 
   const handleRegister = () => {
     axios({
-      url: 'http://192.168.100.6:3000/users/register',
+      url: 'http://192.168.1.4:3000/users/register',
       method: 'POST',
       data: {
         name,email,password,address
@@ -58,7 +58,7 @@ export default function Register({navigation}) {
       />
       <TextInput
       style={[styles.formInput , { letterSpacing : 3 }]}
-      placeholder="adress" 
+      placeholder="address" 
       autoCompleteType="off"
       onChangeText={(text) => setAddress(text)}
       />

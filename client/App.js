@@ -1,6 +1,7 @@
-import React , { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import {Provider} from 'react-redux'
+
+import React, { useState } from 'react';
+import { StyleSheet, Text, View , Keyboard,TouchableWithoutFeedback } from 'react-native';
+import { Provider } from 'react-redux'
 import store from './store'
 import { NavigationContainer, useLinkProps } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -19,7 +20,6 @@ import History from './screens/History'
 import * as Font from 'expo-font'
 import { AppLoading } from 'expo'
 
-
 const getFont = () => Font.loadAsync({
     'nunito' : require('./assets/fonts/Nunito.ttf')
 })
@@ -32,29 +32,79 @@ export default function App() {
 
   if (fontsLoaded){
     return (
-      <Provider store={store}>
-      <NavigationContainer>
-        <Stack.Navigator
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+        <Provider store={store}>
+        <NavigationContainer>
+          <Stack.Navigator
             screenOptions={{
               headerShown: false
             }}
           >
-            <Stack.Screen name="AddPet" component={AddPet} 
-      options={{title: 'AddPet'}}
-      />
-            <Stack.Screen name="Chat" component={Chat} 
-            options={{title: 'Chat'}}
+
+            <Stack.Screen name="Landing" component={Landing}
+              options={{ title: 'Landing' }}
             />
-            <Stack.Screen name="PetList" component={PetList} 
-              options={{title: 'PetList'}}
+            <Stack.Screen name="Register" component={Register} 
+          options={{title: 'Register'}}
+          />
+            <Stack.Screen name="Home" component={Home}
+              options={{ title: 'Home' }}
             />
-            <Stack.Screen name="Landing" component={Landing} 
-            options={{title: 'Landing'}}
+            <Stack.Screen name="Login" component={Login}
+              options={{ title: 'Login' }}
+              />
+            
+          <Stack.Screen name="PetList" component={PetList} 
+            options={{title: 'PetList'}}
             />
             <Stack.Screen name="KeepersPage" component={KeepersPage}
-           options={{title: 'Keepers'}}
-           />
+              options={{title: 'Keepers'}}
+            />
+            <Stack.Screen name="History" component={History} 
+              options={{title: 'History'}}
+            />
+            {/* <Stack.Screen name="Landing" component={Landing} 
+              options={{title: 'Landing'}}
+            /> */}
             
+            <Stack.Screen name="AddPet" component={AddPet} 
+              options={{title: 'AddPet'}}
+            />
+            {/* <Stack.Screen name="Login" component={Login} 
+              options={{title: 'Login'}}
+            />  
+            <Stack.Screen name="Register" component={Register} 
+              options={{title: 'Register'}}
+              />    */}
+            <Stack.Screen name="Order" component={Order} 
+              options={{title: 'Order'}}
+            />
+            <Stack.Screen name="Chat" component={Chat} 
+            options={{title: 'Chat'}}
+             />
+
+            <Stack.Screen name="KeepersPage" component={KeepersPage}
+              options={{ title: 'Keepers' }}
+            />
+            {/* <Stack.Screen name="AddPet" component={AddPet}
+              options={{ title: 'AddPet' }}
+            /> */}
+            <Stack.Screen name="PetList" component={PetList}
+              options={{ title: 'PetList' }}
+            />
+            {/* <Stack.Screen name="Landing" component={Landing}
+              options={{ title: 'Landing' }}
+            />
+
+            <Stack.Screen name="Home" component={Home}
+              options={{ title: 'Home' }}
+            />
+            <Stack.Screen name="Login" component={Login}
+              options={{ title: 'Login' }}
+
+            />
+          
+>>>>>>> development
           <Stack.Screen name="Home" component={Home} 
           options={{title: 'Home'}}
           />
@@ -67,14 +117,20 @@ export default function App() {
           <Stack.Screen name="Order" component={Order} 
             options={{title: 'Order'}}
             />
-            {/* <Stack.Screen name="History" component={History} 
-            options={{title: 'History'}}
+            <Stack.Screen name="Order" component={Order}
+              options={{ title: 'Order' }}
+            />
+            <Stack.Screen name="History" component={History}
+              options={{ title: 'History' }}
+            />
+            <Stack.Screen name="Chat" component={Chat}
+              options={{ title: 'Chat' }}
             /> */}
-         
-        </Stack.Navigator>
-      </NavigationContainer>
-     </Provider>
 
+          </Stack.Navigator>
+        </NavigationContainer>
+      </Provider>
+      </TouchableWithoutFeedback>    
     )
   }else {
     return (
@@ -94,3 +150,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+
+//error di history => keluar sendiri
+// error di login => text string
+// error di addPet => text string

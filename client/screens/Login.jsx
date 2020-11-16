@@ -1,10 +1,9 @@
 import React, {useState, useEffect} from 'react';
-
-import { Image, StyleSheet, Text, View , Button , TextInput} from 'react-native';
-
+import { Image, StyleSheet, Text, View, TextInput} from 'react-native';
 import axios from 'axios'
 import {setToken} from '../store/actions'
 import {useDispatch} from 'react-redux'
+import Button from 'apsl-react-native-button'
 import logo from '../assets/logoDog.png'
 
 
@@ -15,7 +14,7 @@ export default function Login({navigation}) {
 
   const handleLogin = () => {
     axios({
-      url: 'http://192.168.100.6:3000/users/login',
+      url: 'http://192.168.1.4:3000/users/login',
       method: 'POST',
       data: {
         email,password
@@ -53,16 +52,19 @@ export default function Login({navigation}) {
         secureTextEntry={true}
         />
         </View>
-        <Button
-          style={styles.buttonStyle7} textStyle={styles.textStyle}
+
+        <Button 
+          style={styles.buttonStyle7} 
+          textStyle={styles.textStyle}
           onPress={handleLogin}
+          // title="Login"
           >
-          Log in
+            Log in
         </Button>
       </View>
       
       <View style={styles.bottom}>
-        <Text style={[styles.textbottom, { letterSpacing : 1 }]}>Don't have an account yet ? 
+        <Text style={[styles.textbottom, { letterSpacing : 1 }]}>Don't have an account yet ?
           <Text 
           style={{color:'blue', textDecorationLine: 'none'}}
           accessibilityRole='button'

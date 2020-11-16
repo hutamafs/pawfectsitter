@@ -6,18 +6,18 @@ export function fetchKeepers ()  {
         // console.log('masuk pak ekoooo')
         fetch(`http://192.168.1.4:3000/keepers`)
         .then(resp => resp.json())
-        .then(resp => {
-            // console.log(resp, 'resp dari fetch')
+        .then(resp => 
             dispatch({
             type: 'FETCH_KEEPERS',
             payload: resp
-        })})
+        }))
         .catch(err => {
             console.log(err)
             console.warn
         })
     }
 }
+
 export function setToken(payload) {
     return {
         type: 'SET_TOKEN',
@@ -43,9 +43,10 @@ export function setOrders(payload) {
 export function fetchOrders() {
     return (dispatch) => {
         axios({
-            url: 'http://192.168.1.3:3000/orders/',
+            url: 'http://192.168.1.4:3000/orders',
             method: 'GET',
             headers:{access_token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYjA5NGNkMjU5ZTlkMDE5MDlkYmIwNiIsImVtYWlsIjoidGFtYUBnbWFpbC5jb20iLCJpYXQiOjE2MDU0MDc5NTF9.sEH3tA'}
+
           })
           .then(({data}) => {
             //console.log(data, '<<<<<<<RESPONYA');
@@ -58,7 +59,7 @@ export function fetchOrders() {
 export function fetchPets() {
     return(dispatch) => {
         axios({
-            url: 'http://192.168.1.3:3000/pets',
+            url: 'http://192.168.1.4:3000/pets',
             method: 'GET',
             headers: {access_token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYWZkMDc1Zjc5MmZjMmJmZjgyNGJmYiIsImVtYWlsIjoiaEBtYWlsLmNvbSIsImlhdCI6MTYwNTQxOTY1MX0.ShAR2Oya4yCJVaRm2tCx-3SeZXp4YKBYD_USChwiJCg'}
 
@@ -87,3 +88,6 @@ export function setSocket(payload) {
 
 // fetch hutama : http://192.168.1.3:3000
 // fetch nasrul : http://192.168.100.6:3000
+// fetch angga: http://192.168.1.4:3000
+//fetch aji : http://192.168.8.100
+//access_aji : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYjEwOTc1NGE4MjQ0MDQ1NGNhNmM2MSIsImVtYWlsIjoiYWJjZEBtYWlsLmNvbSIsImlhdCI6MTYwNTQzNzg2OH0.CHnIsDmwmKkEg7ESV_VAL6bUM0m5SDUKY14X8ibMJKo
