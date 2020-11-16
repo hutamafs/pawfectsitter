@@ -23,28 +23,23 @@ export default function KeepersPage({ route, navigation }) {
   const dispatch = useDispatch();
   const [price, setPrice] = useState('');
   const [keeperId, setKeeperId] = useState('');
-  const [animals,setAnimals] = useState([]);
-  const [isDog,setIsDog] = useState(false);
-  const [isCat,setIsCat] = useState(false);
-  const [isBird,setIsBird] = useState(false);
-  const [localKeepers , setLocalKeepers] = useState([keepers]);
-  const [isPrice,setIsPrice] = useState(false);
-  const [isRating,setIsRating] = useState(false);
+
+  const [localKeepers , setLocalKeepers] = useState(keepers);
+
+  const [isFilterAnimal,setIsFilterAnimal] = useState(false);
+  const [animalNow,setAnimalNow] = useState('');
+
+  const [categoryNow,setCategoryNow] = useState('');
   
   useEffect(() => {
     dispatch(fetchKeepers())
     dispatch(fetchPets(access_token))
-
-
-  // console.log(price, 'ini priceeeeee')
+  },[localKeepers,categoryNow,animalNow])
   let duration_props = [
     { label: 'hourly', value: `${price.hourly}` },
     { label: 'daily', value: `${price.daily}` },
     { label: 'weekly', value: `${price.weekly}` }
   ];
-  // console.log(duration_props, 'ini duration_props')
-
-  // console.log(pets, 'ini pet nya')
   let pet_props = []
   pets.map(el => pet_props.push({ label: `${el.name}`, value: `${el._id}` }))
   // console.log(pet_props, 'petproopes nih')
@@ -52,10 +47,6 @@ export default function KeepersPage({ route, navigation }) {
     setName(el.name);
     setPrice(el.price)
     setKeeperId(el._id)
-    // console.log(el, 'ini element yg dibawa')
-    // console.log(el.name, 'element name isinya')
-    // console.log(el.price, 'element price isinya')
-    // console.log(el.price.hourly, 'element hourly')
     setModalVisible(!isModalVisible);
   }
 
@@ -100,59 +91,99 @@ export default function KeepersPage({ route, navigation }) {
     setHarga(value)
   }
 
-  const filterDog = () => {
-    setIsDog(!isDog);
-    if(isDog) {
-      setAnimals(animals.filter(el => el != 'dog'));
-    } else {
-      setAnimals(animals.concat('dog'))
-    }
-  }
-
-  const filterCat = () => {
-    setIsCat(!isCat);
-    if(isCat) {
-      setAnimals(animals.filter(el => el != 'cat'))
-    } else {
-      setAnimals(animals.concat('cat'))
-    }
-  }
-
-  const filterBird = () => {
-    setIsBird(!isBird);
-    if(isBird) {
-      setAnimals(animals.filter(el => el != 'bird'))
-    } else {
-      setAnimals(animals.concat('bird'))
-    }
-  }
-
-  const sortPrice = () => {
-    let cloned = keepers;
-    if(isPrice) {
-      cloned.sort((a,b) => a.price.hourly>b.price.hourly);
-    }
-    setIsPrice(!isPrice);
-    setLocalKeepers(cloned);
-  }
-
-  const sortRating = () => {
-    let cloned = keepers;
-    if(isRating) {
-      cloned.sort((a,b) => a.rating > b.rating )
-    }
-    setIsRating(!isRating);
-    setLocalKeepers(cloned);
-  }
-
   const stars = (rating) => {
-    let starIcon = []
+    let starIcon = [];
     for(let i = 0 ; i<Math.floor(Number(rating)) ; i++) {
       starIcon.push(
         <Icon key={i} name="star" color="yellow" size={10} style={{marginTop:3,marginHorizontal:1.5}} />
       )
     }
     return starIcon;
+  }
+
+  const sortCategory = (type) => {
+    let cloned = keepers;
+    cloned.sort((a,b) => a[type.toLowerCase()] < b[type.toLowerCase()])
+    console.log(type.toLowerCase(),'ini type')
+    setCategoryNow(type.toLowerCase());    
+    setLocalKeepers(cloned);
+  }
+
+  const filterAnimal = (animalia) => {
+    if(animalia == animalNow) {
+      setIsFilterAnimal(!isFilterAnimal)
+    }
+    setAnimalNow(animalia)
+    if(isFilterAnimal == false) {
+      setLocalKeepers(keepers)
+    } else {
+      const filteredKeepers = [];
+      keepers.filter(keeper => {
+      keeper.skills.map(skill => {
+        if(skill.includes(animalia)) {
+          filteredKeepers.push(keeper);
+        }        
+      })
+    })
+    setLocalKeepers(filteredKeepers);
+    }
+  }
+
+  const listCategories = () => {
+    let types = {
+      0:'Price',
+      1:'Rating'
+    }
+    let categories = [];
+    for(let i = 0 ; i<2 ; i++) {
+      categories.push(
+        <TouchableOpacity
+        key={i}
+        onPress={() => sortCategory(types[i])}
+        style={(types[i].toLowerCase() == categoryNow) ? 
+          {width:100,borderRadius:25,justifyContent:'center',borderColor:'green',borderWidth:2,marginHorizontal:3}:
+          {width:100,borderRadius:25,justifyContent:'center',borderColor:'grey',borderWidth:2,marginHorizontal:3}
+        }
+        >
+        <Text style={{ fontSize: 15, color: 'black', textAlign: 'center', margin: 5,alignSelf:'center' }}>{types[i]}</Text>
+        </TouchableOpacity>
+      )
+    }
+    return categories;
+  }
+
+  const listAnimals = () => {
+    let animals = {
+      0:{
+        name:'dog',
+        logo:'🐶'
+      },
+      1:{
+        name:'cat',
+        logo:'🐱'
+      },
+      2:{
+        name:'bird',
+        logo:'🦅'
+      }
+    }
+    let lists = [];
+    for(let i = 0 ; i<3 ; i++) {
+      lists.push(
+        <TouchableOpacity
+        key={i}
+        onPress={() => filterAnimal(animals[i].name)}
+        style={
+            (animals[i].name == animalNow) ?
+          {width:50,borderRadius:25,justifyContent:'center',borderColor:'blue',borderWidth:0.8,marginHorizontal:3} : 
+          {width:50,borderRadius:25,justifyContent:'center',borderColor:'grey',borderWidth:0.8,marginHorizontal:3} 
+        }
+      >
+      <Text style={{ fontSize: 15, color: '#fff', margin: 5,alignSelf:'center' }}> {animals[i].logo} </Text>
+      </TouchableOpacity>
+      )
+    }
+    return lists;
   }
 
   return (
@@ -166,80 +197,20 @@ export default function KeepersPage({ route, navigation }) {
         </View>
         <View style={{display:'flex',flexDirection:'row',height:30,marginTop:10,marginBottom:2}}>
         <Text style={{display:'flex',alignSelf:'center',marginLeft:5,marginRight:10}}>Filter by Animal</Text> 
-          <TouchableOpacity
-            onPress={filterDog}
-            style={(!isDog) ? 
-              {width:50,borderRadius:25,justifyContent:'center',borderColor:'blue',borderWidth:0.5,marginHorizontal:3} : 
-              {width:50,borderRadius:25,justifyContent:'center',borderColor:'grey',borderWidth:0.5,marginHorizontal:3}
-            }
-          >
-          <Text style={{ fontSize: 15, color: '#fff', margin: 5,alignSelf:'center' }}>🐶</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={filterCat}
-            style={(isCat) ?
-              {width:50,borderRadius:25,justifyContent:'center',borderColor:'blue',borderWidth:0.5,marginHorizontal:3} : 
-              {width:50,borderRadius:25,justifyContent:'center',borderColor:'grey',borderWidth:0.5,marginHorizontal:3}
-            }
-          >
-          <Text style={{ fontSize: 15, color: '#fff', textAlign: 'center', margin: 5,alignSelf:'center' }}>🐱</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={filterBird}
-            style={
-              (isBird) ?
-              {width:50,borderRadius:25,justifyContent:'center',borderColor:'blue',borderWidth:0.5,marginHorizontal:3} : 
-              {width:50,borderRadius:25,justifyContent:'center',borderColor:'grey',borderWidth:0.5,marginHorizontal:3}
-            }
-          >
-          <Text style={{ fontSize: 15, color: '#fff', textAlign: 'center', margin: 5,alignSelf:'center' }}>🦅</Text>
-          </TouchableOpacity>
+          {listAnimals()}
         </View>
         <View style={{display:'flex',flexDirection:'row',height:30,marginTop:10,marginBottom:5}}>
             <Text>Sort by </Text>
-            <TouchableOpacity
-            onPress={sortPrice}
-            style={(!isPrice) ? 
-              {width:100,borderRadius:25,justifyContent:'center',borderColor:'green',borderWidth:2,marginHorizontal:3} : 
-              {width:100,borderRadius:25,justifyContent:'center',borderColor:'grey',borderWidth:2,marginHorizontal:3}
-            }
-            >
-            <Text style={{ fontSize: 15, color: 'black', textAlign: 'center', margin: 5,alignSelf:'center' }}>Price</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-            onPress={sortRating}
-            style={(!isRating) ? 
-              {width:100,borderRadius:25,justifyContent:'center',borderColor:'green',borderWidth:2,marginHorizontal:3} : 
-              {width:100,borderRadius:25,justifyContent:'center',borderColor:'grey',borderWidth:2,marginHorizontal:3}
-            }
-            >
-            <Text style={{ fontSize: 15, color: 'black', textAlign: 'center', margin: 5,alignSelf:'center' }}>Rating</Text>
-            </TouchableOpacity>
+            {listCategories()}
         </View>
 
       <ScrollView showsVerticalScrollIndicator={false}>
       <View style={{ display: 'flex', flexDirection: 'column', flex: 0.8 , alignItems:'center' }}>
-          {keepers &&
-            keepers
-            .filter(el => {
-              return (
-                el.skills.map(skill => {
-                  if(animals.length == 0) {
-                    return el
-                  }
-                  return (
-                    animals.map(animal => {
-                      if(animal == skill) {
-                        return el
-                      }
-                    })
-                  )
-                })
-              )
-            })            
+          {localKeepers &&
+            localKeepers        
             .map(el => {
               return (
-                <View key={el._id} style={{ display: 'flex', flexDirection: 'row', flex: 0.3, borderRadius: 10, borderBottomColor: 'black', width: 350, height: 150, marginVertical: 10, borderWidth: 0.6,backgroundColor:'lightblue' }}>
+                <View key={el._id} style={{ display: 'flex', flexDirection: 'row', flex: 0.3, borderRadius: 10, borderBottomColor: 'black', width: 350, height: 150, marginVertical: 10, borderWidth: 0.6,borderColor:'red' }}>
                    <Text style={{position:'absolute',top:20,right:10,fontWeight:'bold'}}> Rp {el.price.hourly.toLocaleString().replace(',','.')} </Text>
                   <View style={{ paddingHorizontal: 10, display: 'flex', justifyContent: 'center' }}>
                     <Image source={{ uri: el.image }} style={{ flex:1,width: 100, height: 125, borderColor: 'white',resizeMode:'contain' }} />
@@ -269,29 +240,9 @@ export default function KeepersPage({ route, navigation }) {
                       <View style={{display:'flex',flexDirection:'row'}}>
                         <Icon  name="compass" color="green" size={20} style={{marginTop:2}} />
                         <Text style={{ color: 'blue', fontSize: 12,alignSelf:'center'}}> {el.address}</Text>
-                      </View>             
-                        {/* <Text style={{ color: 'red', fontSize: 15 }}> Specialized in: {el.skills.map(element => { return (`${element}, `) })} </Text> */}
-                        {/* <View style={{ flex: 0.3, display: 'flex', flexDirection: 'column' }}>
-                          <Text style={{ color: 'black', fontSize: 15 }}> {el.address}</Text>
-                          <Text style={{ color: 'black', fontSize: 12.5 }}> {el.price.daily}</Text>
-                          <Text style={{ color: 'black', fontSize: 12.5 }}> {el.price.hourly}</Text>
-                          <Text style={{ color: 'black', fontSize: 12.5 }}> {el.price.weekly}</Text>
-                        </View> */}
-                      
+                      </View>                   
                       <View style={{display:'flex',flexDirection:'row',paddingLeft:3}}>
                       </View>
-                      {/* <View style={{display:'flex',flexDirection:'row',paddingLeft:3}}>
-                        <Icon name="stopwatch" color="grey" size={17.5} style={{marginTop:3}} />
-                        <Text style={{ color: 'black', fontSize: 12.5,alignSelf:'center'}}> Rp {el.price.hourly.toLocaleString('en-us').replace(',','.')}</Text>
-                      </View>
-                      <View style={{display:'flex',flexDirection:'row',paddingLeft:3}}>
-                        <Icon name="stopwatch" color="grey" size={17.5} style={{marginTop:3}} />
-                        <Text style={{ color: 'black', fontSize: 12.5,alignSelf:'center'}}> Rp {el.price.daily.toLocaleString('en-us').replace(',','.')}</Text>
-                      </View>
-                      <View style={{display:'flex',flexDirection:'row',paddingLeft:3}}>
-                        <Icon name="stopwatch" color="grey" size={17.5} style={{marginTop:3}} />
-                        <Text style={{ color: 'black', fontSize: 12.5,alignSelf:'center'}}> Rp {el.price.weekly.toLocaleString('en-us').replace(',','.')}</Text>
-                      </View> */}
                     </View>
 
                   </View>
@@ -359,17 +310,6 @@ export default function KeepersPage({ route, navigation }) {
                   </Modal>
 
                 </View>
-
-                /*
-                <View key={el._id} style={{backgroundColor: 'grey', margin: 3, borderRadius: 10, padding: 5}}>
-                  <Image source={{uri: el.image}} style={{ width: 175, height: 159, borderWidth: 1, borderColor: 'white' }} />
-                  <Text style={styles.textColor}>Name: {el.name}</Text>
-                  <Text style={styles.textColor}>Address: {el.address}</Text>
-                  <Text style={styles.textColor}>Specialization: {el.skills}</Text>
-                  <Text style={{color: 'yellow'}}>Rating: {el.rating}</Text>
-                  <Text style={styles.textColor}>Status: {el.status}</Text>
-                </View>
-                */
               )
             })
           }
@@ -383,6 +323,7 @@ export default function KeepersPage({ route, navigation }) {
       </View>      
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -401,4 +342,4 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     margin: 5
   }
-});
+})

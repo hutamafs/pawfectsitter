@@ -15,7 +15,7 @@ import AddPet from './screens/AddPet'
 import Order from './screens/Order'
 import Chat from './screens/Chat'
 import History from './screens/History'
-
+import GMap from './screens/gMap'
 
 import * as Font from 'expo-font'
 import { AppLoading } from 'expo'
@@ -43,8 +43,10 @@ export default function App() {
                 headerShown: false
               }}
             >
-
-              <Stack.Screen name="Landing" component={Landing}
+              {/* <Stack.Screen name="gMap" component={GMap}
+                options={{ title: 'gMap' }}
+              /> */}
+              {/* <Stack.Screen name="Landing" component={Landing}
                 options={{ title: 'Landing' }}
               />
               <Stack.Screen name="Login" component={Login}
@@ -55,7 +57,7 @@ export default function App() {
               />
               <Stack.Screen name="Home" component={Home}
                 options={{ title: 'Home' }}
-              />
+              /> */}
               <Stack.Screen name="KeepersPage" component={KeepersPage}
                 options={{ title: 'Keepers' }}
               />
