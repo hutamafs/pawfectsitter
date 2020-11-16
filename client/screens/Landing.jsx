@@ -6,6 +6,7 @@ import logo from '../assets/logoDog.png'
 
 
 export default function Landing({navigation}) {
+  
   return (
     <View style={styles.container}>
       <Image source={logo} style={{ width: 300, height: 350 }} />
