@@ -26,8 +26,6 @@ export default function PetList({navigation}) {
       <Text style={{fontSize:30,marginTop:20}}>My Pets</Text>
     </View>
     <View style={styles.container}>
-<<<<<<< HEAD
-      <Text style={{textAlign: 'center'}}>Pet</Text>
       {/* {loading && 
             <ActivityIndicator size="large" color="#0000ff" />
 =======
@@ -75,17 +73,12 @@ export default function PetList({navigation}) {
                   {/* <Text>Gender: {pet.gender}</Text>
                   <Text>Age: {pet.age}</Text>
                  <Text>Type: {pet.type}</Text> */}
-                </View>
+                {/* </View>
             )
         })
-      }
-<<<<<<< HEAD
-      </ScrollView> */}
-      <ScrollView>
-=======
-        </View>
+      } */}
       
-      </ScrollView>
+      {/* </ScrollView> */}
     </View>
     <TabBar
         navigation={navigation}
@@ -167,4 +160,3 @@ const styles = StyleSheet.create({
 });
 =======
     </ScrollView> */}
->>>>>>> development
