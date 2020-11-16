@@ -13,6 +13,7 @@ import logo from '../assets/logoDog.png';
 import { ScrollView } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+
 export default function KeepersPage({ route, navigation }) {
   const { keepers, pets,  access_token} = useSelector(state => state);
   const [ petId, setPetId ] = useState('');
@@ -293,7 +294,6 @@ export default function KeepersPage({ route, navigation }) {
                         <Text style={{ color: 'black', fontSize: 12.5,alignSelf:'center'}}> Rp {el.price.weekly.toLocaleString('en-us').replace(',','.')}</Text>
                       </View> */}
                     </View>
-
                   </View>
                     <TouchableOpacity
                       style={{ width: 75, height: 20 ,position:'absolute',right:10,bottom:10 }}
