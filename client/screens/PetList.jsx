@@ -13,7 +13,7 @@ export default function PetList({navigation}) {
     const dispatch = useDispatch()
     const {access_token, pets, loading} = useSelector(state => state)
     useEffect(() => {
-        dispatch(fetchPets())
+        dispatch(fetchPets(access_token))
     },[])
     console.log(pets,'ini pets')
   return (
