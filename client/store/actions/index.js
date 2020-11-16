@@ -3,7 +3,7 @@ import axios from 'axios'
 export function fetchKeepers ()  {
     return(dispatch) => {
         // console.log('masuk pak ekoooo')
-        fetch(`http://192.168.100.6:3000/keepers`)
+        fetch(`http://192.168.1.3:3000/keepers`)
         .then(resp => resp.json())
         .then(resp => 
             dispatch({
@@ -57,7 +57,7 @@ export function fetchOrders(token) {
 export function fetchPets(token) {
     return(dispatch) => {
         axios({
-            url: 'http://192.168.100.6:3000/pets',
+            url: 'http://192.168.1.3:3000/pets',
             method: 'GET',
             headers: {access_token: token}
           })

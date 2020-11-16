@@ -35,6 +35,8 @@ export default function App() {
 
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <Provider store={store}>
+
+
           <NavigationContainer>
             <Stack.Navigator
               screenOptions={{
@@ -77,8 +79,6 @@ export default function App() {
           </NavigationContainer>
         </Provider>
       </TouchableWithoutFeedback>
-
-
     )
   } else {
     return (
