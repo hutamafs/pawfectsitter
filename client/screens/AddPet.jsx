@@ -31,6 +31,23 @@ const AddPet = () => {
         {label: '🐱', value: 'cat',style:{marginLeft:20} }
     ];
 
+    const handleSubmit = () => {
+        console.log(image,'ini image')
+    axios({
+        url: 'http://192.168.1.4:3000/pets',
+        method: 'POST',
+        headers:{access_token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYWZkMDc1Zjc5MmZjMmJmZjgyNGJmYiIsImVtYWlsIjoiaEBtYWlsLmNvbSIsImlhdCI6MTYwNTM4ODgwOX0.54h9zQqXhvFXOW-ZS2Gmj84bKwilvj-3VqDNQOfC8pM'},
+        data: { name,gender,type,age,image },
+        })
+        .then(({data}) => {
+        console.log(data, '<<<<<<<RESPONYA');
+        //dispatch(setToken(res.data.access_token))
+        navigation.replace('Home')
+        })
+        .catch((err) => {
+        console.log(err, '<<<<<<<<<ERRRRRROOORRRRRR');
+        })
+    }
     // const handleSubmit = () => {
     //     console.log(image,'ini image')
     // axios({
@@ -74,39 +91,39 @@ const AddPet = () => {
     //     })
     // }
 
-    const handleSubmit = async () => {
-        if (image != null) {
-          // If file selected then create FormData
-          //const fileToUpload = image;
-          const data = new FormData();
-          data.append('name', name);
-          data.append('gender', gender);
-          data.append('type', type);
-          data.append('age', age);
-          data.append('image', image);
-          console.log(data,'ini data')
-          // Please change file upload URL
-          let res = await fetch(
-            'http://192.168.1.3:3000/pets',
-            {
-              method: 'post',
-              body: data,
-              headers: {
-                'Content-Type': 'multipart/form-data; ',
-                access_token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYjBhNzM2NzBkM2U0M2RmODE1ZDZhZCIsImVtYWlsIjoidGFtYUBnbWFpbC5jb20iLCJpYXQiOjE2MDU0MzAyMjV9.SicZdMhqgEQsWUbbKpg8YjMonqjZyV9m2hqWsCrb9wY'
-              },
-            }
-          )
-          let responseJson = await res.json();
-          console.log(responseJson,'ini response json')
+    // const handleSubmit = async () => {
+    //     if (image != null) {
+    //       // If file selected then create FormData
+    //       //const fileToUpload = image;
+    //       const data = new FormData();
+    //       data.append('name', name);
+    //       data.append('gender', gender);
+    //       data.append('type', type);
+    //       data.append('age', age);
+    //       data.append('image', image);
+    //       console.log(data,'ini data')
+    //       // Please change file upload URL
+    //       let res = await fetch(
+    //         'http://192.168.1.3:3000/pets',
+    //         {
+    //           method: 'post',
+    //           body: data,
+    //           headers: {
+    //             'Content-Type': 'multipart/form-data; ',
+    //             access_token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYjBhNzM2NzBkM2U0M2RmODE1ZDZhZCIsImVtYWlsIjoidGFtYUBnbWFpbC5jb20iLCJpYXQiOjE2MDU0MzAyMjV9.SicZdMhqgEQsWUbbKpg8YjMonqjZyV9m2hqWsCrb9wY'
+    //           },
+    //         }
+    //       )
+    //       let responseJson = await res.json();
+    //       console.log(responseJson,'ini response json')
         //   if (responseJson.status == 1) {
         //     alert('Upload Successful');
         //   }
         // } else {
         //   alert('Please Select File first');
         // }
-        }
-      };
+      //   }
+      // };
       /*
       const selectFile = async () => {
         try {

@@ -26,8 +26,12 @@ export default function PetList({navigation}) {
       <Text style={{fontSize:30,marginTop:30, color: '#BA826A'}}>My Pets</Text>
     </View>
     <View style={styles.container}>
+      {/* {loading && 
+            <ActivityIndicator size="large" color="#0000ff" />
+=======
       {loading && 
         <ActivityIndicator size="large" color="#0000ff" />
+>>>>>>> development
       }
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{marginTop:100}}>
@@ -69,13 +73,12 @@ export default function PetList({navigation}) {
                   {/* <Text>Gender: {pet.gender}</Text>
                   <Text>Age: {pet.age}</Text>
                  <Text>Type: {pet.type}</Text> */}
-                </View>
+                {/* </View>
             )
         })
-      }
-        </View>
+      } */}
       
-      </ScrollView>
+      {/* </ScrollView> */}
     </View>
     <TabBar
         navigation={navigation}
@@ -101,6 +104,7 @@ const styles = StyleSheet.create({
 });
 
       {/* <ScrollView>
+>>>>>>> development
       <View style={styles.cardContainer}>
         <Image
         source={logo}
@@ -128,4 +132,31 @@ const styles = StyleSheet.create({
         <Text>Age</Text>
         <Text>Type</Text>
       </View>
+<<<<<<< HEAD
+    </ScrollView>
+    </View>
+    <TabBar
+        navigation={navigation}
+    />
+    </>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    display: "flex",
+    backgroundColor: '#fff',
+    justifyContent: 'flex-start',
+    margin: 50,
+    maxHeight: '80%'
+  },
+  cardContainer: {
+    display: "flex",
+    backgroundColor: 'gray',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 5
+  }
+});
+=======
     </ScrollView> */}

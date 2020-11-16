@@ -13,6 +13,7 @@ import logo from '../assets/logoDog.png';
 import { ScrollView } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+
 export default function KeepersPage({ route, navigation }) {
   const { keepers, pets,  access_token} = useSelector(state => state);
   const [ petId, setPetId ] = useState('');
@@ -21,17 +22,21 @@ export default function KeepersPage({ route, navigation }) {
   const [quantity, setQuantity] = useState('');
   const [harga, setHarga] = useState('');
   const dispatch = useDispatch();
-  const [price, setPrice] = useState('')
-  const [keeperId, setKeeperId] = useState('')
-
+  const [price, setPrice] = useState('');
+  const [keeperId, setKeeperId] = useState('');
+  const [animals,setAnimals] = useState([]);
+  const [isDog,setIsDog] = useState(false);
+  const [isCat,setIsCat] = useState(false);
+  const [isBird,setIsBird] = useState(false);
+  const [localKeepers , setLocalKeepers] = useState([keepers]);
+  const [isPrice,setIsPrice] = useState(false);
+  const [isRating,setIsRating] = useState(false);
+  
   useEffect(() => {
     dispatch(fetchKeepers())
     dispatch(fetchPets(access_token))
-  }, [])
 
-  // console.log(keepers,'ini keepers')
-  // console.log(pets,'ini pets')
-
+}, [])
   // console.log(price, 'ini priceeeeee')
   let duration_props = [
     { label: 'hourly', value: `${price.hourly}` },
@@ -52,7 +57,6 @@ export default function KeepersPage({ route, navigation }) {
     // console.log(el.name, 'element name isinya')
     // console.log(el.price, 'element price isinya')
     // console.log(el.price.hourly, 'element hourly')
-    console.log(keeperId, 'ini keepers ID nyaaaa')
     setModalVisible(!isModalVisible);
   }
 
@@ -80,7 +84,6 @@ export default function KeepersPage({ route, navigation }) {
       }
     })
     .then(result => {
-      console.log(result, 'result orderrererreers')
       dispatch(setOrders(result))
     })
     .catch(err => console.log(err))
@@ -98,8 +101,62 @@ export default function KeepersPage({ route, navigation }) {
     setHarga(value)
   }
 
+  const filterDog = () => {
+    setIsDog(!isDog);
+    if(isDog) {
+      setAnimals(animals.filter(el => el != 'dog'));
+    } else {
+      setAnimals(animals.concat('dog'))
+    }
+  }
+
+  const filterCat = () => {
+    setIsCat(!isCat);
+    if(isCat) {
+      setAnimals(animals.filter(el => el != 'cat'))
+    } else {
+      setAnimals(animals.concat('cat'))
+    }
+  }
+
+  const filterBird = () => {
+    setIsBird(!isBird);
+    if(isBird) {
+      setAnimals(animals.filter(el => el != 'bird'))
+    } else {
+      setAnimals(animals.concat('bird'))
+    }
+  }
+
+  const sortPrice = () => {
+    let cloned = keepers;
+    if(isPrice) {
+      cloned.sort((a,b) => a.price.hourly>b.price.hourly);
+    }
+    setIsPrice(!isPrice);
+    setLocalKeepers(cloned);
+  }
+
+  const sortRating = () => {
+    let cloned = keepers;
+    if(isRating) {
+      cloned.sort((a,b) => a.rating > b.rating )
+    }
+    setIsRating(!isRating);
+    setLocalKeepers(cloned);
+  }
+
+  const stars = (rating) => {
+    let starIcon = []
+    for(let i = 0 ; i<Math.floor(Number(rating)) ; i++) {
+      starIcon.push(
+        <Icon key={i} name="star" color="yellow" size={10} style={{marginTop:3,marginHorizontal:1.5}} />
+      )
+    }
+    return starIcon;
+  }
+
   return (
-    <>
       <View style={styles.container}>
         <View style={{display:'flex',flexDirection:'row',height:80,marginTop:15, borderBottomWidth:1, backgroundColor: '#F7E7D3'}}>
           <Image
@@ -107,27 +164,113 @@ export default function KeepersPage({ route, navigation }) {
             style={{ width: 80, height: 80,marginLeft:3 }}
           />
         <Text style={{fontSize:30,marginTop:20, color: '#BA826A'}}>Keepers</Text>
-      </View>
+        </View>
+        <View style={{display:'flex',flexDirection:'row',height:30,marginTop:10,marginBottom:2}}>
+        <Text style={{display:'flex',alignSelf:'center',marginLeft:5,marginRight:10}}>Filter by Animal</Text> 
+          <TouchableOpacity
+            onPress={filterDog}
+            style={(!isDog) ? 
+              {width:50,borderRadius:25,justifyContent:'center',borderColor:'blue',borderWidth:0.5,marginHorizontal:3} : 
+              {width:50,borderRadius:25,justifyContent:'center',borderColor:'grey',borderWidth:0.5,marginHorizontal:3}
+            }
+          >
+          <Text style={{ fontSize: 15, color: '#fff', margin: 5,alignSelf:'center' }}>🐶</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={filterCat}
+            style={(isCat) ?
+              {width:50,borderRadius:25,justifyContent:'center',borderColor:'blue',borderWidth:0.5,marginHorizontal:3} : 
+              {width:50,borderRadius:25,justifyContent:'center',borderColor:'grey',borderWidth:0.5,marginHorizontal:3}
+            }
+          >
+          <Text style={{ fontSize: 15, color: '#fff', textAlign: 'center', margin: 5,alignSelf:'center' }}>🐱</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={filterBird}
+            style={
+              (isBird) ?
+              {width:50,borderRadius:25,justifyContent:'center',borderColor:'blue',borderWidth:0.5,marginHorizontal:3} : 
+              {width:50,borderRadius:25,justifyContent:'center',borderColor:'grey',borderWidth:0.5,marginHorizontal:3}
+            }
+          >
+          <Text style={{ fontSize: 15, color: '#fff', textAlign: 'center', margin: 5,alignSelf:'center' }}>🦅</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={{display:'flex',flexDirection:'row',height:30,marginTop:10,marginBottom:5}}>
+            <Text>Sort by </Text>
+            <TouchableOpacity
+            onPress={sortPrice}
+            style={(!isPrice) ? 
+              {width:100,borderRadius:25,justifyContent:'center',borderColor:'green',borderWidth:2,marginHorizontal:3} : 
+              {width:100,borderRadius:25,justifyContent:'center',borderColor:'grey',borderWidth:2,marginHorizontal:3}
+            }
+            >
+            <Text style={{ fontSize: 15, color: 'black', textAlign: 'center', margin: 5,alignSelf:'center' }}>Price</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+            onPress={sortRating}
+            style={(!isRating) ? 
+              {width:100,borderRadius:25,justifyContent:'center',borderColor:'green',borderWidth:2,marginHorizontal:3} : 
+              {width:100,borderRadius:25,justifyContent:'center',borderColor:'grey',borderWidth:2,marginHorizontal:3}
+            }
+            >
+            <Text style={{ fontSize: 15, color: 'black', textAlign: 'center', margin: 5,alignSelf:'center' }}>Rating</Text>
+            </TouchableOpacity>
+        </View>
+
       <ScrollView showsVerticalScrollIndicator={false}>
       <View style={{ display: 'flex', flexDirection: 'column', flex: 0.8 , alignItems:'center' }}>
           {keepers &&
-            keepers.map(el => {
+            keepers
+            .filter(el => {
               return (
-                <View key={el._id} style={{ display: 'flex', flexDirection: 'row', flex: 0.3, borderRadius: 10, borderBottomColor: 'black', width: 350, height: 150, marginVertical: 10, borderWidth: 0.6, backgroundColor:'#F7E7D3' }}>
+                el.skills.map(skill => {
+                  if(animals.length == 0) {
+                    return el
+                  }
+                  return (
+                    animals.map(animal => {
+                      if(animal == skill) {
+                        return el
+                      }
+                    })
+                  )
+                })
+              )
+            })            
+            .map(el => {
+              return (
+                <View key={el._id} style={{ display: 'flex', flexDirection: 'row', flex: 0.3, borderRadius: 10, borderBottomColor: 'black', width: 350, height: 150, marginVertical: 10, borderWidth: 0.6,backgroundColor:'#F7E7D3' }}>
+                   <Text style={{position:'absolute',top:20,right:10,fontWeight:'bold'}}> Rp {el.price.hourly.toLocaleString().replace(',','.')} </Text>
                   <View style={{ paddingHorizontal: 10, display: 'flex', justifyContent: 'center' }}>
                     <Image source={{ uri: el.image }} style={{ flex:1,width: 100, height: 125, borderColor: 'white',resizeMode:'contain', margin: 5 }} />
 
                   </View>
                   <View style={{ display: 'flex', flexDirection: 'column',marginTop:15 }}>
-                    <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                      <Text style={{ color: 'black', fontSize: 25, color: '#BA826A' }}> {el.name} </Text>                      
-                    </View>
-                    <View style={{display:'flex',flexDirection:'column',marginTop:3}}>
-                      <View style={{ display: 'flex', flexDirection: 'row',paddingLeft:3}}>
-                      <Icon  name="star" color="yellow" size={15} style={{marginTop:3}} />              
-                      <Text style={{ color: 'blue', fontSize: 15,alignSelf:'center'}}> {el.rating}</Text>
-                      <Icon  name="compass" color="green" size={20} style={{marginTop:2,marginLeft:20}} />
-                      <Text style={{ color: 'blue', fontSize: 12,alignSelf:'center'}}> {el.address}</Text>              
+                    <View style={{ display: 'flex-start', flexDirection: 'row'}}>
+                      <Text style={{ color: 'black', fontSize: 25 }}> {el.name} </Text>         
+                      {
+                          el.skills.map(skill => (
+                            <Text style={{ fontSize: 15, color: 'black', textAlign: 'center', margin: 5,alignSelf:'center' }}> 
+                              { (skill == 'dog') ? 
+                                  '🐶':
+                                (skill == 'cat') ?
+                                  '🐱':
+                                  '🦅'
+                              }
+                            </Text>
+                          ))
+                      }
+                    </View>                        
+                    <View style={{display:'flex',flexDirection:'column',marginTop:1}}>
+                      <View style={{display:'flex',flexDirection:'row',marginLeft:5,marginTop:0}}>                        
+                        {/* <Icon  name="star" color="yellow" size={15} style={{marginTop:3}} />*/}
+                        {stars(el.rating)}
+                      </View> 
+                      <View style={{display:'flex',flexDirection:'row'}}>
+                        <Icon  name="compass" color="green" size={20} style={{marginTop:2}} />
+                        <Text style={{ color: 'blue', fontSize: 12,alignSelf:'center'}}> {el.address}</Text>
+                      </View>             
                         {/* <Text style={{ color: 'red', fontSize: 15 }}> Specialized in: {el.skills.map(element => { return (`${element}, `) })} </Text> */}
                         {/* <View style={{ flex: 0.3, display: 'flex', flexDirection: 'column' }}>
                           <Text style={{ color: 'black', fontSize: 15 }}> {el.address}</Text>
@@ -135,8 +278,10 @@ export default function KeepersPage({ route, navigation }) {
                           <Text style={{ color: 'black', fontSize: 12.5 }}> {el.price.hourly}</Text>
                           <Text style={{ color: 'black', fontSize: 12.5 }}> {el.price.weekly}</Text>
                         </View> */}
-                      </View>
+                      
                       <View style={{display:'flex',flexDirection:'row',paddingLeft:3}}>
+                      </View>
+                      {/* <View style={{display:'flex',flexDirection:'row',paddingLeft:3}}>
                         <Icon name="stopwatch" color="grey" size={17.5} style={{marginTop:3}} />
                         <Text style={{ color: 'black', fontSize: 12.5,alignSelf:'center'}}> Rp {el.price.hourly.toLocaleString('en-us').replace(',','.')}</Text>
                       </View>
@@ -147,9 +292,8 @@ export default function KeepersPage({ route, navigation }) {
                       <View style={{display:'flex',flexDirection:'row',paddingLeft:3}}>
                         <Icon name="stopwatch" color="grey" size={17.5} style={{marginTop:3}} />
                         <Text style={{ color: 'black', fontSize: 12.5,alignSelf:'center'}}> Rp {el.price.weekly.toLocaleString('en-us').replace(',','.')}</Text>
-                      </View>
+                      </View> */}
                     </View>
-
                   </View>
                     <TouchableOpacity
                       style={{ width: 85, height: 30 ,position:'absolute',right:10,bottom:10, backgroundColor: '#BA826A', borderRadius: 10 }}
@@ -236,9 +380,7 @@ export default function KeepersPage({ route, navigation }) {
         <TabBar
           navigation={navigation}
         />
-      </View>
-    </>
-      
+      </View>      
   );
 }
 
