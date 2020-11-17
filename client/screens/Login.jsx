@@ -4,8 +4,9 @@ import axios from 'axios'
 import {setToken} from '../store/actions'
 import {useDispatch} from 'react-redux'
 import Button from 'apsl-react-native-button'
-import logo from '../assets/logoDog.png'
+import logo from '../assets/cat1.png'
 import firebaseSDK from './config/firebaseSDK';
+import logoKaki from '../assets/logoKaki.png'
 
 
 
@@ -33,7 +34,7 @@ export default function Login({navigation}) {
 
   const handleLogin = async () => {
     axios({
-      url: 'http://192.168.1.4:3000/users/login',
+      url: 'http://192.168.1.8:3000/users/login',
       method: 'POST',
       data: {
         email,password
@@ -61,8 +62,26 @@ export default function Login({navigation}) {
 
   return (
     <View style={styles.container}>
+      <View 
+      style={{
+        flexDirection: "row",
+        marginTop : -100,
+      }}>
+        <Image source={logoKaki} 
+        style={{ 
+          width: 150, 
+          height: 150,
+          marginLeft : 10,
+        }} />
+        <Text style={[
+          styles.textStyle , {
+            marginTop : 39,
+            marginLeft : -50,
+            color: '#2F3542',
+            fontSize : 35
+           }]}>pawfect sitter</Text>
+      </View>
       <View style={styles.middle}>
-        <Image source={logo} style={{ width: 300, height: 350 }} />
         <View>
         
         <TextInput
@@ -102,6 +121,13 @@ export default function Login({navigation}) {
           }
         > Register</Text>
        </Text>
+       <Image source={logo} style={{ 
+        width: 300, 
+        height: 200 ,
+        marginTop : 120,
+        marginLeft : 130
+       }} />
+
       </View>
 
     </View>
@@ -112,17 +138,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1, 
     padding : 40 ,
-    backgroundColor: '#C8D1DA',
+    backgroundColor: '#F4E3E3',
     justifyContent: 'center',
     fontFamily : 'nunito'
   },
   middle : {
-    flex : 0.8,
     alignItems: 'center',
     justifyContent: 'center',
   },
   bottom : {
-    flex : 0.1,
     fontFamily : 'nunito',
   },  
   formInput: {
@@ -130,23 +154,22 @@ const styles = StyleSheet.create({
     height : 50,
     borderWidth: 2,
     marginBottom : 10,
-    borderRadius : 20,
+    borderRadius : 10,
     paddingLeft : 30,
-    fontSize : 20,
+    fontSize : 15,
     color : 'black',
     textTransform : 'capitalize',
     fontWeight : '800',
   },
   buttonStyle7 : {
-    borderColor: '#6661DB',
-    backgroundColor: '#6661DB',
+    borderColor: '#2F3542',
+    backgroundColor: '#2F3542',
     marginTop : 5,
-    borderRadius: 20,
+    borderRadius: 10,
   },
   textStyle : {
-    color: 'black',
-    fontWeight: '900',
-    fontSize : 30,
+    color: '#F4F4F4',
+    fontSize : 20,
     fontFamily : 'nunito'
   },
   textbottom : {

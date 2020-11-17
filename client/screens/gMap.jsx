@@ -8,6 +8,7 @@ const GMap = ({navigation, route}) => {
         navigation.replace('Home')
       }
     console.log(route.params, 'ini props gmaps')
+
     return (
         <SafeAreaView forceInset={{top: 'always'}}>
             <View style={{

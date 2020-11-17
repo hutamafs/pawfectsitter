@@ -5,7 +5,6 @@ import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'
 const height = Dimensions.get('window').height
 
 const Map = (props) => {
-    console.log(props, 'ini props Map Component')
     // const [currentPosition, setCurrentPosition] = useState(initialState)
     const initialState = {
         latitude: props.props.latitude,

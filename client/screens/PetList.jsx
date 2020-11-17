@@ -83,9 +83,10 @@ export default function PetList({ navigation }) {
 
 
 
-        {pets.map(pet => {
+        {pets.map((pet,i) => {
           return (
             <View
+            key={i}
               style={{
                 height: 400,
                 elevation: 33,
