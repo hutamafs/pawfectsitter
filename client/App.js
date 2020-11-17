@@ -50,6 +50,9 @@ export default function App() {
             {/* <Stack.Screen name="Landing" component={Landing}
               options={{ title: 'Landing' }}
             />
+            <Stack.Screen name="KeepersPage" component={KeepersPage}
+              options={{title: 'Keepers'}}
+            />
             <Stack.Screen name="Register" component={Register} 
           options={{title: 'Register'}}
           />
@@ -64,9 +67,7 @@ export default function App() {
           <Stack.Screen name="PetList" component={PetList} 
             options={{title: 'PetList'}}
             />
-            <Stack.Screen name="KeepersPage" component={KeepersPage}
-              options={{title: 'Keepers'}}
-            />
+        
             <Stack.Screen name="History" component={History} 
               options={{title: 'History'}}
             /> */}
