@@ -6,6 +6,7 @@ import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import  TabBar  from './components/TabBottomNavbar'
 import KeepList from './components/KeepList'
 import Button from 'apsl-react-native-button'
+import logo from '../assets/logoDog.png'
 import { setToken } from '../store/actions';
 import { useDispatch } from 'react-redux';
 
@@ -21,46 +22,84 @@ const Home = ({navigation, route}) => {
 
     return(
         <View style={{
-            backgroundColor:"#FFF",
+            backgroundColor:"#C8D1DA",
             flex:1,
         }}>
            <View style={{
-               backgroundColor:"#EED811",
-               height:"28%",
+               backgroundColor:"#6661DB",
+               height:"30%",
                borderBottomLeftRadius:20,
                borderBottomRightRadius:20,
-               paddingHorizontal:20
-           }}>
-               <View style={{
+               paddingHorizontal: 20
+            }}>
+                <View
+                    style={{
+                        flexDirection : 'row'
+                    }}
+                >
+                <View >
+                        <Icon 
+                            name="paw" 
+                            color="black" 
+                            size={80}
+                            style={[{  
+                            transform: [{ rotate: "0deg" }],
+                            position : 'absolute',
+                            marginTop : 25 ,
+                            color : "#102B3E",
+                            opacity : 0.5,
+                        }]}
+                        />
+                </View>
+                <Text 
+                    style={{
+                        marginTop : 35,
+                        marginLeft : 88,
+                        fontFamily : 'nunito',
+                        color : "#0F2A3C",
+                        fontSize : 22
+                    }}
+                > PawFect Sitter</Text>
+                <Button
+                    style={{
+                        height: 40,
+                        width: 40,
+                        borderRadius: 10,
+                        backgroundColor: "#C8D1DA",
+                        borderColor: '#6964E2',
+                        marginHorizontal : 400,
+                        marginTop : 40,
+                        padding : 2,
+                        position : 'absolute'
+                    }}
+                        onPress={handleLogout} 
+                    >
+                    <Icon 
+                    name="logout" 
+                    color="#102B3E" 
+                    size={30} />
+                </Button>
+            </View>
+            <View style={{
                    flexDirection:"row",
                    alignItems:"center",
-                   marginTop:10,
                    width:"100%"
                }}>
-                   <View style={{width:"50%"}}>
+                   <View style={{width:"100%"}}>
                         <Text style={{
                             fontSize:15,
-                            marginTop : 20,
-                            marginBottom: 45,
-                            color:"black",
+                            marginLeft : 93,
+                            color: "#0F2A3C",
                             fontWeight:"normal",
                             fontFamily : 'nunito'
-                        }}>Welcome,  You !</Text>
-                   </View>
-                   <View>
-                       <Button
-                        style={{
-                            height: 25,
-                            width: 65,
-                            borderRadius: 10,
-                            backgroundColor: "#ED9104",
-                            borderColor: '#C7B838',
-                            marginHorizontal : 160,
-                            fontSize : 3,
-                            padding : 5
-                          }}
-                          onPress={handleLogout}
-                       >Log out</Button>
+                        }}>Hey, You </Text>
+                        <Text style={{
+                            fontSize:15,
+                            marginLeft : 93,
+                            color: "#0F2A3C",
+                            fontWeight:"normal",
+                            fontFamily : 'nunito'
+                        }}>Love your puppy with us </Text>
                    </View>
               </View>
               
@@ -69,24 +108,27 @@ const Home = ({navigation, route}) => {
                    paddingHorizontal:20,
                    width:"100%",
                    alignItems:"center",
-                   marginTop : 5
+                   marginTop : 30
                }}>
                  <Button
                   style={{
                     alignItems: "center",
                     justifyContent: "center",
-                    height: 65,
-                    width: 65,
+                    height: 60,
+                    width: 60,
                     borderRadius: 20,
-                    backgroundColor: "#ED9104",
-                    borderColor: '#C7B838',
+                    backgroundColor: "#102B3F",
+                    borderColor: '#102B3F',
                     marginLeft : 15
                     
                   }}
                   onPress={() => navigation.navigate('AddPet')}
 
                   >
-                    <Icon name="plus" color="white" size={40} />
+                    <Icon 
+                    name="plus" 
+                    color="#6964E2" 
+                    size={50} />
                     
                 </Button> 
             
@@ -96,32 +138,38 @@ const Home = ({navigation, route}) => {
                   style={{
                         alignItems: "center",
                         justifyContent: "center",
-                        height: 65,
-                        width: 65,
+                        height: 60,
+                        width: 60,
                         borderRadius: 20,
-                        backgroundColor: "#ED9104",
-                        marginLeft : 40,
-                        borderColor: '#C7B838',
+                        backgroundColor: "#102B3F",
+                        marginLeft : 45,
+                        borderColor: '#102B3F',
                     }}
                     onPress={() => navigation.navigate('PetList')}
                   >
-                    <Icon name="dog" color="white" size={32} />
+                    <Icon 
+                    name="dog" 
+                    color="#6964E2" 
+                    size={40} />
                 </Button>
 
                 <Button
                   style={{
                     alignItems: "center",
                     justifyContent: "center",
-                    height: 65,
-                    width: 65,
+                    height: 60,
+                    width: 60,
                     borderRadius: 20,
-                    backgroundColor: "#ED9104",
-                    marginLeft : 40,
-                    borderColor: '#C7B838',
+                    backgroundColor: "#102B3F",
+                    marginLeft : 48,
+                    borderColor: '#102B3F',
                   }}
                   onPress={() => navigation.navigate('KeepersPage')}
                   >
-                    <Icon name="worker" color="white" size={32} />
+                    <Icon 
+                    name="worker" 
+                    color="#6964E2" 
+                    size={40} />
                 </Button>
 
 
@@ -129,15 +177,18 @@ const Home = ({navigation, route}) => {
                   style={{
                     alignItems: "center",
                     justifyContent: "center",
-                    height: 65,
-                    width: 65,
+                    height: 60,
+                    width: 60,
                     borderRadius: 20,
-                    borderColor: '#C7B838',
-                    backgroundColor: "#ED9104",
-                    marginLeft : 40
+                    borderColor: '#102B3F',
+                    backgroundColor: "#102B3F",
+                    marginLeft : 45
                   }}
                   >
-                    <Icon name="heart-half-full" color="white" size={32} />
+                    <Icon 
+                    name="heart-half-full" 
+                    color="#6964E2" 
+                    size={40} />
                 </Button>
               </View>
            <View style={{
@@ -149,26 +200,34 @@ const Home = ({navigation, route}) => {
                }}>
                    <Text
                     style={{
+                        fontWeight : 'bold',
                         paddingHorizontal:30,
                         fontFamily:"nunito",
+                        color : '#102B3E'
                     }}
                    >Add Pet</Text>
                    <Text
                     style={{
+                        fontWeight : 'bold',
                         paddingHorizontal:35,
                         fontFamily:"nunito",
+                        color : '#102B3E'
                     }}
                    >My Pet</Text>
                    <Text
                     style={{
-                        paddingHorizontal:20,
+                        fontWeight : 'bold',
+                        paddingHorizontal:28,
                         fontFamily:"nunito",
+                        color : '#102B3E'
                     }}
                    >My Keeper</Text>
                    <Text
                     style={{
-                        paddingHorizontal:25,
+                        fontWeight : 'bold',
+                        paddingHorizontal:19,
                         fontFamily:"nunito",
+                        color : '#102B3E'
                     }}
                    >Tinder Dog</Text>
 
@@ -176,12 +235,13 @@ const Home = ({navigation, route}) => {
            </View>
 
            <LinearGradient
-            colors={["rgba(237,145,4,0.4)", "transparent"]}
+            colors={["rgba(16,43,62,0.1)", "transparent"]}
             style={{
                 left:0,
                 right:0,
-                height:90,
-                marginTop:-45
+                top : -3,
+                height:65,
+                marginTop:-35
             }}
            >
                <View style={{
@@ -190,13 +250,13 @@ const Home = ({navigation, route}) => {
                    paddingHorizontal:20,
                    marginHorizontal:20,
                    borderRadius:20,
-                   marginTop:25,
+                   marginTop:15,
                    flexDirection:"row",
                    alignItems:"center"
                }}>
                    <TextInput
                         placeholder="Search"
-                        placeholderTextColor="black"
+                        placeholderTextColor="#102B3E"
                         style={{
                             fontWeight:"bold",
                             fontSize:18,
@@ -212,17 +272,51 @@ const Home = ({navigation, route}) => {
                    paddingHorizontal:20,
                    width:"100%",
                    alignItems:"center",
-                   marginBottom : 30,
-                   marginTop : 20
+                   marginBottom : 10,
+                   marginTop : 10
                }}>
-                   <View style={{width:"50%"}}>
+                   <View style={{width:"40%"}}>
                         <Text style={{
                             fontWeight:"bold",
                             fontSize:18,
-                            color:"#EED811",
+                            color:"#102B3E",
+                            opacity : 0.5,
+                            borderBottomWidth : 4,
+                            borderBottomEndRadius : 20,
+                            padding : 3,
+                            borderColor : "rgba(16,43,62,0.6)"
                         }}>Recommended Keeper</Text>
-
                    </View>
+                   <View >
+                        <Icon 
+                            name="paw" 
+                            color="black" 
+                            size={80}
+                            style={[{  
+                            transform: [{ rotate: "25deg" }],
+                            position : 'absolute',
+                            marginTop : -25 ,
+                            marginLeft : -140,
+                            color : "#102B3E",
+                            opacity : 0.1,
+                        }]}
+                        />
+                </View>
+                   <View >
+                        <Icon 
+                            name="paw" 
+                            color="black" 
+                            size={80}
+                            style={[{  
+                            transform: [{ rotate: "25deg" }],
+                            position : 'absolute',
+                            marginTop : -25 ,
+                            marginLeft : 70,
+                            color : "#102B3E",
+                            opacity : 0.1,
+                        }]}
+                        />
+                </View>  
                    <View style={{width:"50%", alignItems:"flex-end"}}>
                         
                             <Button
@@ -230,17 +324,20 @@ const Home = ({navigation, route}) => {
                                     height: 25,
                                     width: 65,
                                     borderRadius: 10,
-                                    backgroundColor: "#EED811",
-                                    borderColor: '#C7B838',
-                                    marginHorizontal : 160,
+                                    backgroundColor: "#6964E2",
+                                    borderColor: '#6964E2',
+                                    marginHorizontal : 195,
                                     fontSize : 3,
                                     padding : 5,
+                                    marginTop : 10,
+                                    
                                 }}
                                 onPress={() => navigation.navigate('KeepersPage')} 
                             >
                                <Text
                                 style={{
                                     fontFamily:"nunito",
+                                    color : "#102B3E",
                                 }}
                                >More</Text> 
                             </Button>
@@ -248,45 +345,98 @@ const Home = ({navigation, route}) => {
                    </View>
                </View>
 
-            
+
+                             
+               <View >
+                        <Icon 
+                            name="paw" 
+                            color="black" 
+                            size={80}
+                            style={[{  
+                            transform: [{ rotate: "25deg" }],
+                            position : 'absolute',
+                            marginTop : 200 ,
+                            marginLeft : -10,
+                            color : "#102B3E",
+                            opacity : 0.1,
+                        }]}
+                        />
+                </View>
+
+                <View >
+                        <Icon 
+                            name="paw" 
+                            color="black" 
+                            size={80}
+                            style={[{  
+                            transform: [{ rotate: "25deg" }],
+                            position : 'absolute',
+                            marginTop : 145 ,
+                            marginLeft : 380,
+                            color : "#102B3E",
+                            opacity : 0.1,
+                        }]}
+                        />
+                </View>
+                <View >
+                        <Icon 
+                            name="paw" 
+                            color="black" 
+                            size={80}
+                            style={[{  
+                            transform: [{ rotate: "25deg" }],
+                            position : 'absolute',
+                            marginTop : 350 ,
+                            marginLeft : 250,
+                            color : "#102B3E",
+                            opacity : 0.1,
+                        }]}
+                        />
+                </View>
         
                 
-                <ScrollView>     
+                <ScrollView>   
                     <KeepList
                         img={require('../assets/logoDog.png')}
-                        name="Budi"
+                        name="John Doe "
                         rating='9.8'
-                        bg="#EED811"
+                        bg="#6964E2"
+                        font="#102B3E"
                     />
                     <KeepList
                         img={require('../assets/logoDog.png')}
-                        name="Andi"
-                        rating='9.5'
-                        bg="#EED811"
+                        name="Akang Surasep"
+                        rating='9.8'
+                        bg="#102B3E"
+                        font="#6964E2"
                     />
                     <KeepList
                         img={require('../assets/logoDog.png')}
-                        name="Roman"
-                        rating='9.5'
-                        bg="#EED811"
+                        name="Ronald Bertand"
+                        rating='9.4'
+                        bg="#6964E2"
+                        font="#102B3E"
                     />
                     <KeepList
                         img={require('../assets/logoDog.png')}
-                        name="Kosasih"
-                        rating='9.5'
-                        bg="#EED811"
+                        name="Putri Nandia"
+                        rating='9.0'
+                        bg="#102B3E"
+                        font="#6964E2"
                     />
                     <KeepList
                         img={require('../assets/logoDog.png')}
-                        name="Simon"
-                        rating='9.5'
-                        bg="#EED811"
+                        name="Agus Budianto"
+                        rating='8.8'
+                        bg="#6964E2"
+                        font="#102B3E"
                     />
                     <KeepList
                         img={require('../assets/logoDog.png')}
-                        name="Citra"
-                        rating='9.5'
-                        bg="#EED811"
+                        name="Siswanto Agung"
+                        rating='7.8'
+                        bg="#102B3E"
+                        font="#6964E2"
                     />
                 </ScrollView>    
             <TabBar 

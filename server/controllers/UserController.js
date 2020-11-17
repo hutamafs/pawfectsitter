@@ -5,11 +5,9 @@ const jwt = require('jsonwebtoken');
 class UserController {
 
     static async register(req,res,next) {
-        console.log(req.body)
         try {
             const {name,email,password,address} = req.body;
             const newObj = {name,email,password: await hashPass(password),address};
-            
             let user = new User(newObj);
             await user.save();
             res.status(201).json({
@@ -36,9 +34,7 @@ class UserController {
                 id:user._id,
                 email:user.email
             }
-            //let access_token = await genToken(payload);
             let access_token = await jwt.sign(payload,process.env.SECRET);
-            // console.log(access_token);
             res.status(200).json({access_token});
         } catch (error) {
             next(error);

@@ -45,7 +45,8 @@ const keeperSchema = new mongoose.Schema({
     },
     longitude: {
         type: Number
-    }
+    },
+    review:[String]
 });
 
 module.exports.Keeper = mongoose.model("Keeper", keeperSchema)

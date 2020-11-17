@@ -5,13 +5,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchKeepers, fetchPets, setOrders } from '../store/actions';
 import TabBar from './components/TabBottomNavbar';
 import Modal from 'react-native-modal';
-import { Picker } from '@react-native-picker/picker';
 import { TextInput } from 'react-native-paper';
 import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
 import axios from 'axios';
 import logo from '../assets/logoDog.png';
 import { ScrollView } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome';
+
 
 
 export default function KeepersPage({ route, navigation }) {
@@ -35,7 +35,8 @@ export default function KeepersPage({ route, navigation }) {
   useEffect(() => {
     dispatch(fetchKeepers())
     dispatch(fetchPets(access_token))
-  },[localKeepers,categoryNow,animalNow])
+    setLocalKeepers(keepers)
+  },[categoryNow,animalNow])
 
   let duration_props = [
     { label: 'hourly', value: `${price.hourly}` },
@@ -67,7 +68,7 @@ export default function KeepersPage({ route, navigation }) {
       url: 'http://192.168.100.6:3000/orders/' + keeperId,
       method: 'post',
       headers: {
-        access_token: access_token
+        access_token
       },
       data: {
         quantity: payload.quantity,
@@ -75,8 +76,8 @@ export default function KeepersPage({ route, navigation }) {
         pet_id: payload.pet_id
       }
     })
-    .then(result => {
-      dispatch(setOrders(result))
+    .then(({data}) => {
+      dispatch(setOrders(data))
     })
     .catch(err => console.log(err))
 
@@ -84,14 +85,15 @@ export default function KeepersPage({ route, navigation }) {
     setQuantity('')
   }
 
-  const handlePetRadio = (e) => {
-    // setPetId(e.target[radio_props].value)
-    setPetId(e)
-  }
+//   const handlePetRadio = (e) => {
+//     // setPetId(e.target[radio_props].value)
+//     setPetId(e)
+//   }
 
-  const setRadioHarga = (value) => {
-    setHarga(value)
-  }
+//   const setRadioHarga = (value) => {
+//     setHarga(value)
+//   }
+
 
   const stars = (rating) => {
     let starIcon = [];
@@ -106,7 +108,6 @@ export default function KeepersPage({ route, navigation }) {
   const sortCategory = (type) => {
     let cloned = keepers;
     cloned.sort((a,b) => a[type.toLowerCase()] < b[type.toLowerCase()])
-    console.log(type.toLowerCase(),'ini type')
     setCategoryNow(type.toLowerCase());    
     setLocalKeepers(cloned);
   }
@@ -202,13 +203,13 @@ export default function KeepersPage({ route, navigation }) {
           {listAnimals()}
         </View>
         <View style={{display:'flex',flexDirection:'row',height:30,marginTop:10,marginBottom:5}}>
-            <Text>Sort by </Text>
+            <Text style={{paddingRight:15}} >Sort by </Text>
             {listCategories()}
         </View>
 
       <ScrollView showsVerticalScrollIndicator={false}>
       <View style={{ display: 'flex', flexDirection: 'column', flex: 0.8 , alignItems:'center' }}>
-          {localKeepers &&
+          {localKeepers.length > 0 &&
             localKeepers        
             .map(el => {
               return (
@@ -256,11 +257,11 @@ export default function KeepersPage({ route, navigation }) {
                       <Text style={{ color: 'white', textAlign: 'center' }}>Hire Me! </Text>
                     </TouchableOpacity>
 
-                  <Modal isVisible={isModalVisible}>
-                    <View style={{ flex: 0.6, display: 'flex', backgroundColor: 'white', alignItems: 'center', borderRadius: 20 }}>
-                      <View style={{ alignItems: 'center'}}>
-                        <Text style={{ marginTop: 15, fontSize: 17 }}> {`Which pet would you like to entrust to ${name}?`} </Text>
-                        {
+                   <Modal isVisible={isModalVisible}>
+                     <View style={{ flex: 0.6, display: 'flex', backgroundColor: 'white', alignItems: 'center', borderRadius: 20 }}>
+                       <View style={{ alignItems: 'center'}}>
+                         <Text style={{ marginTop: 15, fontSize: 17 }}> {`Which pet would you like to entrust to ${name}?`} </Text>
+                         {
                           pet_props &&
                           <RadioForm
                             radio_props={pet_props}
@@ -317,15 +318,16 @@ export default function KeepersPage({ route, navigation }) {
             })
           }
 
-        </View>
-      </ScrollView>
+         </View>
+       </ScrollView>
         
-        <TabBar
+       <TabBar
           navigation={navigation}
         />
       </View>      
   );
 }
+
 
 
 const styles = StyleSheet.create({

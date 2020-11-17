@@ -4,7 +4,7 @@ class KeeperController {
 
     static async getAllKeepers(req,res,next) {
         try {
-            let keepers = await Keeper.find({}).sort({rating:-1});
+            let keepers = await Keeper.find({});
             res.status(200).json(keepers);
         } catch (next) {
             
@@ -13,7 +13,6 @@ class KeeperController {
 
     static async createKeeper(req,res,next) {
         try {
-            // console.log(req.body, 'kiriman creates')
            const {name,email,image,price,rating,skills,status,address} = req.body;
            const newObj = {name,email,image,price,rating:Number(rating),skills,status,address};
 
@@ -23,6 +22,15 @@ class KeeperController {
 
         } catch (error) {
             next(error)
+        }
+    }
+
+    static async getOneKeeper(req,res,next) {
+        try {
+            let keeper = await Keeper.findById(req.params.id);
+            res.status(200).json(keeper);
+        } catch (next) {
+            
         }
     }
 

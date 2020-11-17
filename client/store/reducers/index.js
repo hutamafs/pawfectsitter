@@ -17,7 +17,7 @@ export default function reducer (state = initialState, action) {
         case 'ADD_PET':
             return {...state, pets:state.pets.concat(action.payload)};
         case 'SET_ORDERS':
-            return {...state, orders: action.payload}
+            return {...state, orders: state.orders.concat(action.payload)}
         case 'FETCH_PETS':
             return {...state, pets: action.payload, loading: false}
         case 'SET_SOCKET':

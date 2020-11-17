@@ -1,12 +1,13 @@
 const { Pet } = require("../models/pet.model");
 const Order = require('../models/OrderModel');
 const { Keeper } = require("../models/keeper.model");
+const moment = require('moment');
 
 class OrderController {
 
     static async getAllOrders(req,res,next) {
         try {
-            let orders = await Order.find({user_id: req.userData.id})
+            let orders = await Order.find({user_id: req.userData.id});
             res.status(200).json(orders);
         } catch (next) {
         }
@@ -26,7 +27,10 @@ class OrderController {
                 petName : pet.name,
                 petImage : pet.image,
                 keeperImage:keeper.image,
-                status:true
+                keeperId:req.params.id,
+                status:true,
+                timeCreated:moment(new Date()).format('h:mm:ss a'),
+                dateCreated:moment(new Date()).format('DD MMM')
             })
             await order.save();
             res.status(201).json(order)
@@ -37,8 +41,13 @@ class OrderController {
     static async finishOrder(req,res,next) {
         try {
             let order = await Order.findOne({_id:req.params.id});
-            order.status = false;
+            let keeper = await Keeper.findById(order.keeperId);
             await order.save();
+            await keeper.review.push(order.review)
+            // await keeper.save();
+            order.status = false;
+            order.timeFinished = moment(new Date()).format('h:mm:ss a')
+            order.dateFinished = moment(new Date()).format('DD MMM')
             //let order = await Order.findOneAndUpdate(req.params.id,false,{new:true});
             res.status(200).json(order);
 

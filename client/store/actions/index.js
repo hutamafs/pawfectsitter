@@ -4,7 +4,11 @@ import { ActionSheetIOS } from 'react-native'
 export function fetchKeepers ()  {
     return(dispatch) => {
         // console.log('masuk pak ekoooo')
+<<<<<<< HEAD
         fetch(`http://192.168.100.6:3000/keepers`)
+=======
+        fetch(`http://192.168.1.3:3000/keepers`)
+>>>>>>> development
         .then(resp => resp.json())
         .then(resp => 
             dispatch({
@@ -29,7 +33,6 @@ export function addPet(payload) {
     return {
         type: 'ADD_PET',
         payload
-
     }
 }
 
@@ -43,7 +46,11 @@ export function setOrders(payload) {
 export function fetchOrders(token) {
     return (dispatch) => {
         axios({
+<<<<<<< HEAD
             url: 'http://192.168.100.6:3000/orders',
+=======
+            url: 'http://192.168.1.3:3000/orders',
+>>>>>>> development
             method: 'GET',
             headers:{access_token: token}
           })
@@ -58,9 +65,13 @@ export function fetchOrders(token) {
 export function fetchPets(token) {
     return(dispatch) => {
         axios({
+<<<<<<< HEAD
             url: 'http://192.168.100.6:3000/pets',
+=======
+            url: 'http://192.168.43.190:3000/pets',
+>>>>>>> development
             method: 'GET',
-            headers: {access_token: token}
+            headers: {access_token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYjBhNzM2NzBkM2U0M2RmODE1ZDZhZCIsImVtYWlsIjoidGFtYUBnbWFpbC5jb20iLCJpYXQiOjE2MDU1MDM1NzR9.MqXo3XTpsCcbe-dpxQ1utlrb8-SijbvzAUJdG4TU0B8'}
           })
           .then((res) => {
             //console.log(res.data, '<<<<<<<RESPONYA');
@@ -96,4 +107,7 @@ export function setMessages(payload) {
 // fetch nasrul : http://192.168.100.6:3000
 // fetch angga: http://192.168.1.4:3000
 //fetch aji : http://192.168.8.100
+//fetch aji-wifi : 192.168.43.190
+//fetch aji wifi2 : 192.168.1.103
+
 //access_aji : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYjEwOTc1NGE4MjQ0MDQ1NGNhNmM2MSIsImVtYWlsIjoiYWJjZEBtYWlsLmNvbSIsImlhdCI6MTYwNTQzNzg2OH0.CHnIsDmwmKkEg7ESV_VAL6bUM0m5SDUKY14X8ibMJKo
