@@ -14,7 +14,7 @@ export default function Login({navigation}) {
 
   const handleLogin = () => {
     axios({
-      url: 'http://192.168.8.100:3000/users/login',
+      url: 'http://192.168.43.190:3000/users/login',
       method: 'POST',
       data: {
         email,password

@@ -61,26 +61,25 @@ const Home = ({navigation}) => {
                 > PawFect Sitter</Text>
                 <Button
                     style={{
-                        height: 25,
-                        width: 65,
+                        height: 40,
+                        width: 40,
                         borderRadius: 10,
-                        backgroundColor: "#6964E2",
+                        backgroundColor: "#C8D1DA",
                         borderColor: '#6964E2',
-                        marginHorizontal : 200,
-                        fontSize : 3,
-                        padding : 5,
+                        marginHorizontal : 400,
+                        marginTop : 40,
+                        padding : 2,
+                        position : 'absolute'
                     }}
-                        onPress={() => navigation.navigate('KeepersPage')} 
+                        onPress={handleLogout} 
                     >
-                    <Text
-                        style={{
-                        fontFamily:"nunito",
-                        color : "#102B3E",
-                        }}
-                               >More</Text> 
-                            </Button>
-                </View>
-               <View style={{
+                    <Icon 
+                    name="logout" 
+                    color="#102B3E" 
+                    size={30} />
+                </Button>
+            </View>
+            <View style={{
                    flexDirection:"row",
                    alignItems:"center",
                    width:"100%"
@@ -291,6 +290,36 @@ const Home = ({navigation}) => {
                             borderColor : "rgba(16,43,62,0.6)"
                         }}>Recommended Keeper</Text>
                    </View>
+                   <View >
+                        <Icon 
+                            name="paw" 
+                            color="black" 
+                            size={80}
+                            style={[{  
+                            transform: [{ rotate: "25deg" }],
+                            position : 'absolute',
+                            marginTop : -25 ,
+                            marginLeft : -140,
+                            color : "#102B3E",
+                            opacity : 0.1,
+                        }]}
+                        />
+                </View>
+                   <View >
+                        <Icon 
+                            name="paw" 
+                            color="black" 
+                            size={80}
+                            style={[{  
+                            transform: [{ rotate: "25deg" }],
+                            position : 'absolute',
+                            marginTop : -25 ,
+                            marginLeft : 70,
+                            color : "#102B3E",
+                            opacity : 0.1,
+                        }]}
+                        />
+                </View>  
                    <View style={{width:"50%", alignItems:"flex-end"}}>
                         
                             <Button
@@ -319,64 +348,104 @@ const Home = ({navigation}) => {
                    </View>
                </View>
 
-            
+
+                             
+               <View >
+                        <Icon 
+                            name="paw" 
+                            color="black" 
+                            size={80}
+                            style={[{  
+                            transform: [{ rotate: "25deg" }],
+                            position : 'absolute',
+                            marginTop : 200 ,
+                            marginLeft : -10,
+                            color : "#102B3E",
+                            opacity : 0.1,
+                        }]}
+                        />
+                </View>
+
+                <View >
+                        <Icon 
+                            name="paw" 
+                            color="black" 
+                            size={80}
+                            style={[{  
+                            transform: [{ rotate: "25deg" }],
+                            position : 'absolute',
+                            marginTop : 145 ,
+                            marginLeft : 380,
+                            color : "#102B3E",
+                            opacity : 0.1,
+                        }]}
+                        />
+                </View>
+                <View >
+                        <Icon 
+                            name="paw" 
+                            color="black" 
+                            size={80}
+                            style={[{  
+                            transform: [{ rotate: "25deg" }],
+                            position : 'absolute',
+                            marginTop : 350 ,
+                            marginLeft : 250,
+                            color : "#102B3E",
+                            opacity : 0.1,
+                        }]}
+                        />
+                </View>
         
                 
-                <ScrollView>     
+                <ScrollView>   
                     <KeepList
                         img={require('../assets/logoDog.png')}
-                        name="Budi"
+                        name="John Doe "
                         rating='9.8'
-                        bg="#EED811"
+                        bg="#6964E2"
+                        font="#102B3E"
                     />
                     <KeepList
                         img={require('../assets/logoDog.png')}
-                        name="Andi"
-                        rating='9.5'
-                        bg="#EED811"
+                        name="Akang Surasep"
+                        rating='9.8'
+                        bg="#102B3E"
+                        font="#6964E2"
                     />
                     <KeepList
                         img={require('../assets/logoDog.png')}
-                        name="Roman"
-                        rating='9.5'
-                        bg="#EED811"
+                        name="Ronald Bertand"
+                        rating='9.4'
+                        bg="#6964E2"
+                        font="#102B3E"
                     />
                     <KeepList
                         img={require('../assets/logoDog.png')}
-                        name="Kosasih"
-                        rating='9.5'
-                        bg="#EED811"
+                        name="Putri Nandia"
+                        rating='9.0'
+                        bg="#102B3E"
+                        font="#6964E2"
                     />
                     <KeepList
                         img={require('../assets/logoDog.png')}
-                        name="Simon"
-                        rating='9.5'
-                        bg="#EED811"
+                        name="Agus Budianto"
+                        rating='8.8'
+                        bg="#6964E2"
+                        font="#102B3E"
                     />
                     <KeepList
                         img={require('../assets/logoDog.png')}
-                        name="Citra"
-                        rating='9.5'
-                        bg="#EED811"
+                        name="Siswanto Agung"
+                        rating='7.8'
+                        bg="#102B3E"
+                        font="#6964E2"
                     />
                 </ScrollView>    
-            <TabBar navigation={navigation} />               
+            <TabBar 
+            navigation={navigation}
+            />               
         </View>
     )
 }
 export default Home;
-
-
-
-// <Button
-//   style={{
-//   height: 25,
-//   width: 65,
-//   borderRadius: 10,
-//   backgroundColor: "#ED9104",
-//   borderColor: '#C7B838',
-//   marginTop : 
-//   fontSize : 3,
-//   padding : 5
-//}}
-//  >Log out</Button>
