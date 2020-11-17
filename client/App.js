@@ -62,20 +62,26 @@ export default function App() {
               options={{ title: '' }}
             />
             <Stack.Screen name="AddPet" component={AddPet}
-              options={{ title: 'AddPet' }}
-            />
+                options={{ title: 'AddPet' }}
+              />
+              <Stack.Screen name="History" component={History}
+                options={{ title: 'History' }}
+              />
               <Stack.Screen name="Order" component={Order}
                 options={{ title: 'Order' }}
               />
+               <Stack.Screen name="PetList" component={PetList}
+                options={{ title: 'PetList' }}
+              /> 
+            {/* <Stack.Screen name="KeepersPage" component={KeepersPage}
+              options={{ title: 'Keepers' }}
+            />
               <Stack.Screen name="History" component={History}
                 options={{ title: 'History' }}
               /> 
               
             
-            <Stack.Screen name="PetList" component={PetList}
-              options={{ title: 'PetList' }}
-            />
-            
+             */}
 
             {/* <Stack.Screen name="Home" component={Home}
               options={{ title: 'Home' }}
@@ -87,9 +93,6 @@ export default function App() {
           
 
             
-            <Stack.Screen name="History" component={History}
-              options={{ title: 'History' }}
-            />
             <Stack.Screen name="Chat" component={Chat}
               options={{ title: 'Chat' }}
             /> */}
