@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View, Image, ActivityIndicator} from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { setPet } from '../store/actions'
 import logo from '../assets/logoDog.png'
 import { ScrollView } from 'react-native-gesture-handler';
 import TabBar from './components/TabBottomNavbar'
 import {fetchPets} from '../store/actions';
-import Icon from 'react-native-vector-icons/FontAwesome';
+//import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 
 
 export default function PetList({navigation}) {
@@ -14,8 +14,7 @@ export default function PetList({navigation}) {
     const {access_token, pets, loading} = useSelector(state => state)
     useEffect(() => {
         dispatch(fetchPets(access_token))
-    },[])
-    console.log(pets,'ini pets')
+    },[loading])
   return (
       <>
     <View style={{display:'flex',flexDirection:'row',height:90,borderBottomWidth:1, backgroundColor: '#F7E7D3', borderColor: '#BA826A' }}>
@@ -26,16 +25,23 @@ export default function PetList({navigation}) {
       <Text style={{fontSize:30,marginTop:30, color: '#BA826A'}}>My Pets</Text>
     </View>
     <View style={styles.container}>
-      {/* {loading && 
-            <ActivityIndicator size="large" color="#0000ff" />
-=======
-      {loading && 
-        <ActivityIndicator size="large" color="#0000ff" />
->>>>>>> development
-      }
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{marginTop:100}}>
-        {pets.length == 0 ? <Text style={{textAlign: 'center'}}>No Pet</Text> :
+        {pets.length == 0 ?             <View >
+                        <Icon 
+                            name="paw" 
+                            color="black" 
+                            size={80}
+                            style={[{  
+                            transform: [{ rotate: "25deg" }],
+                            marginTop : -140,
+                            marginLeft : 220,
+                            position : "absolute",
+                            color : "#102B3E",
+                            opacity : 0.1,
+                        }]}
+                        />
+                </View> :
         pets.map(pet => {
             return (
                 <View key={pet._id} style={{display:'flex',flexDirection:'column',flex:0.4,width:200,height:250,marginVertical:10,justifyContent:'center',alignContent:'center',borderWidth:0,borderRadius:5, backgroundColor: '#F7E7D3',shadowOpacity: 0.37,
@@ -70,15 +76,13 @@ export default function PetList({navigation}) {
                  <View style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
                  <Text style={{fontSize:15}}>{pet.age} years old </Text>
                  </View>
-                  {/* <Text>Gender: {pet.gender}</Text>
-                  <Text>Age: {pet.age}</Text>
-                 <Text>Type: {pet.type}</Text> */}
-                {/* </View>
+                </View>
             )
         })
-      } */}
+      }
+      </View>
       
-      {/* </ScrollView> */}
+       </ScrollView>
     </View>
     <TabBar
         navigation={navigation}
