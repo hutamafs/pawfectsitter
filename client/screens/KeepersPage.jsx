@@ -56,10 +56,10 @@ export default function KeepersPage({ route, navigation }) {
   }
 
   function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
-    console.log(lat1, 'line 59')
-    console.log(lon1, 'line 60')
-    console.log(lat2, 'line 61')
-    console.log(lon2, 'line 62')
+    // console.log(lat1, 'line 59')
+    // console.log(lon1, 'line 60')
+    // console.log(lat2, 'line 61')
+    // console.log(lon2, 'line 62')
     var R = 6371; // Radius of the earth in km
     var dLat = deg2rad(lat2 - lat1);  // deg2rad below
     var dLon = deg2rad(lon2 - lon1);

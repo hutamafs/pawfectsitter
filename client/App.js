@@ -16,7 +16,7 @@ import AddPet from './screens/AddPet'
 import Order from './screens/Order'
 import Chat from './screens/Chat'
 import History from './screens/History'
-import GMap from './screens/gMap'
+import GMap from './screens/GMap'
 
 import * as Font from 'expo-font'
 import { AppLoading } from 'expo'
@@ -59,6 +59,8 @@ export default function App() {
               <Stack.Screen name="KeeperDetail" component={KeeperDetail}
                 options={{ title: '' }}
               />
+              <Stack.Screen name="GMap" component={GMap}/>
+              
               <Stack.Screen name="AddPet" component={AddPet}
                 options={{ title: 'AddPet' }}
               />
