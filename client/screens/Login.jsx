@@ -33,7 +33,7 @@ export default function Login({navigation}) {
 
   const handleLogin = async () => {
     axios({
-      url: 'http://192.168.1.4:3000/users/login',
+      url: 'http://192.168.43.190:3000/users/login',
       method: 'POST',
       data: {
         email,password
@@ -42,6 +42,7 @@ export default function Login({navigation}) {
     .then((res) => {
       // console.log(res, '<<<<<<<RESPONYA');
       dispatch(setToken(res.data.access_token))
+      navigation.navigate('Home')
 
       // firebase
       const user = {
@@ -66,8 +67,7 @@ export default function Login({navigation}) {
       <View style={styles.middle}>
         <Image source={logo} style={{ width: 300, height: 350 }} />
         <View>
-        {/* style={[styles.textInput ,  {marginTop : 20 , letterSpacing : 7,  textTransform: 'capitalize' , textAlign : "center" , color : '#f0f8ff'  } ]} */}
-
+        
         <TextInput
         style={[styles.formInput , { letterSpacing : 3 } ]}
         placeholder="email" 
@@ -88,7 +88,6 @@ export default function Login({navigation}) {
           style={styles.buttonStyle7} 
           textStyle={styles.textStyle}
           onPress={handleLogin}
-          // title="Login"
           >
             Log in
         </Button>
@@ -116,7 +115,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1, 
     padding : 40 ,
-    backgroundColor: '#EED811',
+    backgroundColor: '#C8D1DA',
     justifyContent: 'center',
     fontFamily : 'nunito'
   },
@@ -142,8 +141,8 @@ const styles = StyleSheet.create({
     fontWeight : '800',
   },
   buttonStyle7 : {
-    borderColor: '#C7B838',
-    backgroundColor: '#C7B838',
+    borderColor: '#6661DB',
+    backgroundColor: '#6661DB',
     marginTop : 5,
     borderRadius: 20,
   },
