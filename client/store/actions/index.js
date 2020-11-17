@@ -99,6 +99,13 @@ export function fetchPets(token) {
     }    
 }
 
+export function addOrders(payload) {
+    return {
+        type: ADD_ORDERS,
+        payload
+    }
+}
+
 
 export function setMessages(payload) {
     console.log('MASUK UBAH MESSAGE REDUX');

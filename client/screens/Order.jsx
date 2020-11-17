@@ -76,6 +76,7 @@ export default function Order({navigation}) {
     .then(({data}) => {
       console.log(data, '<<<<<<<<<<<sukses nehhhhhh');
       dispatch(addHistory(data))
+      dispatch(fetchOrders(access_token))
       setModalVisible(!isModalVisible)
     })
     .catch(err => console.log(err))
