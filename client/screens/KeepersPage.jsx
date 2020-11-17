@@ -65,7 +65,7 @@ export default function KeepersPage({ route, navigation }) {
     }
     
     axios({
-      url: 'http://192.168.100.6:3000/orders/' + keeperId,
+      url: 'http://192.168.1.4:3000/orders/' + keeperId,
       method: 'post',
       headers: {
         access_token
