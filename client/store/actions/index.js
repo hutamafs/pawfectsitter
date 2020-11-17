@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { ActionSheetIOS } from 'react-native'
 
 export function fetchKeepers ()  {
     return(dispatch) => {
@@ -74,9 +75,26 @@ export function fetchPets(token) {
     }    
 }
 
+export function setSocket(payload) {
+    console.log('MASUUKKKK SOCKETTTTT');
+    return {
+        type: SET_SOCKET,
+        payload: payload
+    }
+}
+
+export function setMessages(payload) {
+    console.log('MASUK UBAH MESSAGE REDUX');
+    return {
+        type: 'SET_MESSAGES',
+        payload: payload
+    }
+}
+
 
 // fetch hutama : http://192.168.1.3:3000
 // fetch nasrul : http://192.168.100.6:3000
+// fetch angga: http://192.168.1.4:3000
 //fetch aji : http://192.168.8.100
 //fetch aji-wifi : 192.168.43.190
 //fetch aji wifi2 : 192.168.1.103

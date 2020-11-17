@@ -13,6 +13,7 @@ import logo from '../assets/logoDog.png';
 import { ScrollView } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+
 export default function KeepersPage({ route, navigation }) {
   const { keepers, pets,  access_token} = useSelector(state => state);
   const [ petId, setPetId ] = useState('');
@@ -21,26 +22,26 @@ export default function KeepersPage({ route, navigation }) {
   const [quantity, setQuantity] = useState('');
   const [harga, setHarga] = useState('');
   const dispatch = useDispatch();
-  const [price, setPrice] = useState('')
-  const [keeperId, setKeeperId] = useState('')
+  const [price, setPrice] = useState('');
+  const [keeperId, setKeeperId] = useState('');
 
+  const [localKeepers , setLocalKeepers] = useState(keepers);
+
+  const [isFilterAnimal,setIsFilterAnimal] = useState(false);
+  const [animalNow,setAnimalNow] = useState('');
+
+  const [categoryNow,setCategoryNow] = useState('');
+  
   useEffect(() => {
     dispatch(fetchKeepers())
     dispatch(fetchPets(access_token))
-  }, [])
+  },[localKeepers,categoryNow,animalNow])
 
-  // console.log(keepers,'ini keepers')
-  // console.log(pets,'ini pets')
-
-  // console.log(price, 'ini priceeeeee')
   let duration_props = [
     { label: 'hourly', value: `${price.hourly}` },
     { label: 'daily', value: `${price.daily}` },
     { label: 'weekly', value: `${price.weekly}` }
   ];
-  // console.log(duration_props, 'ini duration_props')
-
-  // console.log(pets, 'ini pet nya')
   let pet_props = []
   pets.map(el => pet_props.push({ label: `${el.name}`, value: `${el._id}` }))
   // console.log(pet_props, 'petproopes nih')
@@ -48,11 +49,6 @@ export default function KeepersPage({ route, navigation }) {
     setName(el.name);
     setPrice(el.price)
     setKeeperId(el._id)
-    // console.log(el, 'ini element yg dibawa')
-    // console.log(el.name, 'element name isinya')
-    // console.log(el.price, 'element price isinya')
-    // console.log(el.price.hourly, 'element hourly')
-    console.log(keeperId, 'ini keepers ID nyaaaa')
     setModalVisible(!isModalVisible);
   }
 
@@ -80,7 +76,6 @@ export default function KeepersPage({ route, navigation }) {
       }
     })
     .then(result => {
-      console.log(result, 'result orderrererreers')
       dispatch(setOrders(result))
     })
     .catch(err => console.log(err))
@@ -98,64 +93,167 @@ export default function KeepersPage({ route, navigation }) {
     setHarga(value)
   }
 
+  const stars = (rating) => {
+    let starIcon = [];
+    for(let i = 0 ; i<Math.floor(Number(rating)) ; i++) {
+      starIcon.push(
+        <Icon key={i} name="star" color="yellow" size={10} style={{marginTop:3,marginHorizontal:1.5}} />
+      )
+    }
+    return starIcon;
+  }
+
+  const sortCategory = (type) => {
+    let cloned = keepers;
+    cloned.sort((a,b) => a[type.toLowerCase()] < b[type.toLowerCase()])
+    console.log(type.toLowerCase(),'ini type')
+    setCategoryNow(type.toLowerCase());    
+    setLocalKeepers(cloned);
+  }
+
+  const filterAnimal = (animalia) => {
+    if(animalia == animalNow) {
+      setIsFilterAnimal(!isFilterAnimal)
+    }
+    setAnimalNow(animalia)
+    if(isFilterAnimal == false) {
+      setLocalKeepers(keepers)
+    } else {
+      const filteredKeepers = [];
+      keepers.filter(keeper => {
+      keeper.skills.map(skill => {
+        if(skill.includes(animalia)) {
+          filteredKeepers.push(keeper);
+        }        
+      })
+    })
+    setLocalKeepers(filteredKeepers);
+    }
+  }
+
+  const listCategories = () => {
+    let types = {
+      0:'Price',
+      1:'Rating'
+    }
+    let categories = [];
+    for(let i = 0 ; i<2 ; i++) {
+      categories.push(
+        <TouchableOpacity
+        key={i}
+        onPress={() => sortCategory(types[i])}
+        style={(types[i].toLowerCase() == categoryNow) ? 
+          {width:100,borderRadius:25,justifyContent:'center',borderColor:'green',borderWidth:2,marginHorizontal:3}:
+          {width:100,borderRadius:25,justifyContent:'center',borderColor:'grey',borderWidth:2,marginHorizontal:3}
+        }
+        >
+        <Text style={{ fontSize: 15, color: 'black', textAlign: 'center', margin: 5,alignSelf:'center' }}>{types[i]}</Text>
+        </TouchableOpacity>
+      )
+    }
+    return categories;
+  }
+
+  const listAnimals = () => {
+    let animals = {
+      0:{
+        name:'dog',
+        logo:'🐶'
+      },
+      1:{
+        name:'cat',
+        logo:'🐱'
+      },
+      2:{
+        name:'bird',
+        logo:'🦅'
+      }
+    }
+    let lists = [];
+    for(let i = 0 ; i<3 ; i++) {
+      lists.push(
+        <TouchableOpacity
+        key={i}
+        onPress={() => filterAnimal(animals[i].name)}
+        style={
+            (animals[i].name == animalNow) ?
+          {width:50,borderRadius:25,justifyContent:'center',borderColor:'blue',borderWidth:0.8,marginHorizontal:3} : 
+          {width:50,borderRadius:25,justifyContent:'center',borderColor:'grey',borderWidth:0.8,marginHorizontal:3} 
+        }
+      >
+      <Text style={{ fontSize: 15, color: '#fff', margin: 5,alignSelf:'center' }}> {animals[i].logo} </Text>
+      </TouchableOpacity>
+      )
+    }
+    return lists;
+  }
+
   return (
-    <>
       <View style={styles.container}>
-        <View style={{display:'flex',flexDirection:'row',height:80,marginTop:15,borderBottomColor:'black',borderBottomWidth:1}}>
+        <View style={{display:'flex',flexDirection:'row',height:80,marginTop:15, borderBottomWidth:1, backgroundColor: '#F7E7D3'}}>
           <Image
             source={logo} 
             style={{ width: 80, height: 80,marginLeft:3 }}
           />
-        <Text style={{fontSize:30,marginTop:20}}>Keepers</Text>
-      </View>
+        <Text style={{fontSize:30,marginTop:20, color: '#BA826A'}}>Keepers</Text>
+        </View>
+        <View style={{display:'flex',flexDirection:'row',height:30,marginTop:10,marginBottom:2}}>
+        <Text style={{display:'flex',alignSelf:'center',marginLeft:5,marginRight:10}}>Filter by Animal</Text> 
+          {listAnimals()}
+        </View>
+        <View style={{display:'flex',flexDirection:'row',height:30,marginTop:10,marginBottom:5}}>
+            <Text>Sort by </Text>
+            {listCategories()}
+        </View>
+
       <ScrollView showsVerticalScrollIndicator={false}>
       <View style={{ display: 'flex', flexDirection: 'column', flex: 0.8 , alignItems:'center' }}>
-          {keepers &&
-            keepers.map(el => {
+          {localKeepers &&
+            localKeepers        
+            .map(el => {
               return (
-                <View key={el._id} style={{ display: 'flex', flexDirection: 'row', flex: 0.3, borderRadius: 10, borderBottomColor: 'black', width: 350, height: 150, marginVertical: 10, borderWidth: 0.6,backgroundColor:'lightblue' }}>
+
+                <View key={el._id} style={{ display: 'flex', flexDirection: 'row', flex: 0.3, borderRadius: 10, borderBottomColor: 'black', width: 350, height: 150, marginVertical: 10, borderWidth: 0.6,borderColor:'red' }}>
+
+                   <Text style={{position:'absolute',top:20,right:10,fontWeight:'bold'}}> Rp {el.price.hourly.toLocaleString().replace(',','.')} </Text>
                   <View style={{ paddingHorizontal: 10, display: 'flex', justifyContent: 'center' }}>
-                    <Image source={{ uri: el.image }} style={{ flex:1,width: 100, height: 125, borderColor: 'white',resizeMode:'contain' }} />
+                    <Image source={{ uri: el.image }} style={{ flex:1,width: 100, height: 125, borderColor: 'white',resizeMode:'contain', margin: 5 }} />
 
                   </View>
                   <View style={{ display: 'flex', flexDirection: 'column',marginTop:15 }}>
-                    <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                      <Text style={{ color: 'black', fontSize: 25 }}> {el.name} </Text>                      
-                    </View>
-                    <View style={{display:'flex',flexDirection:'column',marginTop:3}}>
-                      <View style={{ display: 'flex', flexDirection: 'row',paddingLeft:3}}>
-                      <Icon  name="star" color="yellow" size={15} style={{marginTop:3}} />              
-                      <Text style={{ color: 'blue', fontSize: 15,alignSelf:'center'}}> {el.rating}</Text>
-                      <Icon  name="compass" color="green" size={20} style={{marginTop:2,marginLeft:20}} />
-                      <Text style={{ color: 'blue', fontSize: 12,alignSelf:'center'}}> {el.address}</Text>              
-                        {/* <Text style={{ color: 'red', fontSize: 15 }}> Specialized in: {el.skills.map(element => { return (`${element}, `) })} </Text> */}
-                        {/* <View style={{ flex: 0.3, display: 'flex', flexDirection: 'column' }}>
-                          <Text style={{ color: 'black', fontSize: 15 }}> {el.address}</Text>
-                          <Text style={{ color: 'black', fontSize: 12.5 }}> {el.price.daily}</Text>
-                          <Text style={{ color: 'black', fontSize: 12.5 }}> {el.price.hourly}</Text>
-                          <Text style={{ color: 'black', fontSize: 12.5 }}> {el.price.weekly}</Text>
-                        </View> */}
-                      </View>
+                    <View style={{ display: 'flex-start', flexDirection: 'row'}}>
+                      <Text style={{ color: 'black', fontSize: 25 }}> {el.name} </Text>         
+                      {
+                          el.skills.map(skill => (
+                            <Text style={{ fontSize: 15, color: 'black', textAlign: 'center', margin: 5,alignSelf:'center' }}> 
+                              { (skill == 'dog') ? 
+                                  '🐶':
+                                (skill == 'cat') ?
+                                  '🐱':
+                                  '🦅'
+                              }
+                            </Text>
+                          ))
+                      }
+                    </View>                        
+                    <View style={{display:'flex',flexDirection:'column',marginTop:1}}>
+                      <View style={{display:'flex',flexDirection:'row',marginLeft:5,marginTop:0}}>                        
+                        {/* <Icon  name="star" color="yellow" size={15} style={{marginTop:3}} />*/}
+                        {stars(el.rating)}
+                      </View> 
+                      <View style={{display:'flex',flexDirection:'row'}}>
+                        <Icon  name="compass" color="green" size={20} style={{marginTop:2}} />
+                        <Text style={{ color: 'blue', fontSize: 12,alignSelf:'center'}}> {el.address}</Text>
+                      </View>                   
                       <View style={{display:'flex',flexDirection:'row',paddingLeft:3}}>
-                        <Icon name="stopwatch" color="grey" size={17.5} style={{marginTop:3}} />
-                        <Text style={{ color: 'black', fontSize: 12.5,alignSelf:'center'}}> Rp {el.price.hourly.toLocaleString('en-us').replace(',','.')}</Text>
-                      </View>
-                      <View style={{display:'flex',flexDirection:'row',paddingLeft:3}}>
-                        <Icon name="stopwatch" color="grey" size={17.5} style={{marginTop:3}} />
-                        <Text style={{ color: 'black', fontSize: 12.5,alignSelf:'center'}}> Rp {el.price.daily.toLocaleString('en-us').replace(',','.')}</Text>
-                      </View>
-                      <View style={{display:'flex',flexDirection:'row',paddingLeft:3}}>
-                        <Icon name="stopwatch" color="grey" size={17.5} style={{marginTop:3}} />
-                        <Text style={{ color: 'black', fontSize: 12.5,alignSelf:'center'}}> Rp {el.price.weekly.toLocaleString('en-us').replace(',','.')}</Text>
                       </View>
                     </View>
-
                   </View>
                     <TouchableOpacity
-                      style={{ width: 75, height: 20 ,position:'absolute',right:10,bottom:10 }}
+                      style={{ width: 85, height: 30 ,position:'absolute',right:10,bottom:10, backgroundColor: '#BA826A', borderRadius: 10 }}
                       onPress={() => handlePress(el)}
                     >
-                      <Text style={{ color: 'red', textAlign: 'center' }}>Hire Me! </Text>
+                      <Text style={{ color: 'white', textAlign: 'center' }}>Hire Me! </Text>
                     </TouchableOpacity>
 
                   <Modal isVisible={isModalVisible}>
@@ -215,17 +313,6 @@ export default function KeepersPage({ route, navigation }) {
                   </Modal>
 
                 </View>
-
-                /*
-                <View key={el._id} style={{backgroundColor: 'grey', margin: 3, borderRadius: 10, padding: 5}}>
-                  <Image source={{uri: el.image}} style={{ width: 175, height: 159, borderWidth: 1, borderColor: 'white' }} />
-                  <Text style={styles.textColor}>Name: {el.name}</Text>
-                  <Text style={styles.textColor}>Address: {el.address}</Text>
-                  <Text style={styles.textColor}>Specialization: {el.skills}</Text>
-                  <Text style={{color: 'yellow'}}>Rating: {el.rating}</Text>
-                  <Text style={styles.textColor}>Status: {el.status}</Text>
-                </View>
-                */
               )
             })
           }
@@ -236,11 +323,10 @@ export default function KeepersPage({ route, navigation }) {
         <TabBar
           navigation={navigation}
         />
-      </View>
-    </>
-      
+      </View>      
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -259,4 +345,4 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     margin: 5
   }
-});
+})

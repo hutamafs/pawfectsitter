@@ -3,7 +3,9 @@ const initialState = {
     access_token: '',
     pets:[],
     orders:[],
-    loading: true
+    loading: true,
+    socket: null,
+    messages: []
 }
 
 export default function reducer (state = initialState, action) {
@@ -18,6 +20,10 @@ export default function reducer (state = initialState, action) {
             return {...state, orders: action.payload}
         case 'FETCH_PETS':
             return {...state, pets: action.payload, loading: false}
+        case 'SET_SOCKET':
+            return {...state, socket: action.payload}
+        case 'SET_MESSAGES':
+            return {...state, messages: state.messages.concat(action.payload)}
         default:
             return state
     }

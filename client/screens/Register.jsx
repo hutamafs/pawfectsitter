@@ -4,6 +4,7 @@ import { Image ,  StyleSheet, Text, View, TextInput } from 'react-native';
 import axios from 'axios'
 import logo from '../assets/logoDog.png'
 import Button from 'apsl-react-native-button'
+import firebaseSDK from './config/firebaseSDK';
 
 
 
@@ -22,10 +23,21 @@ export default function Register({navigation}) {
         name,email,password,address
       }
     })
-    .then((res) => {
+    .then(async (res) => {
       console.log(res, '<<<<<<<RESPONYA');
       console.log(res);
-      navigation.replace('Login')
+      // firebase
+      try {
+        const user = {
+          name: name,
+          email: email,
+          password: password
+        };
+        await firebaseSDK.createAccount(user);
+        navigation.replace('Login')
+      } catch ({ message }) {
+        console.log('create account failed. catch error:' + message);
+      }
     })
     .catch((err) => {
       console.log(err, '<<<<<<<<<ERRRRRROOORRRRRR');

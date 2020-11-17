@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native'
 import { LinearGradient } from 'expo-linear-gradient'
 
 
-export default function TabBar({navigation}) {
+export default function TabBar({navigation, userData}) {
   return (
     <View style={styles.tabBottom}>
     <Button 
@@ -52,7 +52,9 @@ export default function TabBar({navigation}) {
             marginLeft : 60,
           }}
           accessibilityRole='button'
-          onPress={() => navigation.navigate('Chat')}
+          onPress={() => navigation.navigate('Chat', {
+            userData: userData
+          })}
         > 
         <Icon name="chat-processing" color="#102B3F" size={45} />
     </Button>
@@ -81,6 +83,7 @@ const styles = StyleSheet.create({
     display: "flex",
     backgroundColor: '#6964E2',
     borderColor : "#102B3F",
+    // backgroundColor: '#F7E7D3',
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',

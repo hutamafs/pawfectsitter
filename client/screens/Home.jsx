@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {View, Text, Image, ImageBackground} from 'react-native'
 import {TextInput,ScrollView,TouchableOpacity} from 'react-native-gesture-handler'
 import { LinearGradient } from 'expo-linear-gradient'
@@ -11,7 +11,8 @@ import { setToken } from '../store/actions';
 import { useDispatch } from 'react-redux';
 
 
-const Home = ({navigation}) => {
+const Home = ({navigation, route}) => {
+  const {userData} = route.params
     const dispatch = useDispatch()
 
     const handleLogout = () => {
@@ -233,10 +234,6 @@ const Home = ({navigation}) => {
             </View>
            </View>
 
-
-
-           
-
            <LinearGradient
             colors={["rgba(16,43,62,0.1)", "transparent"]}
             style={{
@@ -443,7 +440,8 @@ const Home = ({navigation}) => {
                     />
                 </ScrollView>    
             <TabBar 
-            navigation={navigation}
+            navigation={navigation} 
+            userData={userData}
             />               
         </View>
     )
