@@ -2,45 +2,156 @@ import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View, Image, ActivityIndicator} from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import logo from '../assets/logoDog.png'
-import { ScrollView } from 'react-native-gesture-handler';
+import { ScrollView ,TextInput ,TouchableOpacity} from 'react-native-gesture-handler';
 import TabBar from './components/TabBottomNavbar'
 import {fetchPets} from '../store/actions';
-//import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
+import { LinearGradient } from 'expo-linear-gradient'
+import Button from 'apsl-react-native-button'
 
 
 export default function PetList({navigation}) {
-    const dispatch = useDispatch()
-    const {access_token, pets, loading} = useSelector(state => state)
-    useEffect(() => {
-        dispatch(fetchPets(access_token))
-    },[loading])
+  const dispatch = useDispatch()
+  const {access_token, pets} = useSelector(state => state)
+  useEffect(() => {
+      dispatch(fetchPets(access_token))
+  },[])
+  
+  
+  
+  
+  
   return (
-      <>
-    <View style={{display:'flex',flexDirection:'row',height:90,borderBottomWidth:1, backgroundColor: '#F7E7D3', borderColor: '#BA826A' }}>
-        <Image
-          source={logo} 
-          style={{ width: 90, height: 90,marginLeft:3, marginTop: 10 }}
-        />
-      <Text style={{fontSize:30,marginTop:30, color: '#BA826A'}}>My Pets</Text>
-    </View>
-    <View style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={{marginTop:100}}>
-        {pets.length == 0 ?             <View >
-                        <Icon 
-                            name="paw" 
-                            color="black" 
-                            size={80}
-                            style={[{  
-                            transform: [{ rotate: "25deg" }],
-                            marginTop : -140,
-                            marginLeft : 220,
-                            position : "absolute",
-                            color : "#102B3E",
-                            opacity : 0.1,
-                        }]}
-                        />
+    <View style={{
+      backgroundColor:"#FFF",
+      flex:1
+  }}>
+     <View style={{
+         backgroundColor:"#6661DB",
+         height:"13%",
+         borderBottomLeftRadius:20,
+         borderBottomRightRadius:20,
+         paddingHorizontal:20
+     }}>
+         
+         <View style={{
+             flexDirection:"row",
+             alignItems:"center",
+             marginTop:25,
+             width:"100%"
+         }}>
+             <View style={{width:"50%"}}>
+                  <Text style={{
+                      fontSize:28,
+                      color:"#FFF",
+                      fontWeight:"bold",
+                      marginTop : 20
+                  }}>Pet List</Text>
+             </View>
+             <View style={{width:"50%",alignItems:"flex-end"}}>
+                  
+             </View>
+         </View>
+     </View>
+     <LinearGradient
+      colors={["rgba(16,43,62,0.1)", "transparent"]}
+      style={{
+          left:0,
+          right:0,
+          height:90,
+          marginTop: -25
+      }}
+     >
+        
+      </LinearGradient>
+
+
+         <View style={{
+             flexDirection:"row",
+             paddingHorizontal:20,
+             width:"100%",
+             alignItems:"center"
+         }}>
+             
+             
+         </View>
+
+      
+  
+          <ScrollView 
+              alwaysBounceVertical
+              showsHorizontalScrollIndicator={false}
+              style={{
+                height:300
+              }}
+          >
+
+            
+
+            {pets.map(pet => {
+              return(
+                <View 
+                style={{
+                  height:400,
+                  elevation:33,
+                  backgroundColor:"#FFF",
+                  marginLeft:20,
+                  marginTop:30,
+                  borderRadius:15,
+                  marginBottom:10,
+                  width: 400,
+                }}
+                >
+                  
+                  <View style={{
+                    flexDirection:"column",
+                      paddingTop:30,
+                      paddingHorizontal:10
+                    }}>
+                      <Image
+                          key={pet._id}
+                          source={{uri:pet.image}}
+                          style={{
+                            width : 350,
+                            height : 350
+                          }}
+                          />
+                      <View
+                        style={{
+                          flexDirection : "row"
+                        }}
+                      >
+
+                      <Text style={{
+                        fontWeight:"bold"
+                      }}>Name : {pet.name}</Text>
+                      <Text style={{
+                        fontWeight:"bold",
+                        color:"black",
+                        marginLeft : 20
+                      }}>Age : {pet.age}</Text>
+                      </View>
+                  </View>
+                  
+                </View>
+              
+              )
+            })}
+          </ScrollView>            
+          <TabBar 
+            navigation={navigation} 
+            /> 
+  </View>
+  )
+}
+
+
+
+
+
+
+//punya development 
+{/* {pets.length == 0 ?            
                 </View> :
         pets.map(pet => {
             return (
@@ -66,7 +177,7 @@ export default function PetList({navigation}) {
                   }
                   color={
                     (pet.gender == 'male') ?
-                    "blue":
+                    "white":
                     "red"
                   }                  
                   size={20} 
@@ -79,7 +190,46 @@ export default function PetList({navigation}) {
                 </View>
             )
         })
-      }
+      } */}
+
+
+
+
+
+
+      // const styles = StyleSheet.create({
+//   container: {
+//     display: "flex",
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//     maxHeight: '70%'
+//   },
+//   cardContainer: {
+//     display: "flex",
+//     backgroundColor: 'gray',
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//     margin: 5
+//   }
+// });
+
+
+
+// container punya development
+{/* <View>
+    <View style={{display:'flex',flexDirection:'row',height:90,borderBottomWidth:1, backgroundColor: '#F7E7D3', borderColor: '#BA826A' }}>
+        <Image
+          source={logo} 
+          style={{ width: 90, height: 90,marginLeft:3, marginTop: 10 }}
+        />
+      <Text style={{fontSize:30,marginTop:30, color: '#BA826A'}}>My Pets</Text>
+    </View>
+    <View style={styles.container}>
+      <ScrollView >
+        <View style={{marginTop:100}}>
+        <Text>{JSON.stringify(pets)}</Text>
+
+        
       </View>
       
        </ScrollView>
@@ -87,80 +237,4 @@ export default function PetList({navigation}) {
     <TabBar
         navigation={navigation}
     />
-    </>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    display: "flex",
-    justifyContent: 'center',
-    alignItems: 'center',
-    maxHeight: '70%'
-  },
-  cardContainer: {
-    display: "flex",
-    backgroundColor: 'gray',
-    alignItems: 'center',
-    justifyContent: 'center',
-    margin: 5
-  }
-});
-
-      {/* <ScrollView>
->>>>>>> development
-      <View style={styles.cardContainer}>
-        <Image
-        source={logo}
-        />
-        <Text>Name</Text>
-        <Text>Gender</Text>
-        <Text>Age</Text>
-        <Text>Type</Text>
-      </View>
-      <View style={styles.cardContainer}>
-        <Image
-        source={logo}
-        />
-        <Text>Name</Text>
-        <Text>Gender</Text>
-        <Text>Age</Text>
-        <Text>Type</Text>
-      </View>
-      <View style={styles.cardContainer}>
-        <Image
-        source={logo}
-        />
-        <Text>Name</Text>
-        <Text>Gender</Text>
-        <Text>Age</Text>
-        <Text>Type</Text>
-      </View>
-<<<<<<< HEAD
-    </ScrollView>
-    </View>
-    <TabBar
-        navigation={navigation}
-    />
-    </>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    display: "flex",
-    backgroundColor: '#fff',
-    justifyContent: 'flex-start',
-    margin: 50,
-    maxHeight: '80%'
-  },
-  cardContainer: {
-    display: "flex",
-    backgroundColor: 'gray',
-    alignItems: 'center',
-    justifyContent: 'center',
-    margin: 5
-  }
-});
-=======
-    </ScrollView> */}
+    </View> */}
