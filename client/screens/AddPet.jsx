@@ -5,7 +5,7 @@ import axios from 'axios';
 import { addPet } from '../store/actions/index';
 import { useDispatch , useSelector } from 'react-redux';
 import { RNS3 } from 'react-native-aws3';
-import DocumentPicker from 'react-native-document-picker';
+// import DocumentPicker from 'react-native-document-picker';
 import * as ImagePicker from 'expo-image-picker';
 import logo from '../assets/logoDog.png';
 import * as firebase from 'firebase';

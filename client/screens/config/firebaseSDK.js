@@ -58,7 +58,7 @@ class FirebaseSDK {
       );
   };
 
-  refOn = callback => {
+  on = snapshot => {
     this.ref
       .limitToLast(20)
       .on('child_added', snapshot => callback(this.parse(snapshot)));
@@ -67,15 +67,14 @@ class FirebaseSDK {
   parse = message => {
       const {user, text, timestamp} = message.val()
       const {key: _id} = message
-      const createdAt = new Date(timestamp)
-
       return (
-          _id,createdAt,text,user
+          _id,timestamp,text,user
       )
   }
 
-  get = callback => {
-    this.ref.on('child_added', snapshot => callback(this.parse.snapshot))
+
+  get = message => {
+    this.ref.on('child_added', snapshot => callback(this.parse(snapshot)))
   }
 
 
@@ -84,7 +83,6 @@ class FirebaseSDK {
         const message = {
         text: item.text,
         timestamp: firebase.database.ServerValue.TIMESTAMP,
-        user: item.user
         }
         this.ref.push(message)
     })
