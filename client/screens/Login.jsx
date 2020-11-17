@@ -33,7 +33,7 @@ export default function Login({navigation}) {
 
   const handleLogin = async () => {
     axios({
-      url: 'http://192.168.100.6:3000/users/login',
+      url: 'http://192.168.1.4:3000/users/login',
       method: 'POST',
       data: {
         email,password
@@ -45,7 +45,7 @@ export default function Login({navigation}) {
       const user = {
         email: email,
         password: password,
-        avatar: ''
+        avatar: 'https://placeimg.com/140/140/any'
       };
   
       const response = firebaseSDK.login(

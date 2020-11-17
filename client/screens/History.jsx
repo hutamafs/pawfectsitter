@@ -11,15 +11,63 @@ import {TextInput,ScrollView,TouchableOpacity} from 'react-native-gesture-handle
 
 
 export default function History({navigation}) {
-  const dispatch = useDispatch();
-  const {orders, access_token} = useSelector(state => state);
+  const {history, access_token} = useSelector(state => state);
+  const [categoryNow,setCategoryNow] = useState('');
+  const [localHistory , setLocalHistory] = useState([]);
   console.log(access_token, 'ini access token di history')
 
   useEffect(() => {
-    dispatch(fetchOrders(access_token))
-  },[])
+    setLocalHistory(history)
+  }, [history])
+
+
+  const sortCategory = (type) => {
+    console.log(type, '<<<<ini type');
+    let cloned = [];
+    setCategoryNow(type.toLowerCase());    
+    localHistory.map(el => {
+      cloned.push(el)
+    }) 
+      cloned.sort((a,b) => a[type.toLowerCase()][0] < b[type.toLowerCase()][0])
+      // console.log(cloned);
+
+    setLocalHistory(cloned);
+  }
+
+  const listCategories = () => {
+    let types = {
+      0:'KeeperName',
+      1:'DateCreated'
+    }
+    let categories = [];
+    for(let i = 0 ; i<2 ; i++) {
+      categories.push(
+        <TouchableOpacity
+        key={i}
+        onPress={() => sortCategory(types[i])}
+        style={(types[i].toLowerCase() == categoryNow) ? 
+          {width:100,borderRadius:25,justifyContent:'center',borderColor:'green',borderWidth:2,marginHorizontal:3}:
+          {width:100,borderRadius:25,justifyContent:'center',borderColor:'grey',borderWidth:2,marginHorizontal:3}
+        }
+        >
+        <Text style={{ fontSize: 15, color: 'black', textAlign: 'center', margin: 5,alignSelf:'center' }}>{types[i]}</Text>
+        </TouchableOpacity>
+      )
+    }
+    return categories;
+  }
+
+
   const backToHome = () => {
     navigation.replace('Home')
+  }
+
+  const countHistory = () => {
+    let num = 0
+    if(history) {
+      num = history.length
+    }
+    return num
   }
 
   return (
@@ -62,13 +110,13 @@ export default function History({navigation}) {
          }}>
              <View style={{width:"100%"}}>
                   <Text style={{
-                    fontSize: 25,
+                    fontSize: 20,
                     marginTop : -55,
                     color:"#0F2A3C",
                     marginLeft : 165,
                     fontWeight:"normal",
                     fontFamily : 'nunito'
-                  }}>History List</Text>
+                  }}>History List {countHistory()}</Text>
              </View>
         </View>
      </View>
@@ -88,7 +136,7 @@ export default function History({navigation}) {
          
       </LinearGradient>
 
-      {/* <Text>{JSON.stringify(orders)}</Text> */}
+      {/* <Text>{JSON.stringify(history)}</Text> */}
 
          <View style={{
            flexDirection:"row",
@@ -104,12 +152,38 @@ export default function History({navigation}) {
                       fontSize:15,
                       color:"#6B6C6E",
                       marginLeft : 20,
-                  }}>{orders.length} Order</Text>
+                  }}>{history.length} Order</Text>
 
              </View>
              <View style={{width:"50%", alignItems:"flex-end"}}>
              </View>
          </View>
+
+         <View style={{
+             flexDirection:"row",
+             paddingHorizontal:20,
+             width:"100%",
+             alignItems:"center",
+             marginBottom : 10,
+             marginTop : 20,
+         }}>
+             <View style={{width:"50%"}}>
+                  <Text style={{
+                      fontWeight:"bold",
+                      fontSize:15,
+                      color:"#6B6C6E",
+                      marginLeft : 20,
+                  }}>{countHistory()} Order</Text>
+
+             </View>
+             <View style={{width:"80%", alignItems:"flex-end"}}>
+             </View>
+        
+         </View>
+         <View style={{display:'flex',flexDirection:'row',height:30,marginTop:10,marginBottom:5}}>
+            <Text style={{paddingRight:15,marginLeft:15,fontSize:20}} >Sort by </Text>
+            {listCategories()}
+        </View>
         
          <ScrollView>  
          <View 
@@ -121,8 +195,8 @@ export default function History({navigation}) {
             alignItems : 'center',
             marginHorizontal:40,
             }}>
-          {orders &&
-            orders
+          {localHistory &&
+            localHistory
               .filter(el => el.status === false)          
               .map(el => {
               return(
