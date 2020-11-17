@@ -319,28 +319,7 @@ const Home = ({navigation, route}) => {
                 </View>  
                    <View style={{width:"50%", alignItems:"flex-end"}}>
                         
-                            <Button
-                                style={{
-                                    height: 25,
-                                    width: 65,
-                                    borderRadius: 10,
-                                    backgroundColor: "#6964E2",
-                                    borderColor: '#6964E2',
-                                    marginHorizontal : 195,
-                                    fontSize : 3,
-                                    padding : 5,
-                                    marginTop : 10,
-                                    
-                                }}
-                                onPress={() => navigation.navigate('KeepersPage')} 
-                            >
-                               <Text
-                                style={{
-                                    fontFamily:"nunito",
-                                    color : "#102B3E",
-                                }}
-                               >More</Text> 
-                            </Button>
+                           
 
                    </View>
                </View>
@@ -397,42 +376,42 @@ const Home = ({navigation, route}) => {
                 
                 <ScrollView>   
                     <KeepList
-                        img={require('../assets/logoDog.png')}
+                        img={require('../assets/employee.png')}
                         name="John Doe "
                         rating='9.8'
                         bg="#6964E2"
                         font="#102B3E"
                     />
                     <KeepList
-                        img={require('../assets/logoDog.png')}
+                        img={require('../assets/employee.png')}
                         name="Akang Surasep"
                         rating='9.8'
                         bg="#102B3E"
                         font="#6964E2"
                     />
                     <KeepList
-                        img={require('../assets/logoDog.png')}
+                        img={require('../assets/employee.png')}
                         name="Ronald Bertand"
                         rating='9.4'
                         bg="#6964E2"
                         font="#102B3E"
                     />
                     <KeepList
-                        img={require('../assets/logoDog.png')}
+                        img={require('../assets/employeeGirl.png')}
                         name="Putri Nandia"
                         rating='9.0'
                         bg="#102B3E"
                         font="#6964E2"
                     />
                     <KeepList
-                        img={require('../assets/logoDog.png')}
-                        name="Agus Budianto"
+                        img={require('../assets/employeeGirl.png')}
+                        name="Riyanti Santi"
                         rating='8.8'
                         bg="#6964E2"
                         font="#102B3E"
                     />
                     <KeepList
-                        img={require('../assets/logoDog.png')}
+                        img={require('../assets/employee.png')}
                         name="Siswanto Agung"
                         rating='7.8'
                         bg="#102B3E"
