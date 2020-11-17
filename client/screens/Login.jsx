@@ -40,9 +40,7 @@ export default function Login({navigation}) {
       }
     })
     .then((res) => {
-      // console.log(res, '<<<<<<<RESPONYA');
       dispatch(setToken(res.data.access_token))
-
       // firebase
       const user = {
         email: email,
