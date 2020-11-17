@@ -14,7 +14,6 @@ export default function History({navigation}) {
   const {history, access_token} = useSelector(state => state);
   const [categoryNow,setCategoryNow] = useState('');
   const [localHistory , setLocalHistory] = useState([]);
-  console.log(access_token, 'ini access token di history')
 
   useEffect(() => {
     setLocalHistory(history)

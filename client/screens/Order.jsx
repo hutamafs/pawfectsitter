@@ -27,11 +27,11 @@ export default function Order({navigation}) {
   },[])
 
   useEffect(() => {
-    setLocalOrders(orders)
+    setLocalOrders(orders);
+    console.log(localOrders,'ini localorders')
   }, [orders])
 
   const sortCategory = (type) => {
-    console.log(type, '<<<<ini type');
     let cloned = [];
     setCategoryNow(type.toLowerCase());    
     localOrders.map(el => {
@@ -68,7 +68,7 @@ export default function Order({navigation}) {
 
   const handleSubmit = () => {
     axios({
-      url: "http://192.168.1.4:3000/orders/" + id,
+      url: "http://192.168.1.8:3000/orders/" + id,
       method: "PUT",
       headers:{access_token},
       data: {review}
@@ -88,11 +88,14 @@ export default function Order({navigation}) {
 
   const countOrders = () => {
     let newCount = 0;
-    orders.map(el => {
-      if(el.status === true) {
-        newCount++
-      }
-    })
+    console.log(orders,'ni orders')
+    // if(orders) {
+    //   orders.map(el => {
+    //     if(el.status === true) {
+    //       newCount++
+    //     }
+    //   })
+    // }
     return newCount;
   }
 

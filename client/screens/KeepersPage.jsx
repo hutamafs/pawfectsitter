@@ -54,7 +54,7 @@ export default function KeepersPage({ route, navigation }) {
       { timeout: 20000, maximumAge: 1000 }
     )
   }
-
+  console.log(currentPosition,'ini current position')
   function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
     // console.log(lat1, 'line 59')
     // console.log(lon1, 'line 60')
@@ -114,7 +114,7 @@ export default function KeepersPage({ route, navigation }) {
     }
 
     axios({
-      url: 'http://192.168.1.4:3000/orders/' + keeperId,
+      url: 'http://192.168.1.8:3000/orders/' + keeperId,
       method: 'post',
       headers: {
         access_token
@@ -134,14 +134,14 @@ export default function KeepersPage({ route, navigation }) {
     setQuantity('')
   }
 
-  //   const handlePetRadio = (e) => {
-  //     // setPetId(e.target[radio_props].value)
-  //     setPetId(e)
-  //   }
+    const handlePetRadio = (e) => {
+      // setPetId(e.target[radio_props].value)
+      setPetId(e)
+    }
 
-  //   const setRadioHarga = (value) => {
-  //     setHarga(value)
-  //   }
+    const setRadioHarga = (value) => {
+      setHarga(value)
+    }
 
 
   const stars = (rating) => {

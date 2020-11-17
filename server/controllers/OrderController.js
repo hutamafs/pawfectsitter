@@ -5,7 +5,7 @@ const User = require('../models/UserModel');
 
 const moment = require('moment');
 
-class OrderController {
+class OrderController { 
 
     static async getAllOrders(req,res,next) {
         try {
@@ -44,22 +44,22 @@ class OrderController {
         try {
             const {review} = req.body
             let order = await Order.findOne({_id:req.params.id});
+            console.log(order,'ini ordre')
             let keeper = await Keeper.findById(order.keeperId);
+            console.log(keeper,'ini keeper')
             let user = await User.findById(req.userData.id)
-            console.log(user, 'iniiii user');
-
-            await order.save();
+            order.timeFinished = moment(new Date()).format('h:mm:ss a')
+            order.dateFinished = moment(new Date()).format('DD MMM')
+            order.status = false;
+           
             let obj = {
                 user: user.name,
                 msg: review
             }
-            console.log('jbkjdjkfbkjdfjkbdkjf');
             await keeper.review.push(obj)
             // await keeper.save();
-            console.log(keeper, 'woyyyy keepr');
-            order.status = false;
-            order.timeFinished = moment(new Date()).format('h:mm:ss a')
-            order.dateFinished = moment(new Date()).format('DD MMM')
+            await order.save();
+            console.log('nyampe')
             //let order = await Order.findOneAndUpdate(req.params.id,false,{new:true});
             res.status(200).json(order);
 
