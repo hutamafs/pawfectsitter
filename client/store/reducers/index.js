@@ -5,13 +5,16 @@ const initialState = {
     orders:[],
     loading: true,
     socket: null,
-    messages: []
+    messages: [],
+    keeper:{}
 }
 
 export default function reducer (state = initialState, action) {
     switch (action.type) {
         case 'FETCH_KEEPERS':
             return {...state, keepers: action.payload}
+        case 'FETCH_KEEPER':
+            return {...state, keeper: action.payload}
         case 'SET_TOKEN': 
             return {...state, access_token: action.payload};
         case 'ADD_PET':

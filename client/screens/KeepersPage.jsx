@@ -25,7 +25,11 @@ export default function KeepersPage({ route, navigation }) {
   const [price, setPrice] = useState('');
   const [keeperId, setKeeperId] = useState('');
 
+<<<<<<< HEAD
   const [localKeepers, setLocalKeepers] = useState(null);
+=======
+  const [localKeepers , setLocalKeepers] = useState(null);
+>>>>>>> development
 
   const [isFilterAnimal, setIsFilterAnimal] = useState(false);
   const [animalNow, setAnimalNow] = useState('');
@@ -76,6 +80,7 @@ export default function KeepersPage({ route, navigation }) {
   useEffect(() => {
     getMyLocation()
     dispatch(fetchKeepers())
+<<<<<<< HEAD
     dispatch(fetchPets(access_token))
    
   }, [])
@@ -83,6 +88,14 @@ export default function KeepersPage({ route, navigation }) {
   useEffect(() => {
     setLocalKeepers(keepers)
   }, [keepers])
+=======
+    dispatch(fetchPets(access_token))    
+  },[])
+
+  useEffect(() => {
+    setLocalKeepers(keepers)
+  },[keepers])
+>>>>>>> development
 
   let duration_props = [
     { label: 'hourly', value: `${price.hourly}` },
@@ -152,9 +165,19 @@ export default function KeepersPage({ route, navigation }) {
   }
 
   const sortCategory = (type) => {
+<<<<<<< HEAD
     let cloned = keepers;
     cloned.sort((a, b) => a[type.toLowerCase()] < b[type.toLowerCase()])
     setCategoryNow(type.toLowerCase());
+=======
+    let cloned = [];
+    setCategoryNow(type.toLowerCase());    
+    localKeepers.map(el => {
+      cloned.push(el)
+    }) 
+      cloned.sort((a,b) => a[type.toLowerCase()] < b[type.toLowerCase()])
+
+>>>>>>> development
     setLocalKeepers(cloned);
   }
 
@@ -201,6 +224,10 @@ export default function KeepersPage({ route, navigation }) {
     return categories;
   }
 
+  const toDetail = (id) => {
+    navigation.navigate('KeeperDetail',{id})
+  }
+
   const listAnimals = () => {
     let animals = {
       0: {
@@ -236,6 +263,7 @@ export default function KeepersPage({ route, navigation }) {
   }
 
   return (
+<<<<<<< HEAD
     <View style={styles.container}>
       <View style={{ display: 'flex', flexDirection: 'row', height: 80, marginTop: 15, borderBottomWidth: 1, backgroundColor: '#F7E7D3' }}>
         <Image
@@ -259,9 +287,35 @@ export default function KeepersPage({ route, navigation }) {
             localKeepers
               .map(el => {
                 return (
+=======
+      <View style={styles.container}>
+        <View style={{display:'flex',flexDirection:'row',height:80,marginTop:15, borderBottomWidth:1, backgroundColor: '#F7E7D3'}}>
+          <Image
+            source={logo} 
+            style={{ width: 80, height: 80,marginLeft:3 }}
+          />
+        <Text style={{fontSize:30,marginTop:20, color: '#BA826A'}}>Keepers</Text>
+        </View>
+        {/* <View style={{display:'flex',flexDirection:'row',height:30,marginTop:10,marginBottom:2}}>
+        <Text style={{display:'flex',alignSelf:'center',marginLeft:5,marginRight:10}}>Filter by Animal</Text> 
+          {listAnimals()}
+        </View> */}
+        <View style={{display:'flex',flexDirection:'row',height:30,marginTop:10,marginBottom:5}}>
+            <Text style={{paddingRight:15,marginLeft:15,fontSize:20}} >Sort by </Text>
+            {listCategories()}
+        </View>
+
+      <ScrollView showsVerticalScrollIndicator={false}>
+      <View style={{ display: 'flex', flexDirection: 'column', flex: 0.8 , alignItems:'center' }}>
+          {localKeepers &&
+            localKeepers        
+            .map(el => {
+              return (
+>>>>>>> development
 
                   <View key={el._id} style={{ display: 'flex', flexDirection: 'row', flex: 0.3, borderRadius: 10, borderBottomColor: 'black', width: 350, height: 150, marginVertical: 10, borderWidth: 0.6, borderColor: 'red' }}>
 
+<<<<<<< HEAD
                     <Text style={{ position: 'absolute', top: 20, right: 10, fontWeight: 'bold' }}> Rp {el.price.hourly.toLocaleString().replace(',', '.')} </Text>
                     <View style={{ paddingHorizontal: 10, display: 'flex', justifyContent: 'center' }}>
                       <Image source={{ uri: el.image }} style={{ flex: 1, width: 100, height: 125, borderColor: 'white', resizeMode: 'contain', margin: 5 }} />
@@ -275,6 +329,21 @@ export default function KeepersPage({ route, navigation }) {
                             <Text style={{ fontSize: 15, color: 'black', textAlign: 'center', margin: 5, alignSelf: 'center' }}>
                               { (skill == 'dog') ?
                                 '🐶' :
+=======
+                   <Text style={{position:'absolute',top:20,right:10,fontWeight:'bold'}}> Rp {el.price.hourly.toLocaleString().replace(',','.')} </Text>
+                  <View style={{ paddingHorizontal: 10, display: 'flex',flexDirection:'column',justifyContent:'center',alignItems:'center' }}>
+                    <Image source={{ uri: el.image }} style={{width: 100, height: 100, borderColor: 'white',resizeMode:'contain', margin: 5 }} />
+                    <TouchableOpacity style={{width: 60, height: 30,backgroundColor: '#BA826A',borderRadius:70}} onPress={() => toDetail(el._id)}><Text style={{textAlign: 'center', fontSize: 15, margin: 5,color:'white'}}>Details</Text></TouchableOpacity>          
+                  </View>
+                  <View style={{ display: 'flex', flexDirection: 'column',marginTop:15 }}>
+                    <View style={{ display: 'flex-start', flexDirection: 'row'}}>
+                      <Text style={{ color: 'black', fontSize: 25 }}> {el.name} </Text>         
+                      {
+                          el.skills.map((skill,i) => (
+                            <Text key={i} style={{ fontSize: 15, color: 'black', textAlign: 'center', margin: 5,alignSelf:'center' }}> 
+                              { (skill == 'dog') ? 
+                                  '🐶':
+>>>>>>> development
                                 (skill == 'cat') ?
                                   '🐱' :
                                   '🦅'
@@ -297,10 +366,14 @@ export default function KeepersPage({ route, navigation }) {
                       </View>
                     </View>
                     <TouchableOpacity
+<<<<<<< HEAD
                       style={{ width: 85, height: 30, position: 'absolute', right: 10, bottom: 10, backgroundColor: '#BA826A', borderRadius: 10 }}
+=======
+                      style={{ width: 85, height: 30 ,position:'absolute',right:10,bottom:6.5, backgroundColor: '#BA826A', borderRadius: 10 }}
+>>>>>>> development
                       onPress={() => handlePress(el)}
                     >
-                      <Text style={{ color: 'white', textAlign: 'center' }}>Hire Me! </Text>
+                      <Text style={{ color: 'white', textAlign: 'center',marginTop:5 }}>Hire Me! </Text>
                     </TouchableOpacity>
 
                     <Modal isVisible={isModalVisible}>
