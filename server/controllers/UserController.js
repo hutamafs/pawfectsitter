@@ -10,7 +10,6 @@ class UserController {
             const newObj = {name,email,password: await hashPass(password),address};
             let user = new User(newObj);
             await user.save();
-            console.log(user,'in user')
             res.status(201).json({
                 _id:user._id,
                 name:user.name,
@@ -35,7 +34,6 @@ class UserController {
                 id:user._id,
                 email:user.email
             }
-            console.log(payload,'ini payload')
             let access_token = await jwt.sign(payload,process.env.SECRET);
             res.status(200).json({access_token});
         } catch (error) {

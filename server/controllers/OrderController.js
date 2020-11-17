@@ -27,7 +27,10 @@ class OrderController {
                 petName : pet.name,
                 petImage : pet.image,
                 keeperImage:keeper.image,
+                keeperId:req.params.id,
                 status:true,
+                timeCreated:moment(new Date()).format('h:mm:ss a'),
+                dateCreated:moment(new Date()).format('DD MMM')
             })
             await order.save();
             res.status(201).json(order)
@@ -37,12 +40,14 @@ class OrderController {
 
     static async finishOrder(req,res,next) {
         try {
-            console.log('masuk')
             let order = await Order.findOne({_id:req.params.id});
-            console.log(order,'ini order line 40')
-            order.status = false;
+            let keeper = await Keeper.findById(order.keeperId);
             await order.save();
-            console.log(order,'ini order line 43')
+            await keeper.review.push(order.review)
+            // await keeper.save();
+            order.status = false;
+            order.timeFinished = moment(new Date()).format('h:mm:ss a')
+            order.dateFinished = moment(new Date()).format('DD MMM')
             //let order = await Order.findOneAndUpdate(req.params.id,false,{new:true});
             res.status(200).json(order);
 

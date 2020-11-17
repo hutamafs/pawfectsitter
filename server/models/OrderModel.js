@@ -25,6 +25,24 @@ const orderSchema = new mongoose.Schema({
     },
     status:{
         type:Boolean
+    },
+    timeCreated:{
+        type:String
+    },
+    timeFinished:{
+        type:String
+    },
+    dateCreated:{
+        type:String
+    },
+    dateFinished:{
+        type:String
+    },
+    review:{
+        type:String
+    },
+    keeperId:{
+        type:String
     }
 })
 
