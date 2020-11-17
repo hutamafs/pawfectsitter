@@ -5,6 +5,7 @@ import axios from 'axios'
 import logo from '../assets/logoDog.png'
 import Button from 'apsl-react-native-button'
 import firebaseSDK from './config/firebaseSDK';
+import logoKaki from '../assets/logoKaki.png'
 
 
 
@@ -17,11 +18,7 @@ export default function Register({navigation}) {
 
   const handleRegister = () => {
     axios({
-<<<<<<< HEAD
-      url: 'http://192.168.1.8:3000/users/register',
-=======
       url: 'http://192.168.1.4:3000/users/register',
->>>>>>> development
       method: 'POST',
       data: {
         name,email,password,address
@@ -51,7 +48,25 @@ export default function Register({navigation}) {
   return (
     <View style={styles.container}>
       
-      <Image source={logo} style={{ width: 300, height: 350  }} />
+      <View 
+      style={{
+        flexDirection: "row",
+        marginTop : -100,
+      }}>
+        <Image source={logoKaki} 
+        style={{ 
+          width: 180, 
+          height: 180,
+          marginLeft : -90,
+        }} />
+        <Text style={[
+          styles.textStyle , {
+            marginTop : 54,
+            marginLeft : -65,
+            color: '#2F3542',
+            fontSize : 35
+           }]}>pawfect sitter</Text>
+      </View>
 
       <TextInput
       style={[styles.formInput , { letterSpacing : 3 }]}
@@ -108,7 +123,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding : 65,
-    backgroundColor: '#fff',
+    backgroundColor: '#F4E3E3',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -117,9 +132,9 @@ const styles = StyleSheet.create({
     height : 40,
     borderWidth: 2,
     marginBottom : 10,
-    borderRadius : 20,
+    borderRadius : 10,
     paddingLeft : 30,
-    fontSize : 20,
+    fontSize : 15,
     color : 'black',
     textTransform : 'capitalize',
     fontWeight : '800',
@@ -127,15 +142,15 @@ const styles = StyleSheet.create({
 
   },
   buttonStyle7 : {
-    borderColor: '#6661DB',
-    backgroundColor: '#6661DB',
+    borderColor: '#2F3542',
+    backgroundColor: '#2F3542',
     marginTop : 5,
-    borderRadius: 20,
+    borderRadius: 10,
   },
   textStyle : {
-    color: 'black',
+    color: '#F4F4F4',
     fontWeight: '900',
-    fontSize : 30,
+    fontSize : 20,
     fontFamily : 'nunito'
   },
   bottom : {
