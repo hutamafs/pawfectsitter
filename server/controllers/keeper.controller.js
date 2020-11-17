@@ -13,7 +13,7 @@ class KeeperController {
 
     static async createKeeper(req,res,next) {
         try {
-            // console.log(req.body, 'kiriman creates')
+            console.log(req.body, 'kiriman creates')
            const {name,email,image,price,rating,skills,status,address} = req.body;
            const newObj = {name,email,image,price,rating:Number(rating),skills,status,address};
 

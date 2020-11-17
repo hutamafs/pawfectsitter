@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Button, StyleSheet, Text, View , TextInput, TouchableWithoutFeedback , Keyboard , Image , TouchableOpacity} from 'react-native';
+import { Button, StyleSheet, Text, View , TextInput, TouchableWithoutFeedback , Keyboard , Image , TouchableOpacity, Alert} from 'react-native';
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 import axios from 'axios';
 import { addPet } from '../store/actions/index';
 import { useDispatch , useSelector } from 'react-redux';
 import { RNS3 } from 'react-native-aws3';
-import DocumentPicker from 'react-native-document-picker';
+// import DocumentPicker from 'react-native-document-picker';
 import * as ImagePicker from 'expo-image-picker';
-import logo from '../assets/logoDog.png'
+import logo from '../assets/logoDog.png';
+import * as firebase from 'firebase';
+import ApiKeys from './components/firebaseApi';
 
 
 const AddPet = () => {
@@ -31,65 +33,40 @@ const AddPet = () => {
         {label: '🐱', value: 'cat',style:{marginLeft:20} }
     ];
 
+    if(!firebase.apps.length) { firebase.initializeApp(ApiKeys.FirebaseConfig); }
+
     const handleSubmit = () => {
-        console.log(image,'ini image')
+
+        let fileType = image.substring(image.lastIndexOf(".") + 1);
+        let formData = new FormData();
+        console.log(fileType,'ini filetype')
+        
+        formData.append('image',{
+            image,
+            name: `photo.${fileType}`,
+            type: `image/${fileType}`
+        })
+        formData.append('name', name);
+        formData.append('gender', gender);
+        formData.append('type', type);
+        formData.append('age', age);
+
     axios({
-        url: 'http://192.168.1.4:3000/pets',
+        url: 'http://192.168.1.3:3000/pets',
         method: 'POST',
-        headers:{access_token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYWZkMDc1Zjc5MmZjMmJmZjgyNGJmYiIsImVtYWlsIjoiaEBtYWlsLmNvbSIsImlhdCI6MTYwNTM4ODgwOX0.54h9zQqXhvFXOW-ZS2Gmj84bKwilvj-3VqDNQOfC8pM'},
-        data: { name,gender,type,age,image },
+        headers:{access_token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYjBhNzM2NzBkM2U0M2RmODE1ZDZhZCIsImVtYWlsIjoidGFtYUBnbWFpbC5jb20iLCJpYXQiOjE2MDU1NDM5MTJ9.pb5pZsZiE_v7k5WRAvEHneXx9U871RbIURtKiuWkdYA',"Content-Type": "multipart/form-data"},
+        
+        data: formData,
         })
         .then(({data}) => {
         console.log(data, '<<<<<<<RESPONYA');
         //dispatch(setToken(res.data.access_token))
-        navigation.replace('Home')
+        //navigation.replace('Home')
         })
         .catch((err) => {
         console.log(err, '<<<<<<<<<ERRRRRROOORRRRRR');
         })
     }
-    // const handleSubmit = () => {
-    //     console.log(image,'ini image')
-    // axios({
-    //     url: 'http://192.168.1.3:3000/pets',
-    //     method: 'POST',
-    //     headers:{access_token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYWZkNThhOWQ5NjAyNDQ4OGI3OGJkNyIsImVtYWlsIjoidGFtYUBnbWFpbC5jb20iLCJpYXQiOjE2MDUzNTg5ODh9.1fDc7yYmvXXrLwKiLecnJjhnffnTlRFuBMNRtNDzYUI'},
-    //     data: { name,gender,type,age,image },
-    //     })
-    //     .then(({data}) => {
-    //     console.log(data, '<<<<<<<RESPONYA');
-    //     //dispatch(setToken(res.data.access_token))
-    //     navigation.replace('Home')
-    //     })
-    //     .catch((err) => {
-    //     console.log(err, '<<<<<<<<<ERRRRRROOORRRRRR');
-    //     })
-    // }
-
-    // const takePic = () => {
-    //     ImagePicker.showImagePicker( {} , (response) => {
-    //         const file={
-    //             uri:response.uri,
-    //             name:response.fileName,
-    //             type:'image/png',
-    //         }
-    //         const config = {
-    //             keyPrefix: `s3/`,
-    //             bucket:'photos',
-    //             region:'ap-southeast-1',
-    //             access_key:'AKIAI3HZB6Q3UPG2LTMA',
-    //             secretKey:'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',
-    //             successActionStatus:201,
-    //         }
-    //         RNS3.put(file,config)
-    //         .then(response => 
-    //             setImage(response.body.postResponse.location)    
-    //         )
-    //         .catch(err => {
-    //             console.log(err);
-    //         })
-    //     })
-    // }
 
     // const handleSubmit = async () => {
     //     if (image != null) {
@@ -124,58 +101,7 @@ const AddPet = () => {
         // }
       //   }
       // };
-      /*
-      const selectFile = async () => {
-        try {
-          const res = await DocumentPicker.pick({
-            type: [DocumentPicker.types.allFiles],
-          });
-          console.log(res,'ini res')
-          // Printing the log realted to the file
-          console.log('res : ' + JSON.stringify(res));
-        //   setImage(res);
-        } catch (err) {
-        //   setImage(null);
-          // Handling any exception (If any)
-          if (DocumentPicker.isCancel(err)) {
-            alert('Canceled');
-          } else {
-            alert('Unknown Error: ' + JSON.stringify(err));
-            throw err;
-          }
-        }
-      };
-      */
-
-     function blobCreationFromURL(inputURI) { 
-  
-        let binaryVal; 
-  
-        // mime extension extraction 
-        let inputMIME = inputURI.split(',')[0].split(':')[1].split(';')[0]; 
-  
-        // Extract remaining part of URL and convert it to binary value 
-        if (inputURI.split(',')[0].indexOf('base64') >= 0) 
-            binaryVal = atob(inputURI.split(',')[1]); 
-  
-        // Decoding of base64 encoded string 
-        else
-            binaryVal = unescape(inputURI.split(',')[1]); 
-  
-        // Computation of new string in which hexadecimal 
-        // escape sequences are replaced by the character  
-        // it represents 
-  
-        // Store the bytes of the string to a typed array 
-        let blobArray = []; 
-        for (let index = 0; index < binaryVal.length; index++) { 
-            blobArray.push(binaryVal.charCodeAt(index)); 
-        } 
-        console.log(blobArray,'ini blobarray')
-        return new Blob([blobArray], { 
-            type: inputMIME 
-        }); 
-    } 
+      
 
      const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -188,10 +114,15 @@ const AddPet = () => {
         //console.log(result);
     
         if (!result.cancelled) {
-            let hasil = await blobCreationFromURL(result.uri)
-            console.log(hasil,'ini hasilnya')
-            //console.log(result.uri)
-          //setImage(result.uri);
+             console.log(result,'ini result')
+            // uploadImage(result.uri,'test-image')
+            // .then(() => {
+            //     Alert.alert('success')
+            // })
+            // .catch(() => {
+            //     Alert.alert(error)
+            // })
+            setImage(result.uri)
         }
       };
 
@@ -211,7 +142,7 @@ const AddPet = () => {
             onPress={pickImage}
             >
              <Image
-                source={{uri: 'https://lh3.googleusercontent.com/proxy/W_fq5wVspFA3goJG22FNuX2nx204B0kalDUZqTmMBP4QznwrD0gHhcMbhe9WlC6OxzVmyZy-hm4pqT4YrCLUWgE2'}}
+                source={(image) ? {uri:image}:{uri: 'https://lh3.googleusercontent.com/proxy/W_fq5wVspFA3goJG22FNuX2nx204B0kalDUZqTmMBP4QznwrD0gHhcMbhe9WlC6OxzVmyZy-hm4pqT4YrCLUWgE2'}}
                 style={{ width: 80, height: 80, zIndex: 2}}
             />
             </TouchableOpacity>
@@ -269,7 +200,7 @@ const AddPet = () => {
                 } */}
 
                 <TouchableOpacity
-                    onPress={() => {handleSubmit}}
+                    onPress={handleSubmit}
                     style={styles.btnStyle}>
                     <Text style={{ fontSize: 20, color: '#fff', textAlign: 'center', margin: 5 }}>Submit</Text>
                 </TouchableOpacity>

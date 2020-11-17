@@ -3,27 +3,28 @@ import {Text,TouchableOpacity, View,Image} from 'react-native'
 
 
 export default function KeepList(props){
-        const {img,name, bg ,rating} = props
+        const {img,name ,rating ,bg ,font } = props
         return(
-            <TouchableOpacity
+            <View
                 style={{
                     flexDirection:"row",
-                    backgroundColor:bg,
+                    backgroundColor: bg,
                     padding:20,
-                    marginHorizontal:40,
+                    marginHorizontal: 20,
                     borderRadius:20,
                     alignItems:"center",
-                    marginTop:10
+                    marginTop:10,
+                    opacity : 0.9
                 }}
             >
                     <Image
                         source={img}
-                        style={{width:110,height:110}}
+                        style={{width:90,height:90}}
                     />
 
                     <View>
                          <Text style={{
-                             color:"black",
+                             color:font,
                              fontFamily:"nunito",
                              fontSize: 20,
                              paddingHorizontal:10,
@@ -31,18 +32,15 @@ export default function KeepList(props){
                              marginTop : -50
                          }}>{name}</Text>
                          <Text style={{
-                             color:"black",
+                             color: font,
                              fontFamily:"nunito",
-                             fontSize:12,
-                             paddingHorizontal:20,
-                             marginTop : 10
+                             fontSize:15,
+                             paddingHorizontal:10,
+                             marginTop : 8
                          }}>
-                             {rating}
+                            Rating : {rating}
                          </Text>        
                     </View>
-                    
-                   
-
-            </TouchableOpacity>
+            </View>
         )
 }

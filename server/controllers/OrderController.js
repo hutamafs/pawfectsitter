@@ -6,7 +6,7 @@ class OrderController {
 
     static async getAllOrders(req,res,next) {
         try {
-            let orders = await Order.find({user_id: req.userData.id})
+            let orders = await Order.find({user_id: req.userData.id});
             res.status(200).json(orders);
         } catch (next) {
         }
@@ -36,9 +36,12 @@ class OrderController {
 
     static async finishOrder(req,res,next) {
         try {
+            console.log('masuk')
             let order = await Order.findOne({_id:req.params.id});
+            console.log(order,'ini order line 40')
             order.status = false;
             await order.save();
+            console.log(order,'ini order line 43')
             //let order = await Order.findOneAndUpdate(req.params.id,false,{new:true});
             res.status(200).json(order);
 

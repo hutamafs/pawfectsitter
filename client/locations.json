@@ -1,0 +1,18 @@
+[
+    {
+      "name": "Mal Kelapa Gading",
+      "address": "Jl. Boulevard Raya No.13, RT.13/RW.18, Klp. Gading Tim., Kec. Klp. Gading, Kota Jkt Utara, Daerah Khusus Ibukota Jakarta 14240",
+      "coords": {
+        "latitude": -6.177050,
+        "longitude": 106.902802
+      }
+    },
+    {
+      "name": "Mal Artha Gading",
+      "address": "Jl. Artha Gading Sel. No.1, RW.8, Klp. Gading Bar., Kec. Klp. Gading, Kota Jkt Utara, Daerah Khusus Ibukota Jakarta 14240",
+      "coords": {
+        "latitude": -6.148740,
+        "longitude": 106.894112
+      }
+    }
+  ]

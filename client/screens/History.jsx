@@ -18,91 +18,89 @@ export default function History({navigation}) {
   useEffect(() => {
     dispatch(fetchOrders(access_token))
   },[])
+  const backToHome = () => {
+    navigation.replace('Home')
+  }
 
   return (
     <View style={{
-      backgroundColor:"#FFF",
+      backgroundColor:"#C8D1DA",
       flex:1,
   }}>
      <View style={{
-         backgroundColor:"#3678E4",
-         height:"19%",
+         backgroundColor:"#6661DB",
+         height:"11%",
          borderBottomLeftRadius:20,
          borderBottomRightRadius:20,
-         paddingHorizontal:20
+         paddingHorizontal: 25,
+         marginBottom : -24,
      }}>
+       <Button 
+        style={{
+          width : 30,
+          height : 30,
+          marginTop : 35,
+          borderColor : "#6661DB"
+        }}
+          onPress={backToHome}
+        >
+              <Icon 
+                name="arrow-left-circle" 
+                color="black" 
+                size={30}
+                style={[{  
+                transform: [{ rotate: "0deg" }],
+                position : 'absolute',
+                color : "#102B3E",
+              }]}
+              />
+            </Button>
          <View style={{
              flexDirection:"row",
-             alignItems:"center",
              marginTop:10,
              width:"100%"
          }}>
-             <View style={{width:"50%"}}>
+             <View style={{width:"100%"}}>
                   <Text style={{
-                      fontSize:15,
-                      marginTop : 60,
-                      marginBottom: 45,
-                      color:"#EEF4F4",
-                      fontWeight:"normal",
-                      fontFamily : 'nunito'
-                  }}>Hey , This is Your History !</Text>
+                    fontSize: 25,
+                    marginTop : -55,
+                    color:"#0F2A3C",
+                    marginLeft : 165,
+                    fontWeight:"normal",
+                    fontFamily : 'nunito'
+                  }}>History List</Text>
              </View>
         </View>
-        
-        
-    
      </View>
-
 
 
      
 
      <LinearGradient
-      colors={["rgba(40,120,228,0.9)", "transparent"]}
+      colors={["rgba(16,43,62,0.1)", "transparent"]}
       style={{
           left:0,
           right:0,
-          height:90,
-          marginTop:-45
+          height:60,
+          marginTop: 3
       }}
-     >
-         <View style={{
-             backgroundColor:"#FFF",
-             paddingVertical:8,
-             paddingHorizontal:20,
-             marginHorizontal:20,
-             borderRadius:20,
-             marginTop:25,
-             flexDirection:"row",
-             alignItems:"center"
-         }}>
-             <Text
-                  style={{
-                      fontWeight:"bold",
-                      fontSize:20,
-                      width:260,
-                      color : "#7C7E80",
-                      height : 40,
-                      paddingTop : 8
-                  }}
-             >
-               History
-             </Text>
-         </View>
+      >
+         
       </LinearGradient>
 
+      {/* <Text>{JSON.stringify(orders)}</Text> */}
 
          <View style={{
-             flexDirection:"row",
-             paddingHorizontal:20,
-             width:"100%",
-             alignItems:"center",
-             marginBottom : 30,
-             marginTop : 20
-         }}>
+           flexDirection:"row",
+           paddingHorizontal:20,
+           width:"100%",
+           alignItems:"center",
+           marginBottom : 30,
+           marginTop : 20
+          }}>
              <View style={{width:"50%"}}>
                   <Text style={{
-                      fontWeight:"bold",
+                    fontWeight:"bold",
                       fontSize:15,
                       color:"#6B6C6E",
                       marginLeft : 20,
