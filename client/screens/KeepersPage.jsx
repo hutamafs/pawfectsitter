@@ -1,17 +1,18 @@
-import { StatusBar } from 'expo-status-bar';
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, Button , TouchableWithoutFeedback , Keyboard } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchKeepers, fetchPets, setOrders } from '../store/actions';
-import TabBar from './components/TabBottomNavbar';
-import Modal from 'react-native-modal';
-import { Picker } from '@react-native-picker/picker';
-import { TextInput } from 'react-native-paper';
-import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
-import axios from 'axios';
-import logo from '../assets/logoDog.png';
-import { ScrollView } from 'react-native-gesture-handler';
-import Icon from 'react-native-vector-icons/FontAwesome';
+// import { StatusBar } from 'expo-status-bar';
+// import React, { useEffect, useState } from 'react';
+// import { StyleSheet, Text, View, Image, TouchableOpacity, Button , TouchableWithoutFeedback , Keyboard } from 'react-native';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { fetchKeepers, fetchPets, setOrders } from '../store/actions';
+// import TabBar from './components/TabBottomNavbar';
+// import Modal from 'react-native-modal';
+// import { Picker } from '@react-native-picker/picker';
+// import { TextInput } from 'react-native-paper';
+// import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
+// import axios from 'axios';
+// import logo from '../assets/logoDog.png';
+// import { ScrollView } from 'react-native-gesture-handler';
+// import Icon from 'react-native-vector-icons/FontAwesome';
+
 
 
 export default function KeepersPage({ route, navigation }) {
@@ -53,46 +54,47 @@ export default function KeepersPage({ route, navigation }) {
     setModalVisible(!isModalVisible);
   }
 
-  const handleCancel = () => {
-    setModalVisible(!isModalVisible);
-  }
+//   const handleCancel = () => {
+//     setModalVisible(!isModalVisible);
+//   }
 
-  const handleSubmit = () => {
-    let payload = {
-      pet_id: petId,
-      harga: (Number(quantity) * Number(harga)),
-      quantity: Number(quantity)
-    }
+//   const handleSubmit = () => {
+//     let payload = {
+//       pet_id: petId,
+//       harga: (Number(quantity) * Number(harga)),
+//       quantity: Number(quantity)
+//     }
     
-    axios({
-      url: 'http://192.168.100.6:3000/orders/' + keeperId,
-      method: 'post',
-      headers: {
-        access_token: access_token
-      },
-      data: {
-        quantity: payload.quantity,
-        price: payload.harga,
-        pet_id: payload.pet_id
-      }
-    })
-    .then(result => {
-      dispatch(setOrders(result))
-    })
-    .catch(err => console.log(err))
+//     axios({
+//       url: 'http://192.168.100.6:3000/orders/' + keeperId,
+//       method: 'post',
+//       headers: {
+//         access_token: access_token
+//       },
+//       data: {
+//         quantity: payload.quantity,
+//         price: payload.harga,
+//         pet_id: payload.pet_id
+//       }
+//     })
+//     .then(result => {
+//       dispatch(setOrders(result))
+//     })
+//     .catch(err => console.log(err))
 
-    setModalVisible(!isModalVisible);
-    setQuantity('')
-  }
+//     setModalVisible(!isModalVisible);
+//     setQuantity('')
+//   }
 
-  const handlePetRadio = (e) => {
-    // setPetId(e.target[radio_props].value)
-    setPetId(e)
-  }
+//   const handlePetRadio = (e) => {
+//     // setPetId(e.target[radio_props].value)
+//     setPetId(e)
+//   }
 
-  const setRadioHarga = (value) => {
-    setHarga(value)
-  }
+//   const setRadioHarga = (value) => {
+//     setHarga(value)
+//   }
+
 
   const stars = (rating) => {
     let starIcon = [];
@@ -257,76 +259,77 @@ export default function KeepersPage({ route, navigation }) {
                       <Text style={{ color: 'white', textAlign: 'center' }}>Hire Me! </Text>
                     </TouchableOpacity>
 
-                  <Modal isVisible={isModalVisible}>
-                    <View style={{ flex: 0.6, display: 'flex', backgroundColor: 'white', alignItems: 'center', borderRadius: 20 }}>
-                      <View style={{ alignItems: 'center'}}>
-                        <Text style={{ marginTop: 15, fontSize: 17 }}> {`Which pet would you like to entrust to ${name}?`} </Text>
-                        {
-                          pet_props &&
-                          <RadioForm
-                            radio_props={pet_props}
-                            initial={0}
-                            formHorizontal={true}
-                            labelHorizontal={true}
-                            buttonColor={'#2196f3'}
-                            borderWidth={2}
-                            buttonSize={15}
-                            buttonWrapStyle={{ marginLeft: 10 }}
-                            onPress={(value) => handlePetRadio(value)}
-                            labelStyle={{ paddingLeft: 5, marginRight: 15, fontSize: 17 }}
-                          />
-                        }
-                      </View>
+//                   <Modal isVisible={isModalVisible}>
+//                     <View style={{ flex: 0.6, display: 'flex', backgroundColor: 'white', alignItems: 'center', borderRadius: 20 }}>
+//                       <View style={{ alignItems: 'center'}}>
+//                         <Text style={{ marginTop: 15, fontSize: 17 }}> {`Which pet would you like to entrust to ${name}?`} </Text>
+//                         {
+//                           pet_props &&
+//                           <RadioForm
+//                             radio_props={pet_props}
+//                             initial={0}
+//                             formHorizontal={true}
+//                             labelHorizontal={true}
+//                             buttonColor={'#2196f3'}
+//                             borderWidth={2}
+//                             buttonSize={15}
+//                             buttonWrapStyle={{ marginLeft: 10 }}
+//                             onPress={(value) => handlePetRadio(value)}
+//                             labelStyle={{ paddingLeft: 5, marginRight: 15, fontSize: 17 }}
+//                           />
+//                         }
+//                       </View>
 
-                      <View style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 200, marginTop: 10 }}>
-                        <Text style={{ marginTop: 15, fontSize: 15, marginBottom: 5, fontSize: 17 }}> Which Package ? </Text>
-                        {
-                          duration_props &&
-                          <RadioForm
-                            radio_props={duration_props}
-                            initial={0}
-                            formHorizontal={true}
-                            labelHorizontal={true}
-                            buttonColor={'#2196f3'}
-                            borderWidth={2}
-                            buttonSize={15}
-                            buttonWrapStyle={{ marginLeft: 10 }}
-                            onPress={(value) => setRadioHarga(value)}
-                            labelStyle={{ paddingLeft: 5, marginRight: 15, fontSize: 17 }}
-                          />
-                        }
-                      </View>
+//                       <View style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 200, marginTop: 10 }}>
+//                         <Text style={{ marginTop: 15, fontSize: 15, marginBottom: 5, fontSize: 17 }}> Which Package ? </Text>
+//                         {
+//                           duration_props &&
+//                           <RadioForm
+//                             radio_props={duration_props}
+//                             initial={0}
+//                             formHorizontal={true}
+//                             labelHorizontal={true}
+//                             buttonColor={'#2196f3'}
+//                             borderWidth={2}
+//                             buttonSize={15}
+//                             buttonWrapStyle={{ marginLeft: 10 }}
+//                             onPress={(value) => setRadioHarga(value)}
+//                             labelStyle={{ paddingLeft: 5, marginRight: 15, fontSize: 17 }}
+//                           />
+//                         }
+//                       </View>
 
-                      <View>
-                        <TextInput
-                          placeholder="For How long?"
-                          style={{ backgroundColor: 'white', width: 300, height: 50, borderWidth: 1, borderRadius: 20, marginTop: 20, marginBottom: 20, borderTopStartRadius: 20, borderTopEndRadius: 20 }}
-                          value={quantity}
-                          keyboardType="numeric"
-                          onChangeText={(text) => setQuantity(text)}
-                          required
-                        />
-                      </View>
+//                       <View>
+//                         <TextInput
+//                           placeholder="For How long?"
+//                           style={{ backgroundColor: 'white', width: 300, height: 50, borderWidth: 1, borderRadius: 20, marginTop: 20, marginBottom: 20, borderTopStartRadius: 20, borderTopEndRadius: 20 }}
+//                           value={quantity}
+//                           keyboardType="numeric"
+//                           onChangeText={(text) => setQuantity(text)}
+//                           required
+//                         />
+//                       </View>
 
-                      <TouchableOpacity style={styles.btnStyle} onPress={() => handleSubmit()}><Text style={{textAlign: 'center', fontSize: 25, margin: 5}}>Hire</Text></TouchableOpacity>
-                      <TouchableOpacity style={styles.btnStyle} onPress={() => handleCancel()}><Text style={{textAlign: 'center', fontSize: 25, margin: 5}}>Cancel</Text></TouchableOpacity>
-                    </View>
-                  </Modal>
+//                       <TouchableOpacity style={styles.btnStyle} onPress={() => handleSubmit()}><Text style={{textAlign: 'center', fontSize: 25, margin: 5}}>Hire</Text></TouchableOpacity>
+//                       <TouchableOpacity style={styles.btnStyle} onPress={() => handleCancel()}><Text style={{textAlign: 'center', fontSize: 25, margin: 5}}>Cancel</Text></TouchableOpacity>
+//                     </View>
+//                   </Modal>
 
                 </View>
               )
             })
           }
 
-        </View>
-      </ScrollView>
+//         </View>
+//       </ScrollView>
         
-        <TabBar
-          navigation={navigation}
-        />
-      </View>      
-  );
-}
+//         <TabBar
+//           navigation={navigation}
+//         />
+//       </View>      
+//   );
+// }
+
 
 
 const styles = StyleSheet.create({
