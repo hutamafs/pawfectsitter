@@ -45,7 +45,7 @@ export default function Login({navigation}) {
       const user = {
         email: email,
         password: password,
-        avatar: ''
+        avatar: 'https://placeimg.com/140/140/any'
       };
   
       const response = firebaseSDK.login(

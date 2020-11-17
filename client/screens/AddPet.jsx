@@ -48,7 +48,6 @@ const AddPet = ({navigation}) => {
         url: 'http://192.168.1.8:3000/pets',
         method: 'POST',
         headers:{access_token,"Content-Type": "multipart/form-data"},
-        
         data: formData,
         })
         .then(({data}) => {
