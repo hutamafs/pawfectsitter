@@ -43,7 +43,7 @@ export function setOrders(payload) {
 export function fetchOrders(token) {
     return (dispatch) => {
         axios({
-            url: 'http://192.168.43.190:3000/orders',
+            url: 'http://192.168.1.3:3000/orders',
             method: 'GET',
             headers:{access_token: token}
           })
