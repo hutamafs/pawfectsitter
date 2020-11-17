@@ -40,10 +40,11 @@ class OrderController {
 
     static async finishOrder(req,res,next) {
         try {
+            const {review} = req.body
             let order = await Order.findOne({_id:req.params.id});
             let keeper = await Keeper.findById(order.keeperId);
             await order.save();
-            await keeper.review.push(order.review)
+            await keeper.review.push(review)
             // await keeper.save();
             order.status = false;
             order.timeFinished = moment(new Date()).format('h:mm:ss a')

@@ -39,6 +39,13 @@ export function setOrders(payload) {
     }
 }
 
+export function addHistory(payload) {
+    return {
+        type:'ADD_HISTORY',
+        payload
+    }
+}
+
 export function fetchOrders(token) {
     return (dispatch) => {
         axios({
@@ -74,13 +81,6 @@ export function fetchPets(token) {
     }    
 }
 
-export function setSocket(payload) {
-    console.log('MASUUKKKK SOCKETTTTT');
-    return {
-        type: SET_SOCKET,
-        payload: payload
-    }
-}
 
 export function setMessages(payload) {
     console.log('MASUK UBAH MESSAGE REDUX');

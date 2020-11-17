@@ -5,7 +5,7 @@ const initialState = {
     orders:[],
     loading: true,
     socket: null,
-    messages: []
+    history: []
 }
 
 export default function reducer (state = initialState, action) {
@@ -17,13 +17,15 @@ export default function reducer (state = initialState, action) {
         case 'ADD_PET':
             return {...state, pets:state.pets.concat(action.payload)};
         case 'SET_ORDERS':
-            return {...state, orders: state.orders.concat(action.payload)}
+            return {...state, orders: action.payload}
+        case 'ADD_ORDERS':
+           return {...state, orders: state.orders.concat(action.payload)}
         case 'FETCH_PETS':
             return {...state, pets: action.payload, loading: false}
-        case 'SET_SOCKET':
-            return {...state, socket: action.payload}
-        case 'SET_MESSAGES':
-            return {...state, messages: state.messages.concat(action.payload)}
+        case 'UPDATE_KEEPER':
+            return {...state, keepers: action.payload}
+        case 'ADD_HISTORY' :
+            return {...state, history: state.history.concat(action.payload)} 
         default:
             return state
     }

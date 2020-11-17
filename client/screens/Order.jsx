@@ -1,37 +1,52 @@
-import React , { useEffect } from 'react';
+import React , { useEffect, useState } from 'react';
 import { Image , StyleSheet, Text, View , Alert} from 'react-native';
 import { useDispatch , useSelector } from 'react-redux';
-import {fetchOrders} from '../store/actions'
+import {fetchOrders, addHistory} from '../store/actions'
 import {TextInput,ScrollView,TouchableOpacity} from 'react-native-gesture-handler'
 import  TabBar  from './components/TabBottomNavbar'
 import Button from 'apsl-react-native-button'
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
-import { setOrders } from '../store/actions';
 import axios from 'axios'
+import Modal from 'react-native-modal';
+
 
 
 export default function Order({navigation}) {
 
   const dispatch = useDispatch();
   const {orders, access_token} = useSelector(state => state);
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [msg, setMsg] = useState('')
+  const [name, setName] = useState('')
+  const [id, setId] = useState('')
 
   useEffect(() => {
     dispatch(fetchOrders(access_token))
-  },[orders])
+  },[])
 
-  const handlePress = (id) => {
+  const handleSubmit = () => {
+    console.log(msg);
+    console.log(name);
+    let review = {
+      name,msg
+    }
     axios({
-      url : "http://192.168.1.4:3000/orders/" + id,
-      method : "PUT",
-      headers : {access_token}
+      url: "http://192.168.1.4:3000/orders/" + id,
+      method: "PUT",
+      data: {review},
+      headers:{access_token}
     })
-    .then(data=> {
-      console.log(data ,'MASUK ORDER CLIENT');
-      // alert(
-      //   "Take Back Your Puppy"
-      // )
+    .then(({data}) => {
+      console.log(data, '<<<<<<<<<<<sukses nehhhhhh');
+      dispatch(addHistory(data))
+      setModalVisible(!isModalVisible)
     })
     .catch(err => console.log(err))
+  }
+
+  const handlePress = (id) => {
+    setModalVisible(!isModalVisible);
+    setId(id)
   }
 
   const countOrders = () => {
@@ -252,6 +267,35 @@ export default function Order({navigation}) {
       backgroundColor:"#C8D1DA",
       flex:1,
     }}>
+
+      <Modal isVisible={isModalVisible}>
+        <View style={{backgroundColor: 'white', height: '80%'}}>
+        <Text style={{fontSize: 20, textAlign: 'center', marginTop: 20, marginBottom: 20}}>Your Name?</Text>
+        <TextInput
+        style={{borderWidth: 2, height:'10%', marginLeft:15, marginRight:15, borderRadius: 20, padding: 10, marginBottom: 20}}
+        placeholder="Write your name here"
+        onChangeText={(text) => setName(text)}
+        />
+        <Text style={{fontSize: 20, textAlign: 'center', marginTop: 20, marginBottom: 20}}>Let them hear your opinion</Text>
+        <TextInput
+        style={{borderWidth: 2, height:'40%', marginLeft:15, marginRight:15, borderRadius: 20, padding: 10, marginBottom: 20}}
+        placeholder="Give your review here ^^"
+        onChangeText={(text) => setMsg(text)}
+        />
+        <Button
+        style={{backgroundColor:'#6661DB',
+        borderColor : "#6661DB",
+        borderBottomRightRadius : 20,
+        borderTopLeftRadius : 20,
+        marginLeft: 20,
+        marginRight: 20
+        }}
+        onPress={handleSubmit}
+        >
+        <Text style={{color: 'white'}}>Submit</Text>
+        </Button>
+        </View>
+      </Modal>
      <View style={{
          backgroundColor:"#6661DB",
          height:"11%",

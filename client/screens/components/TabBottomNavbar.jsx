@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native'
 import { LinearGradient } from 'expo-linear-gradient'
 
 
-export default function TabBar({navigation, userData}) {
+export default function TabBar({navigation}) {
   return (
     <View style={styles.tabBottom}>
     <Button 
@@ -52,9 +52,7 @@ export default function TabBar({navigation, userData}) {
             marginLeft : 60,
           }}
           accessibilityRole='button'
-          onPress={() => navigation.navigate('Chat', {
-            userData: userData
-          })}
+          onPress={() => navigation.navigate('Chat')}
         > 
         <Icon name="chat-processing" color="#102B3F" size={45} />
     </Button>

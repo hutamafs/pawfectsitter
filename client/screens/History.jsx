@@ -11,13 +11,10 @@ import {TextInput,ScrollView,TouchableOpacity} from 'react-native-gesture-handle
 
 
 export default function History({navigation}) {
-  const dispatch = useDispatch();
-  const {orders, access_token} = useSelector(state => state);
+  const {history, access_token} = useSelector(state => state);
   console.log(access_token, 'ini access token di history')
 
-  useEffect(() => {
-    dispatch(fetchOrders(access_token))
-  },[])
+  
   const backToHome = () => {
     navigation.replace('Home')
   }
@@ -104,7 +101,7 @@ export default function History({navigation}) {
                       fontSize:15,
                       color:"#6B6C6E",
                       marginLeft : 20,
-                  }}>{orders.length} Order</Text>
+                  }}>{history.length} Order</Text>
 
              </View>
              <View style={{width:"50%", alignItems:"flex-end"}}>
@@ -121,8 +118,8 @@ export default function History({navigation}) {
             alignItems : 'center',
             marginHorizontal:40,
             }}>
-          {orders &&
-            orders
+          {history &&
+            history
               .filter(el => el.status === false)          
               .map(el => {
               return(

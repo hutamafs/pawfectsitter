@@ -42,9 +42,13 @@ export default function App() {
               headerShown: false
             }}
           >
+           
             <Stack.Screen name="Landing" component={Landing}
               options={{ title: 'Landing' }}
             />
+             <Stack.Screen name="Order" component={Order}
+                options={{ title: 'Order' }}
+              />
             <Stack.Screen name="Register" component={Register} 
               options={{title: 'Register'}}
             />
@@ -60,9 +64,7 @@ export default function App() {
             <Stack.Screen name="AddPet" component={AddPet}
               options={{ title: 'AddPet' }}
             />
-              <Stack.Screen name="Order" component={Order}
-                options={{ title: 'Order' }}
-              />
+              
               <Stack.Screen name="History" component={History}
                 options={{ title: 'History' }}
               /> 
