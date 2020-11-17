@@ -16,7 +16,7 @@ import AddPet from './screens/AddPet'
 import Order from './screens/Order'
 import Chat from './screens/Chat'
 import History from './screens/History'
-import GMap from './screens/gMap'
+import GMap from './screens/GMap'
 
 import * as Font from 'expo-font'
 import { AppLoading } from 'expo'
@@ -33,10 +33,9 @@ export default function App() {
 
   if (fontsLoaded) {
     return (
-
-
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <Provider store={store}>
+<<<<<<< HEAD
         <NavigationContainer>
           <Stack.Navigator
             screenOptions={{
@@ -44,6 +43,15 @@ export default function App() {
             }}
           >
             <Stack.Screen name="Landing" component={Landing}
+=======
+          <NavigationContainer>
+            <Stack.Navigator
+              screenOptions={{
+                headerShown: false
+              }}
+            >
+              {/* <Stack.Screen name="Landing" component={Landing}
+>>>>>>> development
               options={{ title: 'Landing' }}
             />
             {/* <Stack.Screen name="Landing" component={Landing}
@@ -60,6 +68,7 @@ export default function App() {
             />
             <Stack.Screen name="Home" component={Home} 
               options={{title: 'Home'}}
+<<<<<<< HEAD
             />
             <Stack.Screen name="KeepersPage" component={KeepersPage}
               options={{ title: 'Keepers' }}
@@ -82,26 +91,49 @@ export default function App() {
               options={{ title: 'Chat' }}
             /> 
             
+=======
+            /> */}
+              <Stack.Screen name="KeepersPage" component={KeepersPage}
+                options={{ title: 'Keepers' }}
+              />
+              <Stack.Screen name="KeeperDetail" component={KeeperDetail}
+                options={{ title: '' }}
+              />
+              <Stack.Screen name="GMap" component={GMap}/>
+              
+              <Stack.Screen name="AddPet" component={AddPet}
+                options={{ title: 'AddPet' }}
+              />
+              <Stack.Screen name="Order" component={Order}
+                options={{ title: 'Order' }}
+              />
 
-            {/* <Stack.Screen name="Home" component={Home}
-              options={{ title: 'Home' }}
-            />
-            <Stack.Screen name="Login" component={Login}
-              options={{ title: 'Login' }}
+              <Stack.Screen name="History" component={History}
+                options={{ title: 'History' }}
+              />
+>>>>>>> development
 
-            />
-          
 
+              <Stack.Screen name="PetList" component={PetList}
+                options={{ title: 'PetList' }}
+              />
+
+<<<<<<< HEAD
             
             <Stack.Screen name="History" component={History}
               options={{ title: 'History' }}
             />
             */}
+=======
+              {/* <Stack.Screen name="Chat" component={Chat}
+                options={{ title: 'Chat' }}
+              /> */}
+>>>>>>> development
 
-          </Stack.Navigator>
-        </NavigationContainer>
-      </Provider>
-      </TouchableWithoutFeedback>    
+            </Stack.Navigator>
+          </NavigationContainer>
+        </Provider>
+      </TouchableWithoutFeedback>
 
     )
   } else {

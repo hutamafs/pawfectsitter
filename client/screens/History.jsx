@@ -28,7 +28,7 @@ export default function History({navigation}) {
     localHistory.map(el => {
       cloned.push(el)
     }) 
-      cloned.sort((a,b) => a[type.toLowerCase()] < b[type.toLowerCase()])
+      cloned.sort((a,b) => a[type.toLowerCase()][0] < b[type.toLowerCase()][0])
       // console.log(cloned);
 
     setLocalHistory(cloned);
