@@ -35,7 +35,8 @@ export default function KeepersPage({ route, navigation }) {
   useEffect(() => {
     dispatch(fetchKeepers())
     dispatch(fetchPets(access_token))
-  },[localKeepers,categoryNow,animalNow])
+    setLocalKeepers(keepers)
+  },[categoryNow,animalNow])
 
   let duration_props = [
     { label: 'hourly', value: `${price.hourly}` },
@@ -106,7 +107,6 @@ export default function KeepersPage({ route, navigation }) {
   const sortCategory = (type) => {
     let cloned = keepers;
     cloned.sort((a,b) => a[type.toLowerCase()] < b[type.toLowerCase()])
-    console.log(type.toLowerCase(),'ini type')
     setCategoryNow(type.toLowerCase());    
     setLocalKeepers(cloned);
   }
@@ -127,6 +127,7 @@ export default function KeepersPage({ route, navigation }) {
         }        
       })
     })
+    console.log(filteredKeepers,'ini filter')
     setLocalKeepers(filteredKeepers);
     }
   }
@@ -208,7 +209,7 @@ export default function KeepersPage({ route, navigation }) {
 
       <ScrollView showsVerticalScrollIndicator={false}>
       <View style={{ display: 'flex', flexDirection: 'column', flex: 0.8 , alignItems:'center' }}>
-          {localKeepers &&
+          {localKeepers.length > 0 &&
             localKeepers        
             .map(el => {
               return (
