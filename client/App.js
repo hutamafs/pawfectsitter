@@ -15,7 +15,7 @@ import AddPet from './screens/AddPet'
 import Order from './screens/Order'
 import Chat from './screens/Chat'
 import History from './screens/History'
-
+import GMap from './screens/gMap'
 
 import * as Font from 'expo-font'
 import { AppLoading } from 'expo'
@@ -34,13 +34,20 @@ export default function App() {
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <Provider store={store}>
-        <NavigationContainer>
-          <Stack.Navigator
-            screenOptions={{
-              headerShown: false
-            }}
-          > 
-            <Stack.Screen name="Landing" component={Landing}
+
+
+
+          <NavigationContainer>
+            <Stack.Navigator
+              screenOptions={{
+                headerShown: false
+              }}
+            >
+              {/* <Stack.Screen name="gMap" component={GMap}
+                options={{ title: 'gMap' }}
+              /> */}
+
+            {/* <Stack.Screen name="Landing" component={Landing}
               options={{ title: 'Landing' }}
             />
             <Stack.Screen name="KeepersPage" component={KeepersPage}
@@ -54,6 +61,7 @@ export default function App() {
             />
             <Stack.Screen name="Login" component={Login}
               options={{ title: 'Login' }}
+
               />
             
           <Stack.Screen name="PetList" component={PetList} 
@@ -62,7 +70,7 @@ export default function App() {
         
             <Stack.Screen name="History" component={History} 
               options={{title: 'History'}}
-            />
+            /> */}
             {/* <Stack.Screen name="Landing" component={Landing} 
               options={{title: 'Landing'}}
             /> */}
@@ -82,43 +90,6 @@ export default function App() {
             <Stack.Screen name="Chat" component={Chat} 
             options={{title: 'Chat'}}
              />
-
-            {/* <Stack.Screen name="AddPet" component={AddPet}
-              options={{ title: 'AddPet' }}
-            /> */}
-            {/* <Stack.Screen name="Landing" component={Landing}
-              options={{ title: 'Landing' }}
-            />
-
-            <Stack.Screen name="Home" component={Home}
-              options={{ title: 'Home' }}
-            />
-            <Stack.Screen name="Login" component={Login}
-              options={{ title: 'Login' }}
-
-            />
-          
-          <Stack.Screen name="Home" component={Home} 
-          options={{title: 'Home'}}
-          />
-          <Stack.Screen name="Login" component={Login} 
-          options={{title: 'Login'}}
-          />
-          <Stack.Screen name="Register" component={Register} 
-          options={{title: 'Register'}}
-          />
-          <Stack.Screen name="Order" component={Order} 
-            options={{title: 'Order'}}
-            />
-            <Stack.Screen name="Order" component={Order}
-              options={{ title: 'Order' }}
-            />
-            <Stack.Screen name="History" component={History}
-              options={{ title: 'History' }}
-            />
-            <Stack.Screen name="Chat" component={Chat}
-              options={{ title: 'Chat' }}
-            /> */}
 
           </Stack.Navigator>
         </NavigationContainer>
