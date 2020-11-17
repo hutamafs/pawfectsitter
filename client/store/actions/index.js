@@ -18,6 +18,24 @@ export function fetchKeepers ()  {
     }
 }
 
+export function fetchKeeper(id) {
+    return (dispatch) => {
+        axios({
+            url: `http://192.168.1.3:3000/keepers/${id}`,
+            method: 'GET',
+          })
+          .then(({data}) => {
+            //console.log(data, '<<<<<<<RESPONYA');
+            dispatch({
+                type: 'FETCH_KEEPER',
+                payload:data
+            })
+          })
+          .catch(err => console.log(err,'ini error fetch 1 keeper'))
+    }
+    
+}
+
 export function setToken(payload) {
     return {
         type: 'SET_TOKEN',
