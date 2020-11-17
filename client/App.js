@@ -16,7 +16,7 @@ import AddPet from './screens/AddPet'
 import Order from './screens/Order'
 import Chat from './screens/Chat'
 import History from './screens/History'
-import GMap from './screens/GMap'
+import GMap from './screens/gMap'
 
 import * as Font from 'expo-font'
 import { AppLoading } from 'expo'
@@ -62,12 +62,15 @@ export default function App() {
               />
             <Stack.Screen name="Register" component={Register} 
               options={{title: 'Register'}}
-            />
+            /> */}
             <Stack.Screen name="Login" component={Login} 
               options={{title: 'Login'}}
             />
             <Stack.Screen name="Home" component={Home} 
               options={{title: 'Home'}}
+<<<<<<< HEAD
+            />
+=======
 <<<<<<< HEAD
             />
             <Stack.Screen name="KeepersPage" component={KeepersPage}
@@ -93,6 +96,7 @@ export default function App() {
             
 =======
             /> */}
+>>>>>>> development
               <Stack.Screen name="KeepersPage" component={KeepersPage}
                 options={{ title: 'Keepers' }}
               />
