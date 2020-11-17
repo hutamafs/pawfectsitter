@@ -16,25 +16,62 @@ export default function Order({navigation}) {
   const dispatch = useDispatch();
   const {orders, access_token} = useSelector(state => state);
   const [isModalVisible, setModalVisible] = useState(false);
-  const [msg, setMsg] = useState('')
-  const [name, setName] = useState('')
+  const [review, setReview] = useState('')
   const [id, setId] = useState('')
+  const [categoryNow,setCategoryNow] = useState('');
+  const [localOrders , setLocalOrders] = useState([]);
+
 
   useEffect(() => {
     dispatch(fetchOrders(access_token))
   },[])
 
-  const handleSubmit = () => {
-    console.log(msg);
-    console.log(name);
-    let review = {
-      name,msg
+  useEffect(() => {
+    setLocalOrders(orders)
+  }, [orders])
+
+  const sortCategory = (type) => {
+    console.log(type, '<<<<ini type');
+    let cloned = [];
+    setCategoryNow(type.toLowerCase());    
+    localOrders.map(el => {
+      cloned.push(el)
+    }) 
+      cloned.sort((a,b) => a[type.toLowerCase()] < b[type.toLowerCase()])
+      // console.log(cloned);
+
+    setLocalOrders(cloned);
+  }
+
+  const listCategories = () => {
+    let types = {
+      0:'KeeperName',
+      1:'DateCreated'
     }
+    let categories = [];
+    for(let i = 0 ; i<2 ; i++) {
+      categories.push(
+        <TouchableOpacity
+        key={i}
+        onPress={() => sortCategory(types[i])}
+        style={(types[i].toLowerCase() == categoryNow) ? 
+          {width:100,borderRadius:25,justifyContent:'center',borderColor:'green',borderWidth:2,marginHorizontal:3}:
+          {width:100,borderRadius:25,justifyContent:'center',borderColor:'grey',borderWidth:2,marginHorizontal:3}
+        }
+        >
+        <Text style={{ fontSize: 15, color: 'black', textAlign: 'center', margin: 5,alignSelf:'center' }}>{types[i]}</Text>
+        </TouchableOpacity>
+      )
+    }
+    return categories;
+  }
+
+  const handleSubmit = () => {
     axios({
       url: "http://192.168.1.4:3000/orders/" + id,
       method: "PUT",
-      data: {review},
-      headers:{access_token}
+      headers:{access_token},
+      data: {review}
     })
     .then(({data}) => {
       console.log(data, '<<<<<<<<<<<sukses nehhhhhh');
@@ -270,17 +307,11 @@ export default function Order({navigation}) {
 
       <Modal isVisible={isModalVisible}>
         <View style={{backgroundColor: 'white', height: '80%'}}>
-        <Text style={{fontSize: 20, textAlign: 'center', marginTop: 20, marginBottom: 20}}>Your Name?</Text>
-        <TextInput
-        style={{borderWidth: 2, height:'10%', marginLeft:15, marginRight:15, borderRadius: 20, padding: 10, marginBottom: 20}}
-        placeholder="Write your name here"
-        onChangeText={(text) => setName(text)}
-        />
         <Text style={{fontSize: 20, textAlign: 'center', marginTop: 20, marginBottom: 20}}>Let them hear your opinion</Text>
         <TextInput
-        style={{borderWidth: 2, height:'40%', marginLeft:15, marginRight:15, borderRadius: 20, padding: 10, marginBottom: 20}}
-        placeholder="Give your review here ^^"
-        onChangeText={(text) => setMsg(text)}
+        style={{borderWidth: 2, height:'50%', marginLeft:15, padding:10, marginRight:15, borderRadius: 20, marginBottom: 20}}
+        placeholder="Write here"
+        onChangeText={(text) => setReview(text)}
         />
         <Button
         style={{backgroundColor:'#6661DB',
@@ -324,11 +355,13 @@ export default function Order({navigation}) {
               }]}
               />
             </Button>
+            
          <View style={{
              flexDirection:"row",
              marginTop:10,
              width:"100%"
          }}>
+           
              <View style={{width:"100%"}}>
                   <Text style={{
                     fontSize: 25,
@@ -376,6 +409,10 @@ export default function Order({navigation}) {
              </View>
         
          </View>
+         <View style={{display:'flex',flexDirection:'row',height:30,marginTop:10,marginBottom:5}}>
+            <Text style={{paddingRight:15,marginLeft:15,fontSize:20}} >Sort by </Text>
+            {listCategories()}
+        </View>
                
         <ScrollView>
           
@@ -404,8 +441,8 @@ export default function Order({navigation}) {
               }]}
               />
             </View>
-          {orders &&
-            orders
+          {localOrders &&
+            localOrders
             .filter(el => el.status === true)        
             .map(el => {
               return(
