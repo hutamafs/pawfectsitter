@@ -17,11 +17,7 @@ export default function Register({navigation}) {
 
   const handleRegister = () => {
     axios({
-<<<<<<< HEAD
       url: 'http://192.168.1.8:3000/users/register',
-=======
-      url: 'http://192.168.1.4:3000/users/register',
->>>>>>> development
       method: 'POST',
       data: {
         name,email,password,address

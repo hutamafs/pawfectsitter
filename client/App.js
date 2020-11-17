@@ -35,71 +35,30 @@ export default function App() {
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <Provider store={store}>
-<<<<<<< HEAD
-        <NavigationContainer>
-          <Stack.Navigator
-            screenOptions={{
-              headerShown: false
-            }}
-          >
-            <Stack.Screen name="Landing" component={Landing}
-=======
           <NavigationContainer>
             <Stack.Navigator
               screenOptions={{
                 headerShown: false
               }}
             >
-              {/* <Stack.Screen name="Landing" component={Landing}
->>>>>>> development
+            <Stack.Screen name="Landing" component={Landing}
               options={{ title: 'Landing' }}
             />
-            {/* <Stack.Screen name="Landing" component={Landing}
-              options={{ title: 'Landing' }}
-            /> */}
-             <Stack.Screen name="Order" component={Order}
-                options={{ title: 'Order' }}
-              />
             <Stack.Screen name="Register" component={Register} 
               options={{title: 'Register'}}
-            /> */}
+            />
             <Stack.Screen name="Login" component={Login} 
               options={{title: 'Login'}}
             />
             <Stack.Screen name="Home" component={Home} 
               options={{title: 'Home'}}
-<<<<<<< HEAD
-            />
-=======
-<<<<<<< HEAD
             />
             <Stack.Screen name="KeepersPage" component={KeepersPage}
               options={{ title: 'Keepers' }}
             />
-            <Stack.Screen name="KeeperDetail" component={KeeperDetail}
-              options={{ title: '' }}
-            />
-            <Stack.Screen name="AddPet" component={AddPet}
-              options={{ title: 'AddPet' }}
-            />
-              
-              <Stack.Screen name="History" component={History}
-                options={{ title: 'History' }}
-              /> 
-              
-            <Stack.Screen name="PetList" component={PetList}
-              options={{ title: 'PetList' }}
-            />
             <Stack.Screen name="Chat" component={Chat}
               options={{ title: 'Chat' }}
             /> 
-            
-=======
-            /> */}
->>>>>>> development
-              <Stack.Screen name="KeepersPage" component={KeepersPage}
-                options={{ title: 'Keepers' }}
-              />
               <Stack.Screen name="KeeperDetail" component={KeeperDetail}
                 options={{ title: '' }}
               />
@@ -115,30 +74,16 @@ export default function App() {
               <Stack.Screen name="History" component={History}
                 options={{ title: 'History' }}
               />
->>>>>>> development
-
-
               <Stack.Screen name="PetList" component={PetList}
                 options={{ title: 'PetList' }}
               />
-
-<<<<<<< HEAD
-            
-            <Stack.Screen name="History" component={History}
-              options={{ title: 'History' }}
-            />
-            */}
-=======
               {/* <Stack.Screen name="Chat" component={Chat}
                 options={{ title: 'Chat' }}
               /> */}
->>>>>>> development
-
             </Stack.Navigator>
           </NavigationContainer>
         </Provider>
       </TouchableWithoutFeedback>
-
     )
   } else {
     return (
