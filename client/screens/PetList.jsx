@@ -11,6 +11,7 @@ import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 export default function PetList({navigation}) {
     const dispatch = useDispatch()
     const {access_token, pets, loading} = useSelector(state => state)
+    console.log(access_token)
     useEffect(() => {
         dispatch(fetchPets(access_token))
     },[loading])
@@ -26,7 +27,8 @@ export default function PetList({navigation}) {
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{marginTop:100}}>
-        {pets.length == 0 ?             <View >
+        {pets.length == 0 ?             
+                  <View >
                         <Icon 
                             name="paw" 
                             color="black" 

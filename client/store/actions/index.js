@@ -59,7 +59,7 @@ export function fetchPets(token) {
         axios({
             url: 'http://192.168.100.6:3000/pets',
             method: 'GET',
-            headers: {access_token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYjBhNzM2NzBkM2U0M2RmODE1ZDZhZCIsImVtYWlsIjoidGFtYUBnbWFpbC5jb20iLCJpYXQiOjE2MDU1MDM1NzR9.MqXo3XTpsCcbe-dpxQ1utlrb8-SijbvzAUJdG4TU0B8'}
+            headers: {access_token: token}
           })
           .then((res) => {
             //console.log(res.data, '<<<<<<<RESPONYA');

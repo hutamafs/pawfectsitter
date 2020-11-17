@@ -13,8 +13,8 @@ class KeeperController {
 
     static async createKeeper(req,res,next) {
         try {
-           const {name,email,image,price,rating,skills,status,address} = req.body;
-           const newObj = {name,email,image,price,rating:Number(rating),skills,status,address};
+           const {name,email,image,price,rating,skills,status,address, latitude, longitude} = req.body;
+           const newObj = {name,email,image,price,rating:Number(rating),skills,status,address, latitude:Number(latitude), longitude:Number(longitude)};
 
            let keeper = new Keeper(newObj);
            await keeper.save();

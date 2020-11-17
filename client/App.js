@@ -43,6 +43,8 @@ export default function App() {
               <Stack.Screen name="Landing" component={Landing}
                 options={{ title: 'Landing' }}
               />
+              {/* <Stack.Screen name="GMap" component={GMap}
+              /> */}
               <Stack.Screen name="Register" component={Register} 
                 options={{title: 'Register'}}
               />
