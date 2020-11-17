@@ -10,6 +10,7 @@ import Login from './screens/Login'
 import Register from './screens/Register'
 import PetList from './screens/PetList'
 import KeepersPage from './screens/KeepersPage'
+import KeeperDetail from './screens/KeeperDetail'
 import Home from './screens/Home';
 import AddPet from './screens/AddPet'
 import Order from './screens/Order'
@@ -42,7 +43,7 @@ export default function App() {
               headerShown: false
             }}
           >
-            <Stack.Screen name="Landing" component={Landing}
+            {/* <Stack.Screen name="Landing" component={Landing}
               options={{ title: 'Landing' }}
             />
             <Stack.Screen name="Register" component={Register} 
@@ -53,9 +54,12 @@ export default function App() {
             />
             <Stack.Screen name="Home" component={Home} 
               options={{title: 'Home'}}
-            />
+            /> */}
             <Stack.Screen name="KeepersPage" component={KeepersPage}
               options={{ title: 'Keepers' }}
+            />
+            <Stack.Screen name="KeeperDetail" component={KeeperDetail}
+              options={{ title: '' }}
             />
             <Stack.Screen name="AddPet" component={AddPet}
               options={{ title: 'AddPet' }}
