@@ -71,7 +71,7 @@ describe("beginning before all",() => {
           .send({
             quantity:1,
             price: kPrice,
-            pet_id:pid
+            pet_id:pid,
             })
       expect(res.status).to.equal(201);
     });
@@ -121,7 +121,9 @@ describe("beginning before all",() => {
               quantity:1,
               price: kPrice,
               pet_id:pid,
-              status:true
+              status:true,
+              keeperId:kid,
+              review:'jalan'
             })
             let idOrder = order._id
           await order.save()
@@ -139,12 +141,15 @@ describe("beginning before all",() => {
   describe("Update / Error Case", () => {
       describe("should be failed because idorder is not valid ", () => {
         it("should return update", async () => {
+          let keeper = new Keeper({ name: "george", email: "geo@mail.com", image: "https://images-na.ssl-images-amazon.com/images/I/41dJs71v-aL._AC_.jpg", rating: 5.0, skills: ["Dog"], status: true, address: "Kebon Jeruk, Jakarta barat",price:{hourly:25000,daily:150000,weekly:1000000} })
+          await keeper.save();
           const order = new Order({
             user_id,
             quantity:1,
             price: kPrice,
             pet_id:pid,
-            status:true
+            status:true,
+
           })
           const res = await request(app)
               .put('/orders/' + '5fafa713f4510138302c5253')
