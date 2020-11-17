@@ -245,7 +245,6 @@ export default function KeepersPage({ route, navigation }) {
     }
     return lists;
   }
-  console.log(currentPosition)
   return (
     <View style={styles.container}>
       <View style={{ display: 'flex', flexDirection: 'row', height: 80, marginTop: 15, borderBottomWidth: 1, backgroundColor: '#F7E7D3', borderColor: '#BA826A' }}>

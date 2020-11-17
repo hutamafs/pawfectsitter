@@ -41,12 +41,12 @@ export default function App() {
                 headerShown: false
               }}
             >
-              <Stack.Screen name="Landing" component={Landing}
+              {/* <Stack.Screen name="Landing" component={Landing}
               options={{ title: 'Landing' }}
             />
             <Stack.Screen name="Register" component={Register} 
               options={{title: 'Register'}}
-            />
+            /> */}
             <Stack.Screen name="Login" component={Login} 
               options={{title: 'Login'}}
             />
