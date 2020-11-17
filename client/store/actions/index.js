@@ -29,7 +29,6 @@ export function addPet(payload) {
     return {
         type: 'ADD_PET',
         payload
-
     }
 }
 

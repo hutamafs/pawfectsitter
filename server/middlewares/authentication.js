@@ -10,8 +10,7 @@ async function authentication (req,res,next) {
         req.userData = decode;
         next();
 
-    } catch (error) {
-        next(error)
+    } catch (next) {
     }
 }
 

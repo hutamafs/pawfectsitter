@@ -1,6 +1,7 @@
 const { Pet } = require("../models/pet.model");
 const Order = require('../models/OrderModel');
 const { Keeper } = require("../models/keeper.model");
+const moment = require('moment');
 
 class OrderController {
 
@@ -26,7 +27,7 @@ class OrderController {
                 petName : pet.name,
                 petImage : pet.image,
                 keeperImage:keeper.image,
-                status:true
+                status:true,
             })
             await order.save();
             res.status(201).json(order)

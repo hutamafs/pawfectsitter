@@ -99,14 +99,6 @@ export default function Order({navigation}) {
                </View>
           </View>
        </View>
-      
-  
-            
-       
-  
-       
-          
-  
            <View style={{
                flexDirection:"row",
                paddingHorizontal:20,
@@ -305,12 +297,6 @@ export default function Order({navigation}) {
              </View>
         </View>
      </View>
-    
-
-          
-     
-
-     
          <View style={{
              backgroundColor:"#FFF",
              paddingVertical: 3,

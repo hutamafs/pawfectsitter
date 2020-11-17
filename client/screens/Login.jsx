@@ -33,7 +33,7 @@ export default function Login({navigation}) {
 
   const handleLogin = async () => {
     axios({
-      url: 'http://192.168.43.190:3000/users/login',
+      url: 'http://192.168.1.3:3000/users/login',
       method: 'POST',
       data: {
         email,password
@@ -42,7 +42,6 @@ export default function Login({navigation}) {
     .then((res) => {
       // console.log(res, '<<<<<<<RESPONYA');
       dispatch(setToken(res.data.access_token))
-      navigation.navigate('Home')
 
       // firebase
       const user = {

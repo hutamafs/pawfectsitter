@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Button, StyleSheet, Text, View , TextInput, TouchableWithoutFeedback , Keyboard , Image , TouchableOpacity, Alert} from 'react-native';
-import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
+import RadioForm from 'react-native-simple-radio-button';
 import axios from 'axios';
 import { addPet } from '../store/actions/index';
 import { useDispatch , useSelector } from 'react-redux';
-import { RNS3 } from 'react-native-aws3';
-// import DocumentPicker from 'react-native-document-picker';
 import * as ImagePicker from 'expo-image-picker';
 import logo from '../assets/logoDog.png';
 import * as firebase from 'firebase';
 import ApiKeys from './components/firebaseApi';
 
 
-const AddPet = () => {
+const AddPet = ({navigation}) => {
     const dispatch = useDispatch();
     const [gender,setGender] = useState('male');
     const [type,setType] = useState('dog');
@@ -20,7 +18,7 @@ const AddPet = () => {
     const[image,setImage] = useState('');
     const[age,setAge] = useState(0);
 
-    //const {access_token} = useSelector(state => state)
+    const {access_token} = useSelector(state => state)
 
     const gender_props = [
         {label: '♂️', value: 'male',textStyle:{marginRight:20} },
@@ -36,13 +34,11 @@ const AddPet = () => {
     if(!firebase.apps.length) { firebase.initializeApp(ApiKeys.FirebaseConfig); }
 
     const handleSubmit = () => {
-
         let fileType = image.substring(image.lastIndexOf(".") + 1);
         let formData = new FormData();
-        console.log(fileType,'ini filetype')
         
         formData.append('image',{
-            image,
+            uri:image,
             name: `photo.${fileType}`,
             type: `image/${fileType}`
         })
@@ -50,58 +46,21 @@ const AddPet = () => {
         formData.append('gender', gender);
         formData.append('type', type);
         formData.append('age', age);
-
     axios({
         url: 'http://192.168.1.3:3000/pets',
         method: 'POST',
-        headers:{access_token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYjBhNzM2NzBkM2U0M2RmODE1ZDZhZCIsImVtYWlsIjoidGFtYUBnbWFpbC5jb20iLCJpYXQiOjE2MDU1NDM5MTJ9.pb5pZsZiE_v7k5WRAvEHneXx9U871RbIURtKiuWkdYA',"Content-Type": "multipart/form-data"},
+        headers:{access_token,"Content-Type": "multipart/form-data"},
         
         data: formData,
         })
         .then(({data}) => {
-        console.log(data, '<<<<<<<RESPONYA');
-        //dispatch(setToken(res.data.access_token))
-        //navigation.replace('Home')
+        dispatch(addPet(data))
+        navigation.replace('PetList')
         })
         .catch((err) => {
         console.log(err, '<<<<<<<<<ERRRRRROOORRRRRR');
         })
-    }
-
-    // const handleSubmit = async () => {
-    //     if (image != null) {
-    //       // If file selected then create FormData
-    //       //const fileToUpload = image;
-    //       const data = new FormData();
-    //       data.append('name', name);
-    //       data.append('gender', gender);
-    //       data.append('type', type);
-    //       data.append('age', age);
-    //       data.append('image', image);
-    //       console.log(data,'ini data')
-    //       // Please change file upload URL
-    //       let res = await fetch(
-    //         'http://192.168.1.3:3000/pets',
-    //         {
-    //           method: 'post',
-    //           body: data,
-    //           headers: {
-    //             'Content-Type': 'multipart/form-data; ',
-    //             access_token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYjBhNzM2NzBkM2U0M2RmODE1ZDZhZCIsImVtYWlsIjoidGFtYUBnbWFpbC5jb20iLCJpYXQiOjE2MDU0MzAyMjV9.SicZdMhqgEQsWUbbKpg8YjMonqjZyV9m2hqWsCrb9wY'
-    //           },
-    //         }
-    //       )
-    //       let responseJson = await res.json();
-    //       console.log(responseJson,'ini response json')
-        //   if (responseJson.status == 1) {
-        //     alert('Upload Successful');
-        //   }
-        // } else {
-        //   alert('Please Select File first');
-        // }
-      //   }
-      // };
-      
+    }      
 
      const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -110,18 +69,8 @@ const AddPet = () => {
           aspect: [4, 3],
           quality: 1,
         });
-    
-        //console.log(result);
-    
+
         if (!result.cancelled) {
-             console.log(result,'ini result')
-            // uploadImage(result.uri,'test-image')
-            // .then(() => {
-            //     Alert.alert('success')
-            // })
-            // .catch(() => {
-            //     Alert.alert(error)
-            // })
             setImage(result.uri)
         }
       };
@@ -143,7 +92,7 @@ const AddPet = () => {
             >
              <Image
                 source={(image) ? {uri:image}:{uri: 'https://lh3.googleusercontent.com/proxy/W_fq5wVspFA3goJG22FNuX2nx204B0kalDUZqTmMBP4QznwrD0gHhcMbhe9WlC6OxzVmyZy-hm4pqT4YrCLUWgE2'}}
-                style={{ width: 80, height: 80, zIndex: 2}}
+                style={{ width: 150, height: 150, zIndex: 2,borderRadius:100}}
             />
             </TouchableOpacity>
             </View>
