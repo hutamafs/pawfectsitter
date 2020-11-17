@@ -38,10 +38,23 @@ const keeperSchema = new mongoose.Schema({
         required: [true,'keeper status is required']
     },
     address: {
-        type: String,
-        required: [true,'keeper address is required']
+        type: String
     },
-    review:[String]
+    latitude: {
+        type: Number
+    },
+    longitude: {
+        type: Number
+    },
+    review:[{
+<<<<<<< HEAD
+        user:String,
+        msg:String
+=======
+        user: String,
+        msg: String
+>>>>>>> development
+    }]
 });
 
 module.exports.Keeper = mongoose.model("Keeper", keeperSchema)

@@ -5,8 +5,6 @@ import axios from 'axios';
 import { addPet } from '../store/actions/index';
 import { useDispatch , useSelector } from 'react-redux';
 import * as ImagePicker from 'expo-image-picker';
-import * as firebase from 'firebase';
-import ApiKeys from './components/firebaseApi';
 import  TabBar  from './components/TabBottomNavbar'
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import Button from 'apsl-react-native-button'
@@ -18,7 +16,7 @@ const AddPet = ({navigation}) => {
     const [type,setType] = useState('dog');
     const[name,setName] = useState('');
     const[image,setImage] = useState('');
-    const[age,setAge] = useState(0);
+    const[age,setAge] = useState(null);
 
     const {access_token} = useSelector(state => state)
 
@@ -47,14 +45,12 @@ const AddPet = ({navigation}) => {
         formData.append('type', type);
         formData.append('age', age);
     axios({
-        url: 'http://192.168.8.102:3000/pets',
+        url: 'http://192.168.1.8:3000/pets',
         method: 'POST',
         headers:{access_token,"Content-Type": "multipart/form-data"},
-        
         data: formData,
         })
         .then(({data}) => {
-            console.log(data);
         dispatch(addPet(data))
         navigation.navigate('PetList')
         })

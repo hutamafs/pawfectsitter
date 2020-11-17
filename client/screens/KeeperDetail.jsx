@@ -1,19 +1,22 @@
 import React, { useEffect } from 'react';
 import {fetchKeeper} from '../store/actions/index';
 import { useDispatch , useSelector } from 'react-redux';
-import { View , Text , Image } from 'react-native';
+import { View , Text , Image, TouchableOpacity } from 'react-native';
 import logo from '../assets/logoDog.png';
 import { ScrollView } from 'react-native-gesture-handler';
 
-const KeeperDetail = (props) => {
+const KeeperDetail = ({navigation, route}) => {
     const dispatch = useDispatch();
-    const {id} = props.route.params;
+    const {id} = route.params;
     const {keeper} = useSelector(state => state)
-
-    console.log(keeper,'ini keeper')
+    
     useEffect(() => {
         dispatch(fetchKeeper(id))
     },[])
+
+    const toMaps = (keeperLatitude, keeperLongitude) => {
+        navigation.navigate('GMap', {latitude: keeperLatitude, longitude: keeperLongitude})
+    }
 
     const skills = (array) => {
         let answer = '';
@@ -89,6 +92,12 @@ const KeeperDetail = (props) => {
                            <Text style={{alignSelf:'center'}}> Weekly Rates</Text>
                            <Text style={{alignSelf:'center'}}>{keeper.price.weekly}</Text>
                         </View>
+                        <TouchableOpacity
+                        style={{ width: 150, height: 30, position: 'absolute', right: 10, bottom: 6.5, backgroundColor: '#BA826A', borderRadius: 10 }}
+                        onPress={() => toMaps(keeper.latitude, keeper.longitude)}
+                        >
+                            <Text style={{ color: 'white', textAlign: 'center', marginTop: 5 }}>Show Location </Text>
+                        </TouchableOpacity>
                     </View>
                     <View style={{marginTop:5}}>
                         <Text style={{fontSize:25}}>

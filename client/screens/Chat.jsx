@@ -37,6 +37,7 @@ export default function Chat({navigation, route}) {
   const onSend = useCallback((messages = []) => {
     firebaseSDK.send(messages)
     setMessages(previousMessages => GiftedChat.append(previousMessages, messages))
+    console.log(messages, '<<<<<ini');
   }, [])
   return (
     <>
