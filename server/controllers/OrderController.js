@@ -46,18 +46,15 @@ class OrderController {
             let order = await Order.findOne({_id:req.params.id});
             let keeper = await Keeper.findById(order.keeperId);
             let user = await User.findById(req.userData.id)
-            console.log(user, 'iniiii user');
-
+            
+            order.status = false;
             await order.save();
             let obj = {
                 user: user.name,
                 msg: review
             }
-            console.log('jbkjdjkfbkjdfjkbdkjf');
             await keeper.review.push(obj)
             // await keeper.save();
-            console.log(keeper, 'woyyyy keepr');
-            order.status = false;
             order.timeFinished = moment(new Date()).format('h:mm:ss a')
             order.dateFinished = moment(new Date()).format('DD MMM')
             //let order = await Order.findOneAndUpdate(req.params.id,false,{new:true});

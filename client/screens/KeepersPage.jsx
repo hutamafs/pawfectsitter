@@ -1,8 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, Button, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, Button, TouchableWithoutFeedback, Keyboard, LogBox } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchKeepers, fetchPets, setOrders } from '../store/actions';
+import { fetchKeepers, fetchPets, addOrders } from '../store/actions';
 import TabBar from './components/TabBottomNavbar';
 import Modal from 'react-native-modal';
 import { TextInput } from 'react-native-paper';
@@ -107,6 +107,8 @@ export default function KeepersPage({ route, navigation }) {
   }
 
   const handleSubmit = () => {
+    console.log(keeperId, '<<<<<<KEEEPRE IDDD');
+    console.log('MASUK SUBMIT');
     let payload = {
       pet_id: petId,
       harga: (Number(quantity) * Number(harga)),
@@ -126,7 +128,8 @@ export default function KeepersPage({ route, navigation }) {
       }
     })
       .then(({ data }) => {
-        dispatch(setOrders(data))
+        console.log('MASUK THEN');
+        dispatch(addOrders(data))
       })
       .catch(err => console.log(err))
 
@@ -134,14 +137,14 @@ export default function KeepersPage({ route, navigation }) {
     setQuantity('')
   }
 
-  //   const handlePetRadio = (e) => {
-  //     // setPetId(e.target[radio_props].value)
-  //     setPetId(e)
-  //   }
+    const handlePetRadio = (e) => {
+      // setPetId(e.target[radio_props].value)
+      setPetId(e)
+    }
 
-  //   const setRadioHarga = (value) => {
-  //     setHarga(value)
-  //   }
+    const setRadioHarga = (value) => {
+      setHarga(value)
+    }
 
 
   const stars = (rating) => {

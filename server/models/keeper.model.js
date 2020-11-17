@@ -47,13 +47,8 @@ const keeperSchema = new mongoose.Schema({
         type: Number
     },
     review:[{
-<<<<<<< HEAD
-        user:String,
-        msg:String
-=======
         user: String,
         msg: String
->>>>>>> development
     }]
 });
 
