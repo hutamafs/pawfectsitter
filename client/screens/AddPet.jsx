@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Button, StyleSheet, Text, View , TextInput, TouchableWithoutFeedback , Keyboard , Image , TouchableOpacity, Alert} from 'react-native';
+import {  StyleSheet, Text, View , TextInput, TouchableWithoutFeedback , Keyboard , Image , TouchableOpacity, Alert} from 'react-native';
 import RadioForm from 'react-native-simple-radio-button';
 import axios from 'axios';
 import { addPet } from '../store/actions/index';
 import { useDispatch , useSelector } from 'react-redux';
 import * as ImagePicker from 'expo-image-picker';
-import logo from '../assets/logoDog.png';
 import * as firebase from 'firebase';
 import ApiKeys from './components/firebaseApi';
+import  TabBar  from './components/TabBottomNavbar'
+import Icon from "@expo/vector-icons/MaterialCommunityIcons";
+import Button from 'apsl-react-native-button'
 
 
 const AddPet = ({navigation}) => {
@@ -21,17 +23,15 @@ const AddPet = ({navigation}) => {
     const {access_token} = useSelector(state => state)
 
     const gender_props = [
-        {label: '♂️', value: 'male',textStyle:{marginRight:20} },
-        {label: '♀️', value: 'female',style:{marginLeft:20} },
+        {label: '♂️', value: 'male' },
+        {label: '♀️', value: 'female' },
     ];
 
     const type_props = [
-        {label: '🐶', value: 'dog',textStyle:{marginRight:20} },
-        {label: '🦅', value: 'bird',style:{marginLeft:20} },
-        {label: '🐱', value: 'cat',style:{marginLeft:20} }
+        {label: 'Dog', value: 'dog',textStyle:{marginRight:20} },
+        {label: 'Bird', value: 'bird',style:{marginLeft:20} },
+        {label: 'Cat', value: 'cat',style:{marginLeft:20} }
     ];
-
-    if(!firebase.apps.length) { firebase.initializeApp(ApiKeys.FirebaseConfig); }
 
     const handleSubmit = () => {
         let fileType = image.substring(image.lastIndexOf(".") + 1);
@@ -50,12 +50,12 @@ const AddPet = ({navigation}) => {
         url: 'http://192.168.1.4:3000/pets',
         method: 'POST',
         headers:{access_token,"Content-Type": "multipart/form-data"},
-        
         data: formData,
         })
         .then(({data}) => {
+            console.log(data);
         dispatch(addPet(data))
-        navigation.replace('PetList')
+        navigation.navigate('PetList')
         })
         .catch((err) => {
         console.log(err, '<<<<<<<<<ERRRRRROOORRRRRR');
@@ -76,18 +76,67 @@ const AddPet = ({navigation}) => {
       };
 
     return (
-        <>
-        <View style={{display: 'flex', flexDirection: 'row', marginTop: 25}}>
-        <Image
-        source={logo}
-        style={{ width: 80, height: 80}}
-        />
-        <Text style={{fontSize: 20, marginTop: 25}}>Add Pet</Text>
+        <View
+             
+            style={{
+                backgroundColor:"#C8D1DA",
+                flex:1,
+            }}
+        >
+        <View style={{
+            // flexDirection: 'row', 
+            // marginTop: 25
+            backgroundColor:"#6661DB",
+               height:"10%",
+               borderBottomLeftRadius:20,
+               borderBottomRightRadius:20,
+               paddingHorizontal: 20
+            }}>
+        <View >
+            <Icon 
+                name="paw" 
+                color="black" 
+                size={40}
+                    style={[{  
+                        transform: [{ rotate: "0deg" }],
+                        position : 'absolute',
+                        marginTop : 25 ,
+                        color : "#102B3E",
+                        opacity : 0.9,
+                }]}
+            />
+                </View>
+        <Text style={{
+            fontSize: 20, 
+            marginTop: 35,
+            marginLeft : 50,
+            fontFamily : 'nunito'
+            }}>Add Pet</Text>
         </View>
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-             <View style={styles.container}>
-                 <View style={{backgroundColor: '#F9F8F6', borderRadius: 100, marginBottom: 30, zIndex: -1}}>
-            <TouchableOpacity style={{borderWidth: 0.1, margin: 10, borderRadius: 100, padding: 30, backgroundColor: 'white', zIndex: -1}}
+
+        
+        <TouchableWithoutFeedback 
+            onPress={Keyboard.dismiss} 
+            accessible={false}
+            >
+
+            <View 
+                style={styles.container}>
+                <View 
+                style={{
+                    backgroundColor: '#6661DB', 
+                    borderRadius: 20, 
+                    marginBottom: 40,
+                    marginTop : -80, 
+                    zIndex: -1}}>
+            <TouchableOpacity 
+                style={{
+                    borderWidth: 0.1, 
+                    margin: 10, 
+                    borderRadius: 100, 
+                    // padding: 30, 
+                    backgroundColor: '#fff', 
+                    zIndex: -1}}
             onPress={pickImage}
             >
              <Image
@@ -97,14 +146,14 @@ const AddPet = ({navigation}) => {
             </TouchableOpacity>
             </View>
                 <TextInput
-                style={styles.textInputStyle}
+                style={[styles.textInputStyle, { letterSpacing : 2 }]}
                 placeholder="Enter your Pet Name"
                 value={name}
                 onChangeText={ (text) => setName(text)}
                 required
                 />
                 <TextInput
-                style={styles.textInputStyle}
+                style={[styles.textInputStyle, { letterSpacing : 2 }]}
                 placeholder="Enter your Pet Age"
                 value={age}
                 keyboardType="numeric"
@@ -112,57 +161,79 @@ const AddPet = ({navigation}) => {
                 required
                 />
                 <View style={{flexDirection: "row", margin: 5}}>
+                    <Text
+                        style={{
+                            fontFamily:"nunito",
+                            fontSize:20,
+                            marginRight : 10
+                        }}
+                    >Gender : </Text>
                     <RadioForm
                         radio_props={gender_props}
                         initial={0}
                         formHorizontal={true}
                         labelHorizontal={true}
-                        buttonColor={'#2196f3'}
-                        borderWidth={1}
+                        buttonColor={'#6661DB'}
+                        borderWidth={10}
                         buttonSize={15}
                         buttonWrapStyle={{marginLeft: 10}}
                         onPress={(value) => setGender(value)}
-                        labelStyle={{paddingLeft:5,marginRight:15}}                        
+                        labelStyle={{paddingLeft:15,marginRight:15}}                        
                     />
                 </View>
                 <View style={{flexDirection: "row", margin: 5}}>
+                <Text
+                        style={{
+                            fontFamily:"nunito",
+                            fontSize:20,
+                            marginRight : 10
+                        }}
+                    >Type : </Text>
                     <RadioForm
                         radio_props={type_props}
                         initial={0}
                         formHorizontal={true}
                         labelHorizontal={true}
-                        buttonColor={'#2196f3'}
+                        buttonColor={'#6661DB'}
                         borderWidth={1}
                         buttonSize={15}
-                        buttonWrapStyle={{marginLeft: 10}}
+                        buttonWrapStyle={{marginLeft: 20}}
                         onPress={(value) => setType(value)}
                         labelStyle={{paddingLeft:5,marginRight:15}}                        
                     />
                 </View>
-                {/* {
-                    image && (
-                        <Image
-                        source={{uri:image}}
-                        style={{width:300,height:300}}
-                        />
-                    )
-                } */}
 
-                <TouchableOpacity
+                <Button
+                    title="Enter"
                     onPress={handleSubmit}
-                    style={styles.btnStyle}>
-                    <Text style={{ fontSize: 20, color: '#fff', textAlign: 'center', margin: 5 }}>Submit</Text>
-                </TouchableOpacity>
+                    style={{
+                        alignItems: "center",
+                        justifyContent: "center",
+                        height: 50,
+                        width: 200,
+                        borderRadius: 20,
+                        backgroundColor: "#6661DB",
+                        marginLeft: 130,
+                        padding : 20,
+                        borderColor: '#6661DB',
+                    }}>Submit
+                    
+                    
+                </Button>
             </View>
-        </TouchableWithoutFeedback>      
-        </> 
+        </TouchableWithoutFeedback>
+            
+        <TabBar 
+            navigation={navigation}
+          />
+        </View> 
     )
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#C8D1DA',
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -172,8 +243,12 @@ const styles = StyleSheet.create({
         height: 50,
         width: 300,
         borderRadius: 20,
-        paddingLeft: 20,
-        margin: 5
+        paddingLeft: 30,
+        margin: 5,
+        backgroundColor : '#fff',
+        fontFamily : 'nunito',
+        fontWeight:"bold",
+        fontSize:18,
     },
     btnStyle: {
         backgroundColor: 'orange',
