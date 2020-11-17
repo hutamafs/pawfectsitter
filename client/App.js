@@ -67,10 +67,12 @@ export default function App() {
                 options={{ title: 'History' }}
               /> 
               
-            
             <Stack.Screen name="PetList" component={PetList}
               options={{ title: 'PetList' }}
             />
+            <Stack.Screen name="Chat" component={Chat}
+              options={{ title: 'Chat' }}
+            /> 
             
 
             {/* <Stack.Screen name="Home" component={Home}
@@ -86,9 +88,7 @@ export default function App() {
             <Stack.Screen name="History" component={History}
               options={{ title: 'History' }}
             />
-            <Stack.Screen name="Chat" component={Chat}
-              options={{ title: 'Chat' }}
-            /> */}
+            */}
 
           </Stack.Navigator>
         </NavigationContainer>
