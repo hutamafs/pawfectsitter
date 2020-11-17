@@ -17,12 +17,12 @@ export default function TabBar({navigation, userData}) {
             width: 50,
             borderRadius: 20,
             marginTop : 15,
-            borderColor : "#102B3F",
+            borderColor : "#F4E3E3",
           }}
           accessibilityRole='button'
           onPress={() => navigation.navigate('Home')}
         >
-        <Icon name="home" color="#102B3F" size={40} />
+        <Icon name="home" color="#FF6B81" size={35} />
     </Button>
     <Button 
           style={{
@@ -32,13 +32,13 @@ export default function TabBar({navigation, userData}) {
             width: 50,
             borderRadius: 20,
             marginTop : 15,    
-            borderColor : "#102B3F",
+            borderColor : "#F4E3E3",
             marginLeft : 60,
           }}
           accessibilityRole='button'
           onPress={() => navigation.navigate('Order')}
         > 
-        <Icon name="book-outline" color="#102B3F" size={45}  />
+        <Icon name="book-outline" color="#FF6B81" size={35}  />
     </Button>
     <Button 
           style={{
@@ -48,7 +48,7 @@ export default function TabBar({navigation, userData}) {
             width: 50,
             borderRadius: 20,
             marginTop : 15,    
-            borderColor : "#102B3F",
+            borderColor : "#F4E3E3",
             marginLeft : 60,
           }}
           accessibilityRole='button'
@@ -56,7 +56,7 @@ export default function TabBar({navigation, userData}) {
             userData: userData
           })}
         > 
-        <Icon name="chat-processing" color="#102B3F" size={45} />
+        <Icon name="chat-processing" color="#FF6B81" size={35} />
     </Button>
     <Button 
           style={{
@@ -65,14 +65,14 @@ export default function TabBar({navigation, userData}) {
             height: 50,
             width: 50,
             borderRadius: 20,
-            borderColor : "#102B3F",
+            borderColor : "#F4E3E3",
             marginTop : 15,
             marginLeft : 60,
           }}
           accessibilityRole='button'
           onPress={() => navigation.navigate('History')}
         > 
-        <Icon name="history" color="#102B3F" size={45} />
+        <Icon name="history" color="#FF6B81" size={35} />
     </Button>
     </View>
   )
@@ -81,15 +81,13 @@ export default function TabBar({navigation, userData}) {
 const styles = StyleSheet.create({
   tabBottom: {
     display: "flex",
-    backgroundColor: '#6964E2',
-    borderColor : "#102B3F",
-    // backgroundColor: '#F7E7D3',
+    backgroundColor: '#F4E3E3',
+    borderColor : "#F4E3E3",
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
-    borderTopLeftRadius : 30,
-    borderTopRightRadius : 30,
-    height : "9%" ,
-    marginBottom : -3,
+    borderRadius : 30,
+    height : "10%" ,
+    marginBottom : 3,
   }
 });
