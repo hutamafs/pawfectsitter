@@ -17,14 +17,13 @@ export default function Order({navigation}) {
 
   useEffect(() => {
     dispatch(fetchOrders(access_token))
-  },[])
+  },[orders])
 
   const handlePress = (id) => {
-    console.log(id );
     axios({
-      url : "http://192.168.43.190:3000/orders/" + id,
+      url : "http://192.168.1.3:3000/orders/" + id,
       method : "PUT",
-      headers : access_token
+      headers : {access_token}
     })
     .then(data=> {
       console.log(data ,'MASUK ORDER CLIENT');
@@ -33,6 +32,16 @@ export default function Order({navigation}) {
       // )
     })
     .catch(err => console.log(err))
+  }
+
+  const countOrders = () => {
+    let newCount = 0;
+    orders.map(el => {
+      if(el.status === true) {
+        newCount++
+      }
+    })
+    return newCount;
   }
 
   const backToHome = () => {
@@ -330,7 +339,7 @@ export default function Order({navigation}) {
                       fontSize:15,
                       color:"#6B6C6E",
                       marginLeft : 20,
-                  }}>{orders.length} Order</Text>
+                  }}>{countOrders()} Order</Text>
 
              </View>
              <View style={{width:"80%", alignItems:"flex-end"}}>
@@ -366,7 +375,8 @@ export default function Order({navigation}) {
               />
             </View>
           {orders &&
-            orders         
+            orders
+            .filter(el => el.status === true)        
             .map(el => {
               return(
                 <View 
