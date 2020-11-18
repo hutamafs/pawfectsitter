@@ -65,7 +65,7 @@ class FirebaseSDK {
   }
 
   parse = message => {
-      const {user, text, timestamp} = message.val()
+      const {text, timestamp} = message.val()
       const {key: _id} = message
       return (
           _id,timestamp,text,user
@@ -83,6 +83,7 @@ class FirebaseSDK {
         const message = {
         text: item.text,
         timestamp: firebase.database.ServerValue.TIMESTAMP,
+        // user: item.user
         }
         this.ref.push(message)
     })
@@ -105,7 +106,14 @@ class FirebaseSDK {
   }
 }
 
+export const setListener = (endpoint, updaterFn) => {
+	firebase.database().ref(endpoint).on('value', updaterFn);
+	return () => firebase.database().ref(endpoint).off();
+}
 
+export const pushData = (endpoint, data) => {
+	return firebase.database().ref(endpoint).push(data);
+}
 
 const firebaseSDK = new FirebaseSDK();
 export default firebaseSDK;

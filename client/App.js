@@ -17,6 +17,8 @@ import Order from './screens/Order'
 import Chat from './screens/Chat'
 import History from './screens/History'
 import GMap from './screens/gMap'
+import ChatRoom from './screens/ChatRoom'
+
 
 import * as Font from 'expo-font'
 import { AppLoading } from 'expo'
@@ -63,6 +65,9 @@ export default function App() {
             <Stack.Screen name="Register" component={Register} 
               options={{title: 'Register'}}
             />
+             <Stack.Screen name="Login" component={Login} 
+              options={{title: 'Login'}}
+            />
             
             <Stack.Screen name="Home" component={Home} 
               options={{title: 'Home'}}
@@ -86,6 +91,12 @@ export default function App() {
                 options={{ title: 'PetList' }}
               />
             <Stack.Screen name="Chat" component={Chat}
+              options={{ title: 'Chat' }}
+            /> 
+            <Stack.Screen name="GMap" component={GMap}
+              options={{ title: 'Chat' }}
+            /> 
+            <Stack.Screen name="ChatRoom" component={ChatRoom}
               options={{ title: 'Chat' }}
             /> 
             </Stack.Navigator>

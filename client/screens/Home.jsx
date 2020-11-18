@@ -12,7 +12,7 @@ import { useDispatch } from 'react-redux';
 
 
 const Home = ({navigation, route}) => {
-  const {userData} = route.params
+//   const {userData} = route.params
     const dispatch = useDispatch()
 
     const handleLogout = () => {
@@ -324,7 +324,6 @@ const Home = ({navigation, route}) => {
                 </ScrollView>    
             <TabBar 
             navigation={navigation} 
-            userData={userData}
             />               
         </View>
     )

@@ -23,9 +23,7 @@ export default function Login({navigation}) {
 			email: email,
 			avatar: ''
 		}
-		navigation.replace('Home', {
-      userData: obj
-    });
+		navigation.replace('Home');
 	};
 
 	const loginFailed = () => {
@@ -34,7 +32,7 @@ export default function Login({navigation}) {
 
   const handleLogin = async () => {
     axios({
-      url: 'http://192.168.1.8:3000/users/login',
+      url: 'http://192.168.1.4:3000/users/login',
       method: 'POST',
       data: {
         email,password
