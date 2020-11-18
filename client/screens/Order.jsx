@@ -4,7 +4,6 @@ import { useDispatch , useSelector } from 'react-redux';
 import {fetchOrders, addHistory} from '../store/actions'
 import {TextInput,ScrollView} from 'react-native-gesture-handler'
 import  TabBar  from './components/TabBottomNavbar'
-import Button from 'apsl-react-native-button'
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import axios from 'axios'
 import Modal from 'react-native-modal';
@@ -224,6 +223,7 @@ export default function Order({navigation}) {
   }
   // AKHIR DARI CONDITIONAL RENDERING
   
+
 
   return (
     

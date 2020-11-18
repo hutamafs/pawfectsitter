@@ -7,13 +7,17 @@ import  TabBar  from './components/TabBottomNavbar'
 import KeepList from './components/KeepList'
 import Button from 'apsl-react-native-button'
 import logo from '../assets/logoDog.png'
-import { setToken } from '../store/actions';
-import { useDispatch } from 'react-redux';
+import { fetchKeepers, setToken } from '../store/actions';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const Home = ({navigation, route}) => {
-
+    const {keepers} = useSelector(state => state)
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(fetchKeepers())
+    }, [])
 
     const handleLogout = () => {
         dispatch(setToken(''))
@@ -253,21 +257,26 @@ const Home = ({navigation, route}) => {
 
                    </View>
                </View>
-
-
-                             
-               
-
-                
-                <ScrollView>   
-                    <KeepList
-                        img={require('../assets/employee.png')}
-                        name="John Doe "
-                        rating='9.8'
-                        bg="#F4F4F4"
-                        font="#2F3542"
-                    />
-                    <KeepList
+                <ScrollView>
+                    {
+                        keepers
+                        .filter(el => el.rating > 4)
+                        .sort((a, b) => a.rating < b.rating)
+                        .map(el => {
+                            return (
+                                <KeepList
+                                    key={el._id}
+                                    img={el.image}
+                                    name={el.name}
+                                    rating={el.rating}
+                                    address={el.address}
+                                    bg="#F4F4F4"
+                                    font="#2F3542"
+                                />
+                            )
+                        })
+                    }   
+                    {/* <KeepList
                         img={require('../assets/employee.png')}
                         name="Akang Surasep"
                         rating='9.8'
@@ -301,7 +310,7 @@ const Home = ({navigation, route}) => {
                         rating='7.8'
                         bg="#F4F4F4"
                         font="#2F3542"
-                    />
+                    /> */}
                 </ScrollView>    
             <TabBar 
             navigation={navigation}
