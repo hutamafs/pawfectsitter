@@ -37,7 +37,7 @@ export default function History({route,navigation}) {
   const listCategories = () => {
     let types = {
       0:'Keeper Name',
-      1:'Date Created'
+      1:'Date Finished'
     }
     let categories = [];
     for(let i = 0 ; i<2 ; i++) {
@@ -72,46 +72,26 @@ export default function History({route,navigation}) {
 
   return (
     <View style={{
-      backgroundColor:"#F4F4F4",
+      backgroundColor:"white",
       flex:1,
   }}>
      <View style={{
          backgroundColor:"#F4E3E3",
-         height:"14%",
-         borderBottomLeftRadius:30,
-         borderBottomRightRadius:30,
+         height:"13%",
+         borderBottomLeftRadius:20,
+         borderBottomRightRadius:20,
          paddingHorizontal: 25,
-         marginBottom : -24,
      }}>
-       <Button 
-        style={{
-          width : 40,
-          height : 40,
-          marginTop : 35,
-          borderColor : "#FF6B81",
-          padding : 2
-        }}
-          onPress={backToHome}
-        >
-              <Icon 
-                name="arrow-left-circle" 
-                color="black" 
-                size={30}
-                style={{
-                position : 'absolute',
-                color : "#FF6B81",
-              }}
-              />
-            </Button>
          <View style={{
              flexDirection:"row",
              marginTop:10,
              width:"100%"
          }}>
-             <View style={{width:"100%",alignItems:'center'}}>
+             <View style={{width:"100%"}}>
                   <Text style={{
                     fontSize: 25,
-                    marginTop : -55,
+                    marginTop:25,
+                    paddingTop:15,
                     color:"#2F3542",
                     fontWeight:"normal",
                     fontFamily : 'nunito'
@@ -119,26 +99,8 @@ export default function History({route,navigation}) {
              </View>
         </View>
      </View>
-
-
-     
-
-     <LinearGradient
-      colors={["rgba(255,107,129,0.3)", "transparent"]}
-      style={{
-          left:0,
-          right:0,
-          height:80,
-          marginTop: -10
-      }}
-      >
-         
-      </LinearGradient>
-
-      {/* <Text>{JSON.stringify(history)}</Text> */}
-         <View style={{display:'flex',flexDirection:'row',height:30}}>
+         <View style={{display:'flex',flexDirection:'row',height:30,marginTop:25}}>
             <Text style={{
-              paddingRight:15,
               marginLeft:25,
               elevation : 20,
               fontSize:20,
@@ -167,14 +129,14 @@ export default function History({route,navigation}) {
                     style={{
                       display:'flex',
                       flexDirection:'row',
-                      flex:0.3,
                       borderRadius:10,
                       borderBottomColor:'black',
-                      paddingBottom: 3,
-                      width:350,
-                      height:125,
-                      marginVertical:20,
-                      borderBottomWidth:0.5
+                      paddingBottom: 4,
+                      width:375,
+                      height:150,
+                      position:'relative',
+                      marginVertical:15,
+                      backgroundColor:'#F4F4F4',
                       }}>
                     <View style={{
                       paddingHorizontal:10,
@@ -185,13 +147,23 @@ export default function History({route,navigation}) {
                       source={{uri:el.keeperImage}} 
                       style={{ 
                         width: 100, 
-                        height: 100, 
+                        height: 120, 
                         borderColor: 'white',
-                        borderRadius:20 ,
-                        marginRight : 20
+                        marginRight : 20,
+                        marginLeft:5,
+                        borderRadius:10
                         }}  />
                     </View>
+                    <Text style={{
+                    color: '#00587a',
+                    fontWeight:'bold',
+                    position:'absolute',
+                    right:10,
+                    top:15}}
+                    > 
+                    {el.dateCreated}
                     
+                </Text> 
                     <View 
                     style={{
                       display:'flex',
@@ -215,16 +187,16 @@ export default function History({route,navigation}) {
                       <Text 
                       style={{
                         color:'black',
-                        fontSize:13,
+                        fontSize:15,
                         fontFamily:"nunito",
                         marginBottom: 5
                       }}
-                        >In Charge of : {el.petName} </Text>
+                        >Pet: {el.petName} </Text>
                     </View>
                     
                     <View 
                     style={{
-                      flex:0.3,
+                      flex:0.5,
                       display:'flex',
                       flexDirection:'column'}}> 
                       

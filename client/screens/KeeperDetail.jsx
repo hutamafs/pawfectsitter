@@ -1,27 +1,27 @@
 import React, { useEffect } from 'react';
-import {fetchKeeper} from '../store/actions/index';
-import { useDispatch , useSelector } from 'react-redux';
-import { View , Text , Image, TouchableOpacity , Alert } from 'react-native';
+import { fetchKeeper } from '../store/actions/index';
+import { useDispatch, useSelector } from 'react-redux';
+import { View, Text, Image, TouchableOpacity, Alert } from 'react-native';
 import logo from '../assets/logoDog.png';
 import { ScrollView } from 'react-native-gesture-handler';
 
-const KeeperDetail = ({navigation, route}) => {
+const KeeperDetail = ({ navigation, route }) => {
     const dispatch = useDispatch();
-    const {id} = route.params;
-    const {keeper} = useSelector(state => state)
-    
+    const { id } = route.params;
+    const { keeper } = useSelector(state => state)
+
     useEffect(() => {
         dispatch(fetchKeeper(id))
-    },[])
-    
+    }, [])
+
     const toMaps = (keeperLatitude, keeperLongitude) => {
-        navigation.navigate('GMap', {latitude: keeperLatitude, longitude: keeperLongitude})
+        navigation.navigate('GMap', { latitude: keeperLatitude, longitude: keeperLongitude })
     }
 
     const skills = (array) => {
         let answer = '';
-        for(let i = 0 ; i<array.length ; i++) {
-            if(i == array.length - 1) {
+        for (let i = 0; i < array.length; i++) {
+            if (i == array.length - 1) {
                 answer += `${array[i]}`
             } else {
                 answer += `${array[i]},`
@@ -31,7 +31,7 @@ const KeeperDetail = ({navigation, route}) => {
     }
     const reviews = (array) => {
         let reviewMessages = [];
-        for(let i = 0 ; i<array.length ; i++) {
+        for (let i = 0; i < array.length; i++) {
             reviewMessages.push(<View
                 key={i}
                 display='flex'
@@ -52,7 +52,7 @@ const KeeperDetail = ({navigation, route}) => {
             <Text style={{position:'absolute',right:20,top:10}}>{array[i].timeCreated}</Text>
                 </View>)
         }
-        
+
         return reviewMessages;
     }
 
@@ -64,13 +64,15 @@ const KeeperDetail = ({navigation, route}) => {
             </View>
             {keeper._id && <View style={{display:'flex',marginTop:20}}>
                     <Image
-                    source={{uri:keeper.image}}
-                    style={{display:'flex',alignItems:'center',height:300,resizeMode:'contain',marginTop:3,shadowOpacity: 0.37,
-                    shadowRadius: 7.49,shadowColor: "#000",
-                    shadowOffset: {
-                    width: 0,
-                    height: 8,
-                    }}}
+                        source={{ uri: keeper.image }}
+                        style={{
+                            display: 'flex', alignItems: 'center', height: 300, resizeMode: 'contain', marginTop: 3, shadowOpacity: 0.37,
+                            shadowRadius: 7.49, shadowColor: "#000",
+                            shadowOffset: {
+                                width: 0,
+                                height: 8,
+                            }
+                        }}
                     />
                     <View>
                     </View>
@@ -110,16 +112,17 @@ const KeeperDetail = ({navigation, route}) => {
                         <Text style={{fontSize:25}}>
                             Reviews :
                         </Text>
-                    {(keeper.review.length == 0) ? <Text style={{fontSize:15}}> {keeper.name} has no review yet </Text> :
-                        reviews(keeper.review)
-                    }
+                            <ScrollView>
+                                {(keeper.review.length == 0) ? <Text style={{ fontSize: 15 }}> {keeper.name} has no review yet </Text> :
+                                    reviews(keeper.review)
+                                }
+                            </ScrollView>
+                        </View>
+
                     </View>
+                {/* </ScrollView> */}
+            </View>}
 
-                </View>
-                </View>}
-
-                
-            
         </View>
             </ScrollView>
     )
