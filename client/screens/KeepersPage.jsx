@@ -312,8 +312,7 @@ export default function KeepersPage({ route, navigation }) {
                 return (
                   <TouchableOpacity onPress={() => toDetail(el._id)} key={el._id} style={{ display: 'flex', flexDirection: 'row', flex: 0.3, borderRadius: 10, borderBottomColor: 'black', width: 350, height: 150, marginVertical: 10, borderWidth: 0.6, borderColor: 'red' }}>
                     <View style={{ position: 'absolute', top: 20, right: 10}}>
-                      <Text style={{ fontWeight: 'bold' }}> Rp {el.price.hourly.toLocaleString().replace
-                      (',', '.')}/ hr </Text>
+                      <Text style={{ fontWeight: 'bold' }}> Rp {el.price.hourly.toLocaleString().replace(',', '.')}/ hr </Text>
                       {/* <Text style={{ fontWeight: 'bold' }}> Rp {el.price.daily.toLocaleString().replaceAll(',', '.')} </Text>
                       <Text style={{ fontWeight: 'bold' }}> Rp {el.price.weekly.toLocaleString().replaceAll(',', '.')} </Text> */}
                     </View>

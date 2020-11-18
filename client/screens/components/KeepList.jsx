@@ -3,7 +3,7 @@ import {Text,TouchableOpacity, View,Image} from 'react-native'
 
 
 export default function KeepList(props){
-        const {img,name ,rating ,bg ,font } = props
+        const {img, name ,rating, address ,bg ,font } = props
         return(
             <View
                 style={{
@@ -18,7 +18,7 @@ export default function KeepList(props){
                 }}
             >
                     <Image
-                        source={img}
+                        source={{uri: img}}
                         style={{width:90,height:90}}
                     />
 
@@ -39,7 +39,16 @@ export default function KeepList(props){
                              marginTop : 8
                          }}>
                             Rating : {rating}
-                         </Text>        
+                         </Text>
+                         <Text style={{
+                             color: font,
+                             fontFamily:"nunito",
+                             fontSize:15,
+                             paddingHorizontal:10,
+                             marginTop : 8
+                         }}>
+                            Adddress : {address}
+                         </Text>         
                     </View>
             </View>
         )
