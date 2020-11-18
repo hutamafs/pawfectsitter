@@ -104,7 +104,9 @@ export default function KeepersPage({ route, navigation }) {
 
   const handleCancel = () => {
     setModalVisible(!isModalVisible);
+    setQuantity('')
   }
+
   const total=Number(quantity) * Number(harga)
   // const totalLocal = Number(total).toLocaleString()
   // console.log(totalLocal, 'line 110')
