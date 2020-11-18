@@ -11,8 +11,15 @@ import Button from 'apsl-react-native-button'
 import bird from '../assets/bird2.png'
 
 export default function PetList({ navigation }) {
+  const [type, setType] = useState("All")
   const dispatch = useDispatch()
   const { access_token, pets } = useSelector(state => state)
+
+  const filterPet = (animals = [], type) => 
+  !animals || type === 'All' ?
+  animals :
+  animals.filter(animal => animal.type.toLowerCase() === type.toLowerCase())
+
   useEffect(() => {
     dispatch(fetchPets(access_token))
   }, [])
@@ -34,7 +41,6 @@ export default function PetList({ navigation }) {
           flexDirection: "row",
           alignItems: "center",
           marginTop: 45,
-          paddingTop:35,
           width: "30%",
           height:50,
           justifyContent:'center',
@@ -81,6 +87,7 @@ export default function PetList({ navigation }) {
 
         {/* button disamping kiri */}
         <Button
+
             style={{
               alignItems: "center",
               justifyContent: "center",
@@ -92,6 +99,8 @@ export default function PetList({ navigation }) {
               borderWidth : 2,
               marginRight : 20
             }}
+            onPress={() => setType('dog')}
+            
         >
           <Icon 
             name="dog" 
@@ -109,8 +118,10 @@ export default function PetList({ navigation }) {
               borderColor: '#FF6B81',
               borderWidth : 2,
               marginRight : 20
-
             }}
+            onPress={() => setType('cat')}
+
+
           >
             <Icon 
               name="cat" 
@@ -128,8 +139,10 @@ export default function PetList({ navigation }) {
               borderColor: '#FF6B81',
               borderWidth : 2,
               marginRight : 20
-
             }}
+            onPress={() => setType('bird')}
+
+
           >
             <Image source={bird} 
               style={{ 
@@ -153,7 +166,7 @@ export default function PetList({ navigation }) {
         }}
         >
        
-        {pets.map((pet,i) => {
+        {filterPet(pets, type).map((pet,i) => {
           return (
             <View
             key={i}
