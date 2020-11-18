@@ -88,7 +88,7 @@ const KeeperDetail = ({ navigation, route }) => {
                             Lives in {keeper.address}
                         </Text>
                         <TouchableOpacity
-                        style={{ width: 150, height: 30, position: 'absolute', right: 10, bottom: 6.5, backgroundColor: '#BA826A', borderRadius: 10 }}
+                        style={{ width: 150, height: 30, position: 'absolute', right: 10, bottom: 6.5, backgroundColor: '#FF6B81', borderRadius: 10 }}
                         onPress={() => toMaps(keeper.latitude, keeper.longitude)}
                         >
                             <Text style={{ color: 'white', textAlign: 'center', marginTop: 5 }}>Show Location </Text>
@@ -122,7 +122,6 @@ const KeeperDetail = ({ navigation, route }) => {
                     </View>
                 {/* </ScrollView> */}
             </View>}
-
         </View>
             </ScrollView>
     )

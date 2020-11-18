@@ -70,6 +70,204 @@ export default function History({route,navigation}) {
     return num
   }
 
+  if ( orders.length == 0 ){
+    return (
+      <View style={{
+        backgroundColor:"#C8D1DA",
+        flex:1,
+      }}>
+       <View style={{
+           backgroundColor:"#6661DB",
+           height:"11%",
+           borderBottomLeftRadius:20,
+           borderBottomRightRadius:20,
+           paddingHorizontal: 25,
+           marginBottom : -24,
+          }}>
+          <Button 
+          style={{
+            width : 30,
+            height : 30,
+            marginTop : 35,
+            borderColor : "#6661DB"
+          }}
+            onPress={backToHome}
+          >
+                <Icon 
+                  name="arrow-left-circle" 
+                  color="black" 
+                  size={50}
+                  style={[{  
+                  transform: [{ rotate: "0deg" }],
+                  position : 'absolute',
+                  color : "#102B3E",
+                }]}
+                />
+              </Button>
+           <View style={{
+               flexDirection:"row",
+               marginTop:10,
+               width:"100%"
+           }}>
+               <View style={{width:"100%",backgroundColor:'black'}}>
+                    <Text style={{
+                      fontSize: 15,
+                      marginTop : -50,
+                      color:"#0F2A3C",
+                      fontWeight:"normal",
+                      fontFamily : 'nunito',
+                    }}> Order List </Text>
+               </View>
+          </View>
+       </View>
+           <View style={{
+               flexDirection:"row",
+               paddingHorizontal:20,
+               width:"100%",
+               alignItems:"center",
+               marginBottom : 30,
+               marginTop : 33,
+           }}>
+               <View style={{width:"50%"}}>
+                    <Text style={{
+                        fontWeight:"bold",
+                        fontSize:15,
+                        color:"#6B6C6E",
+                        marginLeft : 20,
+                    }}>{localOrders.length} Order</Text>
+  
+               </View>
+               <View style={{width:"80%", alignItems:"flex-end"}}>
+               </View>
+          
+           </View>
+           <View >
+                        <Icon 
+                            name="paw" 
+                            color="black" 
+                            size={80}
+                            style={[{  
+                            transform: [{ rotate: "25deg" }],
+                            marginTop : -20,
+                            marginLeft : 130,
+                            position : "absolute",
+                            color : "#102B3E",
+                            opacity : 0.1,
+                        }]}
+                        />
+                </View>     
+          
+                <View >
+                        <Icon 
+                            name="paw" 
+                            color="black" 
+                            size={80}
+                            style={[{  
+                            transform: [{ rotate: "25deg" }],
+                            marginTop : 10,
+                            marginLeft : 390,
+                            position : "absolute",
+                            color : "#102B3E",
+                            opacity : 0.1,
+                        }]}
+                        />
+                </View> 
+                <View >
+                        <Icon 
+                            name="paw" 
+                            color="black" 
+                            size={80}
+                            style={[{  
+                            transform: [{ rotate: "25deg" }],
+                            marginTop : 260,
+                            marginLeft : 190,
+                            position : "absolute",
+                            color : "#102B3E",
+                            opacity : 0.1,
+                        }]}
+                        />
+                </View>
+                <View >
+                        <Icon 
+                            name="paw" 
+                            color="black" 
+                            size={80}
+                            style={[{  
+                            transform: [{ rotate: "25deg" }],
+                            marginTop : 370,
+                            marginLeft : 390,
+                            position : "absolute",
+                            color : "#102B3E",
+                            opacity : 0.1,
+                        }]}
+                        />
+                </View> 
+            <View 
+              style={{
+                height : "92%",
+                alignItems : 'center',
+                justifyContent :'center',
+                marginTop : -160
+              }}  
+              >
+            <Icon 
+                  name="dog-side" 
+                  color="#102B3E" 
+                  size={250}
+                  style={[{  
+                  transform: [{ rotate: "0deg" }],
+                  color : "#102B3E",
+                  opacity : 0.4
+                }]}
+                />
+                <Text
+                  style={{
+                    fontFamily : 'nunito',
+                    fontSize : 20,
+                    opacity: 0.4
+                  }}
+                >Sorry, You Don't have a Order !</Text>
+            </View>
+            <View >
+                        <Icon 
+                            name="paw" 
+                            color="black" 
+                            size={80}
+                            style={[{  
+                            transform: [{ rotate: "25deg" }],
+                            marginTop : -140,
+                            marginLeft : 220,
+                            position : "absolute",
+                            color : "#102B3E",
+                            opacity : 0.1,
+                        }]}
+                        />
+                </View>
+            <View >
+                        <Icon 
+                            name="paw" 
+                            color="black" 
+                            size={80}
+                            style={[{  
+                            transform: [{ rotate: "25deg" }],
+                            marginTop : -290,
+                            position : "absolute",
+                            color : "#102B3E",
+                            opacity : 0.1,
+                        }]}
+                        />
+                </View>
+        <TabBar 
+        navigation={navigation} 
+        style={{
+        }} />               
+    </View>
+          
+    )
+    
+  }
+
+
   return (
     <View style={{
       backgroundColor:"white",
@@ -206,7 +404,7 @@ export default function History({route,navigation}) {
                         fontSize:15,
                         fontFamily:"nunito",    
                       }}
-                        >Billed : Rp. {(el.quantity*el.price).toLocaleString().replaceAll(',','.')},00</Text>
+                        >Billed : Rp. {(el.quantity*el.price).toLocaleString().replace(',','.')},00</Text>
                     </View>
                   </View>
                 </View>

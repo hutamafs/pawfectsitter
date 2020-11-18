@@ -61,24 +61,22 @@ export default function Login({navigation}) {
     <View style={styles.container}>
       <View 
       style={{
-        display:'flex',
-        flexDirection: "column",
+        flexDirection: "row",
         marginTop : -100,
-        marginTop:100,
-        alignItems:'center',
-        justifyContent:'center'
       }}>
         <Image source={logoKaki} 
         style={{ 
-          width: 100, 
-          height: 250,
+          width: 150, 
+          height: 150,
+          marginLeft : 10,
         }} />
         <Text style={[
           styles.textStyle , {
             marginTop : 39,
+            marginLeft : -50,
             color: '#2F3542',
-            fontSize : 40
-           }]}>Pawfect</Text>
+            fontSize : 35
+           }]}>pawfect sitter</Text>
       </View>
       <View style={styles.middle}>
         <View>
@@ -137,21 +135,20 @@ export default function Login({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1, 
+    padding : 40 ,
     backgroundColor: '#F4E3E3',
     justifyContent: 'center',
     fontFamily : 'nunito'
   },
   middle : {
-    marginTop:30,
     alignItems: 'center',
     justifyContent: 'center',
   },
   bottom : {
     fontFamily : 'nunito',
-    alignItems:'center'
   },  
   formInput: {
-    width: 250,
+    width: 400,
     height : 50,
     borderWidth: 2,
     marginBottom : 10,
@@ -159,14 +156,13 @@ const styles = StyleSheet.create({
     paddingLeft : 30,
     fontSize : 15,
     color : 'black',
+    textTransform : 'capitalize',
     fontWeight : '800',
   },
   buttonStyle7 : {
     borderColor: '#2F3542',
     backgroundColor: '#2F3542',
     marginTop : 5,
-    width:250,
-    alignSelf:'center',
     borderRadius: 10,
   },
   textStyle : {
