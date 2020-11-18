@@ -9,6 +9,7 @@ import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { LinearGradient } from 'expo-linear-gradient'
 import Button from 'apsl-react-native-button'
 import bird from '../assets/bird2.png'
+import dogTidur from '../assets/dogPetList.png'
 
 export default function PetList({ navigation }) {
   const [type, setType] = useState("All")
@@ -24,6 +25,167 @@ export default function PetList({ navigation }) {
     dispatch(fetchPets(access_token))
   }, [])
 
+  // Kondisional rendering
+  if ( pets == 0){
+    return (
+      <View style={{
+        backgroundColor: "#FFF",
+        flex: 1
+      }}>
+        <View style={{
+          backgroundColor: "#F4E3E3",
+          height: "13%",
+          borderBottomLeftRadius: 20,
+          borderBottomRightRadius: 20,
+          paddingHorizontal: 20,
+        }}>
+  
+          <View style={{
+            flexDirection: "row",
+            alignItems: "center",
+            marginTop: 45,
+            width: "30%",
+            height:50,
+            justifyContent:'center',
+            borderRadius:30
+          }}>
+            <Text 
+                style={{
+                    fontFamily : 'nunito',
+                    color : "#2F3542",
+                    fontSize : 25
+                }}
+            >Pet List</Text>
+          </View>
+        </View>
+  
+        <View
+          style={{
+            flexDirection : "row",
+            marginStart : 60,
+            marginTop : 10,
+          }}
+        >
+          <Text
+            style={{
+              fontFamily : 'nunito',
+              marginTop : 20,
+              marginLeft : -20,
+              fontSize : 20,
+              marginRight : 20
+            }}
+          >Filter By : </Text>
+          <Button
+  
+              style={{
+                alignItems: "center",
+                justifyContent: "center",
+                height: 60,
+                width: 60,
+                borderRadius: 20,
+                backgroundColor: "#F4E3E3",
+                borderColor: '#FF6B81',
+                borderWidth : 2,
+                marginRight : 20
+              }}
+              onPress={() => setType('dog')}
+              
+          >
+            <Icon 
+              name="dog" 
+              color="#FF6B81" 
+              size={35} />
+            </Button>
+            <Button
+              style={{
+                alignItems: "center",
+                justifyContent: "center",
+                height: 60,
+                width: 60,
+                borderRadius: 20,
+                backgroundColor: "#FF6B81",
+                borderColor: '#FF6B81',
+                borderWidth : 2,
+                marginRight : 20
+              }}
+              onPress={() => setType('cat')}
+  
+  
+            >
+              <Icon 
+                name="cat" 
+                color="#F4E3E3" 
+                size={35} />
+            </Button>
+            <Button
+              style={{
+                alignItems: "center",
+                justifyContent: "center",
+                height: 60,
+                width: 60,
+                borderRadius: 20,
+                backgroundColor: "#F4E3E3",
+                borderColor: '#FF6B81',
+                borderWidth : 2,
+                marginRight : 20
+              }}
+              onPress={() => setType('bird')}
+  
+  
+            >
+              <Image source={bird} 
+                style={{ 
+                width: 180, 
+                height: 180,
+                marginTop : 48,
+                marginLeft : 30
+                }} />
+            </Button>
+        </View>
+        
+  
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          style={{
+            height: 700,
+            marginLeft : 20,
+            marginBottom : 10
+          }}
+          >
+          <View>
+
+            
+          <Image
+            source={dogTidur}
+            style={{
+              width: 450, 
+              height: 400,
+            }}
+          ></Image>
+          <Text
+            style={{
+              fontFamily : 'nunito',
+              fontSize : 20,
+              marginLeft : 20
+            }}
+            >
+            Please , add Pet List now . . .  
+          </Text>    
+          </View> 
+        </ScrollView>
+        <TabBar
+          navigation={navigation}
+        />
+      </View>
+    )
+  }
+  // akhir dari condisional rendering
+
+
+
+
+  
   return (
     <View style={{
       backgroundColor: "#FFF",
@@ -34,47 +196,33 @@ export default function PetList({ navigation }) {
         height: "13%",
         borderBottomLeftRadius: 20,
         borderBottomRightRadius: 20,
-        paddingHorizontal: 20
+        paddingHorizontal: 20,
       }}>
 
         <View style={{
           flexDirection: "row",
           alignItems: "center",
-          marginTop: 25,
-          width: "100%"
+          marginTop: 45,
+          width: "30%",
+          height:50,
+          justifyContent:'center',
+          borderRadius:30
         }}>
-                <Text 
-                    style={{
-                        marginTop : 25,
-                        marginLeft:55,
-                        fontFamily : 'nunito',
-                        color : "#2F3542",
-                        fontSize : 22
-                    }}
-                >Pet List</Text>
-          <View style={{ width: "50%", alignItems: "flex-end" }}>
-
-          </View>
+          <Text 
+              style={{
+                  fontFamily : 'nunito',
+                  color : "#2F3542",
+                  fontSize : 25
+              }}
+          >Pet List</Text>
         </View>
       </View>
-      <LinearGradient
-        colors={["#F4E3E3", "transparent"]}
-        style={{
-          left: 0,
-          right: 0,
-          height: 50,
-          marginTop: -25
-        }}
-      >
 
-      </LinearGradient>
-
-      {/* filter */}
       <View
         style={{
           flexDirection : "row",
           marginStart : 60,
-          marginTop : -10,
+          marginTop : 10,
         }}
       >
         <Text
@@ -86,8 +234,6 @@ export default function PetList({ navigation }) {
             marginRight : 20
           }}
         >Filter By : </Text>
-
-        {/* button disamping kiri */}
         <Button
 
             style={{
@@ -157,7 +303,6 @@ export default function PetList({ navigation }) {
       </View>
       
 
-      {/* slide gambar ke kiri-kanan */}
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -185,9 +330,8 @@ export default function PetList({ navigation }) {
 
               <View style={{
                 flexDirection: "column",
+                alignItems:'center'
               }}>
-                <View style={{display:'flex',flexDirection:'row'}}>
-                </View>
                 <Image
                   key={pet._id}
                   source={{ uri: pet.image }}
@@ -200,19 +344,16 @@ export default function PetList({ navigation }) {
 
                   }}
                   />
-                <View style={{width:350,height:350}}>
+                <View style={{width:350,height:350,display:'flex',flexDirection:'column',alignItems:'center'}}>
                   <Text style={{
                     fontSize: 25,
                     fontFamily : 'nunito',
-                    marginLeft : 55,
                     marginTop : 5
                     }} > {pet.name} </Text>
                   <View
                     style={{
-                      marginLeft: 30,
                       flexDirection : "row",
                       marginTop : 20, 
-                      marginLeft : 50,
                     }}
                   >
                     <View style={{
@@ -222,12 +363,14 @@ export default function PetList({ navigation }) {
                       height : 60,
                       marginRight : 20,
                       borderColor : "#FF6B81",
-                      borderRadius : 10
+                      borderRadius : 10,
+                      flexDirection:'column',
+                      display:'flex',
+                      alignItems:'center'
                       }}>
                         <Text
                           style={{
                             fontFamily : 'nunito',
-                            marginLeft : 15,
                             fontSize : 15,
                             marginTop : 2,
                           }}
@@ -235,7 +378,6 @@ export default function PetList({ navigation }) {
                         <Text
                           style={{
                             fontFamily : 'nunito',
-                            marginLeft : 25,
                             marginTop : 5,
                             fontSize : 15
                           }}
@@ -269,7 +411,6 @@ export default function PetList({ navigation }) {
             </View>
           )
         })}
-        {/* </View> */}
         
       </ScrollView>
       <TabBar

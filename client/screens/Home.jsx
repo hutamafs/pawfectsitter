@@ -34,43 +34,32 @@ const Home = ({navigation, route}) => {
             }}>
                 <View
                     style={{
-                        flexDirection : 'row'
+                        display:'flex',
+                        flexDirection : 'row',
+                        position:'relative',
+                        width:'100%',
                     }}
                 >
-               
-                    <Button
-                        style={{
-                            backgroundColor:"#FF6B81",
-                            borderColor : "#FF6B81",
-                            width : 30,
-                            height : 30,
-                            borderRadius : 20,
-                            position : "absolute",
-                            width : 80,
-                            marginTop : 45,
-                            marginLeft : 10
-                        }}
-                    ></Button>
-                <Text 
+            
+                    
+                    <Text 
                     style={{
                         marginTop : 45,
-                        marginLeft:20,
+                        marginLeft:35,
                         fontFamily : 'nunito',
                         color : "#2F3542",
-                        fontSize : 22
+                        fontSize : 25,
+                        alignItems:'center'
                     }}
                 >Home</Text>
                 <Button
                     style={{
                         height: 40,
                         width: 40,
-                        borderRadius: 10,
-                        backgroundColor: "#F4E3E3",
-                        borderColor: '#FF6B81',
-                        borderWidth :2,
-                        marginHorizontal : 400,
-                        marginTop : 45,
                         position : 'absolute',
+                        borderColor:'#F4E3E3',
+                        top:45,
+                        right:16
                     }}
                         onPress={handleLogout} 
                     >
@@ -80,19 +69,13 @@ const Home = ({navigation, route}) => {
                     size={30} />
                 </Button>
             </View>
-            <View style={{
-                   flexDirection:"row",
-                   alignItems:"center",
-                   width:"100%"
-               }}>
-                   
-              </View>
               
               <View style={{
                    flexDirection:"row",
                    paddingHorizontal:20,
                    width:"100%",
                    alignItems:"center",
+                   justifyContent:'center',
                    marginTop : 30
                }}>
                  <Button
@@ -105,7 +88,6 @@ const Home = ({navigation, route}) => {
                     backgroundColor: "#F4E3E3",
                     borderColor: '#FF6B81',
                     borderWidth : 4,
-                    marginLeft : 15
                     
                   }}
                   onPress={() => navigation.navigate('AddPet')}
@@ -181,33 +163,32 @@ const Home = ({navigation, route}) => {
               </View>
            <View style={{
                    flexDirection:"row",
-                   paddingHorizontal:14,
                    width:"100%",
-                   alignItems:"center",
-                   marginTop : -3
+                   marginTop : -3,
                }}>
                    <Text
                     style={{
                         fontWeight : 'bold',
-                        paddingHorizontal:25,
                         fontFamily:"nunito",
-                        color : '#2F3542'
+                        color : '#2F3542',
+                        marginLeft:45,
+                        paddingLeft:8
                     }}
                    >Add Pet</Text>
                    <Text
                     style={{
                         fontWeight : 'bold',
-                        paddingHorizontal:32,
                         fontFamily:"nunito",
-                        color : '#2F3542'
+                        color : '#2F3542',
+                        marginLeft:60
                     }}
                    >My Pet</Text>
                    <Text
                     style={{
                         fontWeight : 'bold',
-                        paddingHorizontal:30,
                         fontFamily:"nunito",
-                        color : '#2F3542'
+                        color : '#2F3542',
+                        marginLeft:60
                     }}
                    >Keepers</Text>
                    {/* <Text
