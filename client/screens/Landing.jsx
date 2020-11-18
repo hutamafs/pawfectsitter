@@ -16,7 +16,7 @@ export default function Landing({navigation}) {
       <View 
       style={{
         flexDirection: "row",
-        marginTop : -100
+        marginTop : -100,
       }}>
         <Image source={logoKaki} 
         style={{ 
@@ -29,6 +29,7 @@ export default function Landing({navigation}) {
             marginTop : 54,
             marginLeft : -65,
             color: '#2F3542',
+            fontSize : 35
            }]}>pawfect sitter</Text>
       </View>
       <Image source={logo} style={{ 
@@ -41,9 +42,32 @@ export default function Landing({navigation}) {
           color: '#2F3542',
           marginTop: -40,
           marginBottom : 30,
-          fontSize : 30 
+          fontSize : 30,
+          fontWeight: "bold",
         }}
-      >hi paw.</Text>
+      >hi paw .</Text>
+       <Text
+        style={{
+          color: '#2F3542',
+          marginTop: -15,
+          marginBottom : 30,
+          fontSize : 18,
+          fontWeight: "normal",
+          opacity : 0.7,
+          letterSpacing : 1
+        }}
+      >Do you want join with us ?</Text>
+      <Text
+        style={{
+          color: '#2F3542',
+          marginTop: -27,
+          marginBottom : 30,
+          fontSize : 18,
+          fontWeight: "normal",
+          opacity : 0.7,
+          letterSpacing : 1
+        }}
+      >or to be family , Please register first . . .</Text>
      
       
       <Button
@@ -53,6 +77,14 @@ export default function Landing({navigation}) {
         title={"Register"}
       >
         Register
+      </Button>
+      <Button
+        style={styles.buttonStyle7} 
+        textStyle={styles.textStyle}
+        onPress={() => navigation.navigate('Login')}
+        title={"Login"}
+      >
+        Login
       </Button>
        
     </View>
@@ -69,15 +101,17 @@ const styles = StyleSheet.create({
   buttonStyle7 : {
     borderColor: '#2F3542',
     backgroundColor: '#2F3542',
-    marginLeft : 80,
+    marginLeft : 120,
     marginRight : 80,
     marginTop : 5,
     borderRadius: 20,
+    width: 240,
+    height : 80
   },
   textStyle : {
     color: '#F4F4F4',
     fontWeight: '100',
-    fontSize : 30,
+    fontSize : 20,
     fontFamily : 'nunito'
   }
 });

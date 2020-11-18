@@ -54,24 +54,11 @@ export default function PetList({ navigation }) {
           left: 0,
           right: 0,
           height: 90,
-          marginTop: -25
+          marginTop: -55
         }}
       >
 
       </LinearGradient>
-
-
-      <View style={{
-        flexDirection: "row",
-        paddingHorizontal: 20,
-        width: "100%",
-        alignItems: "center"
-      }}>
-
-
-      </View>
-
-
 
       <ScrollView
         alwaysBounceVertical
@@ -80,21 +67,19 @@ export default function PetList({ navigation }) {
           height: 300
         }}
       >
-
-
-
-        {pets.map(pet => {
+        {/* <View style={{display:'flex',flexDirection:'row'}}> */}
+        {pets.map((pet,i) => {
           return (
             <View
+            key={i}
               style={{
-                height: 400,
+                height: 500,
                 elevation: 33,
-                backgroundColor: "#FFF",
                 marginLeft: 20,
                 marginTop: 30,
                 borderRadius: 15,
                 marginBottom: 10,
-                width: 400,
+                width: 500,
               }}
             >
 
@@ -103,35 +88,30 @@ export default function PetList({ navigation }) {
                 paddingTop: 30,
                 paddingHorizontal: 10
               }}>
+                <View style={{display:'flex',flexDirection:'row'}}>
+                  <Text style={{fontSize:50}} > {pet.name} </Text>
+                  <Text style={
+                    (pet.gender == 'male') ? {fontSize:40,color:'blue',alignSelf:'center'} : {fontSize:40,color:'red',alignSelf:'center'}
+                }> {pet.gender == 'male'? '♂️' : '♀️'} </Text>
+                </View>
                 <Image
                   key={pet._id}
                   source={{ uri: pet.image }}
                   style={{
-                    width: 350,
+                    width: 300,
                     height: 350
                   }}
                 />
-                <View
-                  style={{
-                    flexDirection: "row"
-                  }}
-                >
-
-                  <Text style={{
-                    fontWeight: "bold"
-                  }}>Name : {pet.name}</Text>
-                  <Text style={{
-                    fontWeight: "bold",
-                    color: "black",
-                    marginLeft: 20
-                  }}>Age : {pet.age}</Text>
+                <View style={{width:150,height:50}}>
+                  <Text style={{fontSize:30}}>{pet.age} years old </Text>
                 </View>
               </View>
 
             </View>
-
           )
         })}
+        {/* </View> */}
+        
       </ScrollView>
       <TabBar
         navigation={navigation}

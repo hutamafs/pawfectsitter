@@ -13,10 +13,9 @@ const KeeperDetail = ({navigation, route}) => {
     useEffect(() => {
         dispatch(fetchKeeper(id))
     },[])
-
+    
     const toMaps = (keeperLatitude, keeperLongitude) => {
-        console.log(keeperLatitude, 'line 18')
-        console.log(keeperLongitude, 'line 19')
+        console.log(keeperLatitude,keeperLongitude,'ini line 18')
         navigation.navigate('GMap', {latitude: keeperLatitude, longitude: keeperLongitude})
     }
 

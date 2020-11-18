@@ -1,9 +1,11 @@
 const { Pet } = require("../models/pet.model");
 const Order = require('../models/OrderModel');
 const { Keeper } = require("../models/keeper.model");
+const User = require('../models/UserModel');
+
 const moment = require('moment');
 
-class OrderController {
+class OrderController { 
 
     static async getAllOrders(req,res,next) {
         try {
@@ -40,14 +42,22 @@ class OrderController {
 
     static async finishOrder(req,res,next) {
         try {
+            const {review} = req.body
             let order = await Order.findOne({_id:req.params.id});
             let keeper = await Keeper.findById(order.keeperId);
-            await order.save();
-            await keeper.review.push(order.review)
-            // await keeper.save();
-            order.status = false;
+            let user = await User.findById(req.userData.id)
             order.timeFinished = moment(new Date()).format('h:mm:ss a')
             order.dateFinished = moment(new Date()).format('DD MMM')
+            order.status = false;
+           
+            let obj = {
+                user: user.name,
+                msg: review
+            }
+            keeper.status = 'available';
+            await keeper.review.push(obj)
+            await keeper.save();
+            await order.save();
             //let order = await Order.findOneAndUpdate(req.params.id,false,{new:true});
             res.status(200).json(order);
 

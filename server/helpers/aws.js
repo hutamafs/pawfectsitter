@@ -12,7 +12,7 @@ const storage = unggah.s3({
 
   const upload = unggah({
     limits: {
-      fileSize: 1e6 // in bytes
+      fileSize: 5e6 // in bytes
     },
     storage// storage configuration for google cloud storage or S3
 })
