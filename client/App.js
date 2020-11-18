@@ -60,7 +60,6 @@ export default function App() {
                 options={{ title: '' }}
               />
               <Stack.Screen name="GMap" component={GMap}/>
-              
               <Stack.Screen name="AddPet" component={AddPet}
                 options={{ title: 'AddPet' }}
               />
