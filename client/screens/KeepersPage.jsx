@@ -54,7 +54,7 @@ export default function KeepersPage({ route, navigation }) {
       { timeout: 20000, maximumAge: 1000 }
     )
   }
-
+  
   function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
     // console.log(lat1, 'line 59')
     // console.log(lon1, 'line 60')
@@ -107,8 +107,6 @@ export default function KeepersPage({ route, navigation }) {
   }
 
   const handleSubmit = () => {
-    console.log(keeperId, '<<<<<<KEEEPRE IDDD');
-    console.log('MASUK SUBMIT');
     let payload = {
       pet_id: petId,
       harga: (Number(quantity) * Number(harga)),
@@ -116,7 +114,7 @@ export default function KeepersPage({ route, navigation }) {
     }
 
     axios({
-      url: 'http://192.168.1.4:3000/orders/' + keeperId,
+      url: 'http://192.168.1.8:3000/orders/' + keeperId,
       method: 'post',
       headers: {
         access_token
@@ -128,8 +126,8 @@ export default function KeepersPage({ route, navigation }) {
       }
     })
       .then(({ data }) => {
-        console.log('MASUK THEN');
         dispatch(addOrders(data))
+        dispatch(fetchKeepers());
       })
       .catch(err => console.log(err))
 
@@ -250,21 +248,21 @@ export default function KeepersPage({ route, navigation }) {
   }
   return (
     <View style={styles.container}>
-      <View style={{ display: 'flex', flexDirection: 'row', height: 80, marginTop: 15, borderBottomWidth: 1, backgroundColor: '#F7E7D3', borderColor: '#BA826A' }}>
+      <View style={{ display: 'flex', flexDirection: 'row', height: 100, paddingTop: 15,marginBottom:25, borderBottomWidth: 1, backgroundColor: '#F7E7D3', borderColor: '#BA826A' }}>
         <Image
           source={logo}
-          style={{ width: 80, height: 80, marginLeft: 3 }}
+          style={{ width: 80, height: 80, marginLeft: 3,marginTop:20 }}
         />
-        <Text style={{ fontSize: 30, marginTop: 20, color: '#BA826A' }}>Keepers</Text>
+        <Text style={{ fontSize: 30, marginTop: 35, color: '#BA826A' }}>Keepers</Text>
       </View>
       {/* <View style={{display:'flex',flexDirection:'row',height:30,marginTop:10,marginBottom:2}}>
         <Text style={{display:'flex',alignSelf:'center',marginLeft:5,marginRight:10}}>Filter by Animal</Text> 
           {listAnimals()}
         </View> */}
-      {/* <View style={{display:'flex',flexDirection:'row',height:30,marginTop:10,marginBottom:5}}>
+      <View style={{display:'flex',flexDirection:'row',height:30,marginTop:10,marginBottom:5}}>
             <Text style={{paddingRight:15,marginLeft:15,fontSize:20}} >Sort by </Text>
             {listCategories()}
-        </View> */}
+        </View>
 
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{ display: 'flex', flexDirection: 'column', flex: 0.8, alignItems: 'center' }}>
@@ -310,12 +308,14 @@ export default function KeepersPage({ route, navigation }) {
                         </View> */}
                       </View>
                     </View>
-                    <TouchableOpacity
-                      style={{ width: 85, height: 30, position: 'absolute', right: 10, bottom: 6.5, backgroundColor: '#BA826A', borderRadius: 10 }}
-                      onPress={() => handlePress(el)}
-                    >
-                      <Text style={{ color: 'white', textAlign: 'center', marginTop: 5 }}>Hire Me! </Text>
-                    </TouchableOpacity>
+                        {el.status == 'available'?
+                                            <TouchableOpacity
+                                            style={{ width: 85, height: 30, position: 'absolute', right: 10, bottom: 6.5, backgroundColor: '#BA826A', borderRadius: 10 }}
+                                            onPress={() => handlePress(el)}
+                                          >
+                                            <Text style={{ color: 'white', textAlign: 'center', marginTop: 5 }}>Hire Me! </Text>
+                                          </TouchableOpacity>  : <></>
+                      }
 
                     <Modal isVisible={isModalVisible}>
                       <View style={{ flex: 0.6, display: 'flex', backgroundColor: 'white', alignItems: 'center', borderRadius: 20 }}>

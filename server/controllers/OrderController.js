@@ -5,7 +5,7 @@ const User = require('../models/UserModel');
 
 const moment = require('moment');
 
-class OrderController {
+class OrderController { 
 
     static async getAllOrders(req,res,next) {
         try {
@@ -46,17 +46,18 @@ class OrderController {
             let order = await Order.findOne({_id:req.params.id});
             let keeper = await Keeper.findById(order.keeperId);
             let user = await User.findById(req.userData.id)
-            
+            order.timeFinished = moment(new Date()).format('h:mm:ss a')
+            order.dateFinished = moment(new Date()).format('DD MMM')
             order.status = false;
-            await order.save();
+           
             let obj = {
                 user: user.name,
                 msg: review
             }
+            keeper.status = 'available';
             await keeper.review.push(obj)
-            // await keeper.save();
-            order.timeFinished = moment(new Date()).format('h:mm:ss a')
-            order.dateFinished = moment(new Date()).format('DD MMM')
+            await keeper.save();
+            await order.save();
             //let order = await Order.findOneAndUpdate(req.params.id,false,{new:true});
             res.status(200).json(order);
 

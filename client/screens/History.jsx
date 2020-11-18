@@ -14,7 +14,6 @@ export default function History({navigation}) {
   const {history, access_token} = useSelector(state => state);
   const [categoryNow,setCategoryNow] = useState('');
   const [localHistory , setLocalHistory] = useState([]);
-  console.log(access_token, 'ini access token di history')
 
   useEffect(() => {
     setLocalHistory(history)
@@ -28,7 +27,7 @@ export default function History({navigation}) {
     localHistory.map(el => {
       cloned.push(el)
     }) 
-      cloned.sort((a,b) => a[type.toLowerCase()][0] < b[type.toLowerCase()][0])
+      cloned.sort((a,b) => a[type.toLowerCase()] < b[type.toLowerCase()])
       // console.log(cloned);
 
     setLocalHistory(cloned);

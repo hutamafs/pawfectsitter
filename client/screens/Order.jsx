@@ -27,11 +27,10 @@ export default function Order({navigation}) {
   },[])
 
   useEffect(() => {
-    setLocalOrders(orders)
+    setLocalOrders(orders);
   }, [orders])
 
   const sortCategory = (type) => {
-    console.log(type, '<<<<ini type');
     let cloned = [];
     setCategoryNow(type.toLowerCase());    
     localOrders.map(el => {
@@ -68,13 +67,12 @@ export default function Order({navigation}) {
 
   const handleSubmit = () => {
     axios({
-      url: "http://192.168.1.4:3000/orders/" + id,
+      url: "http://192.168.1.8:3000/orders/" + id,
       method: "PUT",
       headers:{access_token},
       data: {review}
     })
     .then(({data}) => {
-      console.log(data, '<<<<<<<<<<<sukses nehhhhhh');
       dispatch(addHistory(data))
       dispatch(fetchOrders(access_token))
       setModalVisible(!isModalVisible)
@@ -89,11 +87,13 @@ export default function Order({navigation}) {
 
   const countOrders = () => {
     let newCount = 0;
-    orders.map(el => {
-      if(el.status === true) {
-        newCount++
-      }
-    })
+    // if(orders) { 
+    //   orders.map(el => {
+    //     if(el.status === true) {
+    //       newCount++
+    //     }
+    //   })
+    // }
     return newCount;
   }
 
@@ -140,14 +140,13 @@ export default function Order({navigation}) {
                marginTop:10,
                width:"100%"
            }}>
-               <View style={{width:"100%"}}>
+               <View style={{width:"50%",backgroundColor:'black'}}>
                     <Text style={{
-                      fontSize: 25,
+                      fontSize: 15,
                       marginTop : -50,
                       color:"#0F2A3C",
-                      marginLeft : 160,
                       fontWeight:"normal",
-                      fontFamily : 'nunito'
+                      fontFamily : 'nunito',
                     }}>Order List</Text>
                </View>
           </View>
@@ -421,11 +420,7 @@ export default function Order({navigation}) {
             style={{
             display:'flex',
             flexDirection:'column',
-            justifyContent : 'center',
-            alignItems : 'center',
-            marginHorizontal:40,
             borderRadius : 20,
-            marginRight : -20
             }}>
               <View >
               <Icon 
@@ -437,7 +432,6 @@ export default function Order({navigation}) {
                 position : 'absolute',
                 color : "#102B3E",
                 marginTop : 25 ,
-                marginLeft : -120,
                 opacity : 0.2,
               }]}
               />
@@ -452,13 +446,13 @@ export default function Order({navigation}) {
                   style={{
                     display:'flex',
                       flexDirection:'row',
-                      flex:0.3,
                       paddingBottom: 4,
-                      width:380,
-                      height:125,
+                      width:250,
+                      height:150,
                       marginVertical: 5,
                       borderWidth : 3,
                       borderRadius : 20,
+                      position:"relative"
                     }}
                     >
                       
@@ -477,7 +471,6 @@ export default function Order({navigation}) {
                     borderColor: 'white',
                     borderRadius:20 ,
                     marginRight : 10 ,
-                    marginLeft : -60
                     }}  />
                 </View>
                 <View 
@@ -536,15 +529,12 @@ export default function Order({navigation}) {
                 </View>
                 <Button
                   style={{
-                    backgroundColor:'#6661DB',
+                    backgroundColor:'white',
                     borderColor : "#6661DB",
                     borderBottomRightRadius : 20,
                     borderTopLeftRadius : 20,
-                    padding :10 ,
                     width:100,
-                    height:60,
-                    right: -38,
-                    top : 63
+                    height:100,
                   }}
                   onPress={() => handlePress(el._id)}
                   >

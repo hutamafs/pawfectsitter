@@ -47,8 +47,8 @@ const keeperSchema = new mongoose.Schema({
         type: Number
     },
     review:[{
-        user: String,
-        msg: String
+        user:String,
+        msg:String
     }]
 });
 
