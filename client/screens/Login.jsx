@@ -23,9 +23,7 @@ export default function Login({navigation}) {
 			email: email,
 			avatar: ''
 		}
-		navigation.replace('Home', {
-      userData: obj
-    });
+		navigation.replace('Home');
 	};
 
 	const loginFailed = () => {
