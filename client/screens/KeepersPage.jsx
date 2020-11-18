@@ -156,17 +156,17 @@ export default function KeepersPage({ route, navigation }) {
   }
 
   const sortCategory = (type) => {
+    type = type.toLowerCase();
     let cloned = [];
-    setCategoryNow(type.toLowerCase());
+    setCategoryNow(type);
     localKeepers.map(el => {
       cloned.push(el)
     })
-    if(type == 'Rating') {
-      cloned.sort((a, b) => a[type.toLowerCase()] > b[type.toLowerCase()])
+     if(type == 'price'){
+      cloned.sort((a, b) => a[type].daily > b[type].daily)
     } else {
-      cloned.sort((a, b) => a[type.toLowerCase()] < b[type.toLowerCase()])
+      cloned.sort((a, b) => a[type] < b[type])
     }
-    
     setLocalKeepers(cloned);
   }
 
@@ -283,7 +283,7 @@ export default function KeepersPage({ route, navigation }) {
                       <TouchableOpacity style={{ width: 60, height: 30, backgroundColor: '#BA826A', borderRadius: 70 }} onPress={() => toDetail(el._id)}><Text style={{ textAlign: 'center', fontSize: 15, margin: 5, color: 'white' }}>Details</Text></TouchableOpacity>
                     </View>
                     <View style={{ display: 'flex', flexDirection: 'column', marginTop: 15 }}>
-                      <Text style={{ color: 'black', fontSize: 25 }}> {el.name} </Text>
+                      <Text style={{ color: 'black', fontSize: 25 }}> {el.name.split(' ')[0]} </Text>
                       
                       <View style={{ display: 'flex', flexDirection: 'row' }}>
                         <Icon name="compass" color="green" size={20} style={{ marginTop: 2 }} />

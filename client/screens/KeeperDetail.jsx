@@ -82,15 +82,15 @@ const KeeperDetail = ({navigation, route}) => {
                     <View style={{display:'flex',flexDirection:'row',flexWrap:'wrap'}} >
                         <View style={{display:'flex',borderWidth:1,width:125,justifyContent:'center',borderRadius:60,borderColor:'green',marginTop:10,marginHorizontal:10}}>
                            <Text style={{alignSelf:'center'}}> Hourly Rates</Text>
-                           <Text style={{alignSelf:'center'}}>{keeper.price.hourly}</Text>
+                           <Text style={{alignSelf:'center'}}>Rp {keeper.price.hourly.toLocaleString().replace(',','.')}</Text>
                         </View>
                         <View style={{display:'flex',borderWidth:1,width:125,justifyContent:'center',borderRadius:60,borderColor:'blue',marginTop:10,marginHorizontal:10}}>
                            <Text style={{alignSelf:'center'}}> Daily Rates </Text>
-                           <Text style={{alignSelf:'center'}}>{keeper.price.daily}</Text>
+                           <Text style={{alignSelf:'center'}}>Rp {keeper.price.daily.toLocaleString().replace(',','.')}</Text>
                         </View>
                         <View style={{display:'flex',borderWidth:1,width:125,justifyContent:'center',borderRadius:60,borderColor:'red',marginTop:10,marginHorizontal:10}}>
                            <Text style={{alignSelf:'center'}}> Weekly Rates</Text>
-                           <Text style={{alignSelf:'center'}}>{keeper.price.weekly}</Text>
+                           <Text style={{alignSelf:'center'}}>Rp {keeper.price.weekly.toLocaleString().replace(',','.')}</Text>
                         </View>
                         <TouchableOpacity
                         style={{ width: 150, height: 30, position: 'absolute', right: 10, bottom: 6.5, backgroundColor: '#BA826A', borderRadius: 10 }}
