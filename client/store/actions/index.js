@@ -4,11 +4,8 @@ import { ActionSheetIOS } from 'react-native'
 export function fetchKeepers ()  {
     return(dispatch) => {
         // console.log('masuk pak ekoooo')
-<<<<<<< HEAD
-        fetch(`http://192.168.1.4:3000/keepers`)
-=======
+
         fetch(`http://192.168.100.6:3000/keepers`)
->>>>>>> development
         .then(resp => resp.json())
         .then(resp => 
             dispatch({
@@ -25,11 +22,7 @@ export function fetchKeepers ()  {
 export function fetchKeeper(id) {
     return (dispatch) => {
         axios({
-<<<<<<< HEAD
-            url: `http://192.168.1.4:3000/keepers/${id}`,
-=======
             url: `http://192.168.100.6:3000/keepers/${id}`,
->>>>>>> development
             method: 'GET',
           })
           .then(({data}) => {
@@ -75,11 +68,7 @@ export function addHistory(payload) {
 export function fetchOrders(token) {
     return (dispatch) => {
         axios({
-<<<<<<< HEAD
-            url: 'http://192.168.1.4:3000/orders',
-=======
             url: 'http://192.168.100.6:3000/orders',
->>>>>>> development
             method: 'GET',
             headers:{access_token: token}
           })
@@ -94,11 +83,7 @@ export function fetchOrders(token) {
 export function fetchPets(token) {
     return(dispatch) => {
         axios({
-<<<<<<< HEAD
-            url: 'http://192.168.1.4:3000/pets',
-=======
             url: 'http://192.168.100.6:3000/pets',
->>>>>>> development
             method: 'GET',
             headers: {access_token: token}
           })

@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-import React from 'react'
-import { SafeAreaView } from 'react-navigation'
-import { Text, styleSheet, View } from 'react-native'
-import Map from './components/Map'
-import Icon from "@expo/vector-icons/MaterialCommunityIcons";
-import Button from 'apsl-react-native-button'
-=======
 import React from 'react';
 import { SafeAreaView } from 'react-navigation';
 import { Text, styleSheet , View } from 'react-native';
