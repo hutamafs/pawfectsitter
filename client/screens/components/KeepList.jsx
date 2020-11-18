@@ -9,7 +9,8 @@ export default function KeepList(props){
                 style={{
                     flexDirection:"row",
                     backgroundColor: bg,
-                    padding:20,
+                    paddingTop:10,
+                    paddingLeft:15,
                     marginHorizontal: 20,
                     borderRadius:20,
                     alignItems:"center",
@@ -19,17 +20,16 @@ export default function KeepList(props){
             >
                     <Image
                         source={{uri: img}}
-                        style={{width:90,height:90}}
+                        style={{width:100,height:100}}
                     />
 
-                    <View>
+                    <View style={{display:'flex',marginTop:15}} >
                          <Text style={{
                              color:font,
                              fontFamily:"nunito",
                              fontSize: 20,
                              paddingHorizontal:10,
                              width:170,
-                             marginTop : -50
                          }}>{name}</Text>
                          <Text style={{
                              color: font,
@@ -40,15 +40,21 @@ export default function KeepList(props){
                          }}>
                             Rating : {rating}
                          </Text>
-                         <Text style={{
-                             color: font,
-                             fontFamily:"nunito",
-                             fontSize:15,
-                             paddingHorizontal:10,
-                             marginTop : 8
-                         }}>
-                            Adddress : {address}
-                         </Text>         
+                        <View style={{display:'flex',flexDirection:'row'}} >
+                            <Text style={{
+                                color: font,
+                                fontFamily:"nunito",
+                                fontSize:15,
+                                width:260,
+                                height:50,
+                                paddingHorizontal:10,
+                                marginTop : 8,
+                                display:'flex',
+                                flexWrap:'wrap'
+                            }}>
+                                🏠  : {address}
+                            </Text>    
+                        </View>         
                     </View>
             </View>
         )

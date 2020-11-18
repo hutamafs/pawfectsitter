@@ -53,7 +53,7 @@ export default function Order({navigation}) {
         key={i}
         onPress={() => sortCategory(types[i])}
         style={(types[i].toLowerCase() == categoryNow) ? 
-          {width:125,borderRadius:25,justifyContent:'center',borderColor:'green',borderWidth:2,marginHorizontal:3}:
+          {width:125,borderRadius:25,justifyContent:'center',borderColor:'#FF6B81',borderWidth:2,marginHorizontal:3}:
           {width:125,borderRadius:25,justifyContent:'center',borderColor:'grey',borderWidth:2,marginHorizontal:3}
         }
         >

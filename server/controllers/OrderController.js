@@ -29,7 +29,6 @@ class OrderController {
             //         break;
             //     }
             // }
-            console.log(orderType,'ini type')
             let pet = await Pet.findById(req.body.pet_id);
             let order = new Order({
                 user_id:req.userData.id,
@@ -43,7 +42,6 @@ class OrderController {
                 status:true,
                 timeCreated:moment(new Date()).format('h:mm:ss a'),
                 dateCreated:moment(new Date()).format('DD MMM'),
-                orderType
             })
             await order.save();
             res.status(201).json(order)
