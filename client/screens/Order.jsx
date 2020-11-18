@@ -446,7 +446,7 @@ export default function Order({navigation}) {
                       borderWidth : 0.5,
                       borderRadius : 10,
                       position:'relative',
-                      backgroundColor:'#a6a6a4'
+                      backgroundColor:'blue'
                     }}
                 >
                   <View style={{position:'absolute',bottom:-30,left:130,marginTop:25,zIndex:1}}>
