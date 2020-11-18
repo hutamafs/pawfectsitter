@@ -7,7 +7,7 @@ import  TabBar  from './components/TabBottomNavbar'
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import axios from 'axios'
 import Modal from 'react-native-modal';
-
+import tangan from '../assets/dog8.png'
 
 
 export default function Order({navigation}) {
@@ -104,7 +104,127 @@ export default function Order({navigation}) {
     navigation.replace('Home')
   }
 
+  // AWAL KONDISIONAL RENDERING
   
+  if ( localOrders == 0 ){
+    return (
+      
+    <View style={{
+      flex:1,
+    }}>
+
+      <Modal isVisible={isModalVisible}>
+        <View style={{backgroundColor: 'white', height: '40%'}}>
+        <Text style={{fontSize: 20,marginLeft:20, marginTop: 20, marginBottom: 20}}>Give them a review</Text>
+        <TextInput
+        style={{borderWidth: 2,height:100, marginLeft:15, marginRight:15, borderRadius: 20, marginBottom: 20,paddingLeft:10,paddingTop:0,marginTop:0}}
+        placeholder="Write here"
+        onChangeText={(text) => setReview(text)}
+        />
+        <View style={{display:'flex',flexDirection:'row',justifyContent:'space-evenly'}}>
+          <TouchableOpacity
+          style={{backgroundColor:'green',
+          borderColor : "#6661DB",
+          marginLeft: 20,
+          width:100,
+          height:40,
+          alignItems:'center',
+          justifyContent:'center',
+          borderRadius:30,
+          }}
+          onPress={handleSubmit}
+          >
+            <Text style={{color: 'white'}}>Submit</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+          style={{backgroundColor:'red',
+          borderColor : "#6661DB",
+          marginLeft: 20,
+          marginRight: 20,
+          width:100,
+          height:40,
+          borderRadius:30,
+          justifyContent:'center',
+          alignItems:'center'
+          }}
+          onPress={closeModal}
+          > 
+            <Text style={{color: 'white'}}>Cancel</Text>
+          </TouchableOpacity>
+        </View>
+        </View>
+      </Modal>
+     <View style={{
+         backgroundColor:"#F4E3E3",
+         height:"12%",
+         borderBottomLeftRadius:20,
+         borderBottomRightRadius:20,
+         paddingHorizontal: 25,
+         marginBottom : -24,
+        }}>
+          <View style={{width:"100%"}}>
+              <Text style={{
+                fontSize: 25,
+                color:"#0F2A3C",
+                marginTop:45,
+                fontWeight:"normal",
+                fontFamily : 'nunito'
+              }}>Order List ({countOrders()}) </Text>
+          </View>
+     </View>
+
+         <View style={{
+             flexDirection:"row",
+             paddingHorizontal:20,
+             width:"100%",
+             alignItems:"center",
+             marginBottom : 10,
+             marginTop : 20,
+         }}>
+             
+             <View style={{width:"80%", alignItems:"flex-end"}}>
+             </View>
+        
+         </View>
+         <View style={{display:'flex',flexDirection:'row',height:30,marginTop:10,marginBottom:5}}>
+            <Text style={{paddingRight:15,marginLeft:20,fontSize:20}} >Sort by </Text>
+            {listCategories()}
+        </View>
+               
+      <ScrollView>
+      <View>            
+            <Image
+              source={tangan}
+              style={{
+                width: 250, 
+                height: 300,
+                marginLeft : 200,
+                marginTop : 70
+              }}
+            ></Image>
+          <Text
+            style={{
+              fontFamily : 'nunito',
+              fontSize : 20,
+              marginLeft : 80
+            }}
+            >
+            Hi paw, order sitter for me  . . .  
+          </Text>    
+          </View> 
+      </ScrollView>    
+      
+      <TabBar 
+      navigation={navigation} 
+      style={{
+      }} />               
+  </View>   
+    )
+  }
+  // AKHIR DARI CONDITIONAL RENDERING
+  
+
+
   return (
     
     <View style={{
@@ -307,15 +427,7 @@ export default function Order({navigation}) {
                     fontWeight:'bold'
                   }}
                   >{el.keeperName} </Text> 
-                {/* <Text 
-                  style={{
-                    color:'#102B3E',
-                    fontSize:13,
-                    fontFamily:"nunito",
-                    marginBottom: 10
-                    }}> In Charge of: {el.petName} 
-                </Text> */}
-
+             
                 <Text 
                   style={{
                     color:'#102B3E',
