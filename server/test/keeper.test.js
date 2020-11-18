@@ -25,7 +25,6 @@ describe("/keepers", () => {
         { name: "jon", email: "geo@mail.com", image: "https://images-na.ssl-images-amazon.com/images/I/41dJs71v-aL._AC_.jpg", rating: 1, skills: ["Dog"], status: true, address: "Kebon Jeruk, Jakarta barat",price:{hourly:25000,daily:150000,weekly:1000000} },
         { name: "maria", email: "maria@gmail.com", image: "https://images-na.ssl-images-amazon.com/images/I/41dJs71v-aL._AC_.jpg", rating: 2, skills: ["Dog"], status: true, address: "Kemang, Jakarta selatan",price:{hourly:25000,daily:150000,weekly:1000000}  }
       ];
-      console.log(keepers,'ini keepers')
       await Keeper.insertMany(keepers);
       const res = await request(app).get("/keepers");
       expect(res.status).to.equal(200);

@@ -26,7 +26,14 @@ export default function Order({navigation}) {
   },[])
 
   useEffect(() => {
-    setLocalOrders(orders);
+
+    let cloned = [];
+    if(orders.length > 0) {
+      orders.filter(el => el.status == true)
+      .map(el => cloned.push(el))
+    }
+
+    setLocalOrders(cloned);
   }, [orders])
 
 
@@ -54,7 +61,7 @@ export default function Order({navigation}) {
         key={i}
         onPress={() => sortCategory(types[i])}
         style={(types[i].toLowerCase() == categoryNow) ? 
-          {width:125,borderRadius:25,justifyContent:'center',borderColor:'green',borderWidth:2,marginHorizontal:3}:
+          {width:125,borderRadius:25,justifyContent:'center',borderColor:'#FF6B81',borderWidth:2,marginHorizontal:3}:
           {width:125,borderRadius:25,justifyContent:'center',borderColor:'grey',borderWidth:2,marginHorizontal:3}
         }
         >
@@ -64,14 +71,14 @@ export default function Order({navigation}) {
     }
     return categories;
   }
-  
+
   const closeModal = () => {
     setModalVisible(!isModalVisible);
   }
 
   const handleSubmit = () => {
     axios({
-      url: "http://192.168.1.4:3000/orders/" + id,
+      url: "http://192.168.1.8:3000/orders/" + id,
       method: "PUT",
       headers:{access_token},
       data: {review}
@@ -107,7 +114,7 @@ export default function Order({navigation}) {
 
   // AWAL KONDISIONAL RENDERING
   
-  if ( localOrders == 0 ){
+  if ( localOrders.length == 0 ){
     return (
       
     <View style={{
@@ -200,7 +207,6 @@ export default function Order({navigation}) {
                 width: 250, 
                 height: 300,
                 marginLeft : 200,
-                marginTop : 70
               }}
             ></Image>
           <Text
@@ -382,8 +388,8 @@ export default function Order({navigation}) {
                       {`Take back ${el.petName}`} </Text>
                   </TouchableOpacity>
                   </View>
-                  
-                <Text style={{
+                
+                  <Text style={{
                     color: '#00587a',
                     fontWeight:'bold',
                     position:'absolute',
@@ -391,6 +397,17 @@ export default function Order({navigation}) {
                     top:15}}
                     > 
                     {el.dateCreated}
+                    
+                </Text> 
+
+                <Text style={{
+                    color: '#00587a',
+                    fontWeight:'bold',
+                    position:'absolute',
+                    right:10,
+                    top:35}}
+                    > 
+                    {el.timeCreated}
                     
                 </Text> 
                       
@@ -428,8 +445,16 @@ export default function Order({navigation}) {
                     marginBottom : 2,
                     fontWeight:'bold'
                   }}
-                  >{el.keeperName} </Text> 
-             
+                  >{el.keeperName.split(' ')[0]} </Text> 
+                {/* <Text 
+                  style={{
+                    color:'#102B3E',
+                    fontSize:13,
+                    fontFamily:"nunito",
+                    marginBottom: 10
+                    }}> In Charge of: {el.petName} 
+                </Text> */}
+
                 <Text 
                   style={{
                     color:'#102B3E',

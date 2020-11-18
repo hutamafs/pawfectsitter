@@ -16,13 +16,11 @@ export default function History({route,navigation}) {
   const [localHistory , setLocalHistory] = useState([]);
 
   useEffect(() => {
-    console.log(route,'ini route')
     setLocalHistory(history)
   }, [history])
 
 
   const sortCategory = (type) => {
-    console.log(type, '<<<<ini type');
     let cloned = [];
     setCategoryNow(type.toLowerCase());    
     localHistory.map(el => {
@@ -37,7 +35,7 @@ export default function History({route,navigation}) {
   const listCategories = () => {
     let types = {
       0:'Keeper Name',
-      1:'Date Finished'
+      1:'Time Finished'
     }
     let categories = [];
     for(let i = 0 ; i<2 ; i++) {
@@ -47,7 +45,7 @@ export default function History({route,navigation}) {
         onPress={() => sortCategory(types[i])}
         style={(types[i].toLowerCase() == categoryNow) ? 
           {width:125,borderRadius:25,justifyContent:'center',borderColor:'#FF6B81',borderWidth:2,marginHorizontal:3}:
-          {width:125,borderRadius:25,justifyContent:'center',borderColor:'#FF6B81',borderWidth:2,marginHorizontal:3}
+          {width:125,borderRadius:25,justifyContent:'center',borderColor:'grey',borderWidth:2,marginHorizontal:3}
         }
         >
         <Text style={{ fontSize: 15, color: '#2F3542', textAlign: 'center', margin: 5,alignSelf:'center' }}>{types[i]}</Text>
@@ -70,7 +68,7 @@ export default function History({route,navigation}) {
     return num
   }
 
-  if ( orders.length == 0 ){
+  if ( history.length == 0 ){
     return (
       <View style={{
         backgroundColor:"#C8D1DA",
@@ -116,7 +114,7 @@ export default function History({route,navigation}) {
                       color:"#0F2A3C",
                       fontWeight:"normal",
                       fontFamily : 'nunito',
-                    }}> Order List </Text>
+                    }}> History List </Text>
                </View>
           </View>
        </View>
@@ -134,7 +132,7 @@ export default function History({route,navigation}) {
                         fontSize:15,
                         color:"#6B6C6E",
                         marginLeft : 20,
-                    }}>{localOrders.length} Order</Text>
+                    }}>{localHistory.length} Order</Text>
   
                </View>
                <View style={{width:"80%", alignItems:"flex-end"}}>
@@ -359,7 +357,17 @@ export default function History({route,navigation}) {
                     right:10,
                     top:15}}
                     > 
-                    {el.dateCreated}
+                    {el.dateFinished}
+                    
+                </Text>
+                <Text style={{
+                    color: '#00587a',
+                    fontWeight:'bold',
+                    position:'absolute',
+                    right:10,
+                    top:35}}
+                    > 
+                    {el.timeFinished}
                     
                 </Text> 
                     <View 
@@ -380,7 +388,7 @@ export default function History({route,navigation}) {
                         fontSize:25,
                         fontFamily:"nunito",
                       }}
-                        >{el.keeperName} </Text>
+                        >{el.keeperName.split(' ')[0]} </Text>
                       
                       <Text 
                       style={{
