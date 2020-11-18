@@ -27,43 +27,29 @@ export default function PetList({ navigation }) {
         height: "13%",
         borderBottomLeftRadius: 20,
         borderBottomRightRadius: 20,
-        paddingHorizontal: 20
+        paddingHorizontal: 20,
       }}>
 
         <View style={{
           flexDirection: "row",
           alignItems: "center",
-          marginTop: 25,
-          width: "100%"
+          marginTop: 45,
+          paddingTop:35,
+          width: "30%",
+          height:50,
+          justifyContent:'center',
+          borderRadius:30
         }}>
-          <Button
-                        style={{
-                            backgroundColor:"#FDCB6E",
-                            borderColor : "#FDCB6E",
-                            width : 30,
-                            height : 30,
-                            borderRadius : 20,
-                            position : "absolute",
-                            width : 80,
-                            marginTop : 25,
-                            marginLeft : 15
-                        }}
-                    ></Button>
-                <Text 
-                    style={{
-                        marginTop : 25,
-                        marginLeft:55,
-                        fontFamily : 'nunito',
-                        color : "#2F3542",
-                        fontSize : 22
-                    }}
-                >Pet List</Text>
-          <View style={{ width: "50%", alignItems: "flex-end" }}>
-
-          </View>
+          <Text 
+              style={{
+                  fontFamily : 'nunito',
+                  color : "#2F3542",
+                  fontSize : 25
+              }}
+          >Pet List</Text>
         </View>
       </View>
-      <LinearGradient
+      {/* <LinearGradient
         colors={["#F4E3E3", "transparent"]}
         style={{
           left: 0,
@@ -73,14 +59,14 @@ export default function PetList({ navigation }) {
         }}
       >
 
-      </LinearGradient>
+      </LinearGradient> */}
 
       {/* filter */}
       <View
         style={{
           flexDirection : "row",
           marginStart : 60,
-          marginTop : -10,
+          marginTop : 10,
         }}
       >
         <Text
@@ -184,9 +170,8 @@ export default function PetList({ navigation }) {
 
               <View style={{
                 flexDirection: "column",
+                alignItems:'center'
               }}>
-                <View style={{display:'flex',flexDirection:'row'}}>
-                </View>
                 <Image
                   key={pet._id}
                   source={{ uri: pet.image }}
@@ -199,19 +184,16 @@ export default function PetList({ navigation }) {
 
                   }}
                   />
-                <View style={{width:350,height:350}}>
+                <View style={{width:350,height:350,display:'flex',flexDirection:'column',alignItems:'center'}}>
                   <Text style={{
                     fontSize: 25,
                     fontFamily : 'nunito',
-                    marginLeft : 55,
                     marginTop : 5
                     }} > {pet.name} </Text>
                   <View
                     style={{
-                      marginLeft: 30,
                       flexDirection : "row",
                       marginTop : 20, 
-                      marginLeft : 50,
                     }}
                   >
                     <View style={{
@@ -221,12 +203,14 @@ export default function PetList({ navigation }) {
                       height : 60,
                       marginRight : 20,
                       borderColor : "#FF6B81",
-                      borderRadius : 10
+                      borderRadius : 10,
+                      flexDirection:'column',
+                      display:'flex',
+                      alignItems:'center'
                       }}>
                         <Text
                           style={{
                             fontFamily : 'nunito',
-                            marginLeft : 15,
                             fontSize : 15,
                             marginTop : 2,
                           }}
@@ -234,7 +218,6 @@ export default function PetList({ navigation }) {
                         <Text
                           style={{
                             fontFamily : 'nunito',
-                            marginLeft : 25,
                             marginTop : 5,
                             fontSize : 15
                           }}

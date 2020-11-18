@@ -61,22 +61,24 @@ export default function Login({navigation}) {
     <View style={styles.container}>
       <View 
       style={{
-        flexDirection: "row",
+        display:'flex',
+        flexDirection: "column",
         marginTop : -100,
+        marginTop:100,
+        alignItems:'center',
+        justifyContent:'center'
       }}>
         <Image source={logoKaki} 
         style={{ 
-          width: 150, 
-          height: 150,
-          marginLeft : 10,
+          width: 100, 
+          height: 250,
         }} />
         <Text style={[
           styles.textStyle , {
             marginTop : 39,
-            marginLeft : -50,
             color: '#2F3542',
-            fontSize : 35
-           }]}>pawfect sitter</Text>
+            fontSize : 40
+           }]}>Pawfect</Text>
       </View>
       <View style={styles.middle}>
         <View>
@@ -85,7 +87,6 @@ export default function Login({navigation}) {
         style={[styles.formInput , { letterSpacing : 3 } ]}
         placeholder="email" 
         autoCompleteType="off"
-        keyboardType="email-address"
         onChangeText={(text) => setEmail(text)}
         />
         <TextInput
@@ -134,20 +135,21 @@ export default function Login({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1, 
-    padding : 40 ,
     backgroundColor: '#F4E3E3',
     justifyContent: 'center',
     fontFamily : 'nunito'
   },
   middle : {
+    marginTop:30,
     alignItems: 'center',
     justifyContent: 'center',
   },
   bottom : {
     fontFamily : 'nunito',
+    alignItems:'center'
   },  
   formInput: {
-    width: 400,
+    width: 250,
     height : 50,
     borderWidth: 2,
     marginBottom : 10,
@@ -155,13 +157,14 @@ const styles = StyleSheet.create({
     paddingLeft : 30,
     fontSize : 15,
     color : 'black',
-    textTransform : 'capitalize',
     fontWeight : '800',
   },
   buttonStyle7 : {
     borderColor: '#2F3542',
     backgroundColor: '#2F3542',
     marginTop : 5,
+    width:250,
+    alignSelf:'center',
     borderRadius: 10,
   },
   textStyle : {

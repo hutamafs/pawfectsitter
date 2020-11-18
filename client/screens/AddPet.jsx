@@ -83,8 +83,8 @@ const AddPet = ({navigation}) => {
         <View style={{
             // flexDirection: 'row', 
             // marginTop: 25
-            backgroundColor:"#6661DB",
-               height:"10%",
+            backgroundColor:"#F4E3E3",
+               height:"13%",
                borderBottomLeftRadius:20,
                borderBottomRightRadius:20,
                paddingHorizontal: 20
