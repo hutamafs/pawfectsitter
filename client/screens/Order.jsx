@@ -36,6 +36,7 @@ export default function Order({navigation}) {
     setLocalOrders(cloned);
   }, [orders])
 
+
   const sortCategory = (type) => {
     let cloned = [];
     setCategoryNow(type.toLowerCase());    
@@ -323,6 +324,7 @@ export default function Order({navigation}) {
             <Text style={{paddingRight:15,marginLeft:20,fontSize:20,fontFamily:'nunito',color:'#0F2A3C'}} >Sort by </Text>
             {listCategories()}
         </View>
+        
                
         <ScrollView>
           

@@ -117,7 +117,7 @@ export function setMessages(payload) {
 
 
 // fetch hutama : http://192.168.1.3:3000
-// fetch nasrul : http://192.168.100.6:3000
+// fetch nasrul : http://192.168.100.6:3000  
 // fetch angga: http://192.168.1.4:3000
 //fetch aji : http://192.168.8.100
 //fetch aji-wifi : 192.168.43.190

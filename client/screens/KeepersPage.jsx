@@ -31,6 +31,8 @@ export default function KeepersPage({ route, navigation }) {
   const [PriceisDisabled, setPriceisDisabled] = useState(false) 
   const [RatingisDisabled, setRatingisDisabled] = useState(false) 
   const [DistanceisDisabled, setDistanceisDisabled] = useState(false) 
+  const [search, setSearch] = useState('')
+
 
 
 
@@ -303,11 +305,17 @@ export default function KeepersPage({ route, navigation }) {
             <Text style={{paddingRight:10,marginLeft:10,fontSize:20}} >Sort by </Text>
             {listCategories()}
         </View>
-
+        <View style={{display: 'flex', justifyContent: 'center', margin: 20}}>
+            <TextInput style={{width: '90%', backgroundColor: "white"}}
+            placeholder="Search..."
+            onChangeText={(text) => setSearch(text)}
+            />
+            </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{ display: 'flex', flexDirection: 'column', flex: 0.8, alignItems: 'center' }}>
           {localKeepers &&
             localKeepers
+              .filter(el => el.name.includes(search))
               .map(el => {
                 return (
                   <TouchableOpacity onPress={() => toDetail(el._id)} key={el._id} style={{ display: 'flex', flexDirection: 'row', flex: 0.3, borderRadius: 10, borderBottomColor: 'black', width: 350, height: 150, marginVertical: 10, borderWidth: 0.6, borderColor: 'red' }}>
