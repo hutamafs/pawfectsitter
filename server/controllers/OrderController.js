@@ -18,8 +18,18 @@ class OrderController {
     static async createOrder(req,res,next) {
         try {
             let keeper = await Keeper.findById(req.params.id);
-            await keeper.update({status:'unavailable'})
+            keeper.status='unavailable'
             await keeper.save();
+            // for(let key in keeper.price) {
+            //     console.log(key,'ini key')
+            //     if(keeper.price[key] == req.body.price) {
+            //         console.log('masuk')
+            //         orderType = key;
+            //         console.log(orderType,'linie 29')
+            //         break;
+            //     }
+            // }
+            console.log(orderType,'ini type')
             let pet = await Pet.findById(req.body.pet_id);
             let order = new Order({
                 user_id:req.userData.id,
@@ -32,7 +42,8 @@ class OrderController {
                 keeperId:req.params.id,
                 status:true,
                 timeCreated:moment(new Date()).format('h:mm:ss a'),
-                dateCreated:moment(new Date()).format('DD MMM')
+                dateCreated:moment(new Date()).format('DD MMM'),
+                orderType
             })
             await order.save();
             res.status(201).json(order)

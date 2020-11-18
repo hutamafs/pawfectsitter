@@ -43,7 +43,7 @@ const orderSchema = new mongoose.Schema({
     },
     keeperId:{
         type:String
-    }
+    },
 })
 
 const Order = mongoose.model('Order',orderSchema);

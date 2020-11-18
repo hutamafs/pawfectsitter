@@ -71,7 +71,7 @@ export default function Order({navigation}) {
 
   const handleSubmit = () => {
     axios({
-      url: "http://192.168.100.6:3000/orders/" + id,
+      url: "http://192.168.1.8:3000/orders/" + id,
       method: "PUT",
       headers:{access_token},
       data: {review}
@@ -387,8 +387,8 @@ export default function Order({navigation}) {
                       {`Take back ${el.petName}`} </Text>
                   </TouchableOpacity>
                   </View>
-                  
-                <Text style={{
+                
+                  <Text style={{
                     color: '#00587a',
                     fontWeight:'bold',
                     position:'absolute',
@@ -396,6 +396,17 @@ export default function Order({navigation}) {
                     top:15}}
                     > 
                     {el.dateCreated}
+                    
+                </Text> 
+
+                <Text style={{
+                    color: '#00587a',
+                    fontWeight:'bold',
+                    position:'absolute',
+                    right:10,
+                    top:35}}
+                    > 
+                    {el.timeCreated}
                     
                 </Text> 
                       
@@ -433,7 +444,7 @@ export default function Order({navigation}) {
                     marginBottom : 2,
                     fontWeight:'bold'
                   }}
-                  >{el.keeperName} </Text> 
+                  >{el.keeperName.split(' ')[0]} </Text> 
                 {/* <Text 
                   style={{
                     color:'#102B3E',

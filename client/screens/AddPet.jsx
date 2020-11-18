@@ -45,7 +45,7 @@ const AddPet = ({navigation}) => {
         formData.append('type', type);
         formData.append('age', age);
     axios({
-        url: 'http://192.168.100.6:3000/pets',
+        url: 'http://192.168.1.8:3000/pets',
         method: 'POST',
         headers:{access_token,"Content-Type": "multipart/form-data"},
         data: formData,
