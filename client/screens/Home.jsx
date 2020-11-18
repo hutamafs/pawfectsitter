@@ -12,7 +12,10 @@ import { useDispatch } from 'react-redux';
 
 
 const Home = ({navigation, route}) => {
+<<<<<<< HEAD
 //   const {userData} = route.params
+=======
+>>>>>>> development
     const dispatch = useDispatch()
 
     const handleLogout = () => {
@@ -54,7 +57,7 @@ const Home = ({navigation, route}) => {
                 <Text 
                     style={{
                         marginTop : 45,
-                        marginLeft : 48,
+                        marginLeft:20,
                         fontFamily : 'nunito',
                         color : "#2F3542",
                         fontSize : 22
@@ -161,7 +164,7 @@ const Home = ({navigation, route}) => {
                 </Button>
 
 
-                <Button
+                {/* <Button
                   style={{
                     alignItems: "center",
                     justifyContent: "center",
@@ -177,7 +180,7 @@ const Home = ({navigation, route}) => {
                     name="heart-half-full" 
                     color="#F4E3E3" 
                     size={40} />
-                </Button>
+                </Button> */}
               </View>
            <View style={{
                    flexDirection:"row",
@@ -189,7 +192,7 @@ const Home = ({navigation, route}) => {
                    <Text
                     style={{
                         fontWeight : 'bold',
-                        paddingHorizontal:31,
+                        paddingHorizontal:25,
                         fontFamily:"nunito",
                         color : '#2F3542'
                     }}
@@ -197,7 +200,7 @@ const Home = ({navigation, route}) => {
                    <Text
                     style={{
                         fontWeight : 'bold',
-                        paddingHorizontal:35,
+                        paddingHorizontal:32,
                         fontFamily:"nunito",
                         color : '#2F3542'
                     }}
@@ -205,24 +208,24 @@ const Home = ({navigation, route}) => {
                    <Text
                     style={{
                         fontWeight : 'bold',
-                        paddingHorizontal:28,
+                        paddingHorizontal:30,
                         fontFamily:"nunito",
                         color : '#2F3542'
                     }}
-                   >My Keeper</Text>
-                   <Text
+                   >Keepers</Text>
+                   {/* <Text
                     style={{
                         fontWeight : 'bold',
                         paddingHorizontal:19,
                         fontFamily:"nunito",
                         color : '#2F3542'
                     }}
-                   >Tinder Dog</Text>
+                   >Tinder Dog</Text> */}
 
             </View>
            </View>
            
-               <View style={{
+               {/* <View style={{
                    backgroundColor:"#FFF",
                    paddingVertical:8,
                    paddingHorizontal:20,
@@ -243,7 +246,7 @@ const Home = ({navigation, route}) => {
                             width:320
                         }}
                    />
-               </View>
+               </View> */}
 
 
                <View style={{
@@ -254,7 +257,7 @@ const Home = ({navigation, route}) => {
                    marginBottom : 10,
                    marginTop : 10
                }}>
-                   <View style={{width:"40%"}}>
+                   <View style={{width:"100%"}}>
                         <Text style={{
                             fontWeight:"bold",
                             fontSize:18,
@@ -264,7 +267,7 @@ const Home = ({navigation, route}) => {
                             borderBottomEndRadius : 20,
                             padding : 3,
                             borderColor : "#FF6B81"
-                        }}>Recommended Keeper</Text>
+                        }}>Recommended Keepers</Text>
                    </View>
                    
                    
@@ -323,7 +326,11 @@ const Home = ({navigation, route}) => {
                     />
                 </ScrollView>    
             <TabBar 
+<<<<<<< HEAD
             navigation={navigation} 
+=======
+            navigation={navigation}
+>>>>>>> development
             />               
         </View>
     )

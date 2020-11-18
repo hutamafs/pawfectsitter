@@ -10,13 +10,13 @@ import {TextInput,ScrollView,TouchableOpacity} from 'react-native-gesture-handle
 
 
 
-export default function History({navigation}) {
+export default function History({route,navigation}) {
   const {history, access_token} = useSelector(state => state);
   const [categoryNow,setCategoryNow] = useState('');
   const [localHistory , setLocalHistory] = useState([]);
-  console.log(access_token, 'ini access token di history')
 
   useEffect(() => {
+    console.log(route,'ini route')
     setLocalHistory(history)
   }, [history])
 
@@ -28,7 +28,7 @@ export default function History({navigation}) {
     localHistory.map(el => {
       cloned.push(el)
     }) 
-      cloned.sort((a,b) => a[type.toLowerCase()][0] < b[type.toLowerCase()][0])
+      cloned.sort((a,b) => a[type.toLowerCase()] < b[type.toLowerCase()])
       // console.log(cloned);
 
     setLocalHistory(cloned);
@@ -108,15 +108,14 @@ export default function History({navigation}) {
              marginTop:10,
              width:"100%"
          }}>
-             <View style={{width:"100%"}}>
+             <View style={{width:"100%",alignItems:'center'}}>
                   <Text style={{
-                    fontSize: 20,
-                    marginTop : -55,
+                    fontSize: 25,
+                    marginTop : -50,
                     color:"#0F2A3C",
-                    marginLeft : 165,
                     fontWeight:"normal",
                     fontFamily : 'nunito'
-                  }}>History List {countHistory()}</Text>
+                  }}>History List ({countHistory()})</Text>
              </View>
         </View>
      </View>
@@ -137,50 +136,7 @@ export default function History({navigation}) {
       </LinearGradient>
 
       {/* <Text>{JSON.stringify(history)}</Text> */}
-
-         <View style={{
-           flexDirection:"row",
-           paddingHorizontal:20,
-           width:"100%",
-           alignItems:"center",
-           marginBottom : 30,
-           marginTop : 20
-          }}>
-             <View style={{width:"50%"}}>
-                  <Text style={{
-                    fontWeight:"bold",
-                      fontSize:15,
-                      color:"#6B6C6E",
-                      marginLeft : 20,
-                  }}>{history.length} Order</Text>
-
-             </View>
-             <View style={{width:"50%", alignItems:"flex-end"}}>
-             </View>
-         </View>
-
-         <View style={{
-             flexDirection:"row",
-             paddingHorizontal:20,
-             width:"100%",
-             alignItems:"center",
-             marginBottom : 10,
-             marginTop : 20,
-         }}>
-             <View style={{width:"50%"}}>
-                  <Text style={{
-                      fontWeight:"bold",
-                      fontSize:15,
-                      color:"#6B6C6E",
-                      marginLeft : 20,
-                  }}>{countHistory()} Order</Text>
-
-             </View>
-             <View style={{width:"80%", alignItems:"flex-end"}}>
-             </View>
-        
-         </View>
-         <View style={{display:'flex',flexDirection:'row',height:30,marginTop:10,marginBottom:5}}>
+         <View style={{display:'flex',flexDirection:'row',height:30}}>
             <Text style={{paddingRight:15,marginLeft:15,fontSize:20}} >Sort by </Text>
             {listCategories()}
         </View>

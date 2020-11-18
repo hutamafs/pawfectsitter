@@ -29,7 +29,6 @@ export default function Chat({navigation, route}) {
         keeperName: order.keeperName,
         userId: order.user_id
       }
-      
     })
   }
   const backToHome = () => {
@@ -251,8 +250,7 @@ export default function Chat({navigation, route}) {
     
   }
 
-  return (
-    
+  return (    
     <View style={{
       backgroundColor:"#C8D1DA",
       flex:1,
@@ -456,9 +454,11 @@ export default function Chat({navigation, route}) {
       </ScrollView>  
 
          </View>
-
+         <TabBar
+      navigation={navigation}
+      // userData={userData}
+    />
     </View>
-
   )
 }
 
