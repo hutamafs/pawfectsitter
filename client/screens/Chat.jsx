@@ -13,7 +13,7 @@ export default function Chat({navigation, route}) {
   const [messages, setMessages] = useState([]);
   
 
-  const {userData} = route.params
+  // const {userData} = route.params
   useEffect(() => {
     firebaseSDK.on(message => {
       setMessages(messages.concat(message))
@@ -55,13 +55,10 @@ export default function Chat({navigation, route}) {
      <GiftedChat
       messages={messages}
       onSend={messages => onSend(messages)}
-      user={{
-        userData
-      }}
     />
     <TabBar
       navigation={navigation}
-      userData={userData}
+      // userData={userData}
     />
     </>
   )

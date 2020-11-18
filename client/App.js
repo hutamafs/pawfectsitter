@@ -33,6 +33,8 @@ export default function App() {
 
   if (fontsLoaded) {
     return (
+
+
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <Provider store={store}>
           <NavigationContainer>
@@ -50,6 +52,7 @@ export default function App() {
             <Stack.Screen name="Login" component={Login} 
               options={{title: 'Login'}}
             />
+            
             <Stack.Screen name="Home" component={Home} 
               options={{title: 'Home'}}
             />
