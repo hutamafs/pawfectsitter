@@ -8,7 +8,7 @@ import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 
 const GMap = ({navigation, route}) => {
   const backToHome = () => {
-      navigation.replace('KeepersPage')
+      navigation.navigate('KeepersPage')
     }
 
   return (

@@ -77,9 +77,17 @@ const KeeperDetail = ({navigation, route}) => {
                     <Text style={{marginTop:2}}>
                         Specialized in {skills(keeper.skills)}
                     </Text>
-                    <Text style={{fontSize:15,marginTop:2,borderColor:'black',borderBottomWidth:1}}>
-                        Lives in {keeper.address}
-                    </Text>
+                    <View>
+                        <Text style={{fontSize:15,marginTop:2,borderColor:'black',borderBottomWidth:1}}>
+                            Lives in {keeper.address}
+                        </Text>
+                        <TouchableOpacity
+                        style={{ width: 150, height: 30, position: 'absolute', right: 10, bottom: 6.5, backgroundColor: '#BA826A', borderRadius: 10 }}
+                        onPress={() => toMaps(keeper.latitude, keeper.longitude)}
+                        >
+                            <Text style={{ color: 'white', textAlign: 'center', marginTop: 5 }}>Show Location </Text>
+                        </TouchableOpacity>
+                    </View>
                     <View style={{display:'flex',flexDirection:'row',flexWrap:'wrap'}} >
                         <View style={{display:'flex',borderWidth:1,width:125,justifyContent:'center',borderRadius:60,borderColor:'green',marginTop:10,marginHorizontal:10}}>
                            <Text style={{alignSelf:'center'}}> Hourly Rates</Text>
@@ -93,12 +101,6 @@ const KeeperDetail = ({navigation, route}) => {
                            <Text style={{alignSelf:'center'}}> Weekly Rates</Text>
                            <Text style={{alignSelf:'center'}}>{keeper.price.weekly}</Text>
                         </View>
-                        <TouchableOpacity
-                        style={{ width: 150, height: 30, position: 'absolute', right: 10, bottom: 6.5, backgroundColor: '#BA826A', borderRadius: 10 }}
-                        onPress={() => toMaps(keeper.latitude, keeper.longitude)}
-                        >
-                            <Text style={{ color: 'white', textAlign: 'center', marginTop: 5 }}>Show Location </Text>
-                        </TouchableOpacity>
                     </View>
                     <View style={{marginTop:5}}>
                         <Text style={{fontSize:25}}>
