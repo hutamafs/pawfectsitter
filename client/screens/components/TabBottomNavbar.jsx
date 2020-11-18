@@ -38,23 +38,7 @@ export default function TabBar({navigation}) {
           accessibilityRole='button'
           onPress={() => navigation.navigate('Order')}
         > 
-        <Icon name="book-outline" color="#FF6B81" size={35}  />
-    </Button>
-    <Button 
-          style={{
-            alignItems: "center",
-            justifyContent: "center",
-            height: 50,
-            width: 50,
-            borderRadius: 20,
-            marginTop : 15,    
-            borderColor : "#F4E3E3",
-            marginLeft : 60,
-          }}
-          accessibilityRole='button'
-          onPress={() => navigation.navigate('Chat')}
-        > 
-        <Icon name="chat-processing" color="#FF6B81" size={35} />
+        <Icon name="format-list-checkbox" color="#FF6B81" size={35}  />
     </Button>
     <Button 
           style={{
@@ -82,7 +66,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F4E3E3',
     borderColor : "#F4E3E3",
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     flexDirection: 'row',
     borderRadius : 30,
     height : "10%" ,
