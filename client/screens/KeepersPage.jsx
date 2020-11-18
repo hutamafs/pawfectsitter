@@ -1,8 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, Button, TouchableWithoutFeedback, Keyboard, LogBox } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, Button, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchKeepers, fetchPets, addOrders } from '../store/actions';
+import { fetchKeepers, fetchPets, setOrders } from '../store/actions';
 import TabBar from './components/TabBottomNavbar';
 import Modal from 'react-native-modal';
 import { TextInput } from 'react-native-paper';
@@ -54,7 +54,7 @@ export default function KeepersPage({ route, navigation }) {
       { timeout: 20000, maximumAge: 1000 }
     )
   }
-  
+
   function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
     // console.log(lat1, 'line 59')
     // console.log(lon1, 'line 60')
@@ -104,8 +104,12 @@ export default function KeepersPage({ route, navigation }) {
 
   const handleCancel = () => {
     setModalVisible(!isModalVisible);
+    setQuantity('')
   }
 
+  const total=Number(quantity) * Number(harga)
+  // const totalLocal = Number(total).toLocaleString()
+  // console.log(totalLocal, 'line 110')
   const handleSubmit = () => {
     let payload = {
       pet_id: petId,
@@ -126,8 +130,7 @@ export default function KeepersPage({ route, navigation }) {
       }
     })
       .then(({ data }) => {
-        dispatch(addOrders(data))
-        dispatch(fetchKeepers());
+        dispatch(setOrders(data))
       })
       .catch(err => console.log(err))
 
@@ -137,6 +140,7 @@ export default function KeepersPage({ route, navigation }) {
 
     const handlePetRadio = (e) => {
       // setPetId(e.target[radio_props].value)
+      // console.log(e, 'line 139')
       setPetId(e)
     }
 
@@ -161,8 +165,12 @@ export default function KeepersPage({ route, navigation }) {
     localKeepers.map(el => {
       cloned.push(el)
     })
-    cloned.sort((a, b) => a[type.toLowerCase()] < b[type.toLowerCase()])
-
+    if(type == 'Rating') {
+      cloned.sort((a, b) => a[type.toLowerCase()] > b[type.toLowerCase()])
+    } else {
+      cloned.sort((a, b) => a[type.toLowerCase()] < b[type.toLowerCase()])
+    }
+    
     setLocalKeepers(cloned);
   }
 
@@ -189,17 +197,18 @@ export default function KeepersPage({ route, navigation }) {
   const listCategories = () => {
     let types = {
       0: 'Price',
-      1: 'Rating'
+      1: 'Rating',
+      2: 'Distance'
     }
     let categories = [];
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < 3; i++) {
       categories.push(
         <TouchableOpacity
           key={i}
           onPress={() => sortCategory(types[i])}
           style={(types[i].toLowerCase() == categoryNow) ?
             { width: 100, borderRadius: 25, justifyContent: 'center', borderColor: 'green', borderWidth: 2, marginHorizontal: 3 } :
-            { width: 100, borderRadius: 25, justifyContent: 'center', borderColor: 'grey', borderWidth: 2, marginHorizontal: 3 }
+            { width: 100, borderRadius: 25, justifyContent: 'center', borderColor: 'grey', borderWidth: 2, marginHorizontal: 3 } 
           }
         >
           <Text style={{ fontSize: 15, color: 'black', textAlign: 'center', margin: 5, alignSelf: 'center' }}>{types[i]}</Text>
@@ -246,23 +255,24 @@ export default function KeepersPage({ route, navigation }) {
     }
     return lists;
   }
+  console.log(currentPosition)
   return (
     <View style={styles.container}>
-      <View style={{ display: 'flex', flexDirection: 'row', height: 100, paddingTop: 15,marginBottom:25, borderBottomWidth: 1, backgroundColor: '#F7E7D3', borderColor: '#BA826A' }}>
+      <View style={{ display: 'flex', flexDirection: 'row', height: 80, marginTop: 15, borderBottomWidth: 1, backgroundColor: '#F7E7D3', borderColor: '#BA826A' }}>
         <Image
           source={logo}
-          style={{ width: 80, height: 80, marginLeft: 3,marginTop:20 }}
+          style={{ width: 80, height: 80, marginLeft: 3 }}
         />
-        <Text style={{ fontSize: 30, marginTop: 35, color: '#BA826A' }}>Keepers</Text>
+        <Text style={{ fontSize: 30, marginTop: 20, color: '#BA826A' }}>Keepers</Text>
       </View>
       {/* <View style={{display:'flex',flexDirection:'row',height:30,marginTop:10,marginBottom:2}}>
         <Text style={{display:'flex',alignSelf:'center',marginLeft:5,marginRight:10}}>Filter by Animal</Text> 
           {listAnimals()}
         </View> */}
-      <View style={{display:'flex',flexDirection:'row',height:30,marginTop:10,marginBottom:5}}>
+      {/* <View style={{display:'flex',flexDirection:'row',height:30,marginTop:10,marginBottom:5}}>
             <Text style={{paddingRight:15,marginLeft:15,fontSize:20}} >Sort by </Text>
             {listCategories()}
-        </View>
+        </View> */}
 
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{ display: 'flex', flexDirection: 'column', flex: 0.8, alignItems: 'center' }}>
@@ -271,8 +281,11 @@ export default function KeepersPage({ route, navigation }) {
               .map(el => {
                 return (
                   <View key={el._id} style={{ display: 'flex', flexDirection: 'row', flex: 0.3, borderRadius: 10, borderBottomColor: 'black', width: 350, height: 150, marginVertical: 10, borderWidth: 0.6, borderColor: 'red' }}>
-
-                    <Text style={{ position: 'absolute', top: 20, right: 10, fontWeight: 'bold' }}> Rp {el.price.hourly.toLocaleString().replace(',', '.')} </Text>
+                    <View style={{ position: 'absolute', top: 20, right: 10}}>
+                      <Text style={{ fontWeight: 'bold' }}> Rp {el.price.hourly.toLocaleString().replace(',', '.')} </Text>
+                      <Text style={{ fontWeight: 'bold' }}> Rp {el.price.daily.toLocaleString().replace(',', '.')} </Text>
+                      <Text style={{ fontWeight: 'bold' }}> Rp {el.price.weekly.toLocaleString().replace(',', '.')} </Text>
+                    </View>
                     <View style={{ paddingHorizontal: 10, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                       <Image source={{ uri: el.image }} style={{ width: 100, height: 100, borderColor: 'white', resizeMode: 'contain', margin: 5 }} />
                       <TouchableOpacity style={{ width: 60, height: 30, backgroundColor: '#BA826A', borderRadius: 70 }} onPress={() => toDetail(el._id)}><Text style={{ textAlign: 'center', fontSize: 15, margin: 5, color: 'white' }}>Details</Text></TouchableOpacity>
@@ -308,18 +321,16 @@ export default function KeepersPage({ route, navigation }) {
                         </View> */}
                       </View>
                     </View>
-                        {el.status == 'available'?
-                                            <TouchableOpacity
-                                            style={{ width: 85, height: 30, position: 'absolute', right: 10, bottom: 6.5, backgroundColor: '#BA826A', borderRadius: 10 }}
-                                            onPress={() => handlePress(el)}
-                                          >
-                                            <Text style={{ color: 'white', textAlign: 'center', marginTop: 5 }}>Hire Me! </Text>
-                                          </TouchableOpacity>  : <></>
-                      }
+                    <TouchableOpacity
+                      style={{ width: 85, height: 30, position: 'absolute', right: 10, bottom: 6.5, backgroundColor: '#BA826A', borderRadius: 10 }}
+                      onPress={() => handlePress(el)}
+                    >
+                      <Text style={{ color: 'white', textAlign: 'center', marginTop: 5 }}>Hire Me! </Text>
+                    </TouchableOpacity>
 
                     <Modal isVisible={isModalVisible}>
-                      <View style={{ flex: 0.6, display: 'flex', backgroundColor: 'white', alignItems: 'center', borderRadius: 20 }}>
-                        <View style={{ alignItems: 'center' }}>
+                      <View style={{ flex: 0.6, display: 'flex', backgroundColor: 'white', borderRadius: 20 }}>
+                        <View style={{paddingLeft: 7}}>
                           <Text style={{ marginTop: 15, fontSize: 17 }}> {`Which pet would you like to entrust to ${name}?`} </Text>
                           {
                             pet_props &&
@@ -338,7 +349,7 @@ export default function KeepersPage({ route, navigation }) {
                           }
                         </View>
 
-                        <View style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 200, marginTop: 10 }}>
+                        <View style={{ display: 'flex', flexDirection: 'column', width: 200, marginTop: 10, paddingLeft: 7 }}>
                           <Text style={{ marginTop: 15, fontSize: 15, marginBottom: 5, fontSize: 17 }}> Which Package ? </Text>
                           {
                             duration_props &&
@@ -357,19 +368,21 @@ export default function KeepersPage({ route, navigation }) {
                           }
                         </View>
 
-                        <View>
+                        <View style={{paddingLeft: 7}}>
                           <TextInput
                             placeholder="For How long?"
-                            style={{ backgroundColor: 'white', width: 300, height: 50, borderWidth: 1, borderRadius: 20, marginTop: 20, marginBottom: 20, borderTopStartRadius: 20, borderTopEndRadius: 20 }}
+                            style={{ backgroundColor: 'white', width: 200, height: 40, borderWidth: 1, borderRadius: 20, marginTop: 20, marginBottom: 10, borderTopStartRadius: 20, borderTopEndRadius: 20 }}
                             value={quantity}
                             keyboardType="numeric"
                             onChangeText={(text) => setQuantity(text)}
                             required
                           />
                         </View>
-
-                        <TouchableOpacity style={styles.btnStyle} onPress={() => handleSubmit()}><Text style={{ textAlign: 'center', fontSize: 25, margin: 5 }}>Hire</Text></TouchableOpacity>
-                        <TouchableOpacity style={styles.btnStyle} onPress={() => handleCancel()}><Text style={{ textAlign: 'center', fontSize: 25, margin: 5 }}>Cancel</Text></TouchableOpacity>
+                        <Text style={{margin: 10, fontSize: 20, fontWeight: 'bold'}}>Total: Rp.{total}</Text>
+                        <View style={{alignItems: 'center'}}>
+                          <TouchableOpacity style={styles.btnStyle} onPress={() => handleSubmit()}><Text style={{ textAlign: 'center', fontSize: 25, margin: 5, color: 'white' }}>Hire</Text></TouchableOpacity>
+                          <TouchableOpacity style={styles.btnStyle} onPress={() => handleCancel()}><Text style={{ textAlign: 'center', fontSize: 25, margin: 5, color: 'white' }}>Cancel</Text></TouchableOpacity>
+                        </View> 
                       </View>
                     </Modal>
 
@@ -402,7 +415,7 @@ const styles = StyleSheet.create({
     color: 'white'
   },
   btnStyle: {
-    backgroundColor: 'orange',
+    backgroundColor: '#BA826A',
     width: 300,
     borderRadius: 20,
     margin: 5

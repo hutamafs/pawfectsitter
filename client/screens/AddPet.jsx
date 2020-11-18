@@ -211,7 +211,6 @@ const AddPet = ({navigation}) => {
                         borderRadius: 20,
                         backgroundColor: "#6661DB",
                         marginLeft: 130,
-                        padding : 20,
                         borderColor: '#6661DB',
                     }}>Submit
                     
