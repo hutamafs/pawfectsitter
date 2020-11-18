@@ -15,7 +15,6 @@ const KeeperDetail = ({navigation, route}) => {
     },[])
     
     const toMaps = (keeperLatitude, keeperLongitude) => {
-        console.log(keeperLatitude,keeperLongitude,'ini line 18')
         navigation.navigate('GMap', {latitude: keeperLatitude, longitude: keeperLongitude})
     }
 

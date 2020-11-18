@@ -44,8 +44,8 @@ export default function Order({navigation}) {
 
   const listCategories = () => {
     let types = {
-      0:'KeeperName',
-      1:'DateCreated'
+      0:'Keeper Name',
+      1:'Date Created'
     }
     let categories = [];
     for(let i = 0 ; i<2 ; i++) {
@@ -54,8 +54,8 @@ export default function Order({navigation}) {
         key={i}
         onPress={() => sortCategory(types[i])}
         style={(types[i].toLowerCase() == categoryNow) ? 
-          {width:100,borderRadius:25,justifyContent:'center',borderColor:'green',borderWidth:2,marginHorizontal:3}:
-          {width:100,borderRadius:25,justifyContent:'center',borderColor:'grey',borderWidth:2,marginHorizontal:3}
+          {width:125,borderRadius:25,justifyContent:'center',borderColor:'green',borderWidth:2,marginHorizontal:3}:
+          {width:125,borderRadius:25,justifyContent:'center',borderColor:'grey',borderWidth:2,marginHorizontal:3}
         }
         >
         <Text style={{ fontSize: 15, color: 'black', textAlign: 'center', margin: 5,alignSelf:'center' }}>{types[i]}</Text>
@@ -63,6 +63,10 @@ export default function Order({navigation}) {
       )
     }
     return categories;
+  }
+  
+  const closeModal = () => {
+    setModalVisible(!isModalVisible);
   }
 
   const handleSubmit = () => {
@@ -86,15 +90,15 @@ export default function Order({navigation}) {
   }
 
   const countOrders = () => {
-    let newCount = 0;
-    // if(orders) { 
-    //   orders.map(el => {
-    //     if(el.status === true) {
-    //       newCount++
-    //     }
-    //   })
-    // }
-    return newCount;
+    let count = 0
+    if(localOrders.length > 1) {
+      localOrders.map(el => {
+        if(el.status === true) {
+          count++
+        }
+      })
+    }
+    return `${count}`
   }
 
   const backToHome = () => {
@@ -127,7 +131,7 @@ export default function Order({navigation}) {
                 <Icon 
                   name="arrow-left-circle" 
                   color="black" 
-                  size={30}
+                  size={50}
                   style={[{  
                   transform: [{ rotate: "0deg" }],
                   position : 'absolute',
@@ -140,14 +144,14 @@ export default function Order({navigation}) {
                marginTop:10,
                width:"100%"
            }}>
-               <View style={{width:"50%",backgroundColor:'black'}}>
+               <View style={{width:"100%",backgroundColor:'black'}}>
                     <Text style={{
                       fontSize: 15,
                       marginTop : -50,
                       color:"#0F2A3C",
                       fontWeight:"normal",
                       fontFamily : 'nunito',
-                    }}>Order List</Text>
+                    }}> Order List </Text>
                </View>
           </View>
        </View>
@@ -165,7 +169,7 @@ export default function Order({navigation}) {
                         fontSize:15,
                         color:"#6B6C6E",
                         marginLeft : 20,
-                    }}>{orders.length} Order</Text>
+                    }}>{localOrders.length} Order</Text>
   
                </View>
                <View style={{width:"80%", alignItems:"flex-end"}}>
@@ -306,25 +310,44 @@ export default function Order({navigation}) {
     }}>
 
       <Modal isVisible={isModalVisible}>
-        <View style={{backgroundColor: 'white', height: '80%'}}>
-        <Text style={{fontSize: 20, textAlign: 'center', marginTop: 20, marginBottom: 20}}>Let them hear your opinion</Text>
+        <View style={{backgroundColor: 'white', height: '40%'}}>
+        <Text style={{fontSize: 20,marginLeft:20, marginTop: 20, marginBottom: 20}}>Give them a review</Text>
         <TextInput
-        style={{borderWidth: 2, height:'50%', marginLeft:15, padding:10, marginRight:15, borderRadius: 20, marginBottom: 20}}
+        style={{borderWidth: 2,height:100, marginLeft:15, marginRight:15, borderRadius: 20, marginBottom: 20,paddingLeft:10,paddingTop:0,marginTop:0}}
         placeholder="Write here"
         onChangeText={(text) => setReview(text)}
         />
-        <Button
-        style={{backgroundColor:'#6661DB',
-        borderColor : "#6661DB",
-        borderBottomRightRadius : 20,
-        borderTopLeftRadius : 20,
-        marginLeft: 20,
-        marginRight: 20
-        }}
-        onPress={handleSubmit}
-        >
-        <Text style={{color: 'white'}}>Submit</Text>
-        </Button>
+        <View style={{display:'flex',flexDirection:'row',justifyContent:'space-evenly'}}>
+          <TouchableOpacity
+          style={{backgroundColor:'green',
+          borderColor : "#6661DB",
+          marginLeft: 20,
+          width:100,
+          height:40,
+          alignItems:'center',
+          justifyContent:'center',
+          borderRadius:30
+          }}
+          onPress={handleSubmit}
+          >
+            <Text style={{color: 'white'}}>Submit</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+          style={{backgroundColor:'red',
+          borderColor : "#6661DB",
+          marginLeft: 20,
+          marginRight: 20,
+          width:100,
+          height:40,
+          borderRadius:30,
+          justifyContent:'center',
+          alignItems:'center'
+          }}
+          onPress={closeModal}
+          > 
+            <Text style={{color: 'white'}}>Cancel</Text>
+          </TouchableOpacity>
+        </View>
         </View>
       </Modal>
      <View style={{
@@ -362,31 +385,17 @@ export default function Order({navigation}) {
              width:"100%"
          }}>
            
-             <View style={{width:"100%"}}>
+             <View style={{width:"100%",alignItems:'center'}}>
                   <Text style={{
                     fontSize: 25,
                     marginTop : -50,
                     color:"#0F2A3C",
-                    marginLeft : 175,
                     fontWeight:"normal",
                     fontFamily : 'nunito'
-                  }}>Order List</Text>
+                  }}>Order List ({countOrders()}) </Text>
              </View>
         </View>
      </View>
-         <View style={{
-             backgroundColor:"#FFF",
-             paddingVertical: 3,
-             paddingHorizontal:20,
-             marginHorizontal:30,
-             borderRadius:10,
-             flexDirection:"row",
-             alignItems:"center",
-             borderColor : "#7C7E80",
-             marginTop : 10
-            }}>
-            
-         </View>
 
          <View style={{
              flexDirection:"row",
@@ -396,15 +405,15 @@ export default function Order({navigation}) {
              marginBottom : 10,
              marginTop : 20,
          }}>
-             <View style={{width:"50%"}}>
+             {/* <View style={{width:"50%"}}>
                   <Text style={{
                       fontWeight:"bold",
                       fontSize:15,
                       color:"#6B6C6E",
                       marginLeft : 20,
-                  }}>{countOrders()} Order</Text>
+                  }}>{countOrders()}</Text>
 
-             </View>
+             </View> */}
              <View style={{width:"80%", alignItems:"flex-end"}}>
              </View>
         
@@ -436,7 +445,10 @@ export default function Order({navigation}) {
               }]}
               />
             </View>
-          {localOrders &&
+            <View
+            style={{display:'flex',alignItems:'center'}}
+            >
+              {localOrders &&
             localOrders
             .filter(el => el.status === true)        
             .map(el => {
@@ -447,14 +459,42 @@ export default function Order({navigation}) {
                     display:'flex',
                       flexDirection:'row',
                       paddingBottom: 4,
-                      width:250,
+                      width:375,
                       height:150,
                       marginVertical: 5,
-                      borderWidth : 3,
-                      borderRadius : 20,
-                      position:"relative"
+                      borderWidth : 0.5,
+                      borderRadius : 10,
+                      position:'relative',
+                      backgroundColor:'#a6a6a4'
                     }}
+                >
+                  <View style={{position:'absolute',bottom:-30,left:130,marginTop:25,zIndex:1}}>
+                    <TouchableOpacity
+                    style={{
+                      width:150,
+                      height:70,
+                    }}
+                    onPress={() => handlePress(el._id)}
                     >
+                    <Text 
+                    style={{
+                      color: '#edc988',
+                    fontWeight:'bold'}}
+                    > 
+                      {`Take back ${el.petName}`} </Text>
+                  </TouchableOpacity>
+                  </View>
+                  
+                <Text style={{
+                    color: '#00587a',
+                    fontWeight:'bold',
+                    position:'absolute',
+                    right:10,
+                    top:15}}
+                    > 
+                    {el.dateCreated}
+                    
+                </Text> 
                       
                 <View 
                   style={{
@@ -467,9 +507,8 @@ export default function Order({navigation}) {
                   source={{uri:el.keeperImage}} 
                   style={{ 
                     width: 100, 
-                    height: 90, 
+                    height: 120, 
                     borderColor: 'white',
-                    borderRadius:20 ,
                     marginRight : 10 ,
                     }}  />
                 </View>
@@ -484,12 +523,13 @@ export default function Order({navigation}) {
                     flexDirection:'column'}}>
                 <Text 
                   style={{
-                    color:'#102B3E',
+                    color:'black',
                     fontSize:25,
                     fontFamily:"nunito",
-                    marginBottom : 10
+                    marginBottom : 2,
+                    fontWeight:'bold'
                   }}
-                  >Keeper : {el.keeperName} </Text> 
+                  >{el.keeperName} </Text> 
                 {/* <Text 
                   style={{
                     color:'#102B3E',
@@ -504,11 +544,18 @@ export default function Order({navigation}) {
                     color:'#102B3E',
                     fontSize:13,
                     fontFamily:"nunito",
-                    marginBottom: 5,
                     borderBottomWidth : 3,
                     borderColor : "#6B6C6E" ,
-                    paddingBottom : 6
-                    }}>Quantity : {el.quantity} x {el.price}  =
+                    }}>Duration : {el.quantity}
+                </Text>
+                <Text 
+                  style={{
+                    color:'#102B3E',
+                    fontSize:12,
+                    fontFamily:"nunito",
+                    borderBottomWidth : 3,
+                    borderColor : "#6B6C6E" ,
+                    }}>Package Price : {(el.price/el.quantity).toLocaleString().replace(',','.')} 
                 </Text>
                 </View>
                 <View 
@@ -520,35 +567,20 @@ export default function Order({navigation}) {
                 <Text 
                   style={{
                     color: '#102B3E',
-                    fontSize:15,
+                    fontSize:12,
                     fontFamily:"nunito",
                     letterSpacing : 1,
                     paddingBottom : 20
-                  }}>Bill : Rp{el.quantity*el.price}</Text>
-                </View>
-                </View>
-                <Button
-                  style={{
-                    backgroundColor:'white',
-                    borderColor : "#6661DB",
-                    borderBottomRightRadius : 20,
-                    borderTopLeftRadius : 20,
-                    width:100,
-                    height:100,
-                  }}
-                  onPress={() => handlePress(el._id)}
-                  >
-                  <Text 
-                  style={{
-                    color: '#0F2A3C',
-                    textAlign:'center'}}
-                    > 
-                    {`Take back ${el.petName}`} </Text>
-                </Button>
+                  }}>Bill : Rp{(el.price).toLocaleString().replaceAll(',','.')}</Text>
+                </View>               
+              </View>
+                
               </View>
               )
             })
           }
+            </View>
+          
         </View> 
       </ScrollView>    
       

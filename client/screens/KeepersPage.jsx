@@ -163,8 +163,12 @@ export default function KeepersPage({ route, navigation }) {
     localKeepers.map(el => {
       cloned.push(el)
     })
-    cloned.sort((a, b) => a[type.toLowerCase()] < b[type.toLowerCase()])
-
+    if(type == 'Rating') {
+      cloned.sort((a, b) => a[type.toLowerCase()] > b[type.toLowerCase()])
+    } else {
+      cloned.sort((a, b) => a[type.toLowerCase()] < b[type.toLowerCase()])
+    }
+    
     setLocalKeepers(cloned);
   }
 
@@ -191,17 +195,18 @@ export default function KeepersPage({ route, navigation }) {
   const listCategories = () => {
     let types = {
       0: 'Price',
-      1: 'Rating'
+      1: 'Rating',
+      2: 'Distance'
     }
     let categories = [];
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < 3; i++) {
       categories.push(
         <TouchableOpacity
           key={i}
           onPress={() => sortCategory(types[i])}
           style={(types[i].toLowerCase() == categoryNow) ?
             { width: 100, borderRadius: 25, justifyContent: 'center', borderColor: 'green', borderWidth: 2, marginHorizontal: 3 } :
-            { width: 100, borderRadius: 25, justifyContent: 'center', borderColor: 'grey', borderWidth: 2, marginHorizontal: 3 }
+            { width: 100, borderRadius: 25, justifyContent: 'center', borderColor: 'grey', borderWidth: 2, marginHorizontal: 3 } 
           }
         >
           <Text style={{ fontSize: 15, color: 'black', textAlign: 'center', margin: 5, alignSelf: 'center' }}>{types[i]}</Text>
