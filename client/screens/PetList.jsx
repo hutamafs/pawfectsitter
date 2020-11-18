@@ -36,19 +36,6 @@ export default function PetList({ navigation }) {
           marginTop: 25,
           width: "100%"
         }}>
-          <Button
-                        style={{
-                            backgroundColor:"#FDCB6E",
-                            borderColor : "#FDCB6E",
-                            width : 30,
-                            height : 30,
-                            borderRadius : 20,
-                            position : "absolute",
-                            width : 80,
-                            marginTop : 25,
-                            marginLeft : 15
-                        }}
-                    ></Button>
                 <Text 
                     style={{
                         marginTop : 25,
