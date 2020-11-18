@@ -36,8 +36,8 @@ export default function History({route,navigation}) {
 
   const listCategories = () => {
     let types = {
-      0:'KeeperName',
-      1:'DateCreated'
+      0:'Keeper Name',
+      1:'Date Created'
     }
     let categories = [];
     for(let i = 0 ; i<2 ; i++) {
@@ -46,8 +46,8 @@ export default function History({route,navigation}) {
         key={i}
         onPress={() => sortCategory(types[i])}
         style={(types[i].toLowerCase() == categoryNow) ? 
-          {width:100,borderRadius:10,justifyContent:'center',borderColor:'#FF6B81',borderWidth:2,marginHorizontal:7}:
-          {width:100,borderRadius:10,justifyContent:'center',borderColor:'#FF6B81',borderWidth:2,marginHorizontal:7}
+          {width:125,borderRadius:25,justifyContent:'center',borderColor:'#FF6B81',borderWidth:2,marginHorizontal:3}:
+          {width:125,borderRadius:25,justifyContent:'center',borderColor:'#FF6B81',borderWidth:2,marginHorizontal:3}
         }
         >
         <Text style={{ fontSize: 15, color: '#2F3542', textAlign: 'center', margin: 5,alignSelf:'center' }}>{types[i]}</Text>
@@ -196,7 +196,8 @@ export default function History({route,navigation}) {
                     style={{
                       display:'flex',
                       flexDirection:'column',
-                      marginTop:10
+                      marginTop:10,
+                      height:100,
                       }}>
                     <View 
                     style={{
@@ -209,14 +210,14 @@ export default function History({route,navigation}) {
                         fontSize:25,
                         fontFamily:"nunito",
                       }}
-                        >Keeper :  {el.keeperName} </Text>
+                        >{el.keeperName} </Text>
                       
                       <Text 
                       style={{
                         color:'black',
                         fontSize:13,
                         fontFamily:"nunito",
-                        marginBottom: 40
+                        marginBottom: 5
                       }}
                         >In Charge of : {el.petName} </Text>
                     </View>
@@ -233,7 +234,7 @@ export default function History({route,navigation}) {
                         fontSize:15,
                         fontFamily:"nunito",    
                       }}
-                        >Billed : Rp. {el.quantity*el.price},00</Text>
+                        >Billed : Rp. {(el.quantity*el.price).toLocaleString().replace(',','.')},00</Text>
                     </View>
                   </View>
                 </View>

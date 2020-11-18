@@ -13,26 +13,26 @@ const GMap = ({navigation, route}) => {
 
   return (
       <>
-            <Button 
+            {/* <Button 
             style={{
-              width : 30,
-              height : 30,
               marginTop : 35,
-              borderColor : "#6661DB"
+              borderWidth:0
             }}
               onPress={backToHome}
             >
                   <Icon 
                     name="arrow-left-circle" 
                     color="black" 
-                    size={30}
+                    size={35}
                     style={[{  
                     transform: [{ rotate: "0deg" }],
                     position : 'absolute',
-                    color : "#102B3E",
+                    color : "black",
+                    left:10,
+                    top:5
                   }]}
                   />
-                </Button>
+                </Button> */}
       <SafeAreaView forceInset={{top: 'always'}}>
           
           <Map
@@ -86,6 +86,8 @@ const GMap = ({navigation, route}) => {
     </>
     )
 }
+
+let check = arraystatus.include()
 
 export default GMap
 */

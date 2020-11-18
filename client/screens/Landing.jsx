@@ -70,22 +70,24 @@ export default function Landing({navigation}) {
       >or to be family , Please register first . . .</Text>
      
       
-      <Button
-        style={styles.buttonStyle7} 
-        textStyle={styles.textStyle}
-        onPress={() => navigation.navigate('Register')}
-        title={"Register"}
-      >
-        Register
+        <View style={{alignItems:'center'}}>
+          <Button
+          style={styles.buttonStyle7} 
+          textStyle={styles.textStyle}
+          onPress={() => navigation.navigate('Register')}
+          title={"Register"}
+        >
+          Register
+        </Button>
+        <Button
+          style={styles.buttonStyle7} 
+          textStyle={styles.textStyle}
+          onPress={() => navigation.navigate('Login')}
+          title={"Login"}
+        >
+          Login
       </Button>
-      <Button
-        style={styles.buttonStyle7} 
-        textStyle={styles.textStyle}
-        onPress={() => navigation.navigate('Login')}
-        title={"Login"}
-      >
-        Login
-      </Button>
+        </View>
        
     </View>
   );
@@ -101,8 +103,6 @@ const styles = StyleSheet.create({
   buttonStyle7 : {
     borderColor: '#2F3542',
     backgroundColor: '#2F3542',
-    marginLeft : 120,
-    marginRight : 80,
     marginTop : 5,
     borderRadius: 20,
     width: 240,

@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, Button, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, Button, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchKeepers, fetchPets, setOrders } from '../store/actions';
 import TabBar from './components/TabBottomNavbar';
@@ -80,8 +80,8 @@ export default function KeepersPage({ route, navigation }) {
   useEffect(() => {
     getMyLocation()
     dispatch(fetchKeepers())
-    dispatch(fetchPets(access_token))    
-  },[])
+    dispatch(fetchPets(access_token))
+  }, [])
 
   useEffect(() => {
     setLocalKeepers(keepers)
@@ -92,10 +92,15 @@ export default function KeepersPage({ route, navigation }) {
     { label: 'daily', value: `${price.daily}` },
     { label: 'weekly', value: `${price.weekly}` }
   ];
+  const [keeperSkills, setKeeperSkills] = useState('')
+
   let pet_props = []
-  pets.map(el => pet_props.push({ label: `${el.name}`, value: `${el._id}` }))
+  pets.map(el => keeperSkills.includes(el.type) ? pet_props.push({ label: `${el.name}`, value: `${el._id}` }) : '')
   // console.log(pet_props, 'petproopes nih')
+
   const handlePress = (el) => {
+    console.log(el, 'line 99')
+    setKeeperSkills(el.skills)
     setName(el.name);
     setPrice(el.price)
     setKeeperId(el._id)
@@ -107,10 +112,10 @@ export default function KeepersPage({ route, navigation }) {
     setQuantity('')
   }
 
-  const total=Number(quantity) * Number(harga)
+  const total = Number(quantity) * Number(harga)
   // const totalLocal = Number(total).toLocaleString()
-  // console.log(totalLocal, 'line 110')
   const handleSubmit = () => {
+
     let payload = {
       pet_id: petId,
       harga: (Number(quantity) * Number(harga)),
@@ -130,7 +135,15 @@ export default function KeepersPage({ route, navigation }) {
       }
     })
       .then(({ data }) => {
-        dispatch(setOrders(data));
+        dispatch(setOrders(data))
+        Alert.alert(
+          "Success",
+          "Your order had been created",
+          [
+            { text: "OK", onPress: () => console.log("OK Pressed") }
+          ],
+          { cancelable: false }
+        );
         dispatch(fetchKeepers());
       })
       .catch(err => console.log(err))
@@ -139,22 +152,22 @@ export default function KeepersPage({ route, navigation }) {
     setQuantity('')
   }
 
-    const handlePetRadio = (e) => {
-      // setPetId(e.target[radio_props].value)
-      // console.log(e, 'line 139')
-      setPetId(e)
-    }
+  const handlePetRadio = (e) => {
+    // setPetId(e.target[radio_props].value)
+    // console.log(e, 'line 139')
+    setPetId(e)
+  }
 
-    const setRadioHarga = (value) => {
-      setHarga(value)
-    }
+  const setRadioHarga = (value) => {
+    setHarga(value)
+  }
 
 
   const stars = (rating) => {
     let starIcon = [];
     for (let i = 0; i < Math.floor(Number(rating)); i++) {
       starIcon.push(
-        <Icon key={i} name="star" color="yellow" size={10} style={{ marginTop: 3, marginHorizontal: 1.5 }} />
+        <Icon key={i} name="star" color="#839b97" size={10} style={{ marginTop: 3, marginHorizontal: 1.5 }} />
       )
     }
     return starIcon;
@@ -167,7 +180,8 @@ export default function KeepersPage({ route, navigation }) {
     localKeepers.map(el => {
       cloned.push(el)
     })
-     if(type == 'price'){
+
+    if (type == 'price') {
       cloned.sort((a, b) => a[type].daily > b[type].daily)
     } else {
       cloned.sort((a, b) => a[type] < b[type])
@@ -208,8 +222,8 @@ export default function KeepersPage({ route, navigation }) {
           key={i}
           onPress={() => sortCategory(types[i])}
           style={(types[i].toLowerCase() == categoryNow) ?
-            { width: 100, borderRadius: 25, justifyContent: 'center', borderColor: 'green', borderWidth: 2, marginHorizontal: 3 } :
-            { width: 100, borderRadius: 25, justifyContent: 'center', borderColor: 'grey', borderWidth: 2, marginHorizontal: 3 } 
+            { width: 85, borderRadius: 25, justifyContent: 'center', borderColor: 'green', borderWidth: 2, marginHorizontal: 3 } :
+            { width: 85, borderRadius: 25, justifyContent: 'center', borderColor: 'grey', borderWidth: 2, marginHorizontal: 3 } 
           }
         >
           <Text style={{ fontSize: 15, color: 'black', textAlign: 'center', margin: 5, alignSelf: 'center' }}>{types[i]}</Text>
@@ -255,23 +269,18 @@ export default function KeepersPage({ route, navigation }) {
       )
     }
     return lists;
-  }
-  console.log(currentPosition)
+  } 
   return (
     <View style={styles.container}>
-      <View style={{ display: 'flex', flexDirection: 'row', height: 80, marginTop: 15, borderBottomWidth: 1, backgroundColor: '#F7E7D3', borderColor: '#BA826A' }}>
-        <Image
-          source={logo}
-          style={{ width: 80, height: 80, marginLeft: 3 }}
-        />
-        <Text style={{ fontSize: 30, marginTop: 20, color: '#BA826A' }}>Keepers</Text>
+      <View style={{ display: 'flex', flexDirection: 'row', height: '13%', paddingTop: 35, backgroundColor: '#F4E3E3', borderColor: '#BA826A',borderBottomRightRadius:20,borderBottomLeftRadius:20 }}>
+        <Text style={{ fontSize: 25, marginTop: 20, color: '#2F3542',marginLeft:20,fontFamily : 'nunito', }}>Keepers List</Text>
       </View>
       {/* <View style={{display:'flex',flexDirection:'row',height:30,marginTop:10,marginBottom:2}}>
         <Text style={{display:'flex',alignSelf:'center',marginLeft:5,marginRight:10}}>Filter by Animal</Text> 
           {listAnimals()}
         </View> */}
-      <View style={{display:'flex',flexDirection:'row',height:30,marginTop:10,marginBottom:5}}>
-            <Text style={{paddingRight:15,marginLeft:15,fontSize:20}} >Sort by </Text>
+      <View style={{display:'flex',flexDirection:'row',height:30,marginTop:10,marginBottom:5,marginHorizontal:20,marginRight:20}}>
+            <Text style={{paddingRight:10,marginLeft:10,fontSize:20}} >Sort by </Text>
             {listCategories()}
         </View>
 
@@ -281,21 +290,22 @@ export default function KeepersPage({ route, navigation }) {
             localKeepers
               .map(el => {
                 return (
-                  <View key={el._id} style={{ display: 'flex', flexDirection: 'row', flex: 0.3, borderRadius: 10, borderBottomColor: 'black', width: 350, height: 150, marginVertical: 10, borderWidth: 0.6, borderColor: 'red' }}>
+                  <TouchableOpacity onPress={() => toDetail(el._id)} key={el._id} style={{ display: 'flex', flexDirection: 'row', flex: 0.3, borderRadius: 10, borderBottomColor: 'black', width: 350, height: 150, marginVertical: 10, borderWidth: 0.6, borderColor: 'red' }}>
                     <View style={{ position: 'absolute', top: 20, right: 10}}>
-                      <Text style={{ fontWeight: 'bold' }}> Rp {el.price.hourly.toLocaleString().replaceAll(',', '.')} </Text>
+                      <Text style={{ fontWeight: 'bold' }}> Rp {el.price.hourly.toLocaleString().replace
+                      (',', '.')}/ hr </Text>
                       {/* <Text style={{ fontWeight: 'bold' }}> Rp {el.price.daily.toLocaleString().replaceAll(',', '.')} </Text>
                       <Text style={{ fontWeight: 'bold' }}> Rp {el.price.weekly.toLocaleString().replaceAll(',', '.')} </Text> */}
                     </View>
-                    <View style={{ paddingHorizontal: 10, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                      <Image source={{ uri: el.image }} style={{ width: 100, height: 100, borderColor: 'white', resizeMode: 'contain', margin: 5 }} />
-                      <TouchableOpacity style={{ width: 60, height: 30, backgroundColor: '#BA826A', borderRadius: 70 }} onPress={() => toDetail(el._id)}><Text style={{ textAlign: 'center', fontSize: 15, margin: 5, color: 'white' }}>Details</Text></TouchableOpacity>
+                    <View style={{ paddingHorizontal: 10, display: 'flex', flexDirection: 'column', }}>
+                      <Image source={{ uri: el.image }} style={{ width: 100, height: 125,  borderColor: 'white', margin: 5 , marginTop:12.5 }} />
+                      {/* <TouchableOpacity style={{ width: 60, height: 30, backgroundColor: '#BA826A', borderRadius: 70 }} onPress={() => toDetail(el._id)}><Text style={{ textAlign: 'center', fontSize: 15, margin: 5, color: 'white' }}>Details</Text></TouchableOpacity> */}
                     </View>
-                    <View style={{ display: 'flex', flexDirection: 'column', marginTop: 15 }}>
+                    <View style={{ display: 'flex', flexDirection: 'column', marginTop: 15,paddingBottom:5 }}>
                       <Text style={{ color: 'black', fontSize: 25 }}> {el.name.split(' ')[0]} </Text>
-                      
+
                       <View style={{ display: 'flex', flexDirection: 'row' }}>
-                        <Icon name="compass" color="green" size={20} style={{ marginTop: 2 }} />
+                        <Icon name="compass" color="green" size={20} style={{marginHorizontal:2}} />
                         <Text>{(getDistanceFromLatLonInKm(currentPosition.latitude, currentPosition.longitude, el.latitude, el.longitude)).toFixed(2).toString()} Kms</Text>
                         {/* {
                           el.skills.map((skill, i) => (
@@ -312,7 +322,6 @@ export default function KeepersPage({ route, navigation }) {
                       </View>
                       <View style={{ display: 'flex', flexDirection: 'column', marginTop: 1 }}>
                         <View style={{ display: 'flex', flexDirection: 'row', marginLeft: 5, marginTop: 0 }}>
-                          <Icon  name="star" color="yellow" size={15} style={{marginTop:3}} />
                           {stars(el.rating)}
                         </View>
                         <View style={{ display: 'flex', flexDirection: 'row' }}>
@@ -322,34 +331,32 @@ export default function KeepersPage({ route, navigation }) {
                         </View> */}
                       </View>
                     </View>
-                        {el.status == 'available' ?                     <TouchableOpacity
-                      style={{ width: 85, height: 30, position: 'absolute', right: 10, bottom: 6.5, backgroundColor: '#BA826A', borderRadius: 10 }}
+                        {el.status == 'available' ?  <TouchableOpacity
+                      style={{ width: 85, height: 30, position: 'absolute', right: 10, bottom: 6.5, backgroundColor: '#FF6B81', borderRadius: 10 }}
                       onPress={() => handlePress(el)}
                     >
-                      <Text style={{ color: 'white', textAlign: 'center', marginTop: 5 }}>Hire Me! </Text>
+                      <Text style={{ color: '#2F3542', textAlign: 'center', marginTop: 5,fontWeight:'bold' }}>Hire Me! </Text>
                     </TouchableOpacity> : <></>}
 
                     <Modal isVisible={isModalVisible}>
                       <View style={{ flex: 0.6, display: 'flex', backgroundColor: 'white', borderRadius: 20 }}>
-                        <View style={{paddingLeft: 7}}>
+                        <View style={{ paddingLeft: 7 }}>
                           <Text style={{ marginTop: 15, fontSize: 17 }}> {`Which pet would you like to entrust to ${name}?`} </Text>
                           {
-                            pet_props &&
+                            pet_props.length > 0 ?
                               <RadioForm
-                              radio_props={pet_props}
-                              initial={0}
-                              style={{display:'flex',flexWrap:'wrap',flexDirection:'row'}}
-                              formHorizontal={true}
-                              labelHorizontal={true}
-                              buttonColor={'#2196f3'}
-                              borderWidth={2}
-                              buttonSize={15}
-                              buttonWrapStyle={{ marginLeft: 10 }}
-                              onPress={(value) => handlePetRadio(value)}
-                              labelStyle={{ paddingLeft: 5, marginRight: 15, fontSize: 17 }}
-                            />
-                              
-                            
+                                radio_props={pet_props}
+                                initial={0}
+                                formHorizontal={true}
+                                labelHorizontal={true}
+                                buttonColor={'#2196f3'}
+                                borderWidth={2}
+                                buttonSize={15}
+                                buttonWrapStyle={{ marginLeft: 10 }}
+                                onPress={(value) => handlePetRadio(value)}
+                                labelStyle={{ paddingLeft: 5, marginRight: 15, fontSize: 17 }}
+                              />
+                              : <Text style={{ marginLeft: 8 }}>This keeper can't handle your pet</Text>
                           }
                         </View>
 
@@ -372,25 +379,24 @@ export default function KeepersPage({ route, navigation }) {
                           }
                         </View>
 
-                        <View style={{paddingLeft: 7}}>
+                        <View style={{ paddingLeft: 7 }}>
                           <TextInput
                             placeholder="For How long?"
                             style={{ backgroundColor: 'white', width: 200, height: 40, borderWidth: 1, borderRadius: 20, marginTop: 20, marginBottom: 10, borderTopStartRadius: 20, borderTopEndRadius: 20 }}
                             value={quantity}
                             keyboardType="numeric"
                             onChangeText={(text) => setQuantity(text)}
-                            required
                           />
                         </View>
-                        <Text style={{margin: 10, fontSize: 20, fontWeight: 'bold'}}>Total: Rp.{total.toLocaleString().replaceAll(',','.')}</Text>
-                        <View style={{alignItems: 'center'}}>
+                        <Text style={{ margin: 10, fontSize: 20, fontWeight: 'bold' }}>Total: Rp.{total.toLocaleString().replace(',', '.')}</Text>
+                        <View style={{ alignItems: 'center' }}>
                           <TouchableOpacity style={styles.btnStyle} onPress={() => handleSubmit()}><Text style={{ textAlign: 'center', fontSize: 25, margin: 5, color: 'white' }}>Hire</Text></TouchableOpacity>
                           <TouchableOpacity style={styles.btnStyle} onPress={() => handleCancel()}><Text style={{ textAlign: 'center', fontSize: 25, margin: 5, color: 'white' }}>Cancel</Text></TouchableOpacity>
-                        </View> 
+                        </View>
                       </View>
                     </Modal>
 
-                  </View>
+                  </TouchableOpacity>
                 )
               })
           }
@@ -419,7 +425,7 @@ const styles = StyleSheet.create({
     color: 'white'
   },
   btnStyle: {
-    backgroundColor: '#BA826A',
+    backgroundColor: '#FF6B81',
     width: 300,
     borderRadius: 20,
     margin: 5

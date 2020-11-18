@@ -64,6 +64,7 @@ export default function Chat({navigation, route}) {
     return (
       <View style={{
         backgroundColor:"#C8D1DA",
+        position:'relative',
         flex:1,
       }}>
        <View style={{
@@ -73,6 +74,7 @@ export default function Chat({navigation, route}) {
            borderBottomRightRadius:20,
            paddingHorizontal: 25,
            marginBottom : -24,
+           position:'relative'
           }}>
           <Button 
           style={{
@@ -242,7 +244,7 @@ export default function Chat({navigation, route}) {
                 </View>
         <TabBar 
         navigation={navigation} 
-        style={{
+        style={{ flex:1,position:'absolute',bottom:0
         }} />               
     </View>
           

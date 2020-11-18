@@ -1,10 +1,9 @@
 import React , { useEffect, useState } from 'react';
-import { Image , StyleSheet, Text, View , Alert} from 'react-native';
+import { Image , StyleSheet, Text, View , Alert, TouchableOpacity} from 'react-native';
 import { useDispatch , useSelector } from 'react-redux';
 import {fetchOrders, addHistory} from '../store/actions'
-import {TextInput,ScrollView,TouchableOpacity} from 'react-native-gesture-handler'
+import {TextInput,ScrollView} from 'react-native-gesture-handler'
 import  TabBar  from './components/TabBottomNavbar'
-import Button from 'apsl-react-native-button'
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import axios from 'axios'
 import Modal from 'react-native-modal';
@@ -71,7 +70,7 @@ export default function Order({navigation}) {
 
   const handleSubmit = () => {
     axios({
-      url: "http://192.168.1.8:3000/orders/" + id,
+      url: "http://192.168.1.4:3000/orders/" + id,
       method: "PUT",
       headers:{access_token},
       data: {review}
@@ -176,67 +175,7 @@ export default function Order({navigation}) {
                </View>
           
            </View>
-           <View >
-                        <Icon 
-                            name="paw" 
-                            color="black" 
-                            size={80}
-                            style={[{  
-                            transform: [{ rotate: "25deg" }],
-                            marginTop : -20,
-                            marginLeft : 130,
-                            position : "absolute",
-                            color : "#102B3E",
-                            opacity : 0.1,
-                        }]}
-                        />
-                </View>     
-          
-                <View >
-                        <Icon 
-                            name="paw" 
-                            color="black" 
-                            size={80}
-                            style={[{  
-                            transform: [{ rotate: "25deg" }],
-                            marginTop : 10,
-                            marginLeft : 390,
-                            position : "absolute",
-                            color : "#102B3E",
-                            opacity : 0.1,
-                        }]}
-                        />
-                </View> 
-                <View >
-                        <Icon 
-                            name="paw" 
-                            color="black" 
-                            size={80}
-                            style={[{  
-                            transform: [{ rotate: "25deg" }],
-                            marginTop : 260,
-                            marginLeft : 190,
-                            position : "absolute",
-                            color : "#102B3E",
-                            opacity : 0.1,
-                        }]}
-                        />
-                </View>
-                <View >
-                        <Icon 
-                            name="paw" 
-                            color="black" 
-                            size={80}
-                            style={[{  
-                            transform: [{ rotate: "25deg" }],
-                            marginTop : 370,
-                            marginLeft : 390,
-                            position : "absolute",
-                            color : "#102B3E",
-                            opacity : 0.1,
-                        }]}
-                        />
-                </View> 
+            
             <View 
               style={{
                 height : "92%",
@@ -245,16 +184,6 @@ export default function Order({navigation}) {
                 marginTop : -160
               }}  
               >
-            <Icon 
-                  name="dog-side" 
-                  color="#102B3E" 
-                  size={250}
-                  style={[{  
-                  transform: [{ rotate: "0deg" }],
-                  color : "#102B3E",
-                  opacity : 0.4
-                }]}
-                />
                 <Text
                   style={{
                     fontFamily : 'nunito',
@@ -305,7 +234,6 @@ export default function Order({navigation}) {
   return (
     
     <View style={{
-      backgroundColor:"#C8D1DA",
       flex:1,
     }}>
 
@@ -351,31 +279,22 @@ export default function Order({navigation}) {
         </View>
       </Modal>
      <View style={{
-         backgroundColor:"#6661DB",
-         height:"11%",
+         backgroundColor:"#F4E3E3",
+         height:"12%",
          borderBottomLeftRadius:20,
          borderBottomRightRadius:20,
          paddingHorizontal: 25,
          marginBottom : -24,
         }}>
-        
-            
-         <View style={{
-             flexDirection:"row",
-             marginTop:10,
-             width:"100%"
-         }}>
-           
-             <View style={{width:"100%",alignItems:'center'}}>
-                  <Text style={{
-                    fontSize: 25,
-                    marginTop : -50,
-                    color:"#0F2A3C",
-                    fontWeight:"normal",
-                    fontFamily : 'nunito'
-                  }}>Order List ({countOrders()}) </Text>
-             </View>
-        </View>
+          <View style={{width:"100%"}}>
+              <Text style={{
+                fontSize: 25,
+                color:"#0F2A3C",
+                marginTop:45,
+                fontWeight:"normal",
+                fontFamily : 'nunito'
+              }}>Order List ({countOrders()}) </Text>
+          </View>
      </View>
 
          <View style={{
@@ -400,7 +319,7 @@ export default function Order({navigation}) {
         
          </View>
          <View style={{display:'flex',flexDirection:'row',height:30,marginTop:10,marginBottom:5}}>
-            <Text style={{paddingRight:15,marginLeft:15,fontSize:20}} >Sort by </Text>
+            <Text style={{paddingRight:15,marginLeft:20,fontSize:20}} >Sort by </Text>
             {listCategories()}
         </View>
                
@@ -446,7 +365,7 @@ export default function Order({navigation}) {
                       borderWidth : 0.5,
                       borderRadius : 10,
                       position:'relative',
-                      backgroundColor:'blue'
+                      backgroundColor:'#F4F4F4'
                     }}
                 >
                   <View style={{position:'absolute',bottom:-30,left:130,marginTop:25,zIndex:1}}>
