@@ -122,7 +122,7 @@ export default function KeepersPage({ route, navigation }) {
     }
 
     axios({
-      url: 'http://192.168.43.190:3000/orders/' + keeperId,
+      url: 'http://192.168.100.6:3000/orders/' + keeperId,
       method: 'post',
       headers: {
         access_token
@@ -386,7 +386,7 @@ export default function KeepersPage({ route, navigation }) {
                             onChangeText={(text) => setQuantity(text)}
                           />
                         </View>
-                        <Text style={{ margin: 10, fontSize: 20, fontWeight: 'bold' }}>Total: Rp.{total.toLocaleString().replaceAll(',', '.')}</Text>
+                        <Text style={{ margin: 10, fontSize: 20, fontWeight: 'bold' }}>Total: Rp.{total.toLocaleString().replace(',', '.')}</Text>
                         <View style={{ alignItems: 'center' }}>
                           <TouchableOpacity style={styles.btnStyle} onPress={() => handleSubmit()}><Text style={{ textAlign: 'center', fontSize: 25, margin: 5, color: 'white' }}>Hire</Text></TouchableOpacity>
                           <TouchableOpacity style={styles.btnStyle} onPress={() => handleCancel()}><Text style={{ textAlign: 'center', fontSize: 25, margin: 5, color: 'white' }}>Cancel</Text></TouchableOpacity>
@@ -423,7 +423,7 @@ const styles = StyleSheet.create({
     color: 'white'
   },
   btnStyle: {
-    backgroundColor: '#BA826A',
+    backgroundColor: '#FF6B81',
     width: 300,
     borderRadius: 20,
     margin: 5

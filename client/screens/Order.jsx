@@ -1,8 +1,8 @@
 import React , { useEffect, useState } from 'react';
-import { Image , StyleSheet, Text, View , Alert} from 'react-native';
+import { Image , StyleSheet, Text, View , Alert, TouchableOpacity} from 'react-native';
 import { useDispatch , useSelector } from 'react-redux';
 import {fetchOrders, addHistory} from '../store/actions'
-import {TextInput,ScrollView,TouchableOpacity} from 'react-native-gesture-handler'
+import {TextInput,ScrollView} from 'react-native-gesture-handler'
 import  TabBar  from './components/TabBottomNavbar'
 import Button from 'apsl-react-native-button'
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
@@ -71,7 +71,7 @@ export default function Order({navigation}) {
 
   const handleSubmit = () => {
     axios({
-      url: "http://192.168.43.190:3000/orders/" + id,
+      url: "http://192.168.100.6:3000/orders/" + id,
       method: "PUT",
       headers:{access_token},
       data: {review}
