@@ -4,7 +4,8 @@ import { ActionSheetIOS } from 'react-native'
 export function fetchKeepers ()  {
     return(dispatch) => {
         // console.log('masuk pak ekoooo')
-        fetch(`http://192.168.1.8:3000/keepers`)
+
+        fetch(`http://192.168.100.6:3000/keepers`)
         .then(resp => resp.json())
         .then(resp => 
             dispatch({
