@@ -46,11 +46,11 @@ export default function History({route,navigation}) {
         key={i}
         onPress={() => sortCategory(types[i])}
         style={(types[i].toLowerCase() == categoryNow) ? 
-          {width:100,borderRadius:25,justifyContent:'center',borderColor:'green',borderWidth:2,marginHorizontal:3}:
-          {width:100,borderRadius:25,justifyContent:'center',borderColor:'grey',borderWidth:2,marginHorizontal:3}
+          {width:100,borderRadius:10,justifyContent:'center',borderColor:'#FF6B81',borderWidth:2,marginHorizontal:7}:
+          {width:100,borderRadius:10,justifyContent:'center',borderColor:'#FF6B81',borderWidth:2,marginHorizontal:7}
         }
         >
-        <Text style={{ fontSize: 15, color: 'black', textAlign: 'center', margin: 5,alignSelf:'center' }}>{types[i]}</Text>
+        <Text style={{ fontSize: 15, color: '#2F3542', textAlign: 'center', margin: 5,alignSelf:'center' }}>{types[i]}</Text>
         </TouchableOpacity>
       )
     }
@@ -72,23 +72,24 @@ export default function History({route,navigation}) {
 
   return (
     <View style={{
-      backgroundColor:"#C8D1DA",
+      backgroundColor:"#F4F4F4",
       flex:1,
   }}>
      <View style={{
-         backgroundColor:"#6661DB",
-         height:"11%",
-         borderBottomLeftRadius:20,
-         borderBottomRightRadius:20,
+         backgroundColor:"#F4E3E3",
+         height:"14%",
+         borderBottomLeftRadius:30,
+         borderBottomRightRadius:30,
          paddingHorizontal: 25,
          marginBottom : -24,
      }}>
        <Button 
         style={{
-          width : 30,
-          height : 30,
+          width : 40,
+          height : 40,
           marginTop : 35,
-          borderColor : "#6661DB"
+          borderColor : "#FF6B81",
+          padding : 2
         }}
           onPress={backToHome}
         >
@@ -96,11 +97,10 @@ export default function History({route,navigation}) {
                 name="arrow-left-circle" 
                 color="black" 
                 size={30}
-                style={[{  
-                transform: [{ rotate: "0deg" }],
+                style={{
                 position : 'absolute',
-                color : "#102B3E",
-              }]}
+                color : "#FF6B81",
+              }}
               />
             </Button>
          <View style={{
@@ -111,8 +111,8 @@ export default function History({route,navigation}) {
              <View style={{width:"100%",alignItems:'center'}}>
                   <Text style={{
                     fontSize: 25,
-                    marginTop : -50,
-                    color:"#0F2A3C",
+                    marginTop : -55,
+                    color:"#2F3542",
                     fontWeight:"normal",
                     fontFamily : 'nunito'
                   }}>History List ({countHistory()})</Text>
@@ -124,12 +124,12 @@ export default function History({route,navigation}) {
      
 
      <LinearGradient
-      colors={["rgba(16,43,62,0.1)", "transparent"]}
+      colors={["rgba(255,107,129,0.3)", "transparent"]}
       style={{
           left:0,
           right:0,
-          height:60,
-          marginTop: 3
+          height:80,
+          marginTop: -10
       }}
       >
          
@@ -137,7 +137,13 @@ export default function History({route,navigation}) {
 
       {/* <Text>{JSON.stringify(history)}</Text> */}
          <View style={{display:'flex',flexDirection:'row',height:30}}>
-            <Text style={{paddingRight:15,marginLeft:15,fontSize:20}} >Sort by </Text>
+            <Text style={{
+              paddingRight:15,
+              marginLeft:25,
+              elevation : 20,
+              fontSize:20,
+              fontFamily : 'nunito',
+              }} >Sort by :  </Text>
             {listCategories()}
         </View>
         
@@ -202,8 +208,6 @@ export default function History({route,navigation}) {
                         color:'black',
                         fontSize:25,
                         fontFamily:"nunito",
-
-                      
                       }}
                         >Keeper :  {el.keeperName} </Text>
                       

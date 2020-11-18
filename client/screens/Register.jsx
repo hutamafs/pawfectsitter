@@ -6,7 +6,7 @@ import logo from '../assets/logoDog.png'
 import Button from 'apsl-react-native-button'
 import firebaseSDK from './config/firebaseSDK';
 import logoKaki from '../assets/logoKaki.png'
-
+import cat from '../assets/cat2.png'
 
 
 export default function Register({navigation}) {
@@ -18,7 +18,7 @@ export default function Register({navigation}) {
 
   const handleRegister = () => {
     axios({
-      url: 'http://192.168.1.8:3000/users/register',
+      url: 'http://192.168.1.4:3000/users/register',
       method: 'POST',
       data: {
         name,email,password,address
@@ -51,7 +51,7 @@ export default function Register({navigation}) {
       <View 
       style={{
         flexDirection: "row",
-        marginTop : -100,
+        marginTop : -160,
       }}>
         <Image source={logoKaki} 
         style={{ 
@@ -115,6 +115,13 @@ export default function Register({navigation}) {
 
         </Text>
       </View>
+      <Image source={cat} 
+        style={{ 
+          width: 200, 
+          height: 200,
+          marginLeft : 90,
+          marginBottom : -290
+        }} />
     </View>
   );
 }

@@ -17,6 +17,8 @@ import Order from './screens/Order'
 import Chat from './screens/Chat'
 import History from './screens/History'
 import GMap from './screens/gMap'
+import ChatRoom from './screens/ChatRoom'
+
 
 import * as Font from 'expo-font'
 import { AppLoading } from 'expo'
@@ -59,9 +61,6 @@ export default function App() {
             <Stack.Screen name="KeepersPage" component={KeepersPage}
               options={{ title: 'Keepers' }}
             />
-            <Stack.Screen name="Chat" component={Chat}
-              options={{ title: 'Chat' }}
-            /> 
               <Stack.Screen name="KeeperDetail" component={KeeperDetail}
                 options={{ title: '' }}
               />
@@ -79,9 +78,12 @@ export default function App() {
               <Stack.Screen name="PetList" component={PetList}
                 options={{ title: 'PetList' }}
               />
-              {/* <Stack.Screen name="Chat" component={Chat}
-                options={{ title: 'Chat' }}
-              /> */}
+            <Stack.Screen name="Chat" component={Chat}
+              options={{ title: 'Chat' }}
+            /> 
+            <Stack.Screen name="ChatRoom" component={ChatRoom}
+              options={{ title: 'Chat' }}
+            /> 
             </Stack.Navigator>
           </NavigationContainer>
         </Provider>

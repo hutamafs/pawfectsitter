@@ -12,6 +12,7 @@ import { useDispatch } from 'react-redux';
 
 
 const Home = ({navigation, route}) => {
+
     const dispatch = useDispatch()
 
     const handleLogout = () => {

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import {fetchKeeper} from '../store/actions/index';
 import { useDispatch , useSelector } from 'react-redux';
-import { View , Text , Image, TouchableOpacity } from 'react-native';
+import { View , Text , Image, TouchableOpacity , Alert } from 'react-native';
 import logo from '../assets/logoDog.png';
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -31,33 +31,42 @@ const KeeperDetail = ({navigation, route}) => {
     }
     const reviews = (array) => {
         let reviewMessages = [];
-        if(array > 0) {
-            for(let i = 0 ; i<array.length ; i++) {
-                <View
+        for(let i = 0 ; i<array.length ; i++) {
+            reviewMessages.push(<View
                 key={i}
                 display='flex'
                 flexDirection='column'
+                style={{
+                    width:300,
+                    height:150,
+                    borderRadius:20,
+                    borderWidth:0.5,
+                    marginLeft:10,
+                    borderColor:'brown',
+                    position:'relative',
+                    marginVertical:5
+
+                }}
                 >
-                    <Text style={{fontWeight:'bold',fontSize:15}}> {array[i].user} </Text>
-                    <View style={{display:'flex',flexWrap:'wrap'}}>
-                        <Text style={{fontSize:10}}> {array[i].msg} </Text>
-                    </View>
-                </View>
-            }
-        }        
+                    <Text style={{fontWeight:'bold',fontSize:30,marginLeft:15,marginTop:10}}>{array[i].user} </Text>
+                    <Text style={{fontSize:15,marginLeft:15}}> {array[i].msg} </Text>
+            <Text style={{position:'absolute',right:20,top:10}}>{array[i].timeCreated}</Text>
+                </View>)
+        }
+        
         return reviewMessages;
     }
 
     return (
         <View>
-            <View style={{display:'flex',flexDirection:'row',height:80,paddingTop:15,borderBottomWidth:1, backgroundColor: '#F7E7D3'}}>
+            <View style={{display:'flex',flexDirection:'row',height:100,paddingTop:25,borderBottomWidth:1, backgroundColor: '#F7E7D3'}}>
                 <Image
                 source={logo}
                 style={{ width:80, height:80, marginLeft:3 }}
                 />
                 <Text style={{fontSize:30,marginTop:20, color: '#BA826A'}}> Keeper detail </Text>
             </View>
-            {keeper._id && <ScrollView showsVerticalScrollIndicator={false}>
+            {keeper._id && <View>
                 <View style={{backgroundColor:'lightgrey'}}>
                     <Image
                     source={{uri:keeper.image}}
@@ -69,6 +78,7 @@ const KeeperDetail = ({navigation, route}) => {
                     }}}
                     />
                 </View>
+                <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={{display:'flex',flexDirection:'column',marginLeft:10}}>
                     <Text style={{fontSize:35,fontWeight:'bold'}}>
                         {keeper.name}
@@ -90,18 +100,18 @@ const KeeperDetail = ({navigation, route}) => {
                     <View style={{display:'flex',flexDirection:'row',flexWrap:'wrap'}} >
                         <View style={{display:'flex',borderWidth:1,width:125,justifyContent:'center',borderRadius:60,borderColor:'green',marginTop:10,marginHorizontal:10}}>
                            <Text style={{alignSelf:'center'}}> Hourly Rates</Text>
-                           <Text style={{alignSelf:'center'}}>{keeper.price.hourly}</Text>
+                           <Text style={{alignSelf:'center'}}>Rp {keeper.price.hourly.toLocaleString().replace(',','.')}</Text>
                         </View>
                         <View style={{display:'flex',borderWidth:1,width:125,justifyContent:'center',borderRadius:60,borderColor:'blue',marginTop:10,marginHorizontal:10}}>
                            <Text style={{alignSelf:'center'}}> Daily Rates </Text>
-                           <Text style={{alignSelf:'center'}}>{keeper.price.daily}</Text>
+                           <Text style={{alignSelf:'center'}}>Rp {keeper.price.daily.toLocaleString().replace(',','.')}</Text>
                         </View>
                         <View style={{display:'flex',borderWidth:1,width:125,justifyContent:'center',borderRadius:60,borderColor:'red',marginTop:10,marginHorizontal:10}}>
                            <Text style={{alignSelf:'center'}}> Weekly Rates</Text>
-                           <Text style={{alignSelf:'center'}}>{keeper.price.weekly}</Text>
+                           <Text style={{alignSelf:'center'}}>Rp {keeper.price.weekly.toLocaleString().replace(',','.')}</Text>
                         </View>
                     </View>
-                    <View style={{marginTop:5}}>
+                    <View style={{marginTop:5,height:300}}>
                         <Text style={{fontSize:25}}>
                             Reviews :
                         </Text>
@@ -111,7 +121,10 @@ const KeeperDetail = ({navigation, route}) => {
                     </View>
 
                 </View>
-            </ScrollView>}
+            </ScrollView>
+                </View>}
+
+                
             
         </View>
     )

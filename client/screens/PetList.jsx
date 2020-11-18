@@ -8,10 +8,18 @@ import { fetchPets } from '../store/actions';
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { LinearGradient } from 'expo-linear-gradient'
 import Button from 'apsl-react-native-button'
+import bird from '../assets/bird2.png'
 
 export default function PetList({ navigation }) {
+  const [type, setType] = useState("All")
   const dispatch = useDispatch()
   const { access_token, pets } = useSelector(state => state)
+
+  const filterPet = (animals = [], type) => 
+  !animals || type === 'All' ?
+  animals :
+  animals.filter(animal => animal.type.toLowerCase() === type.toLowerCase())
+
   useEffect(() => {
     dispatch(fetchPets(access_token))
   }, [])
@@ -22,7 +30,7 @@ export default function PetList({ navigation }) {
       flex: 1
     }}>
       <View style={{
-        backgroundColor: "#6661DB",
+        backgroundColor: "#F4E3E3",
         height: "13%",
         borderBottomLeftRadius: 20,
         borderBottomRightRadius: 20,
@@ -35,75 +43,226 @@ export default function PetList({ navigation }) {
           marginTop: 25,
           width: "100%"
         }}>
-          <View style={{ width: "50%" }}>
-            <Text style={{
-              fontSize: 28,
-              color: "#FFF",
-              fontWeight: "bold",
-              marginTop: 20
-            }}>Pet List</Text>
-          </View>
+                <Text 
+                    style={{
+                        marginTop : 25,
+                        marginLeft:55,
+                        fontFamily : 'nunito',
+                        color : "#2F3542",
+                        fontSize : 22
+                    }}
+                >Pet List</Text>
           <View style={{ width: "50%", alignItems: "flex-end" }}>
 
           </View>
         </View>
       </View>
       <LinearGradient
-        colors={["rgba(16,43,62,0.1)", "transparent"]}
+        colors={["#F4E3E3", "transparent"]}
         style={{
           left: 0,
           right: 0,
-          height: 90,
-          marginTop: -55
+          height: 50,
+          marginTop: -25
         }}
       >
 
       </LinearGradient>
 
-      <ScrollView
-        alwaysBounceVertical
-        showsHorizontalScrollIndicator={false}
+      {/* filter */}
+      <View
         style={{
-          height: 300
+          flexDirection : "row",
+          marginStart : 60,
+          marginTop : -10,
         }}
       >
-        {/* <View style={{display:'flex',flexDirection:'row'}}> */}
-        {pets.map((pet,i) => {
+        <Text
+          style={{
+            fontFamily : 'nunito',
+            marginTop : 20,
+            marginLeft : -20,
+            fontSize : 20,
+            marginRight : 20
+          }}
+        >Filter By : </Text>
+
+        {/* button disamping kiri */}
+        <Button
+
+            style={{
+              alignItems: "center",
+              justifyContent: "center",
+              height: 60,
+              width: 60,
+              borderRadius: 20,
+              backgroundColor: "#F4E3E3",
+              borderColor: '#FF6B81',
+              borderWidth : 2,
+              marginRight : 20
+            }}
+            onPress={() => setType('dog')}
+            
+        >
+          <Icon 
+            name="dog" 
+            color="#FF6B81" 
+            size={35} />
+          </Button>
+          <Button
+            style={{
+              alignItems: "center",
+              justifyContent: "center",
+              height: 60,
+              width: 60,
+              borderRadius: 20,
+              backgroundColor: "#FF6B81",
+              borderColor: '#FF6B81',
+              borderWidth : 2,
+              marginRight : 20
+            }}
+            onPress={() => setType('cat')}
+
+
+          >
+            <Icon 
+              name="cat" 
+              color="#F4E3E3" 
+              size={35} />
+          </Button>
+          <Button
+            style={{
+              alignItems: "center",
+              justifyContent: "center",
+              height: 60,
+              width: 60,
+              borderRadius: 20,
+              backgroundColor: "#F4E3E3",
+              borderColor: '#FF6B81',
+              borderWidth : 2,
+              marginRight : 20
+            }}
+            onPress={() => setType('bird')}
+
+
+          >
+            <Image source={bird} 
+              style={{ 
+              width: 180, 
+              height: 180,
+              marginTop : 48,
+              marginLeft : 30
+              }} />
+          </Button>
+      </View>
+      
+
+      {/* slide gambar ke kiri-kanan */}
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        style={{
+          height: 700,
+          marginLeft : 20,
+          marginBottom : 10
+        }}
+        >
+       
+        {filterPet(pets, type).map((pet,i) => {
           return (
             <View
             key={i}
               style={{
                 height: 500,
-                elevation: 33,
-                marginLeft: 20,
+                elevation: 30,
                 marginTop: 30,
                 borderRadius: 15,
-                marginBottom: 10,
-                width: 500,
+                // borderWidth : 2,
+                width:240,
+                marginLeft : 20,
               }}
             >
 
               <View style={{
                 flexDirection: "column",
-                paddingTop: 30,
-                paddingHorizontal: 10
               }}>
                 <View style={{display:'flex',flexDirection:'row'}}>
-                  <Text style={{fontSize:50}} > {pet.name} </Text>
-                  <Text style={
-                    (pet.gender == 'male') ? {fontSize:40,color:'blue',alignSelf:'center'} : {fontSize:40,color:'red',alignSelf:'center'}
-                }> {pet.gender == 'male'? '♂️' : '♀️'} </Text>
                 </View>
                 <Image
                   key={pet._id}
                   source={{ uri: pet.image }}
                   style={{
-                    width: 300,
-                    height: 350
+                    marginLeft : -2,
+                    marginTop : -2,
+                    width: 245,
+                    height: 351,
+                    borderRadius : 20
+
                   }}
-                />
-                <View style={{width:150,height:50}}>
-                  <Text style={{fontSize:30}}>{pet.age} years old </Text>
+                  />
+                <View style={{width:350,height:350}}>
+                  <Text style={{
+                    fontSize: 25,
+                    fontFamily : 'nunito',
+                    marginLeft : 55,
+                    marginTop : 5
+                    }} > {pet.name} </Text>
+                  <View
+                    style={{
+                      marginLeft: 30,
+                      flexDirection : "row",
+                      marginTop : 20, 
+                      marginLeft : 50,
+                    }}
+                  >
+                    <View style={{
+                      fontSize:30,
+                      borderWidth : 3,
+                      width : 60,
+                      height : 60,
+                      marginRight : 20,
+                      borderColor : "#FF6B81",
+                      borderRadius : 10
+                      }}>
+                        <Text
+                          style={{
+                            fontFamily : 'nunito',
+                            marginLeft : 15,
+                            fontSize : 15,
+                            marginTop : 2,
+                          }}
+                        >age</Text>
+                        <Text
+                          style={{
+                            fontFamily : 'nunito',
+                            marginLeft : 25,
+                            marginTop : 5,
+                            fontSize : 15
+                          }}
+                        >{pet.age}</Text>
+                        </View>
+                    <View style={{
+                      fontSize:30,
+                      borderWidth : 3,
+                      width : 60,
+                      height : 60,
+                      borderColor : "#FF6B81",
+                      borderRadius : 10
+
+                      }}>
+                         <Text style={
+                            (pet.gender == 'male') ? {
+                              fontSize:40,
+                              color:'#FDCB6E',
+                              alignSelf:'center'} : {fontSize:40,color:'#FF6B81',alignSelf:'center'}
+                          }> {pet.gender == 'male'? '♂️' : '♀️'} </Text>
+                        </View>
+                    
+                  
+                  
+                  </View>  
+
+                 
                 </View>
               </View>
 

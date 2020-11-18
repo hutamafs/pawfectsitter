@@ -70,9 +70,8 @@ export default function Order({navigation}) {
   }
 
   const handleSubmit = () => {
-    console.log('masukkkkk line 73')
     axios({
-      url: "http://192.168.100.6:3000/orders/" + id,
+      url: "http://192.168.1.4:3000/orders/" + id,
       method: "PUT",
       headers:{access_token},
       data: {review}
@@ -120,7 +119,7 @@ export default function Order({navigation}) {
            paddingHorizontal: 25,
            marginBottom : -24,
           }}>
-          <Button 
+          {/* <Button 
           style={{
             width : 30,
             height : 30,
@@ -139,7 +138,7 @@ export default function Order({navigation}) {
                   color : "#102B3E",
                 }]}
                 />
-              </Button>
+              </Button> */}
            <View style={{
                flexDirection:"row",
                marginTop:10,
@@ -359,26 +358,7 @@ export default function Order({navigation}) {
          paddingHorizontal: 25,
          marginBottom : -24,
         }}>
-        <Button 
-        style={{
-          width : 30,
-          height : 30,
-          marginTop : 35,
-          borderColor : "#6661DB"
-        }}
-          onPress={backToHome}
-        >
-              <Icon 
-                name="arrow-left-circle" 
-                color="black" 
-                size={30}
-                style={[{  
-                transform: [{ rotate: "0deg" }],
-                position : 'absolute',
-                color : "#102B3E",
-              }]}
-              />
-            </Button>
+        
             
          <View style={{
              flexDirection:"row",
@@ -589,10 +569,8 @@ export default function Order({navigation}) {
       navigation={navigation} 
       style={{
       }} />               
-  </View>
-        
+  </View>     
   )
-      
 }
 
 

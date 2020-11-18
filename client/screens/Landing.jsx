@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import Button from 'apsl-react-native-button'
-import logo from '../assets/catDog.png'
+import logo from '../assets/dog6.png'
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import logoKaki from '../assets/logoKaki.png'
 
