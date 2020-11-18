@@ -153,16 +153,14 @@ export default function PetList({ navigation }) {
             marginBottom : 10
           }}
           >
-          <View>
-
-            
-          <Image
-            source={dogTidur}
-            style={{
-              width: 450, 
-              height: 400,
-            }}
-          ></Image>
+          <View>            
+            <Image
+              source={dogTidur}
+              style={{
+                width: 450, 
+                height: 400,
+              }}
+            ></Image>
           <Text
             style={{
               fontFamily : 'nunito',
