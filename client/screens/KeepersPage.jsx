@@ -24,13 +24,15 @@ export default function KeepersPage({ route, navigation }) {
   const dispatch = useDispatch();
   const [price, setPrice] = useState('');
   const [keeperId, setKeeperId] = useState('');
-
   const [localKeepers, setLocalKeepers] = useState(null);
-
   const [isFilterAnimal, setIsFilterAnimal] = useState(false);
   const [animalNow, setAnimalNow] = useState('');
-
   const [categoryNow, setCategoryNow] = useState('');
+  const [PriceisDisabled, setPriceisDisabled] = useState(false) 
+  const [RatingisDisabled, setRatingisDisabled] = useState(false) 
+  const [DistanceisDisabled, setDistanceisDisabled] = useState(false) 
+
+
 
   const initialState = {
     latitude: null,
@@ -174,6 +176,21 @@ export default function KeepersPage({ route, navigation }) {
   }
 
   const sortCategory = (type) => {
+    if(type === 'Price') {
+      setPriceisDisabled(true)
+      setRatingisDisabled(false)
+      setDistanceisDisabled(false)
+    }
+    if(type === 'Rating') {
+      setPriceisDisabled(false)
+      setRatingisDisabled(true)
+      setDistanceisDisabled(false)
+    }
+    if(type === 'Distance') {
+      setPriceisDisabled(false)
+      setRatingisDisabled(false)
+      setDistanceisDisabled(true)
+    }
     type = type.toLowerCase();
     let cloned = [];
     setCategoryNow(type);
@@ -188,6 +205,8 @@ export default function KeepersPage({ route, navigation }) {
     }
     setLocalKeepers(cloned);
   }
+
+ 
 
   const filterAnimal = (animalia) => {
     if (animalia == animalNow) {
@@ -220,6 +239,7 @@ export default function KeepersPage({ route, navigation }) {
       categories.push(
         <TouchableOpacity
           key={i}
+          disabled={eval(`${types[i]}isDisabled`)}
           onPress={() => sortCategory(types[i])}
           style={(types[i].toLowerCase() == categoryNow) ?
             { width: 85, borderRadius: 25, justifyContent: 'center', borderColor: 'green', borderWidth: 2, marginHorizontal: 3 } :
@@ -269,6 +289,7 @@ export default function KeepersPage({ route, navigation }) {
       )
     }
     return lists;
+
   } 
   return (
     <View style={styles.container}>
