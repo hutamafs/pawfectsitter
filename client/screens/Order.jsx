@@ -70,8 +70,9 @@ export default function Order({navigation}) {
   }
 
   const handleSubmit = () => {
+    console.log('masukkkkk line 73')
     axios({
-      url: "http://192.168.1.8:3000/orders/" + id,
+      url: "http://192.168.100.6:3000/orders/" + id,
       method: "PUT",
       headers:{access_token},
       data: {review}
@@ -326,7 +327,7 @@ export default function Order({navigation}) {
           height:40,
           alignItems:'center',
           justifyContent:'center',
-          borderRadius:30
+          borderRadius:30,
           }}
           onPress={handleSubmit}
           >
@@ -448,7 +449,7 @@ export default function Order({navigation}) {
             <View
             style={{display:'flex',alignItems:'center'}}
             >
-              {localOrders &&
+              {localOrders.length > 0 &&
             localOrders
             .filter(el => el.status === true)        
             .map(el => {
@@ -571,7 +572,7 @@ export default function Order({navigation}) {
                     fontFamily:"nunito",
                     letterSpacing : 1,
                     paddingBottom : 20
-                  }}>Bill : Rp{(el.price).toLocaleString().replaceAll(',','.')}</Text>
+                  }}>Bill : Rp{(el.price).toLocaleString().replace(',','.')}</Text>
                 </View>               
               </View>
                 
