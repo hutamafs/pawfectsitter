@@ -52,7 +52,8 @@ class OrderController {
            
             let obj = {
                 user: user.name,
-                msg: review
+                msg: review,
+                timeCreated:order.dateFinished
             }
             keeper.status = 'available';
             await keeper.review.push(obj)
