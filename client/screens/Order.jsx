@@ -71,7 +71,7 @@ export default function Order({navigation}) {
 
   const handleSubmit = () => {
     axios({
-      url: "http://192.168.8.102:3000/orders/" + id,
+      url: "http://192.168.1.4:3000/orders/" + id,
       method: "PUT",
       headers:{access_token},
       data: {review}

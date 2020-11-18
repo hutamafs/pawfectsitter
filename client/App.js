@@ -84,9 +84,6 @@ export default function App() {
             <Stack.Screen name="ChatRoom" component={ChatRoom}
               options={{ title: 'Chat' }}
             /> 
-              {/* <Stack.Screen name="Chat" component={Chat}
-                options={{ title: 'Chat' }}
-              /> */}
             </Stack.Navigator>
           </NavigationContainer>
         </Provider>
