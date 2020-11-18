@@ -91,8 +91,8 @@ const AddPet = ({navigation}) => {
                         
         <Text style={{
             fontSize: 20, 
-            marginTop: 35,
-            marginLeft : 35,
+            marginTop: 45,
+            marginLeft : 20,
             fontFamily : 'nunito'
             }}>Add Pet</Text>
         </View>
@@ -109,24 +109,23 @@ const AddPet = ({navigation}) => {
                     
                 <View 
                 style={{
-                    backgroundColor: '#FF6B81', 
-                    borderRadius: 100, 
+                    
                     marginBottom: 40,
-                    marginTop : -130, 
+                    marginTop : -130,
+                    borderRadius:100,
                     // zIndex: -9
                     }}>
             <TouchableOpacity 
                 style={{ 
-                    margin: 5, 
-                    borderRadius: 100, 
+                    margin: 5,
                     // padding: 30, 
                     backgroundColor: '#F4F4F4', 
-                    zIndex: -1}}
+                    zIndex: 1}}
             onPress={pickImage}
             >
              <Image
-                source={(image) ? {uri:image}:{uri: 'https://lh3.googleusercontent.com/proxy/W_fq5wVspFA3goJG22FNuX2nx204B0kalDUZqTmMBP4QznwrD0gHhcMbhe9WlC6OxzVmyZy-hm4pqT4YrCLUWgE2'}}
-                style={{ width: 150, height: 150, zIndex: -2,borderRadius:10}}
+                source={(image) ? {uri:image}:{uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTe-eJA2imrdsx5oOdmxYv3pclGWJLsMa2Ew&usqp=CAU'}}
+                style={{ width: 150, height: 150,zIndex:2, borderRadius:100,padding:100}}
             />
             </TouchableOpacity>
             </View>
@@ -152,7 +151,7 @@ const AddPet = ({navigation}) => {
                             marginRight : 10,
                             fontSize:20,
                         }}
-                    >Gender : </Text>
+                    ></Text>
                     <RadioForm
                         radio_props={gender_props}
                         initial={0}
@@ -187,18 +186,15 @@ const AddPet = ({navigation}) => {
                         labelStyle={{paddingLeft:5,marginRight:15}}                        
                     />
                 </View>
-
+                <View style={{display:'flex',alignItems:'center'}}>
                 <Button
                     onPress={handleSubmit}
                     style={{
-                        alignItems: "center",
-                        justifyContent: "center",
                         height: 50,
                         width: 200,
                         borderRadius: 10,
                         backgroundColor: "#FF6B81",
-                        marginLeft: 150,
-                        marginTop : 10,
+                        marginTop : 30,
                         borderColor: '#FF6B81',
                     }}>
                         <Text 
@@ -211,6 +207,8 @@ const AddPet = ({navigation}) => {
                         >Submit</Text>
                     
                 </Button>
+                </View>
+                
             </View>
         </TouchableWithoutFeedback>
         <View
@@ -220,18 +218,18 @@ const AddPet = ({navigation}) => {
                 marginTop : 650,
             }}
         >
-            <Text
+            {/* <Text
                 style={{
                     fontFamily : 'nunito',
                     fontSize : 20
                 }}
-            >hey, hey, hey .</Text>
-            <Text
+            >hey, hey, hey .</Text> */}
+            {/* <Text
                 style={{
                     fontFamily : 'nunito',
                     fontSize : 20
                 }}
-            >take your pict puppy</Text>
+            >take your pict puppy</Text> */}
         </View>
         <Image source={dog} style={{ 
             width: 150, 
