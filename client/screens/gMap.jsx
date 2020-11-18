@@ -48,6 +48,7 @@ export default GMap
 
 /*
 
+>>>>>>> development
 const GMap = ({navigation, route}) => {
     const backToHome = () => {
         navigation.replace('Home')

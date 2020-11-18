@@ -17,15 +17,12 @@ export default function Login({navigation}) {
 
   // firebase
   const loginSuccess = () => {
-    console.log('login successful, can move to chat.');
     let obj = {
 			name: 'Customer',
 			email: email,
 			avatar: ''
 		}
-		navigation.replace('Home', {
-      userData: obj
-    });
+		navigation.replace('Home');
 	};
 
 	const loginFailed = () => {
@@ -34,7 +31,7 @@ export default function Login({navigation}) {
 
   const handleLogin = async () => {
     axios({
-      url: 'http://192.168.8.102:3000/users/login',
+      url: 'http://192.168.1.8:3000/users/login',
       method: 'POST',
       data: {
         email,password
