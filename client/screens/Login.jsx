@@ -86,6 +86,7 @@ export default function Login({navigation}) {
         placeholder="email" 
         autoCompleteType="off"
         keyboardType="email-address"
+        autoCapitalize="none"
         onChangeText={(text) => setEmail(text)}
         />
         <TextInput
