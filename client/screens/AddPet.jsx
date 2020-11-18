@@ -143,6 +143,7 @@ const AddPet = ({navigation}) => {
             </TouchableOpacity>
             </View>
                 <TextInput
+                autoCapitalize="none"
                 style={[styles.textInputStyle, { letterSpacing : 2 }]}
                 placeholder="Enter your Pet Name"
                 value={name}
