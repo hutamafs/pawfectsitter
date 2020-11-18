@@ -70,7 +70,7 @@ const Home = ({navigation, route}) => {
                         borderWidth :2,
                         marginHorizontal : 400,
                         marginTop : 45,
-                        position : 'absolute'
+                        position : 'absolute',
                     }}
                         onPress={handleLogout} 
                     >

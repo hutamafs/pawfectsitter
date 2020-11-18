@@ -124,7 +124,7 @@ export default function KeepersPage({ route, navigation }) {
     console.log(payload, 'line 124')
 
     axios({
-      url: 'http://192.168.8.102:3000/orders/' + keeperId,
+      url: 'http://192.168.100.6:3000/orders/' + keeperId,
       method: 'post',
       headers: {
         access_token
@@ -298,9 +298,9 @@ export default function KeepersPage({ route, navigation }) {
                 return (
                   <View key={el._id} style={{ display: 'flex', flexDirection: 'row', flex: 0.3, borderRadius: 10, borderBottomColor: 'black', width: 350, height: 150, marginVertical: 10, borderWidth: 0.6, borderColor: 'red' }}>
                     <View style={{ position: 'absolute', top: 20, right: 10 }}>
-                      <Text style={{ fontWeight: 'bold' }}> Rp {el.price.hourly.toLocaleString().replaceAll(',', '.')} </Text>
-                      {/* <Text style={{ fontWeight: 'bold' }}> Rp {el.price.daily.toLocaleString().replaceAll(',', '.')} </Text>
-                      <Text style={{ fontWeight: 'bold' }}> Rp {el.price.weekly.toLocaleString().replaceAll(',', '.')} </Text> */}
+                      <Text style={{ fontWeight: 'bold' }}> Rp {el.price.hourly.toLocaleString().replace(',', '.')} </Text>
+                      {/* <Text style={{ fontWeight: 'bold' }}> Rp {el.price.daily.toLocaleString().replace(',', '.')} </Text>
+                      <Text style={{ fontWeight: 'bold' }}> Rp {el.price.weekly.toLocaleString().replace(',', '.')} </Text> */}
                     </View>
                     <View style={{ paddingHorizontal: 10, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                       <Image source={{ uri: el.image }} style={{ width: 100, height: 100, borderColor: 'white', resizeMode: 'contain', margin: 5 }} />
@@ -394,7 +394,7 @@ export default function KeepersPage({ route, navigation }) {
                             onChangeText={(text) => setQuantity(text)}
                           />
                         </View>
-                        <Text style={{ margin: 10, fontSize: 20, fontWeight: 'bold' }}>Total: Rp.{total.toLocaleString().replaceAll(',', '.')}</Text>
+                        <Text style={{ margin: 10, fontSize: 20, fontWeight: 'bold' }}>Total: Rp.{total.toLocaleString().replace(',', '.')}</Text>
                         <View style={{ alignItems: 'center' }}>
                           <TouchableOpacity style={styles.btnStyle} onPress={() => handleSubmit()}><Text style={{ textAlign: 'center', fontSize: 25, margin: 5, color: 'white' }}>Hire</Text></TouchableOpacity>
                           <TouchableOpacity style={styles.btnStyle} onPress={() => handleCancel()}><Text style={{ textAlign: 'center', fontSize: 25, margin: 5, color: 'white' }}>Cancel</Text></TouchableOpacity>
@@ -431,7 +431,7 @@ const styles = StyleSheet.create({
     color: 'white'
   },
   btnStyle: {
-    backgroundColor: '#BA826A',
+    backgroundColor: '#FF6B81',
     width: 300,
     borderRadius: 20,
     margin: 5
