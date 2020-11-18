@@ -45,7 +45,7 @@ export default function Order({navigation}) {
   const listCategories = () => {
     let types = {
       0:'Keeper Name',
-      1:'Date Created'
+      1:'Time Created'
     }
     let categories = [];
     for(let i = 0 ; i<2 ; i++) {
@@ -236,6 +236,7 @@ export default function Order({navigation}) {
     
     <View style={{
       flex:1,
+      backgroundColor:'white'
     }}>
 
       <Modal isVisible={isModalVisible}>
@@ -319,8 +320,8 @@ export default function Order({navigation}) {
              </View>
         
          </View>
-         <View style={{display:'flex',flexDirection:'row',height:30,marginTop:10,marginBottom:5}}>
-            <Text style={{paddingRight:15,marginLeft:20,fontSize:20}} >Sort by </Text>
+         <View style={{display:'flex',flexDirection:'row',height:30,marginTop:10,marginBottom:15}}>
+            <Text style={{paddingRight:15,marginLeft:20,fontSize:20,fontFamily:'nunito',color:'#0F2A3C'}} >Sort by </Text>
             {listCategories()}
         </View>
                
@@ -333,7 +334,7 @@ export default function Order({navigation}) {
             borderRadius : 20,
             }}>
               <View >
-              <Icon 
+              {/* <Icon 
                 name="paw" 
                 color="black" 
                 size={80}
@@ -344,7 +345,7 @@ export default function Order({navigation}) {
                 marginTop : 25 ,
                 opacity : 0.2,
               }]}
-              />
+              /> */}
             </View>
             <View
             style={{display:'flex',alignItems:'center'}}
@@ -363,10 +364,10 @@ export default function Order({navigation}) {
                       width:375,
                       height:150,
                       marginVertical: 5,
-                      borderWidth : 0.5,
+                      borderWidth:0.15,
                       borderRadius : 10,
                       position:'relative',
-                      backgroundColor:'#F4F4F4'
+                      backgroundColor:'#F4F4F4',
                     }}
                 >
                   <View style={{position:'absolute',bottom:-30,left:130,marginTop:25,zIndex:1}}>
@@ -379,7 +380,8 @@ export default function Order({navigation}) {
                     >
                     <Text 
                     style={{
-                      color: '#edc988',
+                      marginLeft:5,
+                      color: '#FF6B81',
                     fontWeight:'bold'}}
                     > 
                       {`Take back ${el.petName}`} </Text>
@@ -411,6 +413,7 @@ export default function Order({navigation}) {
                     height: 120, 
                     borderColor: 'white',
                     marginRight : 10 ,
+                    marginLeft:5,
                     }}  />
                 </View>
                 <View 
@@ -424,7 +427,7 @@ export default function Order({navigation}) {
                     flexDirection:'column'}}>
                 <Text 
                   style={{
-                    color:'black',
+                    color:'#2F3542',
                     fontSize:25,
                     fontFamily:"nunito",
                     marginBottom : 2,
@@ -446,6 +449,7 @@ export default function Order({navigation}) {
                     fontSize:13,
                     fontFamily:"nunito",
                     borderBottomWidth : 3,
+                    color:'#2F3542',
                     borderColor : "#6B6C6E" ,
                     }}>Duration : {el.quantity}
                 </Text>
@@ -455,6 +459,7 @@ export default function Order({navigation}) {
                     fontSize:12,
                     fontFamily:"nunito",
                     borderBottomWidth : 3,
+                    color:'#2F3542',
                     borderColor : "#6B6C6E" ,
                     }}>Package Price : {(el.price/el.quantity).toLocaleString().replace(',','.')} 
                 </Text>
@@ -467,7 +472,7 @@ export default function Order({navigation}) {
                     }}> 
                 <Text 
                   style={{
-                    color: '#102B3E',
+                    color: '#2F3542',
                     fontSize:12,
                     fontFamily:"nunito",
                     letterSpacing : 1,
