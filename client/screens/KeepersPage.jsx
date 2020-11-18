@@ -101,7 +101,6 @@ export default function KeepersPage({ route, navigation }) {
   // console.log(pet_props, 'petproopes nih')
 
   const handlePress = (el) => {
-    console.log(el, 'line 99')
     setKeeperSkills(el.skills)
     setName(el.name);
     setPrice(el.price)
@@ -125,7 +124,7 @@ export default function KeepersPage({ route, navigation }) {
     }
 
     axios({
-      url: 'http://192.168.1.4:3000/orders/' + keeperId,
+      url: 'http://192.168.100.6:3000/orders/' + keeperId,
       method: 'post',
       headers: {
         access_token
@@ -142,7 +141,7 @@ export default function KeepersPage({ route, navigation }) {
           "Success",
           "Your order had been created",
           [
-            { text: "OK", onPress: () => console.log("OK Pressed") }
+            { text: "OK", onPress: () => {setModalVisible(!isModalVisible);navigation.navigate('Order')} }
           ],
           { cancelable: false }
         );
@@ -150,7 +149,7 @@ export default function KeepersPage({ route, navigation }) {
       })
       .catch(err => console.log(err))
 
-    setModalVisible(!isModalVisible);
+    
     setQuantity('')
   }
 
