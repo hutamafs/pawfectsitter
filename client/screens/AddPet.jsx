@@ -45,7 +45,7 @@ const AddPet = ({navigation}) => {
         formData.append('type', type);
         formData.append('age', age);
     axios({
-        url: 'http://192.168.1.4:3000/pets',
+        url: 'http://192.168.1.8:3000/pets',
         method: 'POST',
         headers:{access_token,"Content-Type": "multipart/form-data"},
         data: formData,
@@ -83,7 +83,7 @@ const AddPet = ({navigation}) => {
             // flexDirection: 'row', 
             // marginTop: 25
             backgroundColor:"#F4E3E3",
-               height:"11%",
+               height:"13%",
                borderBottomLeftRadius:20,
                borderBottomRightRadius:20,
                paddingHorizontal: 20
