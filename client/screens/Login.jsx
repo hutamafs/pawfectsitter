@@ -31,11 +31,7 @@ export default function Login({navigation}) {
 
   const handleLogin = async () => {
     axios({
-<<<<<<< HEAD
-      url: 'http://192.168.1.8:3000/users/login',
-=======
       url: 'http://192.168.1.4:3000/users/login',
->>>>>>> development
       method: 'POST',
       data: {
         email,password

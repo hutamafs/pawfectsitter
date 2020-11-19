@@ -78,12 +78,6 @@ export default function App() {
               <Stack.Screen name="PetList" component={PetList}
                 options={{ title: 'PetList' }}
               />
-            <Stack.Screen name="Chat" component={Chat}
-              options={{ title: 'Chat' }}
-            /> 
-            <Stack.Screen name="ChatRoom" component={ChatRoom}
-              options={{ title: 'Chat' }}
-            /> 
             </Stack.Navigator>
           </NavigationContainer>
         </Provider>
