@@ -126,7 +126,7 @@ export default function KeepersPage({ route, navigation }) {
     }
 
     axios({
-      url: 'http://192.168.1.8:3000/orders/' + keeperId,
+      url: 'http://192.168.1.4:3000/orders/' + keeperId,
       method: 'post',
       headers: {
         access_token
@@ -201,6 +201,10 @@ export default function KeepersPage({ route, navigation }) {
 
     if (type == 'price') {
       cloned.sort((a, b) => a[type].daily > b[type].daily)
+    } else if(type == 'distance') {
+      cloned.sort((a, b) => 
+        Number(getDistanceFromLatLonInKm(currentPosition.latitude, currentPosition.longitude, a.latitude, a.longitude)) > Number(getDistanceFromLatLonInKm(currentPosition.latitude, currentPosition.longitude, b.latitude, b.longitude))
+      )
     } else {
       cloned.sort((a, b) => a[type] < b[type])
     }
