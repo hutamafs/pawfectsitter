@@ -203,7 +203,7 @@ export default function KeepersPage({ route, navigation }) {
       cloned.sort((a, b) => a[type].daily > b[type].daily)
     } else if(type == 'distance') {
       cloned.sort((a, b) => 
-        getDistanceFromLatLonInKm(currentPosition.latitude, currentPosition.longitude, a.latitude, a.longitude).toFixed(2) < getDistanceFromLatLonInKm(currentPosition.latitude, currentPosition.longitude, b.latitude, b.longitude).toFixed(2)
+        Number(getDistanceFromLatLonInKm(currentPosition.latitude, currentPosition.longitude, a.latitude, a.longitude)) > Number(getDistanceFromLatLonInKm(currentPosition.latitude, currentPosition.longitude, b.latitude, b.longitude))
       )
     } else {
       cloned.sort((a, b) => a[type] < b[type])
