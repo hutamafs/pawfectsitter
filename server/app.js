@@ -16,9 +16,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 mongoose.connect(config.db[env], config.dbParams);
 
-mongoose.connection.on("error", err => {
-    console.log("err", err)
-});
+// mongoose.connection.on("error", err => {
+//     console.log("err", err)
+// });
   
 mongoose.connection.on("connected", () => {
   console.log("mongoose is connected...")

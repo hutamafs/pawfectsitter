@@ -126,7 +126,7 @@ export default function KeepersPage({ route, navigation }) {
     }
 
     axios({
-      url: 'http://192.168.1.4:3000/orders/' + keeperId,
+      url: 'http://192.168.1.8:3000/orders/' + keeperId,
       method: 'post',
       headers: {
         access_token
@@ -200,7 +200,7 @@ export default function KeepersPage({ route, navigation }) {
     })
 
     if (type == 'price') {
-      cloned.sort((a, b) => a[type].daily > b[type].daily)
+      cloned.sort((a, b) => Number(a[type].daily) > Number(b[type].daily))
     } else if(type == 'distance') {
       cloned.sort((a, b) => 
         Number(getDistanceFromLatLonInKm(currentPosition.latitude, currentPosition.longitude, a.latitude, a.longitude)) > Number(getDistanceFromLatLonInKm(currentPosition.latitude, currentPosition.longitude, b.latitude, b.longitude))
@@ -338,7 +338,14 @@ export default function KeepersPage({ route, navigation }) {
                       <View style={{ display: 'flex', flexDirection: 'row' }}>
                         <Icon name="compass" color="green" size={20} style={{marginHorizontal:2}} />
                         <Text>{(getDistanceFromLatLonInKm(currentPosition.latitude, currentPosition.longitude, el.latitude, el.longitude)).toFixed(2).toString()} Kms</Text>
-                        {/* {
+
+                      </View>
+                      <View style={{ display: 'flex', flexDirection: 'column', marginTop: 1 }}>
+                        <View style={{ display: 'flex', flexDirection: 'row', marginLeft: 5, marginTop: 0 }}>
+                          {stars(el.rating)}
+                        </View>
+                        <View style={{display:'flex',flexDirection:'row'}}>
+                        {
                           el.skills.map((skill, i) => (
                             <Text key={i} style={{ fontSize: 15, color: 'black', textAlign: 'center', margin: 5, alignSelf: 'center' }}>
                               { (skill == 'dog') ?
@@ -349,11 +356,7 @@ export default function KeepersPage({ route, navigation }) {
                               }
                             </Text>
                           ))
-                        } */}
-                      </View>
-                      <View style={{ display: 'flex', flexDirection: 'column', marginTop: 1 }}>
-                        <View style={{ display: 'flex', flexDirection: 'row', marginLeft: 5, marginTop: 0 }}>
-                          {stars(el.rating)}
+                        }
                         </View>
                         <View style={{ display: 'flex', flexDirection: 'row' }}>
                           {/* <Text style={{ color: 'blue', fontSize: 12, alignSelf: 'center' }}>🏠 {el.address}</Text> */}

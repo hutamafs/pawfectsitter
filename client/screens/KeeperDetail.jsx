@@ -37,7 +37,7 @@ const KeeperDetail = ({ navigation, route }) => {
                 display='flex'
                 flexDirection='column'
                 style={{
-                    width:375,
+                    width:370,
                     height:125,
                     borderRadius:20,
                     borderWidth:0.5,
@@ -80,12 +80,12 @@ const KeeperDetail = ({ navigation, route }) => {
                     <Text style={{fontSize:30,fontWeight:'bold'}}>
                         {keeper.name}
                     </Text>
-                    <Text style={{marginTop:2}}>
+                    <Text style={{marginTop:2,fontSize:15}}>
                         Specialized in {skills(keeper.skills)}
                     </Text>
                     <View>
-                        <Text style={{fontSize:15,marginTop:2,borderColor:'black',borderBottomWidth:1}}>
-                            Lives in {keeper.address}
+                        <Text style={{fontSize:15,marginTop:10,borderColor:'black',borderBottomWidth:1}}>
+                        🏠 {keeper.address}
                         </Text>
                         <TouchableOpacity
                         style={{ width: 150, height: 30, position: 'absolute', right: 10, bottom: 6.5, backgroundColor: '#FF6B81', borderRadius: 10 }}
