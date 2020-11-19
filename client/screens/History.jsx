@@ -71,50 +71,27 @@ export default function History({route,navigation}) {
   if ( history.length == 0 ){
     return (
       <View style={{
-        backgroundColor:"#C8D1DA",
         flex:1,
       }}>
        <View style={{
-           backgroundColor:"#6661DB",
-           height:"11%",
+           backgroundColor:"#F4E3E3",
+           height:"13%",
            borderBottomLeftRadius:20,
            borderBottomRightRadius:20,
            paddingHorizontal: 25,
-           marginBottom : -24,
-          }}>
-          <Button 
-          style={{
-            width : 30,
-            height : 30,
-            marginTop : 35,
-            borderColor : "#6661DB"
-          }}
-            onPress={backToHome}
-          >
-                <Icon 
-                  name="arrow-left-circle" 
-                  color="black" 
-                  size={50}
-                  style={[{  
-                  transform: [{ rotate: "0deg" }],
-                  position : 'absolute',
-                  color : "#102B3E",
-                }]}
-                />
-              </Button>
+          }}>          
            <View style={{
                flexDirection:"row",
                marginTop:10,
                width:"100%"
            }}>
-               <View style={{width:"100%",backgroundColor:'black'}}>
+               <View style={{width:"100%"}}>
                     <Text style={{
-                      fontSize: 15,
-                      marginTop : -50,
+                      fontSize: 25,
                       color:"#0F2A3C",
-                      fontWeight:"normal",
+                      marginTop:40,
                       fontFamily : 'nunito',
-                    }}> History List </Text>
+                    }}> History List ({countHistory()}) </Text>
                </View>
           </View>
        </View>
@@ -126,17 +103,6 @@ export default function History({route,navigation}) {
                marginBottom : 30,
                marginTop : 33,
            }}>
-               <View style={{width:"50%"}}>
-                    <Text style={{
-                        fontWeight:"bold",
-                        fontSize:15,
-                        color:"#6B6C6E",
-                        marginLeft : 20,
-                    }}>{localHistory.length} Order</Text>
-  
-               </View>
-               <View style={{width:"80%", alignItems:"flex-end"}}>
-               </View>
           
            </View>
            <View >
@@ -202,7 +168,7 @@ export default function History({route,navigation}) {
                 </View> 
             <View 
               style={{
-                height : "92%",
+                height : "88%",
                 alignItems : 'center',
                 justifyContent :'center',
                 marginTop : -160
@@ -224,7 +190,7 @@ export default function History({route,navigation}) {
                     fontSize : 20,
                     opacity: 0.4
                   }}
-                >Sorry, You Don't have a Order !</Text>
+                >You Haven't ordered in Pawfect !</Text>
             </View>
             <View >
                         <Icon 

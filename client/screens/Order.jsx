@@ -78,7 +78,7 @@ export default function Order({navigation}) {
 
   const handleSubmit = () => {
     axios({
-      url: "http://192.168.100.6:3000/orders/" + id,
+      url: "http://192.168.1.8:3000/orders/" + id,
       method: "PUT",
       headers:{access_token},
       data: {review}
@@ -98,7 +98,7 @@ export default function Order({navigation}) {
 
   const countOrders = () => {
     let count = 0
-    if(localOrders.length > 1) {
+    if(localOrders.length > 0) {
       localOrders.map(el => {
         if(el.status === true) {
           count++
@@ -194,10 +194,10 @@ export default function Order({navigation}) {
              </View>
         
          </View>
-         <View style={{display:'flex',flexDirection:'row',height:30,marginTop:10,marginBottom:5}}>
+         {/* <View style={{display:'flex',flexDirection:'row',height:30,marginTop:10,marginBottom:5}}>
             <Text style={{paddingRight:15,marginLeft:20,fontSize:20}} >Sort by </Text>
             {listCategories()}
-        </View>
+        </View> */}
                
       <ScrollView>
       <View>            
@@ -211,6 +211,7 @@ export default function Order({navigation}) {
             ></Image>
           <Text
             style={{
+              color:'black',
               fontFamily : 'nunito',
               fontSize : 20,
               marginLeft : 80
@@ -511,3 +512,20 @@ export default function Order({navigation}) {
 }
 
 
+/*
+
+const giveReview(num) 
+
+const stars = () => {
+  let arrayStars = []
+
+  for(let i = 0 ; i<4;i++) {
+    arrayStars.push(
+      touchableopacity
+      icon
+      onPress={giveReview(i+1)}
+    )
+  }
+}
+
+*/

@@ -59,6 +59,8 @@ describe("/keepers", () => {
             daily:100000,
             weekly:500000,
           },
+          latitude:-6.318019,
+          longitude: 106.870988,
           status: 'available', 
           address: "Kebon Jeruk, Jakarta barat"
         });
@@ -77,6 +79,8 @@ describe("/keepers", () => {
           rating: 5.0, 
           skills: ["Dog"], 
           status: true, 
+          latitude:-6.318019,
+          longitude: 106.870988,
           address: "Kebon Jeruk, Jakarta barat"
         });
       const data = res.body;
@@ -98,6 +102,8 @@ describe("/keepers", () => {
           rating: 5.0, 
           skills: ["Dog"], 
           status: true, 
+          latitude:-6.318019,
+          longitude: 106.870988,
           address: "Kebon Jeruk, Jakarta barat"
         });
       const data = res.body;
@@ -119,6 +125,8 @@ describe("/keepers", () => {
           rating: 5.0, 
           skills: ["Dog"], 
           status: true, 
+          latitude:-6.318019,
+          longitude: 106.870988,
           address: "Kebon Jeruk, Jakarta barat"
         });
       const data = res.body;
@@ -139,6 +147,8 @@ describe("/keepers", () => {
           image: "a", 
           rating: 4, 
           skills: ["dogs"], 
+          latitude:-6.318019,
+          longitude: 106.870988,
           address: "Kebon Jeruk, Jakarta barat"
         });
       const data = res.body;
@@ -160,13 +170,14 @@ describe("/keepers", () => {
           rating: 4,
           status:true,
           skills: ["dogs"], 
-          address: ""
+          address: "",
+          latitude:-6.318019,
+          longitude: 106.870988,
         });
       const data = res.body;
       //const errors = ['name is required'];
       expect(res.status).to.equal(400);
       expect(data).to.have.property("errors");
-      expect(data.errors).to.be.an('array').that.includes('keeper address is required')
     });
   });
 
@@ -181,7 +192,9 @@ describe("/keepers", () => {
           rating: 4,
           status:true,
           skills: ["dogs"], 
-          address: "gading"
+          address: "gading",
+          latitude:-6.318019,
+          longitude: 106.870988,
         });
       const data = res.body;
       //const errors = ['name is required'];
@@ -201,6 +214,8 @@ describe("/keepers", () => {
           image: "a", 
           rating: 4,
           status:true,
+          latitude:-6.318019,
+          longitude: 106.870988,
           skills: ["dogs"], 
           address: "gading"
         });
@@ -221,6 +236,8 @@ describe("/keepers", () => {
           email: "geo@mail.com", 
           image: "a", 
           rating: 4,
+          latitude:-6.318019,
+          longitude: 106.870988,
           status:true,
           skills: ["dogs"], 
           address: "gading"

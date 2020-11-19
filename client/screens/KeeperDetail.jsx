@@ -38,14 +38,13 @@ const KeeperDetail = ({ navigation, route }) => {
                 display='flex'
                 flexDirection='column'
                 style={{
-                    width: 375,
-                    height: 125,
-                    borderRadius: 20,
-                    borderWidth: 0.5,
-                    borderColor: 'brown',
-                    position: 'relative',
-                    marginVertical: 5
-
+                    width:370,
+                    height:125,
+                    borderRadius:20,
+                    borderWidth:0.5,
+                    borderColor:'brown',
+                    position:'relative',
+                    marginVertical:5
                 }}
             >
                 <Text style={{ fontWeight: 'bold', fontSize: 25, marginLeft: 15, marginTop: 10 }}>{array[i].user} </Text>
@@ -77,9 +76,16 @@ const KeeperDetail = ({ navigation, route }) => {
                     />
                     <View>
                     </View>
-                    <View style={{ display: 'flex', flexDirection: 'column', marginHorizontal: 20, marginTop: 5 }}>
-                        <Text style={{ fontSize: 30, fontWeight: 'bold' }}>
-                            {keeper.name}
+                <View style={{display:'flex',flexDirection:'column',marginHorizontal:20,marginTop:5}}>
+                    <Text style={{fontSize:30,fontWeight:'bold'}}>
+                        {keeper.name}
+                    </Text>
+                    <Text style={{marginTop:2,fontSize:15}}>
+                        Specialized in {skills(keeper.skills)}
+                    </Text>
+                    <View>
+                        <Text style={{fontSize:15,marginTop:10,borderColor:'black',borderBottomWidth:1}}>
+                        🏠 {keeper.address}
                         </Text>
                         <Text style={{ marginTop: 2 }}>
                             Specialized in {skills(keeper.skills)}
