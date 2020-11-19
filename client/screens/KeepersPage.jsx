@@ -338,7 +338,6 @@ export default function KeepersPage({ route, navigation }) {
                       <View style={{ display: 'flex', flexDirection: 'row' }}>
                         <Icon name="compass" color="green" size={20} style={{marginHorizontal:2}} />
                         <Text>{(getDistanceFromLatLonInKm(currentPosition.latitude, currentPosition.longitude, el.latitude, el.longitude)).toFixed(2).toString()} Kms</Text>
-
                       </View>
                       <View style={{ display: 'flex', flexDirection: 'column', marginTop: 1 }}>
                         <View style={{ display: 'flex', flexDirection: 'row', marginLeft: 5, marginTop: 0 }}>
@@ -357,6 +356,10 @@ export default function KeepersPage({ route, navigation }) {
                             </Text>
                           ))
                         }
+                      </View>
+                      <View style={{ display: 'flex', flexDirection: 'column', marginTop: 1 }}>
+                        <View style={{ display: 'flex', flexDirection: 'row', marginLeft: 5, marginTop: 0 }}>
+                          {stars(el.rating)}
                         </View>
                         <View style={{ display: 'flex', flexDirection: 'row' }}>
                           {/* <Text style={{ color: 'blue', fontSize: 12, alignSelf: 'center' }}>🏠 {el.address}</Text> */}
