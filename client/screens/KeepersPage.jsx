@@ -126,7 +126,7 @@ export default function KeepersPage({ route, navigation }) {
     }
 
     axios({
-      url: 'http://192.168.1.4:3000/orders/' + keeperId,
+      url: 'http://192.168.100.6:3000/orders/' + keeperId,
       method: 'post',
       headers: {
         access_token
@@ -338,7 +338,7 @@ export default function KeepersPage({ route, navigation }) {
                       <View style={{ display: 'flex', flexDirection: 'row' }}>
                         <Icon name="compass" color="green" size={20} style={{marginHorizontal:2}} />
                         <Text>{(getDistanceFromLatLonInKm(currentPosition.latitude, currentPosition.longitude, el.latitude, el.longitude)).toFixed(2).toString()} Kms</Text>
-                        {/* {
+                        {
                           el.skills.map((skill, i) => (
                             <Text key={i} style={{ fontSize: 15, color: 'black', textAlign: 'center', margin: 5, alignSelf: 'center' }}>
                               { (skill == 'dog') ?
@@ -349,7 +349,7 @@ export default function KeepersPage({ route, navigation }) {
                               }
                             </Text>
                           ))
-                        } */}
+                        }
                       </View>
                       <View style={{ display: 'flex', flexDirection: 'column', marginTop: 1 }}>
                         <View style={{ display: 'flex', flexDirection: 'row', marginLeft: 5, marginTop: 0 }}>
